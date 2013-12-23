@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<questions id="1">   
+   <question id="1" type="1"> 
+       <title><![CDATA[����ˣ�]]></title>
+       <answer>
+        <it><![CDATA[1���� ��]]></it>  
+        <it><![CDATA[2���� ��]]></it>  
+        <it><![CDATA[3���� ��]]></it>
+        <it><![CDATA[4���� ��]]></it>       
+       </answer>         
+   </question>   
+   <question id="3" type="2">
+      <title><![CDATA[��������ˣ�]]></title>
+       <answer>
+        <it><![CDATA[1���� ��]]></it>  
+        <it><![CDATA[2���� ��]]></it>  
+        <it><![CDATA[3���� ˬ]]></it> 
+        <it><![CDATA[4���� ��]]></it>            
+       </answer>         
+   </question>
+   <question id="4" type="2">
+      <title><![CDATA[����ʲô����ˣ�]]></title>
+       <answer>
+        <it><![CDATA[1���� ��]]></it>  
+        <it><![CDATA[2���� ��]]></it>  
+        <it><![CDATA[3���� ˬ]]></it> 
+        <it><![CDATA[4���� ��]]></it>             
+       </answer>         
+   </question>
+   <question id="5" type="3"> 
+       <title><![CDATA[�����������Լ���]]></title>
+       <answer>
+        <it><![CDATA[���磬����һ����ţ�Ƶ��ˣ�]]></it>               
+       </answer>
+   </question> 
+   <question id="6" type="3"> 
+       <title><![CDATA[�����������Լ���]]></title>
+       <answer>
+        <it><![CDATA[���磬����һ����ţ�Ƶ��ˣ�]]></it>               
+       </answer>
+   </question>            
+</questions>

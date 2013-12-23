@@ -1,0 +1,51 @@
+body{
+    //background-color: #F9CA7A;
+}
+
+#mainDiv{
+	
+	margin: 0 auto;
+	//width: 95%;
+	height: 80%;
+	
+	
+}
+#childDiv{
+
+	
+	margin: 0 auto;
+	top: 10%;
+	text-align: center;
+	font-size: 25px;
+}
+#mainTable{
+	
+	
+	margin: 0 auto;
+	top: 10%;
+	
+	/*border-collapse:collapse;*/
+	width: 95%;
+	
+}
+#mainTable tr td{
+	
+	overflow:hidden;
+}
+#mainTable tr td p{
+	
+	margin-left: 20%;
+	margin-right: 20%;
+	
+	height: 50px;
+	/*width: 100px；宽度固定？*/
+	text-align: center;
+	padding-top: 30px;
+	font-size: 20px;
+	background: url("../image/button.png") no-repeat center;
+}
+#mainTable tr td a{
+	text-decoration:none;
+	//text-align: center;
+	
+}

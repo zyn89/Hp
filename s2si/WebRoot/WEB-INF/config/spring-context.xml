@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+	  <property name="driverClass">
+	    <value>com.mysql.jdbc.Driver</value>
+	  </property>
+	  <property name="user">
+	    <value>root</value>
+	  </property>
+	  <property name="password">
+	    <value>red2game</value>
+	  </property>
+	  <property name="jdbcUrl">
+	    <value>jdbc:mysql://112.124.52.165:3306/hp</value>
+	  </property>
+	</bean>
+	
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+	  <!-- 此处应注入ibatis配置文件，而非sqlMap文件，否则会出现“there is no statement.....异常” -->
+	  <property name="configLocation">
+	     <!--com/gamebase/test/sqlMapConfig.xml -->
+	     <value>/WEB-INF/config/SqlMapConfig.xml
+	     </value>
+	  </property>
+	
+	</bean>
+</beans>
