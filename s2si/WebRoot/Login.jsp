@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=gbk"
-	pageEncoding="gbk"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,8 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<base href="<%=basePath%>">
 
-	<meta http-equiv="Content-Type" content="text/html; charset=gbk">
-<title>登录</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>鐧诲綍</title>
   <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport"/>
   
 <link type="text/css" rel="stylesheet" href="resources/css/login.css"/>
@@ -40,7 +40,7 @@ xmlhttp.send();
 }
 
 function remind(){
-    window.location.href="register.jsp";
+    window.location.href="goTo.action?url=register.jsp";
     }
 </script >
 
@@ -48,24 +48,24 @@ function remind(){
 <body>
 	
 	<div id="login" class="clearfix">
-    <h1>请先登录</h1>
+    <h1>锟斤拷锟饺碉拷录</h1>
     <form class="form-horizontal" id="signupForm" method="post" action="login.action" >
       <fieldset>
         <div class="control-group">
-					<input id="loginName" name="loginName"  type="text"  required="required" placeholder="手机号">
+					<input id="loginName" name="loginName"  type="text"  required="required" placeholder="锟街伙拷锟�">
         </div>
         <div class="control-group">
-					<input id="password" name="password" type="password"  required="required" placeholder="密码">
+					<input id="password" name="password" type="password"  required="required" placeholder="锟斤拷锟斤拷">
         </div>        
         <div class="form-actions">
-					<button class="btn btn-primary submit" type="submit" id="signup">登录</button>
-					<button class="btn" type="button" onclick="remind();" id="pwd-btn">注册</button>
+					<button class="btn btn-primary submit" type="submit" id="signup">鐧诲綍</button>
+					<button class="btn" type="button" onclick="remind();" id="pwd-btn">注锟斤拷</button>
         </div>
       </fieldset>
     </form>
   </div>
 		<h2>AJAX</h2>
-<button type="button" onclick="loadXMLDoc()">请求数据</button>
+<button type="button" onclick="loadXMLDoc()">锟斤拷锟斤拷锟斤拷锟�</button>
 <div id="myDiv"></div>	
 </body>
 </html>

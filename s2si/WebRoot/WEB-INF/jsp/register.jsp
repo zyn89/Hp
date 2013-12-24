@@ -17,25 +17,23 @@
 	
 	<div id="login" class="clearfix">
     <h2>请填写注册内容</h2>
-    <form class="form-horizontal" id="signupForm" method="post" action="main.html" >
+    <form class="form-horizontal" id="signupForm" method="post" action="register.action" >
       <fieldset>
         <div class="control-group">
-					<label  for="loginName">手机号*:</label> <input id="loginName" name="loginName"  type="text"  required="required" >
+					<label  for="loginName">手机号*:</label> <input id="phone" name="phone"  type="text"  required="required" >
         </div>
         <div class="control-group">
 					<label> 姓名   :</label> <input id="loginName" name="name"  type="text"  required="required">
         </div>
         <div class="control-group">
-					<label>  密码*:</label> <input id="password" name="password" type="password"  required="required">
+					<label>  密码*:</label> <input id="password" name="pww" type="password"  required="required">
         </div> 
         <div class="control-group">
-					<label>确认密码*</label> <input id="password" name="password" type="password"  required="required">
+					<label>确认密码*</label> <input id="password2" name="pw" type="password"  required="required">
         </div>          
+        
         <div class="control-group">
-					<label> 电话  :</label> <input id="loginName" name="loginName"  type="text"  required="required" >
-        </div>
-        <div class="control-group">
-					<label> 门店*:</label> <input id="loginName" name="loginName"  type="text"  required="required" >
+					<label> 门店*:</label> <input id="shopName" name="shopName"  type="text"  required="required" >
         </div>
         <div class="form-actions">
 					<button class="btn btn-primary submit" type="submit" id="signup">注册</button>
