@@ -1,5 +1,8 @@
 package com.joyque.action;
 
+import java.util.Map;
+
+import com.joyque.common.action.BaseAction;
 import com.joyque.common.exception.BaseException;
 import com.joyque.common.util.DefaultValue;
 import com.joyque.common.util.ExceptionUtil;
@@ -7,7 +10,7 @@ import com.joyque.service.IUserBasicService;
 
 import net.sf.json.JSONObject;
 
-public class UserBasicAction {
+public class UserBasicAction extends BaseAction{
 
 	private String phone;
 	
@@ -19,6 +22,7 @@ public class UserBasicAction {
 	
 	private IUserBasicService userBasicService;
 	
+	@SuppressWarnings("unchecked")
 	public String register()
 	{
 		JSONObject json = new JSONObject();
@@ -29,12 +33,15 @@ public class UserBasicAction {
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = userBasicService.register(phone, pw, name, shopName);
+			Map session = getSession();
+			session.put("uid", json.get("uid"));
 		}catch(Exception e){
 			json.put("status", 400);
 			json.put("message", e.getMessage());
 		}
 		return json.toString();
 	}
+	
 
 	private boolean isValidateName() {
 		if(name != null && !name.trim().equals("")

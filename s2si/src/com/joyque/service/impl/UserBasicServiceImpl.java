@@ -36,6 +36,7 @@ public class UserBasicServiceImpl implements IUserBasicService{
 		user.setPw(pw);
 		user.setShopName(shopName);
 		userInfoDao.insertUserInfo(user);
+		json.accumulate("uid", uid);
 		return json;
 	}
 	
