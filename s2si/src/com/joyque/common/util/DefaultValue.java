@@ -11,4 +11,12 @@ public class DefaultValue {
 	public static final int minNameLength = 1;
 	
 	public static final int maxNameLength = 10;
+	
+	//check = 1
+	public static final int IsCheck = 1;
+	
+	public static final int NotCheck = 0;
+	
+	//签到一次加1分
+	public static final int CheckCredit = 1;
 }

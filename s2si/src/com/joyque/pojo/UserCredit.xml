@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="UserCredit">
+  <typeAlias alias="UserCredit" type="com.joyque.pojo.UserCredit"/>
+  
+  <select id="getUserCredit" resultClass="UserCredit">
+    select * from user_credit where uid = #value#
+  </select>
+  
+  <select id="getUserCreditInfos" resultClass="UserCredit">
+    select * from user_credit 
+  </select>
+
+  <insert id="insertUserCredit" parameterClass="UserCredit">
+    insert into user_credit values (#uid#, #isCheck#, #credit#)
+  </insert>
+  
+  <update id="updateUserCredit" parameterClass="UserCredit">
+	update user_credit
+	<dynamic prepend="SET ">
+		<isNotEqual property="isCheck" compareValue="-1" prepend=","><![CDATA[ isCheck=#isCheck# ]]></isNotEqual>
+		<isNotEqual property="credit" compareValue="-1" prepend=","><![CDATA[ credit=#credit# ]]></isNotEqual>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 uid = #uid#
+	</dynamic>
+	</update>
+</sqlMap>

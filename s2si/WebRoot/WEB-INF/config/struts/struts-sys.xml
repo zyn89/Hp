@@ -7,7 +7,17 @@
 			<result name="login">/WEB-INF/jsp/main.jsp</result>
 			<result name="input">/WEB-INF/jsp/Login.jsp</result>
 		</action>
-		<action name="register" class="userBasicAction" method="register"></action>
+		
+		<action name="register" class="userBasicAction" method="register">
+		</action>
+		
+		<action name="Login" class="userBasicAction" method="Login">
+		</action>
+		
+		<action name="MotifyInfo" class="userBasicAction" method="MotifyInfo">
+		</action>
+		
+		<action name="CheckIn" class="userBasicAction" method="CheckIn">
 		</action>
 	</package>
 	

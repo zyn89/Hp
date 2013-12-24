@@ -12,6 +12,8 @@ import net.sf.json.JSONObject;
 
 public class UserBasicAction extends BaseAction{
 
+	private static final long serialVersionUID = -7830452477700257474L;
+
 	private String phone;
 	
 	private String pw;
@@ -42,6 +44,68 @@ public class UserBasicAction extends BaseAction{
 		return json.toString();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public String Login()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			if(!isValidatePhone() || !isValidatePw())
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = userBasicService.Login(phone, pw);
+			Map session = getSession();
+			if(session.get("uid") == null)
+			{
+				session.put("uid", json.get("uid"));
+			}
+
+		}catch(Exception e){
+			json.put("status", 400);
+			json.put("message", e.getMessage());
+		}
+		return json.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String MotifyInfo()
+	{
+		JSONObject json = new JSONObject();
+		String uid = null;
+		Map session = getSession();
+		uid = (String) session.get("uid");
+		if(uid == null)
+		{
+			return "overTime";
+		}
+		try{
+			json = userBasicService.MotifyInfo(uid, phone, pw, name, shopName);
+		}catch(Exception e){
+			json.put("status", 400);
+			json.put("message", e.getMessage());
+		}
+		return json.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String CheckIn()
+	{
+		JSONObject json = new JSONObject();
+		String uid = null;
+		Map session = getSession();
+		uid = (String) session.get("uid");
+		if(uid == null)
+		{
+			return "overTime";
+		}
+		try{
+			json = userBasicService.CheckIn(uid);
+		}catch(Exception e){
+			json.put("status", 400);
+			json.put("message", e.getMessage());
+		}
+		return json.toString();
+	}
 
 	private boolean isValidateName() {
 		if(name != null && !name.trim().equals("")

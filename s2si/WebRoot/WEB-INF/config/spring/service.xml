@@ -7,5 +7,6 @@
 	
 	<bean id="userBasicService" class="com.joyque.service.impl.UserBasicServiceImpl" scope="prototype">
 	    <property name="userInfoDao" ref="userInfoDao"></property>
+	    <property name="userCreditDao" ref="userCreditDao"></property>
 	</bean>
 </beans>
