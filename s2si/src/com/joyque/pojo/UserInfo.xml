@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserInfo">
+  <typeAlias alias="UserInfo" type="com.joyque.pojo.UserInfo"/>
+  
+  <select id="getUserInfo" resultClass="UserInfo">
+    select * from user_info where phone = #value#
+  </select>
+  
+  <select id="getUserInfoByUid" resultClass="UserInfo">
+    select * from user_info where uid = #value#
+  </select>
+
+  <insert id="insertUserInfo" parameterClass="UserInfo">
+    insert into user_info (uid, phone, pw, name, shopName) values (#uid#, #phone#, #pw#, #name#, #shopName#)
+  </insert>
+  
+  <update id="updateUserInfo" parameterClass="UserInfo">
+	update user_info
+	<dynamic prepend="SET ">
+		<isNotEmpty property="pw" prepend=","><![CDATA[ pw=#pw# ]]></isNotEmpty>
+		<isNotEmpty property="name" prepend=","><![CDATA[ name=#name# ]]></isNotEmpty>
+		<isNotEmpty property="phone" prepend=","><![CDATA[ phone=#phone# ]]></isNotEmpty>
+		<isNotEmpty property="shopName" prepend=","><![CDATA[ shopName=#shopName# ]]></isNotEmpty>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 uid = #uid#
+	</dynamic>
+	</update>
+</sqlMap>

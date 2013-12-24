@@ -4,4 +4,8 @@
 	<bean id="loginService" class="com.joyque.service.impl.LoginServiceImpl" scope="prototype">
 		<property name="loginDao" ref="loginDao"></property>
 	</bean>
+	
+	<bean id="userBasicService" class="com.joyque.service.impl.UserBasicServiceImpl" scope="prototype">
+	    <property name="userInfoDao" ref="userInfoDao"></property>
+	</bean>
 </beans>

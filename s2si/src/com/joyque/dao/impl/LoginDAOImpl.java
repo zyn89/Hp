@@ -2,7 +2,6 @@ package com.joyque.dao.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Appender;
 import org.apache.log4j.Logger;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -11,6 +10,7 @@ import com.joyque.pojo.Account;
 
 public class LoginDAOImpl extends SqlMapClientDaoSupport implements ILoginDAO {
 	private static Logger logger=Logger.getLogger(LoginDAOImpl.class.getName());
+	@SuppressWarnings("unchecked")
 	public String login() {
 		System.out.println("LoginDAOImpl.login()");
 		logger.info("LoginDAOImpl.login()");

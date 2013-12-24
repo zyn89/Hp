@@ -7,9 +7,13 @@
 			<result name="login">/WEB-INF/jsp/main.jsp</result>
 			<result name="input">/WEB-INF/jsp/Login.jsp</result>
 		</action>
+		<action name="register" class="userBasicAction" method="register">
+		</action>
 	</package>
+	
 	<package name="s" namespace="/"  extends="struts-default">
 		<!--  <action name="userInfo" class="com.joyque.action.DispatchAction" method="userInfo"> <result name="success">/WEB-INF/jsp/userInfo.jsp</result></action>-->
 	 <action name="goTo" class="com.joyque.action.DispatchAction" method="execute"></action>
 	</package>
+	
 </struts>
