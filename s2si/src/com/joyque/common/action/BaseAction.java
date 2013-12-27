@@ -18,14 +18,20 @@ public class BaseAction extends ActionSupport{
 	 * @param ajaxRS
 	 * @throws IOException
 	 */
-	public void ajaxReturn(String ajaxRS) throws IOException{
+	public void ajaxReturn(String ajaxRS){
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/plain");//设置输出为文字流    
 		response.setCharacterEncoding("UTF-8");     
-		PrintWriter out=response.getWriter();
-		out.print(ajaxRS);
-		out.flush();
-		out.close();		
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			out.print(ajaxRS);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * 获取当前用户Session信息

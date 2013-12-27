@@ -28,6 +28,8 @@
   <sqlMap resource="com/joyque/pojo/Account.xml"/>
   <sqlMap resource="com/joyque/pojo/UserInfo.xml"/>
   <sqlMap resource="com/joyque/pojo/UserCredit.xml"/>
+  <sqlMap resource="com/joyque/pojo/ActivityInfo.xml"/>
+  <sqlMap resource="com/joyque/pojo/UserActivity.xml"/>
   <!-- List more here...
   <sqlMap resource="com/mydomain/data/Order.xml"/>
   <sqlMap resource="com/mydomain/data/Documents.xml"/>

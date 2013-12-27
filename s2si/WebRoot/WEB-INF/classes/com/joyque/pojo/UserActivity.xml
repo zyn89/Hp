@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="UserActivity">
+  <typeAlias alias="UserActivity" type="com.joyque.pojo.UserActivity"/>
+  
+  <select id="getUserActivities" resultClass="UserActivity">
+    select * from user_activity where aid = #value#
+  </select>
+  
+  <select id="getUserActivity" parameterClass="java.util.Map"
+      resultClass="UserActivity">
+    select * from user_activity where uid = #uid# and aid = #aid#
+  </select>
+</sqlMap>   

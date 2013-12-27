@@ -8,4 +8,8 @@
 	<bean id="userBasicAction" class="com.joyque.action.UserBasicAction" scope="prototype">
 		<property name="userBasicService" ref="userBasicService"></property>
 	</bean>
+	
+	<bean id="activityAction" class="com.joyque.action.ActivityAction" scope="prototype">
+		<property name="activityService" ref="activityService"></property>
+	</bean>
 </beans>

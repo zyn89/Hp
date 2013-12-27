@@ -9,6 +9,8 @@
 		</action>
 		
 		<action name="register" class="userBasicAction" method="register">
+		<result name="success">/WEB-INF/jsp/main.jsp</result>
+			
 		</action>
 		
 		<action name="Login" class="userBasicAction" method="Login">

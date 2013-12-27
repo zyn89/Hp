@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <body>
+<% String pram = (String)request.getAttribute("uid");%>
 	<div id="mainDiv">
         <div id="childDiv">欢 迎!
         </div>
@@ -23,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tr>
 				<td><a href="goTo.action?url=userInfo.jsp"><p>个人中心</p></a>
 				</td>
-				<td><a href="goTo.action?url=checkIn.jsp"><p>签到</p></a>
+				<td><a href="goTo.action?url=checkIn.jsp"><p><%=pram%>签到</p></a>
 				</td>
 			</tr>
 			<tr>

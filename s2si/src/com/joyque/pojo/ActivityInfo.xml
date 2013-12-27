@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="ActivityInfo">
+  <typeAlias alias="ActivityInfo" type="com.joyque.pojo.ActivityInfo"/>
+  
+  <select id="getActivityInfo" resultClass="ActivityInfo">
+    select * from activity_info where aid = #value#
+  </select>
+  
+  <select id="getActivityInfos" resultClass="ActivityInfo">
+    select * from activity_info 
+  </select>
+
+  <insert id="insertActivityInfo" parameterClass="ActivityInfo">
+    insert into activity_info values (null, #type#, #date#, #imageUrl#)
+  </insert>
+  
+  <update id="updateActivityInfo" parameterClass="ActivityInfo">
+	update activity_info
+	<dynamic prepend="SET ">
+		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 aid = #aid#
+	</dynamic>
+  </update>
+  
+  <delete id="deleteActivityInfo">
+      delete from activity_info where aid = #value#
+  </delete>
+</sqlMap>

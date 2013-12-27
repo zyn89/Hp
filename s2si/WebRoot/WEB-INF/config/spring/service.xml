@@ -9,4 +9,9 @@
 	    <property name="userInfoDao" ref="userInfoDao"></property>
 	    <property name="userCreditDao" ref="userCreditDao"></property>
 	</bean>
+	
+	<bean id="activityService" class="com.joyque.service.impl.ActivityServiceImpl" scope="prototype">
+	    <property name="activityInfoDao" ref="activityInfoDao"></property>
+	    <property name="userActivityDao" ref="userActivityDao"></property>
+	</bean>
 </beans>

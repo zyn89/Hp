@@ -13,15 +13,15 @@ import com.joyque.dao.IUserInfoDao;
 import com.joyque.pojo.UserCredit;
 import com.joyque.pojo.UserInfo;
 import com.joyque.service.IUserBasicService;
+import com.opensymphony.xwork2.ActionContext;
 
 public class UserBasicServiceImpl implements IUserBasicService{
 	private IUserInfoDao userInfoDao;
 	private IUserCreditDao userCreditDao;
 
 	@Override
-	public JSONObject register(String phone, String pw, String name,
+	public String register(String phone, String pw, String name,
 			String shopName) {
-		JSONObject json = new JSONObject();
 		//判断号码是否注册
 		UserInfo user = userInfoDao.getUserInfo(phone);
 		if(user != null)
@@ -47,20 +47,18 @@ public class UserBasicServiceImpl implements IUserBasicService{
 		credit.setUid(uid);
 		userCreditDao.insertUserCredit(credit);
 		
-		json.accumulate("uid", uid);
-		json.accumulate("name", user.getName());
 		if(user.getShopName() != null)
 		{
-			json.accumulate("shopName", user.getShopName());
+			ActionContext.getContext().put("shopName", user.getShopName());
 		}
-		json.accumulate("isCheck", credit.getIsCheck());
-		json.accumulate("credit", credit.getCredit());
-		return json;
+		ActionContext.getContext().put("name", user.getName());
+		ActionContext.getContext().put("isCheck", credit.getIsCheck());
+		ActionContext.getContext().put("credit", credit.getCredit());
+		return uid;
 	}
 	
 	@Override
-	public JSONObject Login(String phone, String pw) {
-		JSONObject json = new JSONObject();
+	public String Login(String phone, String pw) {
 		UserInfo user = userInfoDao.getUserInfo(phone);
 		if(user == null)
 		{
@@ -73,15 +71,14 @@ public class UserBasicServiceImpl implements IUserBasicService{
 		
 		UserCredit credit = userCreditDao.getUserCredit(user.getUid());
 		
-		json.accumulate("uid", user.getUid());
-		json.accumulate("name", user.getName());
 		if(user.getShopName() != null)
 		{
-			json.accumulate("shopName", user.getShopName());
+			ActionContext.getContext().put("shopName", user.getShopName());
 		}
-		json.accumulate("isCheck", credit.getIsCheck());
-		json.accumulate("credit", credit.getCredit());
-		return json;
+		ActionContext.getContext().put("name", user.getName());
+		ActionContext.getContext().put("isCheck", credit.getIsCheck());
+		ActionContext.getContext().put("credit", credit.getCredit());
+		return user.getUid();
 	}
 	
 	@Override
@@ -106,6 +103,14 @@ public class UserBasicServiceImpl implements IUserBasicService{
 			user.setShopName(shopName);
 		}
 		userInfoDao.updateUserInfo(user);
+		UserCredit credit = userCreditDao.getUserCredit(user.getUid());
+		json.accumulate("name", user.getName());
+		json.accumulate("isCheck", credit.getIsCheck());
+		json.accumulate("credit", credit.getCredit());
+		if(user.getShopName() != null)
+		{
+			json.accumulate("shopName", user.getShopName());
+		}
 		return json;
 	}
 	

@@ -27,48 +27,45 @@ public class UserBasicAction extends BaseAction{
 	@SuppressWarnings("unchecked")
 	public String register()
 	{
-		JSONObject json = new JSONObject();
 		try{
 			if(!isValidatePhone() || !isValidatePw()
 					|| !isValidateName())
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = userBasicService.register(phone, pw, name, shopName);
+			String uid = userBasicService.register(phone, pw, name, shopName);
 			Map session = getSession();
-			session.put("uid", json.get("uid"));
-		}catch(Exception e){
-			json.put("status", 400);
-			json.put("message", e.getMessage());
+			session.put("uid", uid);
+		}catch(Exception e){			
+			
 		}
-		return json.toString();
+		
+		return SUCCESS;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public String Login()
 	{
-		JSONObject json = new JSONObject();
 		try{
 			if(!isValidatePhone() || !isValidatePw())
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = userBasicService.Login(phone, pw);
+			String uid = userBasicService.Login(phone, pw);
 			Map session = getSession();
 			if(session.get("uid") == null)
 			{
-				session.put("uid", json.get("uid"));
+				session.put("uid", uid);
 			}
 
 		}catch(Exception e){
-			json.put("status", 400);
-			json.put("message", e.getMessage());
+			
 		}
-		return json.toString();
+		return SUCCESS;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public String MotifyInfo()
+	public void MotifyInfo()
 	{
 		JSONObject json = new JSONObject();
 		String uid = null;
@@ -76,7 +73,7 @@ public class UserBasicAction extends BaseAction{
 		uid = (String) session.get("uid");
 		if(uid == null)
 		{
-			return "overTime";
+			
 		}
 		try{
 			json = userBasicService.MotifyInfo(uid, phone, pw, name, shopName);
@@ -84,11 +81,11 @@ public class UserBasicAction extends BaseAction{
 			json.put("status", 400);
 			json.put("message", e.getMessage());
 		}
-		return json.toString();
+		ajaxReturn(json.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
-	public String CheckIn()
+	public void CheckIn()
 	{
 		JSONObject json = new JSONObject();
 		String uid = null;
@@ -96,7 +93,7 @@ public class UserBasicAction extends BaseAction{
 		uid = (String) session.get("uid");
 		if(uid == null)
 		{
-			return "overTime";
+			
 		}
 		try{
 			json = userBasicService.CheckIn(uid);
@@ -104,7 +101,7 @@ public class UserBasicAction extends BaseAction{
 			json.put("status", 400);
 			json.put("message", e.getMessage());
 		}
-		return json.toString();
+		ajaxReturn(json.toString());
 	}
 
 	private boolean isValidateName() {
