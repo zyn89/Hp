@@ -13,5 +13,17 @@
 	<bean id="activityService" class="com.joyque.service.impl.ActivityServiceImpl" scope="prototype">
 	    <property name="activityInfoDao" ref="activityInfoDao"></property>
 	    <property name="userActivityDao" ref="userActivityDao"></property>
+	    <property name="questionInfoDao" ref="questionInfoDao"></property>
+	</bean>
+	
+	<bean id="questionService" class="com.joyque.service.impl.QuestionServiceImpl" scope="prototype">
+	    <property name="questionInfoDao" ref="questionInfoDao"></property>
+	    <property name="userActivityDao" ref="userActivityDao"></property>
+	    <property name="activityInfoDao" ref="activityInfoDao"></property>
+	    <property name="userInfoDao" ref="userInfoDao"></property>
+	</bean>
+	
+	<bean id="uplordService" class="com.joyque.service.impl.UplordServiceImpl" scope="prototype">
+	    <property name="uplordInfoDao" ref="uplordInfoDao"></property>
 	</bean>
 </beans>

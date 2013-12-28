@@ -12,4 +12,12 @@
 	<bean id="activityAction" class="com.joyque.action.ActivityAction" scope="prototype">
 		<property name="activityService" ref="activityService"></property>
 	</bean>
+	
+	<bean id="questionAction" class="com.joyque.action.QuestionAction" scope="prototype">
+		<property name="questionService" ref="questionService"></property>
+	</bean>
+	
+	<bean id="uplordAction" class="com.joyque.action.UplordAction" scope="prototype">
+		<property name="uplordService" ref="uplordService"></property>
+	</bean>
 </beans>

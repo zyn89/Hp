@@ -15,13 +15,16 @@
   </select>
 
   <insert id="insertActivityInfo" parameterClass="ActivityInfo">
-    insert into activity_info values (null, #type#, #date#, #imageUrl#)
+    insert into activity_info values (null, #type#, #date#, #imageUrl#, #descUrl#, #score#, #credit#)
   </insert>
   
   <update id="updateActivityInfo" parameterClass="ActivityInfo">
 	update activity_info
 	<dynamic prepend="SET ">
 		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
+		<isNotEmpty property="descUrl" prepend=","><![CDATA[ descUrl=#descUrl# ]]></isNotEmpty>
+		<isNotEqual property="score" compareValue="-1" prepend=","><![CDATA[ score=#score# ]]></isNotEqual>
+		<isNotEqual property="credit" compareValue="-1" prepend=","><![CDATA[ credit=#credit# ]]></isNotEqual>
 	</dynamic>
 	<dynamic prepend="WHERE">
 		 aid = #aid#

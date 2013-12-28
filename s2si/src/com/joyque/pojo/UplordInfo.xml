@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="UplordInfo">
+  <typeAlias alias="UplordInfo" type="com.joyque.pojo.UplordInfo"/>
+  
+  <select id="GetUplordInfos" parameterClass="java.util.Map"
+  resultClass="UplordInfo">
+    select * from uplord_info where aid = #value# limit #start#, #end#
+  </select>
+
+  <insert id="insertUplordInfo" parameterClass="UplordInfo">
+    insert into uplord_info values (null, #aid#, #uid#, #date#, #picUrl1#, 
+    #picUrl2#, #picUrl3#, #picUrl4#, #picUrl5#, #picUrl6#, #content#)
+  </insert>
+  
+
+</sqlMap>    

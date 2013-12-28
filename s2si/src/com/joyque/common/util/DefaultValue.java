@@ -19,4 +19,25 @@ public class DefaultValue {
 	
 	//签到一次加1分
 	public static final int CheckCredit = 1;
+	
+	//图片类型，活动图片
+	public static final String PicActivity = "activity";
+	
+	//图片类型，活动说明图片
+	public static final String PicActivityDesc = "activityDesc";
+	
+	//图片类型，问题图片
+	public static final String PicQuestion = "question";
+	
+	//图片类型
+	public static final String PicUplord = "uplord";
+	
+	//活动类型 问答
+	public static final String ActivityQA = "qa";
+	
+	//活动类型 传图片 没文字
+	public static final String ActivityPicWithoutWord = "pic";
+	
+	//活动类型 图片加文字
+	public static final String ActivityPicWithWord = "pic_word";
 }

@@ -21,6 +21,39 @@
 		
 		<action name="CheckIn" class="userBasicAction" method="CheckIn">
 		</action>
+		
+		<action name="ActivityList" class="activityAction" method="ActivityList">
+		</action>
+		
+		<action name="AddActivity" class="activityAction" method="AddActivity">
+		</action>
+		
+		<action name="DeleteActivity" class="activityAction" method="DeleteActivity">
+		</action>
+		
+		<action name="UpdateActivity" class="activityAction" method="UpdateActivity">
+		</action>
+		
+		<action name="GetQuestionList" class="questionAction" method="GetQuestionList">
+		</action>
+		
+		<action name="DoneQuestion" class="questionAction" method="DoneQuestion">
+		</action>
+		
+		<action name="GetQaActivity" class="questionAction" method="GetQaActivity">
+		</action>
+		
+		<action name="QueryUserScore" class="questionAction" method="QueryUserScore">
+		</action>
+		
+		<action name="AddQuestion" class="questionAction" method="AddQuestion">
+		</action>
+		
+		<action name="UpdateQuestion" class="questionAction" method="UpdateQuestion">
+		</action>
+		
+		<action name="deleteQuestion" class="questionAction" method="deleteQuestion">
+		</action>
 	</package>
 	
 	<package name="s" namespace="/"  extends="struts-default">

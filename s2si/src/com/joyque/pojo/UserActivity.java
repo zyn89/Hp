@@ -5,6 +5,8 @@ public class UserActivity {
 	private String uid;
 	
 	private long aid;
+	
+	private int score;
 
 	public String getUid() {
 		return uid;
@@ -20,5 +22,13 @@ public class UserActivity {
 
 	public void setAid(long aid) {
 		this.aid = aid;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 }

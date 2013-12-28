@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+ <sqlMap namespace="QuestionInfo">
+  <typeAlias alias="QuestionInfo" type="com.joyque.pojo.QuestionInfo"/>
+  
+  <select id="GetQuestionInfoList" resultClass="QuestionInfo">
+    select * from question_info where aid = #value#
+  </select>
+  
+  <select id="getQuestionInfo" resultClass="QuestionInfo">
+    select * from question_info where aid = #value#
+  </select>
+
+  <insert id="insertQuestionInfo" parameterClass="QuestionInfo">
+    insert into question_info values (null, #aid#, #questionUrl#, #a1#, #a2#, #a3#, #aIndex#, #score#)
+  </insert>
+  
+  <update id="updateQuestionInfo" parameterClass="QuestionInfo">
+	update question_info
+	<dynamic prepend="SET ">
+		<isNotEmpty property="questionUrl" prepend=","><![CDATA[ questionUrl=#questionUrl# ]]></isNotEmpty>
+		<isNotEmpty property="a1" prepend=","><![CDATA[ a1=#a1# ]]></isNotEmpty>
+		<isNotEmpty property="a2" prepend=","><![CDATA[ a2=#a2# ]]></isNotEmpty>
+		<isNotEmpty property="a3" prepend=","><![CDATA[ a3=#a3# ]]></isNotEmpty>
+		<isNotEqual property="aIndex" compareValue="-1" prepend=","><![CDATA[ aIndex=#aIndex# ]]></isNotEqual>
+		<isNotEqual property="score" compareValue="-1" prepend=","><![CDATA[ score=#score# ]]></isNotEqual>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 qid = #qid#
+	</dynamic>
+	</update>
+	
+	<delete id="deleteQuestionInfo">
+	    delete from question_info where qid = #value#
+	</delete>
+	
+	<delete id="deleteQuestionInfoList">
+	    delete from question_info where aid = #value#
+	</delete>
+</sqlMap>

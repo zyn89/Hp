@@ -6,12 +6,17 @@
 <sqlMap namespace="UserActivity">
   <typeAlias alias="UserActivity" type="com.joyque.pojo.UserActivity"/>
   
-  <select id="getUserActivities" resultClass="UserActivity">
-    select * from user_activity where aid = #value#
+  <select id="getUserActivities" parameterClass="java.util.Map"
+  resultClass="UserActivity">
+    select * from user_activity where aid = #aid# limit #start#, #end#
   </select>
   
   <select id="getUserActivity" parameterClass="java.util.Map"
       resultClass="UserActivity">
     select * from user_activity where uid = #uid# and aid = #aid#
   </select>
+  
+  <insert id="insertUserActivity" parameterClass="UserActivity">
+    insert into user_activity values (#uid#, #aid#, #score#)
+  </insert>
 </sqlMap>   
