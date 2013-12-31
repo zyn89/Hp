@@ -64,4 +64,22 @@
 		   <ref bean="sqlMapClient"/>
 		</property>
 	</bean>
+	
+	<bean id="surveyInfoDao" class="com.joyque.dao.impl.SurveyInfoDaoImpl" scope="prototype">
+		<property name="dataSource">
+		   <ref bean="dataSource"/>
+		</property>
+		<property name="sqlMapClient">
+		   <ref bean="sqlMapClient"/>
+		</property>
+	</bean>
+	
+	<bean id="surveyQuestionDao" class="com.joyque.dao.impl.SurveyQuestionDaoImpl" scope="prototype">
+		<property name="dataSource">
+		   <ref bean="dataSource"/>
+		</property>
+		<property name="sqlMapClient">
+		   <ref bean="sqlMapClient"/>
+		</property>
+	</bean>
 </beans>

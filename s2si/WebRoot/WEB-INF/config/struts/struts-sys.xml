@@ -54,6 +54,12 @@
 		
 		<action name="deleteQuestion" class="questionAction" method="deleteQuestion">
 		</action>
+		
+		<action name="UplordPic" class="uplordAction" method="UplordPic">
+		</action>
+		
+		<action name="QueryUplord" class="uplordAction" method="QueryUplord">
+		</action>
 	</package>
 	
 	<package name="s" namespace="/"  extends="struts-default">

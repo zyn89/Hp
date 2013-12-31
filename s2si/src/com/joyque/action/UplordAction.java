@@ -43,6 +43,10 @@ public class UplordAction extends BaseAction{
 	
 	private String content;
 	
+	private int start;
+	
+	private int end;
+	
 	@SuppressWarnings("unchecked")
 	public void UplordPic()
 	{
@@ -72,6 +76,37 @@ public class UplordAction extends BaseAction{
 			
 		}
 		ajaxReturn(json.toString());
+	}
+
+	@SuppressWarnings("unchecked")
+	public void QueryUplord()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateAid(aid) || !isValidatePage(start)
+					|| !isValidatePage(end))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = uplordService.QueryUplord(aid, start, end);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	private boolean isValidatePage(int page) {
+		if(page >= 0)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	private boolean isValdateFormate(String formate) {
@@ -216,5 +251,21 @@ public class UplordAction extends BaseAction{
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
 	}
 }

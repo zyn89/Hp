@@ -20,4 +20,8 @@
 	<bean id="uplordAction" class="com.joyque.action.UplordAction" scope="prototype">
 		<property name="uplordService" ref="uplordService"></property>
 	</bean>
+	
+	<bean id="surveyAction" class="com.joyque.action.SurveyAction" scope="prototype">
+		<property name="surveyService" ref="surveyService"></property>
+	</bean>
 </beans>

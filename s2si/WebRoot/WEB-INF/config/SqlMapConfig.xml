@@ -32,6 +32,9 @@
   <sqlMap resource="com/joyque/pojo/UserActivity.xml"/>
   <sqlMap resource="com/joyque/pojo/QuestionInfo.xml"/>
   <sqlMap resource="com/joyque/pojo/UplordInfo.xml"/>
+  <sqlMap resource="com/joyque/pojo/SurveyInfo.xml"/>
+  <sqlMap resource="com/joyque/pojo/SurveyQuestion.xml"/>
+  <sqlMap resource="com/joyque/pojo/UserSurvey.xml"/>
   <!-- List more here...
   <sqlMap resource="com/mydomain/data/Order.xml"/>
   <sqlMap resource="com/mydomain/data/Documents.xml"/>

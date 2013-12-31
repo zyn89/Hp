@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+ <sqlMap namespace="SurveyQuestion">
+  <typeAlias alias="SurveyQuestion" type="com.joyque.pojo.SurveyQuestion"/>
+  
+  <select id="GetSurveyQuestion" resultClass="SurveyQuestion">
+    select * from survey_question where qid = #value#
+  </select>
+  
+  <select id="GetSurveyQuestions" resultClass="SurveyQuestion">
+    select * from survey_question where sid = #value#
+  </select>
+
+  <insert id="insertSurveyQuestion" parameterClass="SurveyQuestion">
+    insert into survey_question values (null, #sid#, #imageUrl#, #a1#, #a2#, #a3#)
+  </insert>
+  
+  <update id="updateSurveyQuestion" parameterClass="SurveyQuestion">
+	update survey_question
+	<dynamic prepend="SET ">
+		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
+		<isNotEmpty property="a1" prepend=","><![CDATA[ a1=#a1# ]]></isNotEmpty>
+		<isNotEmpty property="a2" prepend=","><![CDATA[ a2=#a2# ]]></isNotEmpty>
+		<isNotEmpty property="a3" prepend=","><![CDATA[ a3=#a3# ]]></isNotEmpty>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 qid = #qid#
+	</dynamic>
+	</update>
+	
+	<delete id="deleteSurveyQuestion">
+	    delete from survey_question where qid = #value#
+	</delete>
+	
+	<delete id="deleteSurveyQuestions">
+	    delete from survey_question where sid = #value#
+	</delete>
+</sqlMap>
