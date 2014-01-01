@@ -55,4 +55,19 @@ public class UserSurveyDaoImpl extends SqlMapClientDaoSupport implements IUserSu
 		return result;
 	}
 
+	@Override
+	public UserSurvey GetUserSurvey(String uid, long qid) {
+		UserSurvey result = null;
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("uid", uid);
+		parameter.put("qid", qid);
+		try{
+			result = (UserSurvey) this.getSqlMapClientTemplate().queryForObject(
+					"GetUserSurvey", parameter);
+		} catch (DataAccessException e) {
+			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);
+		}
+		return result;
+	}
+
 }

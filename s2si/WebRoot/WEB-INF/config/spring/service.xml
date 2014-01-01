@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" " http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans>
-	<bean id="loginService" class="com.joyque.service.impl.LoginServiceImpl" scope="prototype">
-		<property name="loginDao" ref="loginDao"></property>
-	</bean>
-	
 	<bean id="userBasicService" class="com.joyque.service.impl.UserBasicServiceImpl" scope="prototype">
 	    <property name="userInfoDao" ref="userInfoDao"></property>
 	    <property name="userCreditDao" ref="userCreditDao"></property>
@@ -21,6 +17,7 @@
 	    <property name="userActivityDao" ref="userActivityDao"></property>
 	    <property name="activityInfoDao" ref="activityInfoDao"></property>
 	    <property name="userInfoDao" ref="userInfoDao"></property>
+	    <property name="userCreditDao" ref="userCreditDao"></property>
 	</bean>
 	
 	<bean id="uplordService" class="com.joyque.service.impl.UplordServiceImpl" scope="prototype">
@@ -30,5 +27,8 @@
 	
 	<bean id="surveyService" class="com.joyque.service.impl.SurveyServiceImpl" scope="prototype">
 	    <property name="surveyInfoDao" ref="surveyInfoDao"></property>
+	    <property name="userSurveyDao" ref="userSurveyDao"></property>
+	    <property name="surveyQuestionDao" ref="surveyQuestionDao"></property>
+	    <property name="userCreditDao" ref="userCreditDao"></property>
 	</bean>
 </beans>

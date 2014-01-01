@@ -1,5 +1,7 @@
 package com.joyque.action;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
@@ -18,10 +20,6 @@ public class QuestionAction extends BaseAction{
 	private long aid;
 	
 	private long qid;
-
-	private String image;
-	
-	private String formate;
 	
 	private String a1;
 	
@@ -37,6 +35,10 @@ public class QuestionAction extends BaseAction{
 	
 	private int end;
 	
+	private List<File> pics;
+	
+	private List<String> picsContentType;
+		
 	@SuppressWarnings("unchecked")
 	public String GetQuestionList()
 	{
@@ -137,20 +139,20 @@ public class QuestionAction extends BaseAction{
 			{
 				
 			}
-			if(!isValidateImage(image) || !isValidateFormate(formate)
+			if(!isValidateImage(pics) || !isValidateFormate(picsContentType)
 					|| !isValidateAnswer(a1) || !isValidateAnswer(a2)
 					|| !isValidateAnswer(a3) || !isValidateAindex(aIndex)
 					|| !isValidateScore(score) || !isValidateAid(aid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = questionService.AddQuestion(uid, aid, image, formate, a1, a2, a3, aIndex, score);
+			json = questionService.AddQuestion(uid, aid, pics, picsContentType, a1, a2, a3, aIndex, score);
 		}catch(Exception e){			
 			
 		}
 		ajaxReturn(json.toString());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void UpdateQuestion()
 	{
@@ -167,7 +169,7 @@ public class QuestionAction extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = questionService.UpdateQuestion(uid, qid, image, formate,
+			json = questionService.UpdateQuestion(uid, qid, pics, picsContentType,
 					a1, a2, a3, aIndex, score, aid);
 		}catch(Exception e){			
 			
@@ -198,6 +200,22 @@ public class QuestionAction extends BaseAction{
 		ajaxReturn(json.toString());
 	}
 	
+	private boolean isValidateFormate(List<String> picsContentType) {
+		if(picsContentType != null && picsContentType.size() == 1)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isValidateImage(List<File> pics) {
+		if(pics != null && pics.size() == 1)
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	private boolean isValidateQid(long qid) {
 		if(qid > 0)
 		{
@@ -216,22 +234,6 @@ public class QuestionAction extends BaseAction{
 
 	private boolean isValidateAnswer(String answer) {
 		if(answer != null && !answer.trim().equals(""))
-		{
-			return true;
-		}
-		return false;
-	}
-
-	private boolean isValidateFormate(String formate) {
-	    if(formate != null && !formate.trim().equals(""))
-	    {
-	    	return true;
-	    }
-		return false;
-	}
-
-	private boolean isValidateImage(String image) {
-		if(image != null && !image.trim().equals(""))
 		{
 			return true;
 		}
@@ -294,22 +296,6 @@ public class QuestionAction extends BaseAction{
 		this.qid = qid;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public String getFormate() {
-		return formate;
-	}
-
-	public void setFormate(String formate) {
-		this.formate = formate;
-	}
-
 	public String getA1() {
 		return a1;
 	}
@@ -364,5 +350,21 @@ public class QuestionAction extends BaseAction{
 
 	public void setEnd(int end) {
 		this.end = end;
+	}
+
+	public List<File> getPics() {
+		return pics;
+	}
+
+	public void setPics(List<File> pics) {
+		this.pics = pics;
+	}
+
+	public List<String> getPicsContentType() {
+		return picsContentType;
+	}
+
+	public void setPicsContentType(List<String> picsContentType) {
+		this.picsContentType = picsContentType;
 	}
 }

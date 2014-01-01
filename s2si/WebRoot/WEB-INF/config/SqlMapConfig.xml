@@ -25,7 +25,6 @@
 
   <!-- List the SQL Map XML files. They can be loaded from the 
        classpath, as they are here (com.domain.data...) -->
-  <sqlMap resource="com/joyque/pojo/Account.xml"/>
   <sqlMap resource="com/joyque/pojo/UserInfo.xml"/>
   <sqlMap resource="com/joyque/pojo/UserCredit.xml"/>
   <sqlMap resource="com/joyque/pojo/ActivityInfo.xml"/>

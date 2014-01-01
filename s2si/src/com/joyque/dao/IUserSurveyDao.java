@@ -10,5 +10,7 @@ public interface IUserSurveyDao {
 	
 	public List<UserSurvey> GetUserSurveysByPage(long qid, int start, int end);
 	
+	public UserSurvey GetUserSurvey(String uid, long qid);
+	
 	public int insertUserSurvey(UserSurvey info);
 }

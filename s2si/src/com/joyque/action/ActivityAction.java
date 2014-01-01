@@ -1,5 +1,7 @@
 package com.joyque.action;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
@@ -18,19 +20,21 @@ public class ActivityAction extends BaseAction{
 	
 	private long aid;
 	
-	private String activityImage;
-	
-	private String activityFormate;
-	
-	private String descImage;
-	
-	private String descFormate;
-	
 	private String type;
 	
 	private int score;
 	
 	private int credit;
+	
+	private List<File> pics;
+	
+	private List<String> picsContentType;
+	
+	private String activityIndex;
+	
+	private String descIndex;
+	
+	private List<String> picsName;
 	
 	@SuppressWarnings("unchecked")
 	public String ActivityList()
@@ -62,21 +66,21 @@ public class ActivityAction extends BaseAction{
 			{
 				
 			}
-			if(!isValidateImage(activityImage) || !isValidateFormate(activityFormate)
-					|| !isValidateImage(descImage) || !isValidateFormate(descFormate)
-					|| !isValidateType(type) || !isValidateScore(score)
-					|| !isValidateCredit(credit))
+			if(!isValidateType(type) || !isValidateScore(score)
+					|| !isValidateCredit(credit) || !isValidatePics(pics)
+					|| !isValidatePicsType(picsContentType) || !isValidatePicIndex(activityIndex)
+					|| !isValidatePicIndex(descIndex) || !isValidatePicName(picsName))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = activityService.AddActivity(
-					activityImage, activityFormate, descImage,
-					descFormate ,uid, type, score, credit);
+					pics, picsContentType, activityIndex,
+					descIndex ,uid, type, score, credit, picsName);
 		}catch(Exception e){			
 			
 		}
 		ajaxReturn(json.toString());
-	}
+	}	
 
 	@SuppressWarnings("unchecked")
 	public void DeleteActivity()
@@ -118,12 +122,44 @@ public class ActivityAction extends BaseAction{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = activityService.UpdateActivity(
-					aid, uid, activityImage, activityFormate,
-					descImage, descFormate, score, credit);
+					aid, uid, pics, picsContentType,
+					activityIndex, descIndex, score, credit, picsName);
 		}catch(Exception e){			
 			
 		}
 		ajaxReturn(json.toString());
+	}
+	
+	private boolean isValidatePicName(List<String> picsName) {
+		if(picsName != null && picsName.size() > 0)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isValidatePicIndex(String activityIndex) {
+		if(activityIndex != null && !activityIndex.trim().equals(""))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isValidatePicsType(List<String> picsContentType) {
+		if(picsContentType != null && picsContentType.size() > 0)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isValidatePics(List<File> pics) {
+		if(pics != null && pics.size() > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	private boolean isValidateCredit(int credit) {
@@ -160,22 +196,6 @@ public class ActivityAction extends BaseAction{
 		return false;
 	}
 
-	private boolean isValidateFormate(String formate) {
-		if(formate != null && !formate.trim().equals(""))
-		{
-			return true;
-		}
-		return false;
-	}
-
-	private boolean isValidateImage(String image) {
-		if(image != null && !image.trim().equals(""))
-		{
-			return true;
-		}
-		return false;
-	}
-
 	public IActivityService getActivityService() {
 		return activityService;
 	}
@@ -200,38 +220,6 @@ public class ActivityAction extends BaseAction{
 		this.type = type;
 	}
 
-	public String getActivityImage() {
-		return activityImage;
-	}
-
-	public void setActivityImage(String activityImage) {
-		this.activityImage = activityImage;
-	}
-
-	public String getActivityFormate() {
-		return activityFormate;
-	}
-
-	public void setActivityFormate(String activityFormate) {
-		this.activityFormate = activityFormate;
-	}
-
-	public String getDescImage() {
-		return descImage;
-	}
-
-	public void setDescImage(String descImage) {
-		this.descImage = descImage;
-	}
-
-	public String getDescFormate() {
-		return descFormate;
-	}
-
-	public void setDescFormate(String descFormate) {
-		this.descFormate = descFormate;
-	}
-
 	public int getScore() {
 		return score;
 	}
@@ -246,5 +234,45 @@ public class ActivityAction extends BaseAction{
 
 	public void setCredit(int credit) {
 		this.credit = credit;
+	}
+
+	public List<File> getPics() {
+		return pics;
+	}
+
+	public void setPics(List<File> pics) {
+		this.pics = pics;
+	}
+
+	public List<String> getPicsContentType() {
+		return picsContentType;
+	}
+
+	public void setPicsContentType(List<String> picsContentType) {
+		this.picsContentType = picsContentType;
+	}
+
+	public String getActivityIndex() {
+		return activityIndex;
+	}
+
+	public void setActivityIndex(String activityIndex) {
+		this.activityIndex = activityIndex;
+	}
+
+	public String getDescIndex() {
+		return descIndex;
+	}
+
+	public void setDescIndex(String descIndex) {
+		this.descIndex = descIndex;
+	}
+
+	public List<String> getPicsName() {
+		return picsName;
+	}
+
+	public void setPicsName(List<String> picsName) {
+		this.picsName = picsName;
 	}
 }

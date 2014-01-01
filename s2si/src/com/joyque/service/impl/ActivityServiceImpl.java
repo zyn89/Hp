@@ -1,10 +1,9 @@
 package com.joyque.service.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-
-import sun.misc.BASE64Decoder;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -57,22 +56,29 @@ public class ActivityServiceImpl implements IActivityService{
 	}
 	
 	@Override
-	public JSONObject AddActivity(String activityImage,
-			String activityFormate, String descImage, String descFormate,
-			String uid, String type, int score, int credit) throws IOException {
+	public JSONObject AddActivity(List<File> pics, List<String> picsContentType,
+			String activityIndex, String descIndex,
+			String uid, String type, int score, int credit, List<String> picsName) throws IOException {
 		JSONObject json = new JSONObject();
 		ActivityInfo activity = new ActivityInfo();
 		activity.setDefaultValue();
 		
-		activityImage = activityImage.replace(' ', '+');
-		BASE64Decoder decoder = new BASE64Decoder();
-		byte[] buffer = decoder.decodeBuffer(activityImage);
-		String url = FileUtil.SaveActivityStringAsMedia(uid, buffer, activityFormate);
+		int aIndex = 0;
+		int dIndex = 0;
+		if(activityIndex.equals(picsName.get(0)))
+		{
+			aIndex = 0;
+			dIndex = 1;
+		}
+		else
+		{
+			aIndex = 1;
+			dIndex = 0;
+		}
+		String url = FileUtil.SaveActivityStringAsMedia(uid, pics.get(aIndex), picsContentType.get(aIndex));
 		activity.setImageUrl(url);
 		
-		descImage = descImage.replace(' ', '+');
-		byte[] buffer_desc = decoder.decodeBuffer(descImage);
-		url = FileUtil.SaveActivityDescStringAsMedia(uid, buffer_desc, descFormate);
+		url = FileUtil.SaveActivityDescStringAsMedia(uid, pics.get(dIndex), picsContentType.get(dIndex));
 		activity.setDescUrl(url);
 		
 		activity.setCredit(credit);
@@ -95,26 +101,39 @@ public class ActivityServiceImpl implements IActivityService{
 	}
 	
 	@Override
-	public JSONObject UpdateActivity(long aid, String uid, String activityImage,
-			String activityFormate, String descImage, String descFormate, int score, int credit) throws IOException {
+	public JSONObject UpdateActivity(long aid, String uid, List<File> pics, List<String> picsContentType, 
+			String activityIndex, String descIndex, int score, int credit, List<String> picsName) throws IOException {
 		JSONObject json = new JSONObject();
 		ActivityInfo activity = new ActivityInfo();
 		activity.setAid(aid);
-		if(activityImage != null && !activityImage.trim().equals(""))
+		
+		if(activityIndex != null && !activityIndex.trim().equals(""))
 		{
-			activityImage = activityImage.replace(' ', '+');
-			BASE64Decoder decoder = new BASE64Decoder();
-			byte[] buffer = decoder.decodeBuffer(activityImage);
-			String activityUrl = FileUtil.SaveActivityStringAsMedia(uid, buffer, activityFormate);
+			int aIndex = 0;
+			if(activityIndex.equals(picsName.get(0)))
+			{
+				aIndex = 0;
+			}
+			else
+			{
+				aIndex = 1;
+			}
+			String activityUrl = FileUtil.SaveActivityStringAsMedia(uid, pics.get(aIndex), picsContentType.get(aIndex));
 			activity.setImageUrl(activityUrl);
 		}
 		
-		if(descImage != null && !descImage.trim().equals(""))
+		if(descIndex != null && !descIndex.trim().equals(""))
 		{
-			descImage = descImage.replace(' ', '+');
-			BASE64Decoder decoder = new BASE64Decoder();
-			byte[] buffer = decoder.decodeBuffer(descImage);
-			String descUrl = FileUtil.SaveActivityDescStringAsMedia(uid, buffer, descFormate);
+			int dIndex = 0;
+			if(descIndex.equals(picsName.get(0)))
+			{
+				dIndex = 0;
+			}
+			else
+			{
+				dIndex = 1;
+			}
+			String descUrl = FileUtil.SaveActivityDescStringAsMedia(uid, pics.get(dIndex), picsContentType.get(dIndex));
 			activity.setDescUrl(descUrl);
 		}
 		

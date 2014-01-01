@@ -16,6 +16,11 @@
     select * from user_survey where qid = #qid# 
   </select>
   
+  <select id="GetUserSurvey" parameterClass="java.util.Map"
+  resultClass="UserSurvey">
+    select * from user_survey where qid = #qid# and uid = #uid#
+  </select>
+  
   <insert id="insertUserSurvey" parameterClass="UserSurvey">
     insert into user_survey values (#uid#, #qid#, #sid#, #aIndex#)
   </insert>

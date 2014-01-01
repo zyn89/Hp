@@ -3,10 +3,6 @@
 <struts>
 	 <include file="struts-default.xml"/>
 	<package name="" namespace="/" extends="struts-default">
-		<action name="login" class="loginAction" method="login">
-			<result name="login">/WEB-INF/jsp/main.jsp</result>
-			<result name="input">/WEB-INF/jsp/Login.jsp</result>
-		</action>
 		
 		<action name="register" class="userBasicAction" method="register">
 		<result name="success">/WEB-INF/jsp/main.jsp</result>

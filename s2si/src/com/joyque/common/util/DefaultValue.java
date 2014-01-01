@@ -32,6 +32,12 @@ public class DefaultValue {
 	//图片类型
 	public static final String PicUplord = "uplord";
 	
+	//图片类型，调研
+	public static final String PicSurvey = "survey";
+	
+	//图片类型，调研问题
+	public static final String PicSurveyQuestion = "surveyQuestion";
+	
 	//活动类型 问答
 	public static final String ActivityQA = "qa";
 	

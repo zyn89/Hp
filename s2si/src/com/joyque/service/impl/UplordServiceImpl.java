@@ -1,10 +1,9 @@
 package com.joyque.service.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-
-import sun.misc.BASE64Decoder;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -21,10 +20,8 @@ public class UplordServiceImpl implements IUplordService{
 	private IUserInfoDao userInfoDao;
 
 	@Override
-	public JSONObject UplordPic(String uid, long aid, String image1,
-			String image2, String image3, String image4, String image5,
-			String image6, String formate1, String formate2, String formate3,
-			String formate4, String formate5, String formate6, String content) throws IOException {
+	public JSONObject UplordPic(String uid, long aid, List<File> pics,
+			List<String> picsContentType, String content) throws IOException {
 		JSONObject json = new JSONObject();
 		UplordInfo ui = new UplordInfo();
 		ui.setUid(uid);
@@ -33,35 +30,22 @@ public class UplordServiceImpl implements IUplordService{
 		Date date = new Date();
 		ui.setDate(date.getTime());
 		
-		image1 = image1.replace(' ', '+');
-		BASE64Decoder decoder = new BASE64Decoder();
-		byte[] buffer = decoder.decodeBuffer(image1);
-		String url = FileUtil.SaveUplordStringAsMedia(uid, buffer, formate1);
+		String url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(0), picsContentType.get(0));
 		ui.setPicUrl1(url);
 		
-		image2 = image2.replace(' ', '+');
-		buffer = decoder.decodeBuffer(image2);
-		url = FileUtil.SaveUplordStringAsMedia(uid, buffer, formate2);
+		url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(1), picsContentType.get(1));
 		ui.setPicUrl2(url);
 		
-		image3 = image3.replace(' ', '+');
-		buffer = decoder.decodeBuffer(image3);
-		url = FileUtil.SaveUplordStringAsMedia(uid, buffer, formate3);
+		url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(2), picsContentType.get(2));
 		ui.setPicUrl3(url);
 		
-		image4 = image4.replace(' ', '+');
-		buffer = decoder.decodeBuffer(image4);
-		url = FileUtil.SaveUplordStringAsMedia(uid, buffer, formate4);
+		url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(3), picsContentType.get(3));
 		ui.setPicUrl4(url);
 		
-		image5 = image5.replace(' ', '+');
-		buffer = decoder.decodeBuffer(image5);
-		url = FileUtil.SaveUplordStringAsMedia(uid, buffer, formate5);
+		url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(4), picsContentType.get(4));
 		ui.setPicUrl5(url);
 		
-		image6 = image6.replace(' ', '+');
-		buffer = decoder.decodeBuffer(image6);
-		url = FileUtil.SaveUplordStringAsMedia(uid, buffer, formate6);
+		url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(5), picsContentType.get(5));
 		ui.setPicUrl6(url);
 		
 		uplordInfoDao.insertUplordInfo(ui);

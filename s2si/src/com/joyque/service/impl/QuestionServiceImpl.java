@@ -1,9 +1,8 @@
 package com.joyque.service.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import sun.misc.BASE64Decoder;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -13,10 +12,12 @@ import com.joyque.common.util.FileUtil;
 import com.joyque.dao.IActivityInfoDao;
 import com.joyque.dao.IQuestionInfoDao;
 import com.joyque.dao.IUserActivityDao;
+import com.joyque.dao.IUserCreditDao;
 import com.joyque.dao.IUserInfoDao;
 import com.joyque.pojo.ActivityInfo;
 import com.joyque.pojo.QuestionInfo;
 import com.joyque.pojo.UserActivity;
+import com.joyque.pojo.UserCredit;
 import com.joyque.pojo.UserInfo;
 import com.joyque.service.IQuestionService;
 import com.opensymphony.xwork2.ActionContext;
@@ -26,6 +27,7 @@ public class QuestionServiceImpl implements IQuestionService{
 	private IUserActivityDao userActivityDao;
 	private IActivityInfoDao activityInfoDao;
 	private IUserInfoDao userInfoDao;
+	private IUserCreditDao userCreditDao;
 
 	@Override
 	public void GetQuestions(long aid) {
@@ -59,6 +61,11 @@ public class QuestionServiceImpl implements IQuestionService{
 		ua.setAid(aid);
 		ua.setScore(score);
 		userActivityDao.insertUserActivity(ua);
+		ActivityInfo ai = activityInfoDao.getActivityInfo(aid);
+		UserCredit uc = userCreditDao.getUserCredit(uid);
+		uc.setCredit(uc.getCredit() + ai.getCredit());
+		userCreditDao.updateUserCredit(uc);
+		json.accumulate("credit", uc.getCredit());
 		return json;
 	}
 	
@@ -105,7 +112,7 @@ public class QuestionServiceImpl implements IQuestionService{
 	}
 	
 	@Override
-	public JSONObject AddQuestion(String uid, long aid, String image, String formate,
+	public JSONObject AddQuestion(String uid, long aid, List<File> pics, List<String> picsContentType,
 			String a1, String a2, String a3, int aIndex, int score) throws IOException {
 		JSONObject json = new JSONObject();
 		QuestionInfo qi = new QuestionInfo();
@@ -117,10 +124,7 @@ public class QuestionServiceImpl implements IQuestionService{
 		qi.setaIndex(aIndex);
 		qi.setScore(score);
 		
-		image = image.replace(' ', '+');
-		BASE64Decoder decoder = new BASE64Decoder();
-		byte[] buffer = decoder.decodeBuffer(image);
-		String url = FileUtil.SaveQuestionStringAsMedia(uid, buffer, formate);
+		String url = FileUtil.SaveQuestionStringAsMedia(uid, pics.get(0), picsContentType.get(0));
 		qi.setQuestionUrl(url);
 		questionInfoDao.insertQuestionInfo(qi);
 		json.accumulate("questions", GetQuestionArray(aid));
@@ -128,7 +132,7 @@ public class QuestionServiceImpl implements IQuestionService{
 	}
 	
 	@Override
-	public JSONObject UpdateQuestion(String uid, long qid, String image, String formate,
+	public JSONObject UpdateQuestion(String uid, long qid, List<File> pics, List<String> picsContentType,
 			String a1, String a2, String a3, int aIndex, int score, long aid) throws IOException {
 		JSONObject json = new JSONObject();
 		QuestionInfo qi = new QuestionInfo();
@@ -140,12 +144,9 @@ public class QuestionServiceImpl implements IQuestionService{
 		qi.setaIndex(aIndex);
 		qi.setScore(score);
 		
-		if(image != null)
+		if(pics != null && pics.size() == 1)
 		{
-			image = image.replace(' ', '+');
-			BASE64Decoder decoder = new BASE64Decoder();
-			byte[] buffer = decoder.decodeBuffer(image);
-			String url = FileUtil.SaveQuestionStringAsMedia(uid, buffer, formate);
+			String url = FileUtil.SaveQuestionStringAsMedia(uid, pics.get(0), picsContentType.get(0));
 			qi.setQuestionUrl(url);
 		}
 
@@ -193,5 +194,13 @@ public class QuestionServiceImpl implements IQuestionService{
 
 	public void setUserInfoDao(IUserInfoDao userInfoDao) {
 		this.userInfoDao = userInfoDao;
+	}
+
+	public IUserCreditDao getUserCreditDao() {
+		return userCreditDao;
+	}
+
+	public void setUserCreditDao(IUserCreditDao userCreditDao) {
+		this.userCreditDao = userCreditDao;
 	}
 }
