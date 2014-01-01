@@ -20,7 +20,6 @@ import com.joyque.pojo.UserActivity;
 import com.joyque.pojo.UserCredit;
 import com.joyque.pojo.UserInfo;
 import com.joyque.service.IQuestionService;
-import com.opensymphony.xwork2.ActionContext;
 
 public class QuestionServiceImpl implements IQuestionService{
 	private IQuestionInfoDao questionInfoDao;
@@ -30,8 +29,10 @@ public class QuestionServiceImpl implements IQuestionService{
 	private IUserCreditDao userCreditDao;
 
 	@Override
-	public void GetQuestions(long aid) {
-		ActionContext.getContext().put("questions", GetQuestionArray(aid));
+	public JSONObject GetQuestions(long aid) {
+		JSONObject json = new JSONObject();
+		json.accumulate("questions", GetQuestionArray(aid));
+		return json;
 	}
 
 	private JSONArray GetQuestionArray(long aid)

@@ -40,8 +40,9 @@ public class QuestionAction extends BaseAction{
 	private List<String> picsContentType;
 		
 	@SuppressWarnings("unchecked")
-	public String GetQuestionList()
+	public void GetQuestionList()
 	{
+		JSONObject json = new JSONObject();
 		try{
 			String uid = null;
 			Map session = getSession();
@@ -55,11 +56,11 @@ public class QuestionAction extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			questionService.GetQuestions(aid);
+			json = questionService.GetQuestions(aid);
 		}catch(Exception e){			
 			
 		}
-		return SUCCESS;
+		ajaxReturn(json.toString());
 	}
 	
 	@SuppressWarnings("unchecked")

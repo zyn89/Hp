@@ -8,7 +8,7 @@ import net.sf.json.JSONObject;
 
 public interface IQuestionService {
 
-	void GetQuestions(long aid);
+	JSONObject GetQuestions(long aid);
 
 	JSONObject DoneQuestion(String uid, int score, long aid);
 
