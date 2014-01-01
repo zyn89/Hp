@@ -85,7 +85,7 @@ public class UplordAction extends BaseAction{
 	}
 
 	private boolean isValdateFormate(List<String> picsContentType) {
-		if(picsContentType != null && picsContentType.size() == 6)
+		if(picsContentType != null && picsContentType.size() > 0)
 		{
 			return true;
 		}
@@ -93,7 +93,7 @@ public class UplordAction extends BaseAction{
 	}
 
 	private boolean isValidateImage(List<File> pics) {
-		if(pics != null && pics.size() == 6)
+		if(pics != null && pics.size() > 0)
 		{
 			return true;
 		}

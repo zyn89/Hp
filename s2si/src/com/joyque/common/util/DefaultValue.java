@@ -17,6 +17,8 @@ public class DefaultValue {
 	
 	public static final int NotCheck = 0;
 	
+	public static final int LotteryCount = 5;
+	
 	//签到一次加1分
 	public static final int CheckCredit = 1;
 	
@@ -37,6 +39,18 @@ public class DefaultValue {
 	
 	//图片类型，调研问题
 	public static final String PicSurveyQuestion = "surveyQuestion";
+	
+	//图片类型， 兑换
+	public static final String PicExchange = "exchange";
+	
+	//图片类型，兑换说明
+	public static final String PicExchangeDesc = "exchangeDesc";
+	
+	//图片类型，奖品
+	public static final String PicPrize = "prize";
+	
+	//图片类型，奖卷
+	public static final String PicPrizeDesc = "prizeDesc";
 	
 	//活动类型 问答
 	public static final String ActivityQA = "qa";

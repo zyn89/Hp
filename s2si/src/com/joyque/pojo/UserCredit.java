@@ -1,5 +1,7 @@
 package com.joyque.pojo;
 
+import com.joyque.common.util.DefaultValue;
+
 public class UserCredit {
 
 	private String uid;
@@ -8,10 +10,13 @@ public class UserCredit {
 	
 	private int credit = -1;
 	
+	private int lotteryCount = -1;
+	
 	public void setDefaultValue()
 	{
 		isCheck = 0;
 		credit = 0;
+		lotteryCount = DefaultValue.LotteryCount;
 	}
 
 	public String getUid() {
@@ -36,5 +41,13 @@ public class UserCredit {
 
 	public void setCredit(int credit) {
 		this.credit = credit;
+	}
+
+	public int getLotteryCount() {
+		return lotteryCount;
+	}
+
+	public void setLotteryCount(int lotteryCount) {
+		this.lotteryCount = lotteryCount;
 	}
 }

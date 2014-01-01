@@ -136,6 +136,7 @@ public class UserBasicServiceImpl implements IUserBasicService{
 		for(UserCredit info : infos)
 		{
 			info.setIsCheck(DefaultValue.NotCheck);
+			info.setLotteryCount(DefaultValue.LotteryCount);
 			userCreditDao.updateUserCredit(info);
 		}
 	}

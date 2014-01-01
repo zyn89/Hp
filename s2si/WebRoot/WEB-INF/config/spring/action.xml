@@ -20,4 +20,8 @@
 	<bean id="surveyAction" class="com.joyque.action.SurveyAction" scope="prototype">
 		<property name="surveyService" ref="surveyService"></property>
 	</bean>
+	
+	<bean id="presentAction" class="com.joyque.action.PresentAction" scope="prototype">
+		<property name="presentService" ref="presentService"></property>
+	</bean>
 </beans>

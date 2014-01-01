@@ -33,20 +33,35 @@ public class UplordServiceImpl implements IUplordService{
 		String url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(0), picsContentType.get(0));
 		ui.setPicUrl1(url);
 		
-		url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(1), picsContentType.get(1));
-		ui.setPicUrl2(url);
+		if(pics.size() > 1)
+		{
+			url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(1), picsContentType.get(1));
+			ui.setPicUrl2(url);
+		}		
 		
-		url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(2), picsContentType.get(2));
-		ui.setPicUrl3(url);
+		if(pics.size() > 2)
+		{
+			url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(2), picsContentType.get(2));
+			ui.setPicUrl3(url);
+		}		
 		
-		url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(3), picsContentType.get(3));
-		ui.setPicUrl4(url);
+		if(pics.size() > 3)
+		{
+			url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(3), picsContentType.get(3));
+			ui.setPicUrl4(url);
+		}	
 		
-		url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(4), picsContentType.get(4));
-		ui.setPicUrl5(url);
+		if(pics.size() > 4)
+		{
+			url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(4), picsContentType.get(4));
+			ui.setPicUrl5(url);
+		}		
 		
-		url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(5), picsContentType.get(5));
-		ui.setPicUrl6(url);
+		if(pics.size() > 5)
+		{
+			url = FileUtil.SaveUplordStringAsMedia(uid, pics.get(5), picsContentType.get(5));
+			ui.setPicUrl6(url);
+		}		
 		
 		uplordInfoDao.insertUplordInfo(ui);
 		return json;

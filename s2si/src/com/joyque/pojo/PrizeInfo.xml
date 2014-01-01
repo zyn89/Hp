@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="PrizeInfo">
+  <typeAlias alias="PrizeInfo" type="com.joyque.pojo.PrizeInfo"/>
+  
+  <select id="GetPrizeInfo" resultClass="PrizeInfo">
+    select * from prize_info where pid = #value#
+  </select>
+
+  <insert id="insertPrizeInfo" parameterClass="PrizeInfo">
+    insert into prize_info values (null, #prizeUrl#, #descUrl#)
+    <selectKey resultClass="long" keyProperty="pid">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+  </insert>
+  
+  <update id="updatePrizeInfo" parameterClass="PrizeInfo">
+	update prize_info
+	<dynamic prepend="SET ">
+		<isNotEmpty property="prizeUrl" prepend=","><![CDATA[ prizeUrl=#prizeUrl# ]]></isNotEmpty>
+		<isNotEmpty property="descUrl" prepend=","><![CDATA[ descUrl=#descUrl# ]]></isNotEmpty>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 pid = #pid#
+	</dynamic>
+  </update>
+  
+  <delete id="deletePrizeInfo">
+      delete from prize_info where pid = #value#
+  </delete>
+</sqlMap>   

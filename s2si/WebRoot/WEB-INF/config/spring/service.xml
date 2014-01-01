@@ -31,4 +31,11 @@
 	    <property name="surveyQuestionDao" ref="surveyQuestionDao"></property>
 	    <property name="userCreditDao" ref="userCreditDao"></property>
 	</bean>
+	
+	<bean id="presentService" class="com.joyque.service.impl.PresentServiceImpl" scope="prototype">
+	    <property name="exchangeInfoDao" ref="exchangeInfoDao"></property>
+	    <property name="prizeInfoDao" ref="prizeInfoDao"></property>
+	    <property name="userPrizeDao" ref="userPrizeDao"></property>
+	    <property name="userCreditDao" ref="userCreditDao"></property>
+	</bean>
 </beans>
