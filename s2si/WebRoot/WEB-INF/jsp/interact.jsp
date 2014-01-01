@@ -1,62 +1,115 @@
-<%@ page language="java" contentType="text/html; charset=gbk"
-	pageEncoding="gbk"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<html>
-<head>
-<base href="<%=basePath%>">
-<meta http-equiv="Content-Type" content="text/html; charset=gbk">
-<title>微互动</title>
-   <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport"/>
-<link type="text/css" rel="stylesheet" href="resources/css/interact.css"/>
-<script type="text/javascript" defer>
+<!doctype html>
+<html lang="en">
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>寰簰鍔�</title>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<%--<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	--%>
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<script src="resources/js/jquery-1.9.1.js"></script>
+	<script>
+		jQuery(function($){
 
-/*function cDiv(act){
-//var link=document.createElement('a');
-//link.setAttribute('href', url) ;
+			function diplayActs(data) {
+				var $ul = $('<ul>');
+				
+				$.each(data,function(index,value){
+					var aid = value.aid,
+						activityUrl = value.activityUrl,
+						credit = value.credit,
+						descUrl = value.descUrl,
+						done = value.done,
+						score = value.score,
+						type = value.type,
+						$li = $('<li>'),
+						$a = $('<a>'),
+						$img = $('<img>');
 
-var oDiv=document.createElement("div");
-oDiv.onclick="goIn()";
-var oSpan=document.createElement("span");
-oSpan.innerHTML= act;
-oDiv.appendChild(oSpan);
-//link.appendChild(oDiv)
-document.getElementById("showDiv").appendChild(oDiv);
-}*/
+					$li.attr({
+						'data-aid' : aid,
+						'data-credit' : credit,
+						'data-type' : type,
+						'data-score' : score
+					});
 
-function cDiv(act){
-//var link=document.createElement('a');
-//link.setAttribute('href', url) ;
+					$a.attr({
+						href:'interact.action?aid=' + aid + '&type=' + type + '&descUrl=' + descUrl
+					});
 
-var button=document.createElement("input");
-button.type="button";
-button.value= act;
-button.onclick=function go(){
-  window.location.href="goTo.action?url=interactIn.jsp?act="+act;
- 
-}
+					if(done) {
+						//璁剧疆鍥剧墖鏄椿鍔ㄥ畬鎴愮殑鍥剧墖
+					} else {
+						$img.attr({
+							src : activityUrl
+						});
+					}
 
-//link.appendChild(oDiv)
-document.getElementById("showDiv").appendChild(button);
-}
-function all(){
- for(j = 1;j <5; j++) {
-    cDiv("活动"+j);
- }
-}
+					$a.append($img).appendTo($li);
+					$li.appendTo($ul);
+				});
 
+				$('.m-interacts').empty().append($ul);
+			}
 
-</script >
-
-</head>
-<body onload="all()">
-	<div id="showDiv">
-        
+			
+			$.ajax({
+				url: '/s2si/ActivityList.action',
+				type: 'post',
+				dataType: 'json',
+			})
+			.done(function(data) {
+				diplayActs(data.activities);
+			})
+			.fail(function(error) {
+				console.log("error");
+			});
+		});
+	</script>
+	<style> 
+		body {
+			padding: 0px;
+			margin: 0px;
+		}
+		.main {
+			margin:0px auto;
+			width:100%;
+			overflow: hidden;
+			zoom : 1;
+			text-align: center;
+		}
+		.m-interacts ul {
+			list-style: none;
+		}
+	</style>
+  </head>
+  
+  <body>
+  <% String pram = (String)request.getAttribute("name");%>
+ 	<div class="main">
+ 	<span><%= pram %></span>
+		<div class="m-interacts">
+			<ul>
+				<li><a href=""><img src="" alt=""></a></li>
+				<li><a href=""><img src="" alt=""></a></li>
+				<li><a href=""><img src="" alt=""></a></li>
+			</ul>
+		</div>
 	</div>
-	
-</body>
+  </body>
 </html>

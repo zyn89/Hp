@@ -28,13 +28,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     alert("显示已有内容");
   }  
   </script>
-  <%request.setCharacterEncoding("gbk");
-String act=request.getParameter("act");%>
+  <%
+	  String aid=request.getParameter("aid");
+	  String descUrl=request.getParameter("descUrl");
+	  String type=request.getParameter("type");
+  %>
 </head>
 <body>
  <div class="main">
     <div class="header">
-        <p>活动主题:<%=act%></p>
+        <p>活动主题:<%= descUrl%></p>
         <input type="button" id="more" value="已上传内容" onclick="jump()"> 
     </div>
  

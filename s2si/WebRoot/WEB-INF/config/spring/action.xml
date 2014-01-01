@@ -24,4 +24,7 @@
 	<bean id="presentAction" class="com.joyque.action.PresentAction" scope="prototype">
 		<property name="presentService" ref="presentService"></property>
 	</bean>
+	
+	<bean id="interactAction" class="com.joyque.action.InteractAction" scope="prototype">
+	</bean>
 </beans>

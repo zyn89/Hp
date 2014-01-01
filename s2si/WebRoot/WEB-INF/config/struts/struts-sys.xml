@@ -9,6 +9,13 @@
 			
 		</action>
 		
+		<action name="interact" class="interactAction">
+			<result name="success">/WEB-INF/jsp/interactIn2.jsp</result>
+		</action>
+		
+		
+		
+		
 		<action name="Login" class="userBasicAction" method="Login">
 		</action>
 		
@@ -52,6 +59,7 @@
 		</action>
 		
 		<action name="UplordPic" class="uplordAction" method="UplordPic">
+			<result name="success"></result>
 		</action>
 		
 		<action name="QueryUplord" class="uplordAction" method="QueryUplord">

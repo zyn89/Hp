@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <body>
-<% String pram = (String)request.getAttribute("uid");%>
+<% String pram = (String)request.getAttribute("name");%>
 	<div id="mainDiv">
         <div id="childDiv">»¶ Ó­!
         </div>
