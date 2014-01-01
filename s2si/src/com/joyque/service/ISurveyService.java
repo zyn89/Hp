@@ -28,4 +28,6 @@ public interface ISurveyService {
 
 	JSONObject DoneSurveyQuestion(String uid, long qid, long sid, int isFinal, int aIndex);
 
+	JSONObject QuerySurvey(String uid, long qid, int start, int end, long sid);
+
 }

@@ -12,10 +12,12 @@ import com.joyque.common.util.FileUtil;
 import com.joyque.dao.ISurveyInfoDao;
 import com.joyque.dao.ISurveyQuestionDao;
 import com.joyque.dao.IUserCreditDao;
+import com.joyque.dao.IUserInfoDao;
 import com.joyque.dao.IUserSurveyDao;
 import com.joyque.pojo.SurveyInfo;
 import com.joyque.pojo.SurveyQuestion;
 import com.joyque.pojo.UserCredit;
+import com.joyque.pojo.UserInfo;
 import com.joyque.pojo.UserSurvey;
 import com.joyque.service.ISurveyService;
 import com.opensymphony.xwork2.ActionContext;
@@ -25,6 +27,7 @@ public class SurveyServiceImpl implements ISurveyService{
 	private IUserSurveyDao userSurveyDao;
 	private ISurveyQuestionDao surveyQuestionDao;
 	private IUserCreditDao userCreditDao;
+	private IUserInfoDao userInfoDao;
 
 	@Override
 	public void GetSurveyList() {		
@@ -199,6 +202,28 @@ public class SurveyServiceImpl implements ISurveyService{
 		}
 		return json;
 	}
+	
+	@Override
+	public JSONObject QuerySurvey(String uid, long qid, int start, int end,
+			long sid) {
+		JSONObject json = new JSONObject();
+		List<UserSurvey> infos = userSurveyDao.GetUserSurveysByPage(qid, start, end);
+		JSONArray jArray = new JSONArray();
+		for(UserSurvey info : infos)
+		{
+			JSONObject j = new JSONObject();
+			j.accumulate("aIndex", info.getaIndex());
+			String id = info.getUid();
+			UserInfo user = userInfoDao.getUserInfoByUid(id);
+			if(user != null)
+			{
+				j.accumulate("name", user.getName());
+			}
+			jArray.add(j);
+		}
+		json.accumulate("userSurvey", jArray);
+		return json;
+	}	
 
 	public ISurveyInfoDao getSurveyInfoDao() {
 		return surveyInfoDao;
@@ -230,5 +255,13 @@ public class SurveyServiceImpl implements ISurveyService{
 
 	public void setUserCreditDao(IUserCreditDao userCreditDao) {
 		this.userCreditDao = userCreditDao;
-	}	
+	}
+
+	public IUserInfoDao getUserInfoDao() {
+		return userInfoDao;
+	}
+
+	public void setUserInfoDao(IUserInfoDao userInfoDao) {
+		this.userInfoDao = userInfoDao;
+	}
 }

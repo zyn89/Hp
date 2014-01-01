@@ -37,6 +37,10 @@ public class SurveyAction extends BaseAction{
 	
 	private int aIndex;
 	
+	private int start;
+	
+	private int end;
+	
 	@SuppressWarnings("unchecked")
 	public String GetSurveyList()
 	{
@@ -218,6 +222,38 @@ public class SurveyAction extends BaseAction{
 		}
 		ajaxReturn(json.toString());
 	}
+	
+	@SuppressWarnings("unchecked")
+	public void QueryUserSurvey()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateQid(qid) || !isValidatePage(start)
+					|| !isValidatePage(end) || !isValidateSid(sid))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = surveyService.QuerySurvey(uid, qid, start, end, sid);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+
+	private boolean isValidatePage(int page) {
+		if(page >= 0)
+		{
+			return true;
+		}
+		return false;
+	}
 
 	private boolean isValidateIndex(int aIndex) {
 		if(aIndex > 0)
@@ -369,5 +405,21 @@ public class SurveyAction extends BaseAction{
 
 	public void setaIndex(int aIndex) {
 		this.aIndex = aIndex;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
 	}
 }

@@ -56,6 +56,33 @@
 		
 		<action name="QueryUplord" class="uplordAction" method="QueryUplord">
 		</action>
+		
+		<action name="GetSurveyList" class="surveyAction" method="GetSurveyList">
+		</action>
+		
+		<action name="AddSurvey" class="surveyAction" method="AddSurvey">
+		</action>
+		
+		<action name="DeleteSurvey" class="surveyAction" method="DeleteSurvey">
+		</action>
+		
+		<action name="GetSurveyQuestion" class="surveyAction" method="GetSurveyQuestion">
+		</action>
+		
+		<action name="AddSurveyQuestion" class="surveyAction" method="AddSurveyQuestion">
+		</action>
+		
+		<action name="UpdateSurveyQuestion" class="surveyAction" method="UpdateSurveyQuestion">
+		</action>
+		
+		<action name="DeleteSurveyQuestion" class="surveyAction" method="DeleteSurveyQuestion">
+		</action>
+		
+		<action name="DoneSurveyQuestion" class="surveyAction" method="DoneSurveyQuestion">
+		</action>
+		
+		<action name="QueryUserSurvey" class="surveyAction" method="QueryUserSurvey">
+		</action>
 	</package>
 	
 	<package name="s" namespace="/"  extends="struts-default">
