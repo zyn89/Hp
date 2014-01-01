@@ -15,7 +15,6 @@ import com.joyque.dao.IUserActivityDao;
 import com.joyque.pojo.ActivityInfo;
 import com.joyque.pojo.UserActivity;
 import com.joyque.service.IActivityService;
-import com.opensymphony.xwork2.ActionContext;
 
 public class ActivityServiceImpl implements IActivityService{
 	private IActivityInfoDao activityInfoDao;
@@ -23,9 +22,10 @@ public class ActivityServiceImpl implements IActivityService{
 	private IQuestionInfoDao questionInfoDao;
 
 	@Override
-	public void GetActivityList(String uid) {
-		
-		ActionContext.getContext().put("activities", GetActivityArray(uid));
+	public JSONObject GetActivityList(String uid) {
+		JSONObject json = new JSONObject();
+		json.accumulate("activities", GetActivityArray(uid));
+		return json;
 	}
 	
 	private JSONArray GetActivityArray(String uid)

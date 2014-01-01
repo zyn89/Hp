@@ -37,8 +37,9 @@ public class ActivityAction extends BaseAction{
 	private List<String> picsName;
 	
 	@SuppressWarnings("unchecked")
-	public String ActivityList()
+	public void ActivityList()
 	{
+		JSONObject json = new JSONObject();
 		try{
 			String uid = null;
 			Map session = getSession();
@@ -47,11 +48,11 @@ public class ActivityAction extends BaseAction{
 			{
 				
 			}
-			activityService.GetActivityList(uid);
+			json = activityService.GetActivityList(uid);
 		}catch(Exception e){			
 			
 		}
-		return SUCCESS;
+		ajaxReturn(json.toString());
 	}
 	
 	@SuppressWarnings("unchecked")

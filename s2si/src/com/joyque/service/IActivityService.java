@@ -8,7 +8,7 @@ import net.sf.json.JSONObject;
 
 public interface IActivityService {
 
-	void GetActivityList(String uid);
+	JSONObject GetActivityList(String uid);
 
 	JSONObject AddActivity(List<File> pics, List<String> picsContentType, String activityIndex,
 			String descIndex, String uid, String type, int score, int credit, List<String> picsName) throws IOException;
