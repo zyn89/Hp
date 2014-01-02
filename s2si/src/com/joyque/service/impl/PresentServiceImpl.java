@@ -2,7 +2,9 @@ package com.joyque.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -275,12 +277,12 @@ public class PresentServiceImpl implements IPresentServiceDao{
 		lottery.setBg3Url(url);
 		lotteryInfoDao.insertLotteryInfo(lottery);
 		
-		json = GetLotterys();
+		json = GetLotterys(uid);
 		return json;
 	}
 	
 	@Override
-	public JSONObject GetLotterys() {
+	public JSONObject GetLotterys(String uid) {
 		List<LotteryInfo> infos = lotteryInfoDao.GetLotteryInfos();
 		JSONArray jArray = new JSONArray();
 		JSONObject json = new JSONObject();
@@ -290,9 +292,21 @@ public class PresentServiceImpl implements IPresentServiceDao{
 			j.accumulate("lid", info.getLid());
 			j.accumulate("credit", info.getCredit());
 			j.accumulate("lotteryUrl", info.getImageUrl());
-			j.accumulate("bg1Url", info.getBg1Url());
-			j.accumulate("bg2Url", info.getBg2Url());
-			j.accumulate("bg3Url", info.getBg3Url());
+			JSONArray array = new JSONArray();
+			List<String> choiceItems = new ArrayList<String>();
+			choiceItems.add(info.getBg1Url());
+			choiceItems.add(info.getBg2Url());
+			choiceItems.add(info.getBg3Url());
+			Random random = new Random();
+			int r = random.nextInt(3);
+			array.add(choiceItems.get(r));
+			random = new Random();
+			r = random.nextInt(3);
+			array.add(choiceItems.get(r));
+			random = new Random();
+			r = random.nextInt(3);
+			array.add(choiceItems.get(r));
+			j.accumulate("choiceItems", array);
 			PrizeInfo prize = prizeInfoDao.GetPrizeInfo(info.getPid());
 			j.accumulate("prizeUrl", prize.getPrizeUrl());
 			j.accumulate("descUrl", prize.getDescUrl());
@@ -300,6 +314,9 @@ public class PresentServiceImpl implements IPresentServiceDao{
 		}
 		
 		json.accumulate("lotterys", jArray);
+		UserCredit credit = userCreditDao.getUserCredit(uid);
+		json.accumulate("credit", credit.getCredit());
+		json.accumulate("lotteryCount", credit.getLotteryCount());
 		return json;
 	}
 	
@@ -381,15 +398,15 @@ public class PresentServiceImpl implements IPresentServiceDao{
 		lotteryInfoDao.updateLotteryInfo(lottery);
 		prizeInfoDao.updatePrizeInfo(prize);
 		
-		JSONObject json = GetLotterys();
+		JSONObject json = GetLotterys(uid);
 		return json;
 	}
 	
 	@Override
-	public JSONObject DeleteLottery(int lid) {
+	public JSONObject DeleteLottery(int lid, String uid) {
 		JSONObject json = new JSONObject();
 		lotteryInfoDao.deleteLotteryInfo(lid);
-		json = GetLotterys();
+		json = GetLotterys(uid);
 		return json;
 	}
 	

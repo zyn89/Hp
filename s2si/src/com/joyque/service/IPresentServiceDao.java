@@ -31,14 +31,14 @@ public interface IPresentServiceDao {
 			String prizeTitleIndex, String prizeDescIndex, String bg1Index,
 			String bg2Index, String bg3Index, String lotteryIndex) throws IOException;
 
-	JSONObject GetLotterys();
+	JSONObject GetLotterys(String uid);
 
 	JSONObject UpdateLottery(String uid, List<File> pics,
 			List<String> picsContentType, List<String> picsName, int credit,
 			String prizeTitleIndex, String prizeDescIndex, String bg1Index,
 			String bg2Index, String bg3Index, String lotteryIndex, int lid) throws IOException;
 
-	JSONObject DeleteLottery(int lid);
+	JSONObject DeleteLottery(int lid, String uid);
 
 	JSONObject DrawLottery(String uid, int lid, int isAward);
 

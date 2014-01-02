@@ -211,7 +211,7 @@ public class PresentAction extends BaseAction{
 			{
 				
 			}
-			json = presentService.GetLotterys();
+			json = presentService.GetLotterys(uid);
 		}catch(Exception e){			
 			
 		}
@@ -288,7 +288,7 @@ public class PresentAction extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = presentService.DeleteLottery(lid);
+			json = presentService.DeleteLottery(lid, uid);
 		}catch(Exception e){			
 			
 		}
