@@ -12,10 +12,21 @@
 		<action name="interact" class="interactAction">
 			<result name="success">/WEB-INF/jsp/interactIn2.jsp</result>
 		</action>
+		<action name="manager" class="managerAction">
+			<result name="success">/WEB-INF/console/MyHtml.html</result>	
+		</action>
 		
+		<action name="all" class="managerAction">
+			<result name="success">/WEB-INF/console/activities.html</result>	
+		</action>
+		<action name="set" class="managerAction" method="send">	
+		</action>
+		<action name="file" class="activityAction" method="test">
+		</action>
 		
-		
-		
+		<action name="question" class="managerAction">
+			<result name="success">/WEB-INF/console/question.html</result>	
+		</action>
 		<action name="Login" class="userBasicAction" method="Login">
 		</action>
 		

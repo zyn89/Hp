@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>监控页面</title>
+    <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <script language="javascript" type="text/javascript" src="resources/js/jquery-1.9.1.js"></script>
+    <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    </script>
+     <style type="text/css">
+		.my{
+		float:right;
+		}
+		.mynav>li.active>a, 
+		.mynav>li.active>a:hover,
+		.mynav>li.active>a:focus
+		{
+			background-color:#08c;
+			color:white;
+		}
+		.mynav{
+		margin-left:20px;
+		}
+		.section_header p
+		{
+			padding:0px;
+			margin:0px;
+			color:#000;
+		}
+		.section_header
+		{
+			padding: 0;
+			padding-bottom:5px;
+			margin-bottom: 20px;
+			font-size: 21px;
+			line-height: 40px;
+			color: #333;
+			border: 0;
+			border-bottom: 1px solid #06C;
+		}
+	</style>	
+  </head>
+  <script type="text/javascript">  	
+  	$(document).ready(function(){ 
+  		$li=$(".mynav").find("li");
+  		$li.bind("click",function(){
+	  			$(this).siblings().removeClass('active');
+  				//$(".mynav").find("li").removeClass("active");
+  				$(this).siblings().find("i").removeClass("icon-white");
+  				$(this).addClass("active");
+  				$(this).find("i").addClass("icon-white");
+  							
+           	});
+         $(".mynav").find(".ans").bind("click",function(){
+         		$(".content").load("question.action");  
+         });
+         $(".btn.send").bind("click",function(){
+         	$.ajax({
+						url: "http://127.0.0.1:8080/s2si/ActivityList.action",
+         				type: "POST",
+         				data: {},
+         				success:function(data){
+         					console.log(data)
+         				},
+         	});
+         	
+         });
+         $li=$(".mynav").find("li.all");
+         $li.bind("getinfo",function(){
+         	$.ajax({
+					url: "http://127.0.0.1:8080/s2si/ActivityList.action",
+         			type: "POST",
+         			data: {},
+         			success:function(data){
+ 						var data=JSON.parse(data);
+         				//console.log(data);
+         				$li.data("data",data);
+         				var arr=data["activities"];
+         				$("li.all").data("data",data);
+         				//console.log(arr);
+         				var $ul=$("ul.mynav");
+         				for(var i=0;i<arr.length;i++){
+         					//var tmp=JSON.parse(arr[i]);
+         					//console.log(arr[i])
+         					$activity=$(".mynav").find("li.all").clone("true");
+         					$icon=$(".mynav").find("li.all").find("i").clone("true");
+         					var obj=arr[i].aid;
+         					console.log(obj)	
+         					$activity.find("a").text("活动"+obj);
+         					$activity.removeClass("all");
+         					$activity.removeClass("active");
+         					$icon.addClass("icon-chevron-right my");
+         					$icon.appendTo($activity.find("a"));
+         					$activity.find("i").removeClass("icon-white");
+         					//console.log($activity);
+         					$activity.insertBefore($(".mynav").find("li.temple"));
+         				}
+         				$("li.all").trigger("click");
+         				$(".content").load("all.action",function(){
+         					$("li.all").trigger("table");
+         				});
+         			},
+         	});
+         });
+         $("li.all").bind("table",function(){
+         	var data=$(this).data("data");
+         	var arr=data["activities"];
+         	for(var i=0;i<arr.length;i++){
+         		var $tr=$("table").find("tr.temple").clone();
+         		$tr.data("data",arr[i]);
+         		$tr.removeClass("hide");
+         		$tr.removeClass("temple");
+         		$tr.find(".id").text((i+1)+"");
+         		$tr.find(".type").text(arr[i]["type"]);
+         		$tr.find(".desc").data("data",arr[i]["descUrl"]);
+         		$tr.find("a.descURL").bind("click",function(){
+						var $tmp=$(this).parent();
+						console.log($tmp.data("data"));
+						$(".modal.show").find(".modal-body").find("p").text($tmp.data("data"));
+						$(".modal.show").modal("show");
+				});
+         		$tr.find(".activity").data("data",arr[i]["activityUrl"]);
+         		$tr.find("a.activityURL").bind("click",function(){
+						var $tmp=$(this).parent();
+						console.log($tmp.data("data"));
+						$(".modal.show").find(".modal-body").find("p").text($tmp.data("data"));
+						$(".modal.show").modal("show");
+				});
+         		$tr.find(".score").text(arr[i]["score"]);
+         		$tr.find(".credit").text(arr[i]["credit"]);
+         		$tr.find(".oper").bind("click",function(){
+         			$(".modal.oper").data("data",$(this).parent().data("data"));
+         			$(".modal.oper").modal("show");
+         			$(".mynav").data("data",$(".modal.oper"));
+         		});
+         		$tr.appendTo($("table"));
+         	}
+         });
+         $("li.all").trigger("getinfo");
+  	});
+  </script>
+  
+  <body>
+  <div class="container-fluid">
+  	<div class="navbar">
+  		<div class="navbar-inner">
+    		<a class="brand" href="#"><b>后台管理</b></a>
+   		    <!--ul class="nav topnav">
+     			<li class="active"><a href="#">首页</a></li>
+            	<li><a href="#">Link</a></li>
+            	<li><a href="#">Link</a></li>
+            </ul-->
+            <button class="btn btn-primary send">Action</button>
+			<div class="hide btn-group">
+  				<button class="btn btn-primary disabled">Action</button>
+  				<button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+    				<span class="caret"></span>
+ 				</button>
+  					<ul class="dropdown-menu">
+    				<li><a href="#">保存</a></li>
+            		<li><a href="#">退出</a></li>
+ 					 </ul>
+			</div>
+  		</div>
+	  </div>
+	</div>  
+  <div class="row-fluid">
+    <div class="span2">
+      <ul class="nav nav-tabs nav-stacked mynav">
+      	  <li class="all"><a href="#"><i class="icon-chevron-right my"></i>全部活动</a></li>
+          <li class="hide temple"><a href="#" data-original-title="Tooltip on right"><i class="icon-chevron-right my"></i></a></li>
+      </ul>
+    </div>
+    <div class="span9 content">
+		
+    </div>
+  </div>
+	
+  </body>
+</html>

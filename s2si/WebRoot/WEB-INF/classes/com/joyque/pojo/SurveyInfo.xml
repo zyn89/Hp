@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="SurveyInfo">
+  <typeAlias alias="SurveyInfo" type="com.joyque.pojo.SurveyInfo"/>
+  
+  <select id="GetSurveyInfo" resultClass="SurveyInfo">
+    select * from survey_info where sid = #value#
+  </select>
+  
+  <select id="GetSurveyInfos" resultClass="SurveyInfo">
+    select * from survey_info 
+  </select>
+
+  <insert id="insertSurveyInfo" parameterClass="SurveyInfo">
+    insert into survey_info values (null, #imageUrl#, #credit#, #date#)
+  </insert>
+  
+  <update id="updateSurveyInfo" parameterClass="SurveyInfo">
+	update survey_info
+	<dynamic prepend="SET ">
+		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
+		<isNotEqual property="credit" compareValue="-1" prepend=","><![CDATA[ credit=#credit# ]]></isNotEqual>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 sid = #sid#
+	</dynamic>
+  </update>
+  
+  <delete id="deleteSurveyInfo">
+      delete from survey_info where sid = #value#
+  </delete>
+</sqlMap>

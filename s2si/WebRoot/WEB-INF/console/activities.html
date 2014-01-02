@@ -1,0 +1,210 @@
+<script type="text/javascript">
+</script>
+<div class="section_header">
+  			<div class="btn-group pull-right">
+  				<button class="btn add"  data-loading-text="正在添加">添加</button>
+    		 	<button class="btn refresh btn-primary"  data-loading-text="正在刷新">刷新</button>
+ 			</div>
+  			<p>全部活动</p> 
+</div>
+  		
+  	       	<div class="pagination">
+  				<ul>
+    				<li class="next la"><a href="#">&laquo;</a></li>
+    				<li class="first"><a href="#">1</a></li>
+    				<li class="next ra"><a href="#">&raquo;</a></li>
+  				</ul>
+			</div>  
+    	<table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>活动类型</th>
+                  <th>描述链接</th>
+                  <th>图片链接</th>
+                  <th>得分</th>
+                  <th>积分</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hide temple">
+                  <td class="id" style="padding-top:12px">1</td>
+                  <td class="type" style="padding-top:12px">1</td>
+                  <td class="desc"><a class="btn btn-link descURL">查看</a></td>
+                  <td class="activity"><a class="btn btn-link activityURL">查看</a></td>
+                  <td class="score" style="padding-top:12px">Otto</td>
+                  <td class="credit" style="padding-top:12px"></td>
+                  <td class="oper"><button class="btn btn-primary">操作</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+			<div class="modal hide fade show">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h3>链接内容</h3>
+			  </div>
+			  <div class="modal-body">
+			    <p>One fine body…</p>
+			  </div>
+			</div>
+			<div class="modal hide fade oper">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h3>操作</h3>
+			  </div>
+			  <div class="modal-body">
+			     <a href="#" class="btn btn-danger">删除</a>
+			     <a href="#" class="btn btn-primary change">修改</a>
+			     <form class="form-horizontal hide" style="margin-top:10px">
+					  <div class="control-group">
+					    <label class="control-label" for="inputEmail">活动类型</label>
+					    <div class="controls type">
+					      <input type="text" id="inputEmail" placeholder="type">
+					    </div>
+					  </div>
+					   <div class="control-group">
+					    <label class="control-label" for="inputEmail">活动描述</label>
+					    <div class="controls">
+					      <a class="btn btn-link desc" style="padding-left:0px">点此上传</a>
+					    </div>
+					  </div>
+					   <div class="control-group">
+					    <label class="control-label" for="inputEmail">活动图片</label>
+					    <div class="controls">
+					      <a class="btn btn-link activity" style="padding-left:0px">点此上传</a>
+					    </div>
+					  </div>
+					   <div class="control-group">
+					    <label class="control-label" for="inputEmail">得分</label>
+					    <div class="controls score">
+					      <input type="text" id="" placeholder="score">
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <label class="control-label" for="inputPassword">积分</label>
+					    <div class="controls credit">
+					      <input type="text" id="" placeholder="credit">
+					    </div>
+					  </div>
+				</form>
+			  </div>
+			  <form  action="test.action" encType="multipart/form-data"  method="post">
+			  <input type="file" class="hide" multiple="multiple" name="pics" id="fileupload">
+			  <input type="submit" style="display:none"/>
+			  </form>
+			  <div class="modal-footer">
+			    <a href="#" class="btn">关闭</a>
+			    <a href="#" class="btn btn-primary save">Save changes</a>
+			  </div>
+			</div>
+			<div class="modal hide fade add">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h3>操作</h3>
+			  </div>
+			  <div class="modal-body">
+			     <form class="form-horizontal">
+					  <div class="control-group">
+					    <label class="control-label" for="inputEmail">活动类型</label>
+					    <div class="controls type">
+					      <input type="text" id="inputEmail" placeholder="type">
+					    </div>
+					  </div>
+					   <div class="control-group">
+					    <label class="control-label" for="inputEmail">活动描述</label>
+					    <div class="controls">
+					      <a class="btn btn-link" style="padding-left:0px">点此上传</a>
+					    </div>
+					  </div>
+					   <div class="control-group">
+					    <label class="control-label" for="inputEmail">活动图片</label>
+					    <div class="controls">
+					      <a class="btn btn-link" style="padding-left:0px">点此上传</a>
+					    </div>
+					  </div>
+					   <div class="control-group">
+					    <label class="control-label" for="inputEmail">得分</label>
+					    <div class="controls score">
+					      <input type="text" id="" placeholder="score">
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <label class="control-label" for="inputPassword">积分</label>
+					    <div class="controls credit">
+					      <input type="text" id="" placeholder="credit">
+					    </div>
+					  </div>
+				</form>
+			  </div>
+			  <div class="modal-footer">
+			    <a href="#" class="btn">关闭</a>
+			    <a href="#" class="btn btn-primary save">Save changes</a>
+			  </div>
+			</div>
+			
+			<script>
+				$(function(){
+					$(".modal.oper").find(".btn-link.desc").bind("click",function(){
+						$("input[type='file']").trigger("click");
+					});
+					$(".btn.save").bind("click",function(){
+						$('#fileupload').fileupload();
+					});
+					$(".modal.oper").bind("hide",function(){
+						$(".oper").find("form").addClass("hide");
+					});
+					$(".modal-footer").find(".btn").bind("click",function(){
+						
+						var $modal
+						$(".modal.oper").modal("hide");
+						$(".modal.add").modal("hide");
+					});
+					$(".btn.btn-danger").bind("click",function(){
+						//var $modal=$(".mynav").data("data");
+						var obj=$(".modal.oper").data("data");
+						$.ajax({
+							url: "http://127.0.0.1:8080/s2si/test.action",
+		         			type: "POST",
+		         			data: {"data":obj.aid},
+		         			success:function(data){
+		         				alert("success");
+		         			},
+         				});
+					});
+					
+					$(".btn.change").bind("click",function(){
+						//console.log($(".modal.oper").data("data"));
+						$(".oper").find("form").removeClass("hide");
+						var obj=$(".modal.oper").data("data");
+						//console.log(obj);
+						$(".oper .controls.type").find("input").val(obj["type"]);
+						$(".oper .controls.credit").find("input").val(obj["credit"]);
+						$(".oper .controls.score").find("input").val(obj["score"]);
+					});
+					$(".btn.add").bind("click",function(){
+						$(".modal.add").modal("show");
+						$(".mynav").data("data",$(".modal.add"));
+					});
+				});
+			</script>
+	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+	<script src="resources/jquery-upload/jquery.ui.widget.js"></script>
+	<!-- The basic File Upload plugin -->
+	<script src="resources/jquery-upload/jquery.fileupload.js"></script>
+	<!-- The File Upload processing plugin -->
+	<script src="resources/jquery-upload/jquery.fileupload-process.js"></script>
+	<!-- The File Upload image preview & resize plugin -->
+	<script src="resources/jquery-upload/jquery.fileupload-image.js"></script>
+	<!-- The File Upload audio preview plugin -->
+	<script src="resources/jquery-upload/jquery.fileupload-audio.js"></script>
+	<!-- The File Upload video preview plugin -->
+	<script src="resources/jquery-upload/jquery.fileupload-video.js"></script>
+	<!-- The File Upload validation plugin -->
+	<script src="resources/jquery-upload/jquery.fileupload-validate.js"></script>
+	<!-- The File Upload user interface plugin -->
+	<script src="resources/jquery-upload/jquery.fileupload-ui.js"></script>
+	<script>
+
+	</script>

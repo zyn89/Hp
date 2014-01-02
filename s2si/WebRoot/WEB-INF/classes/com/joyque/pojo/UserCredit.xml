@@ -15,7 +15,7 @@
   </select>
 
   <insert id="insertUserCredit" parameterClass="UserCredit">
-    insert into user_credit values (#uid#, #isCheck#, #credit#)
+    insert into user_credit values (#uid#, #isCheck#, #credit#, #lotteryCount#)
   </insert>
   
   <update id="updateUserCredit" parameterClass="UserCredit">
@@ -23,6 +23,7 @@
 	<dynamic prepend="SET ">
 		<isNotEqual property="isCheck" compareValue="-1" prepend=","><![CDATA[ isCheck=#isCheck# ]]></isNotEqual>
 		<isNotEqual property="credit" compareValue="-1" prepend=","><![CDATA[ credit=#credit# ]]></isNotEqual>
+		<isNotEqual property="lotteryCount" compareValue="-1" prepend=","><![CDATA[ lotteryCount=#lotteryCount# ]]></isNotEqual>
 	</dynamic>
 	<dynamic prepend="WHERE">
 		 uid = #uid#

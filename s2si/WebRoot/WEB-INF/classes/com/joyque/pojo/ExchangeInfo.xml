@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="ExchangeInfo">
+  <typeAlias alias="ExchangeInfo" type="com.joyque.pojo.ExchangeInfo"/>
+  
+  <select id="GetExchangeInfo" resultClass="ExchangeInfo">
+    select * from exchange_info where eid = #value#
+  </select>
+  
+  <select id="GetExchangeInfos" resultClass="ExchangeInfo">
+    select * from exchange_info 
+  </select>
+
+  <insert id="insertExchangeInfo" parameterClass="ExchangeInfo">
+    insert into exchange_info values (null, #exchangeUrl#, #descUrl#, #credit#, #pid#)
+  </insert>
+  
+  <update id="updateExchangeInfo" parameterClass="ExchangeInfo">
+	update exchange_info
+	<dynamic prepend="SET ">
+		<isNotEmpty property="exchangeUrl" prepend=","><![CDATA[ exchangeUrl=#exchangeUrl# ]]></isNotEmpty>
+		<isNotEmpty property="descUrl" prepend=","><![CDATA[ descUrl=#descUrl# ]]></isNotEmpty>
+		<isNotEqual property="credit" compareValue="-1" prepend=","><![CDATA[ credit=#credit# ]]></isNotEqual>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 eid = #eid#
+	</dynamic>
+  </update>
+  
+  <delete id="deleteExchangeInfo">
+      delete from exchange_info where eid = #value#
+  </delete>
+</sqlMap>   

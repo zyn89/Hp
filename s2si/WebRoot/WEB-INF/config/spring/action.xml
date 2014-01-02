@@ -27,4 +27,6 @@
 	
 	<bean id="interactAction" class="com.joyque.action.InteractAction" scope="prototype">
 	</bean>
+	<bean id="managerAction" class="com.joyque.action.ManagerAction" scope="prototype">
+	</bean>
 </beans>
