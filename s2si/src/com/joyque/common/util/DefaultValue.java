@@ -52,6 +52,12 @@ public class DefaultValue {
 	//图片类型，奖卷
 	public static final String PicPrizeDesc = "prizeDesc";
 	
+	//图片类型，抽奖说明
+	public static final String PicLottery = "lottery";
+	
+	//图片类型，抽奖底牌
+	public static final String PicLotteryBg = "bg";
+	
 	//活动类型 问答
 	public static final String ActivityQA = "qa";
 	

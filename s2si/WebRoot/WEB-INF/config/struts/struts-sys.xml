@@ -91,6 +91,45 @@
 		
 		<action name="QueryUserSurvey" class="surveyAction" method="QueryUserSurvey">
 		</action>
+		
+		<action name="GetExchanges" class="presentAction" method="GetExchanges">
+		</action>
+		
+		<action name="AddExchange" class="presentAction" method="AddExchange">
+		</action>
+		
+		<action name="updateExchange" class="presentAction" method="updateExchange">
+		</action>
+		
+		<action name="DeleteExchange" class="presentAction" method="DeleteExchange">
+		</action>
+		
+		<action name="DoneExchange" class="presentAction" method="DoneExchange">
+		</action>
+		
+		<action name="ExchangerList" class="presentAction" method="ExchangerList">
+		</action>
+		
+		<action name="LotteryList" class="presentAction" method="LotteryList">
+		</action>
+		
+		<action name="AddLottery" class="presentAction" method="AddLottery">
+		</action>
+		
+		<action name="UpdateLottery" class="presentAction" method="UpdateLottery">
+		</action>
+		
+		<action name="DeleteLottery" class="presentAction" method="DeleteLottery">
+		</action>
+		
+		<action name="DrawLottery" class="presentAction" method="DrawLottery">
+		</action>
+		
+		<action name="QueryLottery" class="presentAction" method="QueryLottery">
+		</action>
+		
+		<action name="QueryLotteryUser" class="presentAction" method="QueryLotteryUser">
+		</action>
 	</package>
 	
 	<package name="s" namespace="/"  extends="struts-default">

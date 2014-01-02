@@ -103,4 +103,16 @@ public class FileUtil {
 	{
 		return SaveFile(uid, file, Type, HeaderExchange, DefaultValue.PicPrizeDesc);
 	}
+	
+	//保存抽奖说明
+	public static String SaveLotteryAsMedia(String uid, File file, String Type) throws IOException
+	{
+		return SaveFile(uid, file, Type, HeaderExchange, DefaultValue.PicLottery);
+	}
+	
+	//保存抽奖底牌
+	public static String SaveLotteryBgAsMedia(String uid, File file, String Type) throws IOException
+	{
+		return SaveFile(uid, file, Type, HeaderExchange, DefaultValue.PicLotteryBg);
+	}
 }

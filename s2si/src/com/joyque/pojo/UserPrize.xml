@@ -9,6 +9,11 @@
   <select id="GetUserPrizes" resultClass="UserPrize">
     select * from user_prize where uid = #value#
   </select>
+  
+  <select id="GetUserPirzesByPid"  parameterClass="java.util.Map"
+  resultClass="UserPrize">
+    select * from user_prize where pid = #pid#  limit #start#, #end#
+  </select>
 
   <insert id="insertUserPrize" parameterClass="UserPrize">
     insert into user_prize values (null, #uid#, #pid#)

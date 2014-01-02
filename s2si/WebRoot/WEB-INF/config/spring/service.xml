@@ -37,5 +37,7 @@
 	    <property name="prizeInfoDao" ref="prizeInfoDao"></property>
 	    <property name="userPrizeDao" ref="userPrizeDao"></property>
 	    <property name="userCreditDao" ref="userCreditDao"></property>
+	    <property name="userInfoDao" ref="userInfoDao"></property>
+	    <property name="lotteryInfoDao" ref="lotteryInfoDao"></property>
 	</bean>
 </beans>

@@ -8,6 +8,8 @@ public interface IUserPrizeDao {
 
 	public List<UserPrize> GetUserPrizes(String uid);
 	
+	public List<UserPrize> GetUserPirzesByPid(long pid, int start, int end);
+	
 	public int insertUserPrize(UserPrize info);
 	
 	public int deleteUserPrize(long id);

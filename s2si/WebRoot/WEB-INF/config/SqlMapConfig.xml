@@ -37,6 +37,7 @@
   <sqlMap resource="com/joyque/pojo/ExchangeInfo.xml"/>
   <sqlMap resource="com/joyque/pojo/PrizeInfo.xml"/>
   <sqlMap resource="com/joyque/pojo/UserPrize.xml"/>
+  <sqlMap resource="com/joyque/pojo/LotteryInfo.xml"/>
   <!-- List more here...
   <sqlMap resource="com/mydomain/data/Order.xml"/>
   <sqlMap resource="com/mydomain/data/Documents.xml"/>

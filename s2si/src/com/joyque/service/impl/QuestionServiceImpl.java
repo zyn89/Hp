@@ -64,8 +64,12 @@ public class QuestionServiceImpl implements IQuestionService{
 		userActivityDao.insertUserActivity(ua);
 		ActivityInfo ai = activityInfoDao.getActivityInfo(aid);
 		UserCredit uc = userCreditDao.getUserCredit(uid);
-		uc.setCredit(uc.getCredit() + ai.getCredit());
-		userCreditDao.updateUserCredit(uc);
+		if(score >= ai.getScore())
+		{	
+			uc.setCredit(uc.getCredit() + ai.getCredit());
+			userCreditDao.updateUserCredit(uc);
+		}
+		
 		json.accumulate("credit", uc.getCredit());
 		return json;
 	}

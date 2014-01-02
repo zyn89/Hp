@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="LotteryInfo">
+  <typeAlias alias="LotteryInfo" type="com.joyque.pojo.LotteryInfo"/>
+  
+  <select id="GetLotteryInfo" resultClass="LotteryInfo">
+    select * from lottery_info where lid = #value#
+  </select>
+  
+  <select id="GetLotteryInfos" resultClass="LotteryInfo">
+    select * from lottery_info 
+  </select>
+
+  <insert id="insertLotteryInfo" parameterClass="LotteryInfo">
+    insert into lottery_info values (null, #pid#, #imageUrl#, #bg1Url#, #bg2Url#, #bg3Url#, #credit#)
+  </insert>
+  
+  <update id="updateLotteryInfo" parameterClass="LotteryInfo">
+	update lottery_info
+	<dynamic prepend="SET ">
+		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
+		<isNotEmpty property="bg1Url" prepend=","><![CDATA[ bg1Url=#bg1Url# ]]></isNotEmpty>
+		<isNotEmpty property="bg2Url" prepend=","><![CDATA[ bg2Url=#bg2Url# ]]></isNotEmpty>
+		<isNotEmpty property="bg3Url" prepend=","><![CDATA[ bg3Url=#bg3Url# ]]></isNotEmpty>
+		<isNotEqual property="credit" compareValue="-1" prepend=","><![CDATA[ credit=#credit# ]]></isNotEqual>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 lid = #lid#
+	</dynamic>
+  </update>
+  
+  <delete id="deleteLotteryInfo">
+      delete from lottery_info where lid = #value#
+  </delete>
+</sqlMap>   

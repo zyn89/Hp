@@ -8,5 +8,6 @@ public class ExceptionUtil {
 	public static final String NoUser = "该用户不存在！";
 	public static final String PwError = "密码不正确！";
 	public static final String IsCheck = "已经签到过！";
-
+	public static final String CreditLack = "您的积分不足！";
+	public static final String DrawLotteryCountLack = "抽奖次数不足！";
 }
