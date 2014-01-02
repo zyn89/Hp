@@ -19,7 +19,7 @@ public class UserPrizeDaoImpl extends SqlMapClientDaoSupport implements IUserPri
 	public List<UserPrize> GetUserPrizes(String uid) {
 		List<UserPrize> result = null;
 		try{
-			result = (List<UserPrize>) this.getSqlMapClientTemplate().queryForObject(
+			result = (List<UserPrize>) this.getSqlMapClientTemplate().queryForList(
 					"GetUserPrizes", uid);
 		} catch (DataAccessException e) {
 			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);

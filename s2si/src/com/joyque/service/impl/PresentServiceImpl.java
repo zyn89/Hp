@@ -426,11 +426,14 @@ public class PresentServiceImpl implements IPresentServiceDao{
 		credit.setCredit(credit.getCredit() - lottery.getCredit());
 		credit.setLotteryCount(credit.getLotteryCount() - 1);
 		userCreditDao.updateUserCredit(credit);
-		long pid = lottery.getPid();
-		UserPrize up = new UserPrize();
-		up.setUid(uid);
-		up.setPid(pid);
-		userPrizeDao.insertUserPrize(up);		
+		if(isAward == 1)
+		{
+			long pid = lottery.getPid();
+			UserPrize up = new UserPrize();
+			up.setUid(uid);
+			up.setPid(pid);
+			userPrizeDao.insertUserPrize(up);
+		}				
 		return json;
 	}
 	
