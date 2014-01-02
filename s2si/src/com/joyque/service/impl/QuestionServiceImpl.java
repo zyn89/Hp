@@ -44,9 +44,11 @@ public class QuestionServiceImpl implements IQuestionService{
 			JSONObject j = new JSONObject();
 			j.accumulate("qid", info.getQid());
 			j.accumulate("questionUrl", info.getQuestionUrl());
-			j.accumulate("a1", info.getA1());
-			j.accumulate("a2", info.getA2());
-			j.accumulate("a3", info.getA3());
+			JSONArray array = new JSONArray();
+			array.add(info.getA1());
+			array.add(info.getA2());
+			array.add(info.getA3());
+			j.accumulate("choiceitems", array);
 			j.accumulate("aIndex", info.getaIndex());
 			j.accumulate("score", info.getScore());
 			jArray.add(j);
