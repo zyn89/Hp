@@ -13,7 +13,7 @@
 			<result name="success">/WEB-INF/jsp/interactIn2.jsp</result>
 		</action>
 		<action name="manager" class="managerAction">
-			<result name="success">/WEB-INF/console/MyHtml.html</result>	
+			<result name="success">/WEB-INF/console/main.html</result>	
 		</action>
 		
 		<action name="all" class="managerAction">
