@@ -8,7 +8,7 @@ import net.sf.json.JSONObject;
 
 public interface ISurveyService {
 
-	void GetSurveyList();
+	JSONObject GetSurveyList();
 
 	JSONObject AddSurvey(String uid, List<File> pics, List<String> picsContentType,
 			int credit) throws IOException;

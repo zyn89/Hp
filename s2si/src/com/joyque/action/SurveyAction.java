@@ -42,8 +42,9 @@ public class SurveyAction extends BaseAction{
 	private int end;
 	
 	@SuppressWarnings("unchecked")
-	public String GetSurveyList()
+	public void GetSurveyList()
 	{
+		JSONObject json = new JSONObject();
 		try{
 			String uid = null;
 			Map session = getSession();
@@ -52,11 +53,11 @@ public class SurveyAction extends BaseAction{
 			{
 				
 			}
-			surveyService.GetSurveyList();
+			json = surveyService.GetSurveyList();
 		}catch(Exception e){			
 			
 		}
-		return SUCCESS;
+		ajaxReturn(json.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
