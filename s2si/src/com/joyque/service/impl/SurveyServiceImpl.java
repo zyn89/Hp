@@ -89,17 +89,52 @@ public class SurveyServiceImpl implements ISurveyService{
 			JSONObject j = new JSONObject();
 			j.accumulate("qid", info.getQid());
 			j.accumulate("imageUrl", info.getImageUrl());
-			j.accumulate("a1", info.getA1());
-			j.accumulate("a2", info.getA2());
-			j.accumulate("a3", info.getA3());
-			UserSurvey us = userSurveyDao.GetUserSurvey(uid, info.getQid());
-			if(us == null)
+			JSONArray qArray = new JSONArray();
+			qArray.add(info.getA1());
+			qArray.add(info.getA2());
+			qArray.add(info.getA3());
+			j.accumulate("choiceItems", qArray);
+			UserSurvey userSurvey = userSurveyDao.GetUserSurvey(uid, info.getQid());
+			if(userSurvey == null)
 			{
 				j.accumulate("done", 0);
 			}
 			else
 			{
 				j.accumulate("done", 1);
+				List<UserSurvey> surveyInfos = userSurveyDao.GetUserSurveys(info.getQid());
+				double count1 = 0;
+				double count2 = 0;
+				double count3 = 0;
+				for(UserSurvey us : surveyInfos)
+				{
+					if(us.getaIndex() == 1)
+					{
+						count1 ++;
+					}
+					else if(us.getaIndex() == 2)
+					{
+						count2 ++;
+					}
+					else
+					{
+						count3 ++;
+					}
+				}
+				double sum = count1 + count2 + count3;
+				if(sum == 0)
+				{
+					j.accumulate("p1", 0);
+					j.accumulate("p2", 0);
+					j.accumulate("p3", 0);
+				}
+				else
+				{
+					j.accumulate("p1", count1 / sum);
+					j.accumulate("p2", count2 / sum);
+					j.accumulate("p3", 1 - ((count1 + count2) / sum));
+				}
+				
 			}
 			jArray.add(j);
 		}
