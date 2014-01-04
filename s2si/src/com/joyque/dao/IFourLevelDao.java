@@ -8,6 +8,8 @@ public interface IFourLevelDao {
 
 	public List<FourLevel> GetFourLevels(long fid);
 	
+	public FourLevel GetFourLevel(long id);
+	
 	public int insertFourLevel(FourLevel info);
 	
 	public int updateFourLevel(FourLevel info);

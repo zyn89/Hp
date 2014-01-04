@@ -29,6 +29,12 @@ public class WebAction  extends BaseAction{
 	
 	private List<String> picsContentType;
 	
+	private long cid;
+	
+	private String url;
+	
+	private String content;
+	
 	@SuppressWarnings("unchecked")
 	public void GetWebs()
 	{
@@ -148,15 +154,361 @@ public class WebAction  extends BaseAction{
 			{
 				
 			}
-			if(!isValidateImage(pics))
+			if(!isValidateImage(pics) || !isValidateType(picsContentType))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.AddCarouselInfo(fid);
+			json = webService.AddCarouselInfo(uid, pics, picsContentType);
 		}catch(Exception e){			
 			
 		}
 		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void UpdateCarouselInfo()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateImage(pics) || !isValidateType(picsContentType)
+					|| !isValidateId(cid))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.UpdateCarouselInfo(uid, cid, pics, picsContentType);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void DeleteCarouselInfo()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateId(cid))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.DeleteCarouselInfo(cid);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void AddOneLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateImage(pics) || !isValidateType(picsContentType))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.AddOneLevel(uid, pics, picsContentType, url);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void UpdateOneLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateImage(pics) || !isValidateType(picsContentType)
+					|| !isValidateId(id))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.UpdateOneLevel(uid, pics, picsContentType, url, id);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void DeleteOneLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateId(id))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.DeleteOneLevel(id);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void AddTwoLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateImage(pics) || !isValidateType(picsContentType)
+					|| !isValidateId(tid) || !isValidateContent(content))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.AddTwoLevel(uid, pics, picsContentType, content, tid);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void UpdateTwoLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateImage(pics) || !isValidateType(picsContentType)
+					|| !isValidateId(id) || !isValidateContent(content))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.UpdateTwoLevel(uid, pics, picsContentType, content, id);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void DeleteTwoLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateId(id))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.DeleteTwoLevel(id);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void AddThreeLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateImage(pics) || !isValidateType(picsContentType)
+					|| !isValidateId(hid) || !isValidateContent(content))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.AddThreeLevel(uid, pics, picsContentType, content, hid, url);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void UpdateThreeLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateImage(pics) || !isValidateType(picsContentType)
+					|| !isValidateId(id) || !isValidateContent(content))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.UpdateThreeLevel(uid, pics, picsContentType, content, id, url);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void DeleteThreeLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateId(id))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.DeleteThreeLevel(id);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void AddFourLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateImage(pics) || !isValidateType(picsContentType)
+					|| !isValidateId(fid) || !isValidateContent(content))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.AddFourLevel(uid, pics, picsContentType, content, fid);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void UpdateFourLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateImage(pics) || !isValidateType(picsContentType)
+					|| !isValidateId(id) || !isValidateContent(content))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.UpdateFourLevel(uid, pics, picsContentType, content, id);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void DeleteFourLevel()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			if(uid == null)
+			{
+				
+			}
+			if(!isValidateId(id))
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = webService.DeleteFourLevel(id);
+		}catch(Exception e){			
+			
+		}
+		ajaxReturn(json.toString());
+	}
+
+	private boolean isValidateContent(String content) {
+		if(content != null && !content.trim().equals(""))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isValidateType(List<String> picsContentType) {
+		if(picsContentType != null && picsContentType.size() > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	private boolean isValidateImage(List<File> pics) {
@@ -229,5 +581,29 @@ public class WebAction  extends BaseAction{
 
 	public void setPicsContentType(List<String> picsContentType) {
 		this.picsContentType = picsContentType;
+	}
+
+	public long getCid() {
+		return cid;
+	}
+
+	public void setCid(long cid) {
+		this.cid = cid;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}	
 }

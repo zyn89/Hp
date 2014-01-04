@@ -9,18 +9,20 @@
   <select id="GetThreeLevels" resultClass="ThreeLevel">
     select * from three_level where hid = #value#
   </select>
+  
+  <select id="GetThreeLevel" resultClass="ThreeLevel">
+    select * from three_level where id = #value#
+  </select>
 
   <insert id="insertThreeLevel" parameterClass="ThreeLevel">
-    insert into three_level values (null, #hid#, #fid#, #url#, #content#, #imageUrl#)
+    insert into three_level values (null, #hid#, #url#, #content#, #imageUrl#)
   </insert>
   
   <update id="updateThreeLevel" parameterClass="ThreeLevel">
 	update three_level
 	<dynamic prepend="SET ">
 		<isNotEmpty property="content" prepend=","><![CDATA[ content=#content# ]]></isNotEmpty>
-		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
-		<isNotEqual property="hid" compareValue="-1" prepend=","><![CDATA[ hid=#hid# ]]></isNotEqual>
-		<isNotEqual property="fid" compareValue="-1" prepend=","><![CDATA[ fid=#fid# ]]></isNotEqual>
+		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>		
 		<isNotEmpty property="url" prepend=","><![CDATA[ url=#url# ]]></isNotEmpty>
 	</dynamic>
 	<dynamic prepend="WHERE">

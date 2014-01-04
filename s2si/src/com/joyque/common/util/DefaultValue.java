@@ -58,6 +58,21 @@ public class DefaultValue {
 	//图片类型，抽奖底牌
 	public static final String PicLotteryBg = "bg";
 	
+	//图片类型，轮播图
+	public static final String PicCarousel = "carousel";
+	
+	//图片类型，一级界面
+	public static final String PicOneLevel = "one";
+	
+    //图片类型，二级界面
+	public static final String PicTwoLevel = "two";
+	
+	//图片类型，三级界面
+	public static final String PicThreeLevel = "three";
+	
+	//图片类型，四级界面
+	public static final String PicFourLevel = "four";
+	
 	//活动类型 问答
 	public static final String ActivityQA = "qa";
 	

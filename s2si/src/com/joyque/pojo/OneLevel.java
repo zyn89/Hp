@@ -6,8 +6,6 @@ public class OneLevel {
 	
 	private String url;
 	
-	private long tid;
-	
 	private String imageUrl;
 
 	public long getOid() {
@@ -24,14 +22,6 @@ public class OneLevel {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public long getTid() {
-		return tid;
-	}
-
-	public void setTid(long tid) {
-		this.tid = tid;
 	}
 
 	public String getImageUrl() {

@@ -6,14 +6,12 @@ public class ThreeLevel {
 
 	private long hid;
 	
-	private long fid;
-	
 	private String url;
 	
 	private String content;
 	
 	private String imageUrl;
-
+	
 	public long getId() {
 		return id;
 	}
@@ -28,14 +26,6 @@ public class ThreeLevel {
 
 	public void setHid(long hid) {
 		this.hid = hid;
-	}
-
-	public long getFid() {
-		return fid;
-	}
-
-	public void setFid(long fid) {
-		this.fid = fid;
 	}
 
 	public String getUrl() {

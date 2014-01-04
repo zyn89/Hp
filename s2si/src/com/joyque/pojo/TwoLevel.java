@@ -6,26 +6,16 @@ public class TwoLevel {
 
 	private long tid;
 	
-	private long hid;
-	
 	private String content;
 	
 	private String imageUrl;
-
+	
 	public long getTid() {
 		return tid;
 	}
 
 	public void setTid(long tid) {
 		this.tid = tid;
-	}
-
-	public long getHid() {
-		return hid;
-	}
-
-	public void setHid(long hid) {
-		this.hid = hid;
 	}
 
 	public String getContent() {

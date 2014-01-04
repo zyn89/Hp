@@ -20,6 +20,16 @@ public class FileUtil {
 	public static final String HeaderSurvey = "D:\\SurveyPic\\";
 	//礼品图片文件夹
 	public static final String HeaderExchange = "D:\\ExchangePic\\";
+	//轮播图片文件夹
+	public static final String HeaderCarousel = "D:\\CarouselPic\\";
+	//一级图片文件夹
+	public static final String HeaderOneLevel = "D:\\OneLevelPic\\";
+	//二级图片文件夹
+	public static final String HeaderTwoLevel = "D:\\TwoLevelPic\\";
+	//三级图片文件夹
+	public static final String HeaderThreeLevel = "D:\\ThreeLevelPic\\";
+	//四级图片文件夹
+	public static final String HeaderFourLevel = "D:\\FourLevelPic\\";
 	
 	private static String SaveFile(String uid, File file, String Type, String header, String pic) throws IOException
 	{
@@ -114,5 +124,35 @@ public class FileUtil {
 	public static String SaveLotteryBgAsMedia(String uid, File file, String Type) throws IOException
 	{
 		return SaveFile(uid, file, Type, HeaderExchange, DefaultValue.PicLotteryBg);
+	}
+	
+	//保存轮播图片
+	public static String SaveCarouselAsMedia(String uid, File file, String Type) throws IOException
+	{
+		return SaveFile(uid, file, Type, HeaderCarousel, DefaultValue.PicCarousel);
+	}
+	
+	//保存一级图片
+	public static String SaveOneLevelAsMedia(String uid, File file, String Type) throws IOException
+	{
+		return SaveFile(uid, file, Type, HeaderOneLevel, DefaultValue.PicOneLevel);
+	}
+	
+	//保存二级图片
+	public static String SaveTwoLevelAsMedia(String uid, File file, String Type) throws IOException
+	{
+		return SaveFile(uid, file, Type, HeaderTwoLevel, DefaultValue.PicTwoLevel);
+	}
+	
+	//保存三级图片
+	public static String SaveThreeLevelAsMedia(String uid, File file, String Type) throws IOException
+	{
+		return SaveFile(uid, file, Type, HeaderThreeLevel, DefaultValue.PicThreeLevel);
+	}
+	
+	//保存四级图片
+	public static String SaveFourLevelAsMedia(String uid, File file, String Type) throws IOException
+	{
+		return SaveFile(uid, file, Type, HeaderFourLevel, DefaultValue.PicFourLevel);
 	}
 }

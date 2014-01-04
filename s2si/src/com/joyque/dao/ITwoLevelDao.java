@@ -8,6 +8,8 @@ public interface ITwoLevelDao {
 
 	public List<TwoLevel> GetTwoLevels(long tid);
 	
+	public TwoLevel GetTwoLevel(long id);
+	
 	public int insertTwoLevel(TwoLevel info);
 	
 	public int updateTwoLevel(TwoLevel info);

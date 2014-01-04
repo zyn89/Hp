@@ -15,7 +15,7 @@ public interface ISurveyService {
 
 	JSONObject DeleteSurvey(long sid);
 
-	void GetSurveyQuestions(long sid, String uid);
+	JSONObject GetSurveyQuestions(long sid, String uid);
 
 	JSONObject AddSurveyQuestion(long sid, List<File> pics,
 			List<String> picsContentType, String a1, String a2, String a3, String uid) throws IOException;

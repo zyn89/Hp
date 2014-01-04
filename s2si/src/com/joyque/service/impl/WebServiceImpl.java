@@ -1,10 +1,13 @@
 package com.joyque.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.joyque.common.util.FileUtil;
 import com.joyque.dao.ICarouselInfoDao;
 import com.joyque.dao.IFourLevelDao;
 import com.joyque.dao.IOneLevelDao;
@@ -74,7 +77,6 @@ public class WebServiceImpl implements IWebService{
 		{
 			JSONObject j = new JSONObject();
 			j.accumulate("id", info.getOid());
-			j.accumulate("tid", info.getTid());
 			j.accumulate("url", info.getUrl());
 			j.accumulate("imageUrl", info.getImageUrl());
 			jArray.add(j);
@@ -92,7 +94,6 @@ public class WebServiceImpl implements IWebService{
 		{
 			JSONObject j = new JSONObject();
 			j.accumulate("id", info.getId());
-			j.accumulate("hid", info.getHid());
 			j.accumulate("content", info.getContent());
 			j.accumulate("imageUrl", info.getImageUrl());
 			jArray.add(j);
@@ -110,7 +111,6 @@ public class WebServiceImpl implements IWebService{
 		{
 			JSONObject j = new JSONObject();
 			j.accumulate("id", info.getId());
-			j.accumulate("fid", info.getFid());
 			j.accumulate("content", info.getContent());
 			j.accumulate("imageUrl", info.getImageUrl());
 			j.accumulate("url", info.getUrl());
@@ -138,9 +138,269 @@ public class WebServiceImpl implements IWebService{
 	}
 	
 	@Override
-	public JSONObject AddCarouselInfo(long fid) {
-		// TODO Auto-generated method stub
-		return null;
+	public JSONObject AddCarouselInfo(String uid, List<File> pics, List<String> picsContentType) throws IOException {
+		JSONObject json = new JSONObject();
+		CarouselInfo carouselInfo = new CarouselInfo();
+		String url = FileUtil.SaveCarouselAsMedia(uid, pics.get(0), picsContentType.get(0));
+		carouselInfo.setImage1Url(url);
+		url = FileUtil.SaveCarouselAsMedia(uid, pics.get(1), picsContentType.get(1));
+		carouselInfo.setImage2Url(url);
+		url = FileUtil.SaveCarouselAsMedia(uid, pics.get(2), picsContentType.get(2));
+		carouselInfo.setImage3Url(url);
+		carouselInfoDao.insertCarouselInfo(carouselInfo);
+		
+		json = GetWebs();
+		return json;
+	}
+	
+	@Override
+	public JSONObject UpdateCarouselInfo(String uid, long cid, List<File> pics,
+			List<String> picsContentType) throws IOException {
+		JSONObject json = new JSONObject();
+		CarouselInfo carouselInfo = carouselInfoDao.GetCarouselInfo(cid);
+		String url = FileUtil.SaveCarouselAsMedia(uid, pics.get(0), picsContentType.get(0));
+		carouselInfo.setImage1Url(url);
+		if(pics.size() > 1)
+		{
+			url = FileUtil.SaveCarouselAsMedia(uid, pics.get(1), picsContentType.get(1));
+			carouselInfo.setImage2Url(url);
+		}
+		if(pics.size() > 2)
+		{
+			url = FileUtil.SaveCarouselAsMedia(uid, pics.get(2), picsContentType.get(2));
+			carouselInfo.setImage3Url(url);
+		}		
+		carouselInfoDao.updateCarouselInfo(carouselInfo);
+		
+		json = GetWebs();
+		return json;
+	}
+	
+	@Override
+	public JSONObject DeleteCarouselInfo(long cid) {
+		JSONObject json = new JSONObject();
+		carouselInfoDao.deleteCarouselInfo(cid);
+		json = GetWebs();
+		return json;
+	}
+	
+	@Override
+	public JSONObject AddOneLevel(String uid, List<File> pics,
+			List<String> picsContentType, String url) throws IOException {
+		JSONObject json = new JSONObject();
+		OneLevel one = new OneLevel();
+		one.setUrl(url);
+		String imageUrl = FileUtil.SaveOneLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
+		one.setImageUrl(imageUrl);
+		oneLevelDao.insertOneLevel(one);
+		
+		json = GetWebs();
+		return json;
+	}
+	
+	@Override
+	public JSONObject UpdateOneLevel(String uid, List<File> pics,
+			List<String> picsContentType, String url, long id) throws IOException {
+		JSONObject json = new JSONObject();
+		OneLevel one = oneLevelDao.GetOneLevel(id);
+		one.setUrl(url);
+		if(pics != null && pics.size() > 0)
+		{
+			String imageUrl = FileUtil.SaveOneLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
+			one.setImageUrl(imageUrl);
+		}
+		
+		oneLevelDao.updateOneLevel(one);
+		
+		json = GetWebs();
+		return json;
+	}
+	
+	@Override
+	public JSONObject DeleteOneLevel(long id) {
+		JSONObject json = new JSONObject();
+		OneLevel one = oneLevelDao.GetOneLevel(id);
+		oneLevelDao.deleteOneLevel(id);
+		List<TwoLevel> two = twoLevelDao.GetTwoLevels(one.getOid());
+		if(two != null)
+		{
+			for(TwoLevel info : two)
+			{
+				twoLevelDao.deleteTwoLevel(info.getId());
+				List<ThreeLevel> three = threeLevelDao.GetThreeLevels(info.getId());
+				if(three != null)
+				{
+					for(ThreeLevel tl : three)
+					{
+						threeLevelDao.deleteThreeLevel(tl.getId());
+						List<FourLevel> four = fourLevelDao.GetFourLevels(tl.getId());
+						if(four != null)
+						{
+							for(FourLevel fl : four)
+							{
+								fourLevelDao.deleteFourLevel(fl.getId());
+							}
+						}
+					}
+				}
+			}
+		}
+		json = GetWebs();
+		return json;
+	}
+	
+	@Override
+	public JSONObject AddTwoLevel(String uid, List<File> pics,
+			List<String> picsContentType, String content, long tid) throws IOException {
+		
+		JSONObject json = new JSONObject();
+		TwoLevel two = new TwoLevel();
+		two.setContent(content);
+		two.setTid(tid);
+		String imageUrl = FileUtil.SaveTwoLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
+		two.setImageUrl(imageUrl);
+		twoLevelDao.insertTwoLevel(two);
+		
+		json = GetTwoLevel(tid);
+		return json;
+	}
+	
+	@Override
+	public JSONObject UpdateTwoLevel(String uid, List<File> pics,
+			List<String> picsContentType, String content, long id) throws IOException {
+		JSONObject json = new JSONObject();
+		TwoLevel two = twoLevelDao.GetTwoLevel(id);
+		two.setContent(content);
+		if(pics != null && pics.size() > 0)
+		{
+			String imageUrl = FileUtil.SaveTwoLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
+			two.setImageUrl(imageUrl);
+		}
+		
+		twoLevelDao.updateTwoLevel(two);
+		
+		json = GetTwoLevel(two.getTid());
+		return json;
+	}
+	
+	@Override
+	public JSONObject DeleteTwoLevel(long id) {
+		JSONObject json = new JSONObject();
+		TwoLevel two = twoLevelDao.GetTwoLevel(id);
+		twoLevelDao.deleteTwoLevel(id);
+		List<ThreeLevel> three = threeLevelDao.GetThreeLevels(id);
+		if(three != null)
+		{
+			for(ThreeLevel tl : three)
+			{
+				threeLevelDao.deleteThreeLevel(tl.getId());
+				List<FourLevel> four = fourLevelDao.GetFourLevels(tl.getId());
+				if(four != null)
+				{
+					for(FourLevel fl : four)
+					{
+						fourLevelDao.deleteFourLevel(fl.getId());
+					}
+				}
+			}
+		}
+		json = GetTwoLevel(two.getTid());
+		return json;
+	}
+	
+	@Override
+	public JSONObject AddThreeLevel(String uid, List<File> pics,
+			List<String> picsContentType, String content, long hid, String url) throws IOException {
+		JSONObject json = new JSONObject();
+		ThreeLevel three = new ThreeLevel();
+		three.setContent(content);
+		three.setHid(hid);
+		three.setUrl(url);
+		String imageUrl = FileUtil.SaveThreeLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
+		three.setImageUrl(imageUrl);
+		threeLevelDao.insertThreeLevel(three);
+		
+		json = GetThreeLevel(hid);
+		return json;
+	}
+	
+	@Override
+	public JSONObject UpdateThreeLevel(String uid, List<File> pics,
+			List<String> picsContentType, String content, long id, String url) throws IOException {
+		JSONObject json = new JSONObject();
+		ThreeLevel three = threeLevelDao.GetThreeLevel(id);
+		three.setContent(content);
+		three.setUrl(url);
+		if(pics != null && pics.size() > 0)
+		{
+			String imageUrl = FileUtil.SaveThreeLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
+			three.setImageUrl(imageUrl);
+		}
+		
+		threeLevelDao.updateThreeLevel(three);
+		
+		json = GetThreeLevel(three.getHid());
+		return json;
+	}
+	
+	@Override
+	public JSONObject DeleteThreeLevel(long id) {
+		JSONObject json = new JSONObject();
+		ThreeLevel three = threeLevelDao.GetThreeLevel(id);
+		threeLevelDao.deleteThreeLevel(id);
+		List<FourLevel> four = fourLevelDao.GetFourLevels(id);
+		if(four != null)
+		{
+			for(FourLevel fl : four)
+			{
+				fourLevelDao.deleteFourLevel(fl.getId());
+			}
+		}
+		json = GetThreeLevel(three.getHid());
+		return json;
+	}
+	
+	@Override
+	public JSONObject AddFourLevel(String uid, List<File> pics,
+			List<String> picsContentType, String content, long fid) throws IOException {
+		JSONObject json = new JSONObject();
+		FourLevel four = new FourLevel();
+		four.setContent(content);
+		four.setFid(fid);	
+		String imageUrl = FileUtil.SaveFourLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
+		four.setImageUrl(imageUrl);
+		fourLevelDao.insertFourLevel(four);
+		
+		json = GetFourLevel(fid);
+		return json;
+	}
+	
+	@Override
+	public JSONObject UpdateFourLevel(String uid, List<File> pics,
+			List<String> picsContentType, String content, long id) throws IOException {
+		JSONObject json = new JSONObject();
+		FourLevel four = fourLevelDao.GetFourLevel(id);
+		four.setContent(content);
+		if(pics != null && pics.size() > 0)
+		{
+			String imageUrl = FileUtil.SaveFourLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
+			four.setImageUrl(imageUrl);
+		}
+		
+		fourLevelDao.updateFourLevel(four);
+		
+		json = GetFourLevel(four.getFid());
+		return json;
+	}
+	
+	@Override
+	public JSONObject DeleteFourLevel(long id) {
+		JSONObject json = new JSONObject();
+		FourLevel four = fourLevelDao.GetFourLevel(id);
+		fourLevelDao.deleteFourLevel(id);
+		
+		json = GetFourLevel(four.getFid());
+		return json;
 	}
 
 	public ICarouselInfoDao getCarouselInfoDao() {

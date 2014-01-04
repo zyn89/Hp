@@ -9,6 +9,10 @@
   <select id="GetFourLevels" resultClass="FourLevel">
     select * from four_level where fid = #value#
   </select>
+  
+  <select id="GetFourLevel" resultClass="FourLevel">
+    select * from four_level where id = #value#
+  </select>
 
   <insert id="insertFourLevel" parameterClass="FourLevel">
     insert into four_level values (null, #fid#, #content#, #imageUrl#)
@@ -19,7 +23,6 @@
 	<dynamic prepend="SET ">
 		<isNotEmpty property="content" prepend=","><![CDATA[ content=#content# ]]></isNotEmpty>
 		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
-		<isNotEqual property="fid" compareValue="-1" prepend=","><![CDATA[ fid=#fid# ]]></isNotEqual>
 	</dynamic>
 	<dynamic prepend="WHERE">
 		 id = #id#

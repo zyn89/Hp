@@ -57,4 +57,15 @@ public class FourLevelDaoImpl extends SqlMapClientDaoSupport implements IFourLev
 		}
 		return result;
 	}
+
+	@Override
+	public FourLevel GetFourLevel(long id) {
+		FourLevel result = null;
+		try{
+			result = (FourLevel) this.getSqlMapClientTemplate().queryForObject("GetFourLevel", id);
+		} catch (DataAccessException e) {
+			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);
+		}
+		return result;
+	}
 }

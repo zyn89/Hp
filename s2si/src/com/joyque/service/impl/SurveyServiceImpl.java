@@ -78,8 +78,10 @@ public class SurveyServiceImpl implements ISurveyService{
 	}
 	
 	@Override
-	public void GetSurveyQuestions(long sid, String uid) {				
-		ActionContext.getContext().put("questions", GetSurveyQutionArray(sid, uid));
+	public JSONObject GetSurveyQuestions(long sid, String uid) {
+		JSONObject json = new JSONObject();
+		json.accumulate("questions", GetSurveyQutionArray(sid, uid));
+		return json;
 	}
 	
 	private JSONArray GetSurveyQutionArray(long sid, String uid)
@@ -126,15 +128,19 @@ public class SurveyServiceImpl implements ISurveyService{
 				double sum = count1 + count2 + count3;
 				if(sum == 0)
 				{
-					j.accumulate("p1", 0);
-					j.accumulate("p2", 0);
-					j.accumulate("p3", 0);
+					JSONArray rArray = new JSONArray();
+					rArray.add(0);
+					rArray.add(0);
+					rArray.add(0);
+					j.accumulate("rate", rArray);
 				}
 				else
 				{
-					j.accumulate("p1", count1 / sum);
-					j.accumulate("p2", count2 / sum);
-					j.accumulate("p3", 1 - ((count1 + count2) / sum));
+					JSONArray rArray = new JSONArray();
+					rArray.add(count1 / sum);
+					rArray.add(count2 / sum);
+					rArray.add(1 - ((count1 + count2) / sum));
+					j.accumulate("rate", rArray);
 				}
 				
 			}

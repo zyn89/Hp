@@ -8,6 +8,8 @@ public interface IThreeLevelDao {
 
 	public List<ThreeLevel> GetThreeLevels(long hid);
 	
+	public ThreeLevel GetThreeLevel(long id);
+	
 	public int insertThreeLevel(ThreeLevel info);
 	
 	public int updateThreeLevel(ThreeLevel info);

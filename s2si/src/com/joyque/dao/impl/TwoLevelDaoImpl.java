@@ -57,4 +57,15 @@ public class TwoLevelDaoImpl extends SqlMapClientDaoSupport implements ITwoLevel
 		return result;
 	}
 
+	@Override
+	public TwoLevel GetTwoLevel(long id) {
+		TwoLevel result = null;
+		try{
+			result = (TwoLevel) this.getSqlMapClientTemplate().queryForObject("GetTwoLevel", id);
+		} catch (DataAccessException e) {
+			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);
+		}
+		return result;
+	}
+
 }

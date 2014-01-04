@@ -108,8 +108,9 @@ public class SurveyAction extends BaseAction{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public String GetSurveyQuestion()
+	public void GetSurveyQuestion()
 	{
+		JSONObject json = new JSONObject();
 		try{
 			String uid = null;
 			Map session = getSession();
@@ -122,11 +123,11 @@ public class SurveyAction extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			surveyService.GetSurveyQuestions(sid, uid);
+			json = surveyService.GetSurveyQuestions(sid, uid);
 		}catch(Exception e){			
 			
 		}
-		return SUCCESS;
+		ajaxReturn(json.toString());
 	}
 	
 	@SuppressWarnings("unchecked")

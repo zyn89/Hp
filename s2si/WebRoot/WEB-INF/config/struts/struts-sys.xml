@@ -143,6 +143,67 @@
 		
 		<action name="QueryLotteryUser" class="presentAction" method="QueryLotteryUser">
 		</action>
+		
+		<!-- 管理员查看一级菜单 -->
+		<action name="GetWebs" class="webAction" method="GetWebs">
+		</action>
+		<!-- 手机界面查看一级菜单 -->
+		<action name="GetWeb" class="webAction" method="GetWeb">
+		</action>
+		
+		<action name="GetTwoLevel" class="webAction" method="GetTwoLevel">
+		</action>
+		
+		<action name="GetThreeLevel" class="webAction" method="GetThreeLevel">
+		</action>
+		
+		<action name="GetFourLevel" class="webAction" method="GetFourLevel">
+		</action>
+		
+		<action name="AddCarouselInfo" class="webAction" method="AddCarouselInfo">
+		</action>
+		
+		<action name="UpdateCarouselInfo" class="webAction" method="UpdateCarouselInfo">
+		</action>
+		
+		<action name="DeleteCarouselInfo" class="webAction" method="DeleteCarouselInfo">
+		</action>
+		
+		<action name="AddOneLevel" class="webAction" method="AddOneLevel">
+		</action>
+		
+		<action name="UpdateOneLevel" class="webAction" method="UpdateOneLevel">
+		</action>
+		
+		<action name="DeleteOneLevel" class="webAction" method="DeleteOneLevel">
+		</action>
+		
+		<action name="AddTwoLevel" class="webAction" method="AddTwoLevel">
+		</action>
+		
+		<action name="UpdateTwoLevel" class="webAction" method="UpdateTwoLevel">
+		</action>
+		
+		<action name="DeleteTwoLevel" class="webAction" method="DeleteTwoLevel">
+		</action>
+		
+		<action name="AddThreeLevel" class="webAction" method="AddThreeLevel">
+		</action>
+		
+		<action name="UpdateThreeLevel" class="webAction" method="UpdateThreeLevel">
+		</action>
+		
+		<action name="DeleteThreeLevel" class="webAction" method="DeleteThreeLevel">
+		</action>
+		
+		<action name="AddFourLevel" class="webAction" method="AddFourLevel">
+		</action>
+		
+		<action name="UpdateFourLevel" class="webAction" method="UpdateFourLevel">
+		</action>
+		
+		<action name="DeleteFourLevel" class="webAction" method="DeleteFourLevel">
+		</action>
 	</package>
 	
 	<package name="s" namespace="/"  extends="struts-default">

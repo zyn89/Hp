@@ -15,7 +15,7 @@
   </select>
 
   <insert id="insertOneLevel" parameterClass="OneLevel">
-    insert into one_level values (null, #url#, #tid#, #imageUrl#)
+    insert into one_level values (null, #url#, #imageUrl#)
   </insert>
   
   <update id="updateOneLevel" parameterClass="OneLevel">

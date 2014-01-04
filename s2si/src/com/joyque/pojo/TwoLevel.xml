@@ -9,9 +9,13 @@
   <select id="GetTwoLevels" resultClass="TwoLevel">
     select * from two_level where tid = #value#
   </select>
+  
+  <select id="GetTwoLevel" resultClass="TwoLevel">
+    select * from two_level where id = #value#
+  </select>
 
   <insert id="insertTwoLevel" parameterClass="TwoLevel">
-    insert into two_level values (null, #tid#, #hid#, #content#, #imageUrl#)
+    insert into two_level values (null, #tid#, #content#, #imageUrl#)
   </insert>
   
   <update id="updateTwoLevel" parameterClass="TwoLevel">
@@ -19,7 +23,6 @@
 	<dynamic prepend="SET ">
 		<isNotEmpty property="content" prepend=","><![CDATA[ content=#content# ]]></isNotEmpty>
 		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
-		<isNotEqual property="hid" compareValue="-1" prepend=","><![CDATA[ hid=#hid# ]]></isNotEqual>
 	</dynamic>
 	<dynamic prepend="WHERE">
 		 id = #id#

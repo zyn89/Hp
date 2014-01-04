@@ -58,4 +58,15 @@ public class ThreeLevelDaoImpl extends SqlMapClientDaoSupport implements IThreeL
 		return result;
 	}
 
+	@Override
+	public ThreeLevel GetThreeLevel(long id) {
+		ThreeLevel result = null;
+		try{
+			result = (ThreeLevel) this.getSqlMapClientTemplate().queryForObject("GetThreeLevel", id);
+		} catch (DataAccessException e) {
+			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);
+		}
+		return result;
+	}
+
 }
