@@ -107,6 +107,7 @@ public class UserBasicServiceImpl implements IUserBasicService{
 		json.accumulate("name", user.getName());
 		json.accumulate("isCheck", credit.getIsCheck());
 		json.accumulate("credit", credit.getCredit());
+		json.accumulate("phone", user.getPhone());
 		if(user.getShopName() != null)
 		{
 			json.accumulate("shopName", user.getShopName());

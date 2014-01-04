@@ -27,6 +27,12 @@
 	
 	<bean id="interactAction" class="com.joyque.action.InteractAction" scope="prototype">
 	</bean>
+	
 	<bean id="managerAction" class="com.joyque.action.ManagerAction" scope="prototype">
 	</bean>
+	
+	<bean id="webAction" class="com.joyque.action.WebAction" scope="prototype">
+	    <property name="webService" ref="webService"></property>
+	</bean>
+	
 </beans>

@@ -9,13 +9,13 @@ import net.sf.json.JSONObject;
 import com.joyque.common.action.BaseAction;
 import com.joyque.common.exception.BaseException;
 import com.joyque.common.util.ExceptionUtil;
-import com.joyque.service.IPresentServiceDao;
+import com.joyque.service.IPresentService;
 
 public class PresentAction extends BaseAction{
 
 	private static final long serialVersionUID = 8151774968613927657L;
 	
-	private IPresentServiceDao presentService;
+	private IPresentService presentService;
 
 	private long eid;
 	
@@ -435,11 +435,11 @@ public class PresentAction extends BaseAction{
 		return false;
 	}
 
-	public IPresentServiceDao getPresentService() {
+	public IPresentService getPresentService() {
 		return presentService;
 	}
 
-	public void setPresentService(IPresentServiceDao presentService) {
+	public void setPresentService(IPresentService presentService) {
 		this.presentService = presentService;
 	}
 

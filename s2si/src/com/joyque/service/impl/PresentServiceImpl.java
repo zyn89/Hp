@@ -24,9 +24,9 @@ import com.joyque.pojo.PrizeInfo;
 import com.joyque.pojo.UserCredit;
 import com.joyque.pojo.UserInfo;
 import com.joyque.pojo.UserPrize;
-import com.joyque.service.IPresentServiceDao;
+import com.joyque.service.IPresentService;
 
-public class PresentServiceImpl implements IPresentServiceDao{
+public class PresentServiceImpl implements IPresentService{
 	private IExchangeInfoDao exchangeInfoDao;
 	private IPrizeInfoDao prizeInfoDao;
 	private IUserPrizeDao userPrizeDao;

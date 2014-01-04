@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="CarouselInfo">
+  <typeAlias alias="CarouselInfo" type="com.joyque.pojo.CarouselInfo"/>
+  
+  <select id="GetCarouselInfo" resultClass="CarouselInfo">
+    select * from carousel_info where cid = #value#
+  </select>
+  
+  <select id="GetCarouselInfos" resultClass="CarouselInfo">
+    select * from carousel_info 
+  </select>
+
+  <insert id="insertCarouselInfo" parameterClass="CarouselInfo">
+    insert into carousel_info values (null, #image1Url#, #image2Url#, #image3Url#)
+  </insert>
+  
+  <update id="updateCarouselInfo" parameterClass="ActivityInfo">
+	update carousel_info
+	<dynamic prepend="SET ">
+		<isNotEmpty property="image1Url" prepend=","><![CDATA[ image1Url=#image1Url# ]]></isNotEmpty>
+		<isNotEmpty property="image2Url" prepend=","><![CDATA[ image2Url=#image2Url# ]]></isNotEmpty>
+		<isNotEmpty property="image3Url" prepend=","><![CDATA[ image3Url=#image3Url# ]]></isNotEmpty>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 cid = #cid#
+	</dynamic>
+  </update>
+  
+  <delete id="deleteCarouselInfo">
+      delete from carousel_info where cid = #value#
+  </delete>
+</sqlMap>

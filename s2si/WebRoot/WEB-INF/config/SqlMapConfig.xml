@@ -38,6 +38,11 @@
   <sqlMap resource="com/joyque/pojo/PrizeInfo.xml"/>
   <sqlMap resource="com/joyque/pojo/UserPrize.xml"/>
   <sqlMap resource="com/joyque/pojo/LotteryInfo.xml"/>
+  <sqlMap resource="com/joyque/pojo/CarouselInfo.xml"/>
+  <sqlMap resource="com/joyque/pojo/OneLevel.xml"/>
+  <sqlMap resource="com/joyque/pojo/TwoLevel.xml"/>
+  <sqlMap resource="com/joyque/pojo/ThreeLevel.xml"/>
+  <sqlMap resource="com/joyque/pojo/FourLevel.xml"/>
   <!-- List more here...
   <sqlMap resource="com/mydomain/data/Order.xml"/>
   <sqlMap resource="com/mydomain/data/Documents.xml"/>

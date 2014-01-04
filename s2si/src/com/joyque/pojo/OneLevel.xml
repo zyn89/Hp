@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="OneLevel">
+  <typeAlias alias="OneLevel" type="com.joyque.pojo.OneLevel"/>
+  
+  <select id="GetOneLevel" resultClass="OneLevel">
+    select * from one_level where oid = #value#
+  </select>
+  
+  <select id="GetOneLevels" resultClass="OneLevel">
+    select * from one_level 
+  </select>
+
+  <insert id="insertOneLevel" parameterClass="OneLevel">
+    insert into one_level values (null, #url#, #tid#, #imageUrl#)
+  </insert>
+  
+  <update id="updateOneLevel" parameterClass="OneLevel">
+	update one_level
+	<dynamic prepend="SET ">
+		<isNotEmpty property="url" prepend=","><![CDATA[ url=#url# ]]></isNotEmpty>
+		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 oid = #oid#
+	</dynamic>
+  </update>
+  
+  <delete id="deleteOneLevel">
+      delete from one_level where oid = #value#
+  </delete>
+</sqlMap>

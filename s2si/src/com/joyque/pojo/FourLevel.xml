@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="FourLevel">
+  <typeAlias alias="FourLevel" type="com.joyque.pojo.FourLevel"/>
+  
+  <select id="GetFourLevels" resultClass="FourLevel">
+    select * from four_level where fid = #value#
+  </select>
+
+  <insert id="insertFourLevel" parameterClass="FourLevel">
+    insert into four_level values (null, #fid#, #content#, #imageUrl#)
+  </insert>
+  
+  <update id="updateFourLevel" parameterClass="FourLevel">
+	update four_level
+	<dynamic prepend="SET ">
+		<isNotEmpty property="content" prepend=","><![CDATA[ content=#content# ]]></isNotEmpty>
+		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
+		<isNotEqual property="fid" compareValue="-1" prepend=","><![CDATA[ fid=#fid# ]]></isNotEqual>
+	</dynamic>
+	<dynamic prepend="WHERE">
+		 id = #id#
+	</dynamic>
+  </update>
+  
+  <delete id="deleteFourLevel" >
+      delete from four_level where id = #id#
+  </delete>
+</sqlMap>

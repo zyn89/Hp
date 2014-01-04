@@ -40,4 +40,12 @@
 	    <property name="userInfoDao" ref="userInfoDao"></property>
 	    <property name="lotteryInfoDao" ref="lotteryInfoDao"></property>
 	</bean>
+	
+	<bean id="webService" class="com.joyque.service.impl.WebServiceImpl" scope="prototype">
+	    <property name="carouselInfoDao" ref="carouselInfoDao"></property>
+	    <property name="oneLevelDao" ref="oneLevelDao"></property>
+	    <property name="twoLevelDao" ref="twoLevelDao"></property>
+	    <property name="threeLevelDao" ref="threeLevelDao"></property>
+	    <property name="fourLevelDao" ref="fourLevelDao"></property>
+	</bean>
 </beans>
