@@ -57,6 +57,7 @@
 			  <div class="modal-body">
 			     <a href="#" class="btn btn-danger">删除</a>
 			     <a href="#" class="btn btn-primary change">修改</a>
+			     <a href="#" class="btn btn-primary reupload hide">重新上传</a>
 			     <form class="form-horizontal hide" style="margin-top:10px">
 					  <div class="control-group">
 					    <label class="control-label" for="inputEmail">活动类型</label>
@@ -68,12 +69,22 @@
 					    <label class="control-label" for="inputEmail">活动描述</label>
 					    <div class="controls">
 					      <a class="btn btn-link desc" style="padding-left:0px">点此上传</a>
+					      <a class="btn btn-link hide temple" style="padding-left:0px;
+					      color:rgb(51,51,51);
+					      cursor:deault;
+					      text-decoration:none;
+					      "></a>
 					    </div>
 					  </div>
 					   <div class="control-group">
 					    <label class="control-label" for="inputEmail">活动图片</label>
 					    <div class="controls">
 					      <a class="btn btn-link activity" style="padding-left:0px">点此上传</a>
+					      <a class="btn btn-link hide temple" style="padding-left:0px;
+					      color:rgb(51,51,51);
+					      cursor:deault;
+					      text-decoration:none;
+					      "></a>
 					    </div>
 					  </div>
 					   <div class="control-group">
@@ -90,10 +101,6 @@
 					  </div>
 				</form>
 			  </div>
-			  <form  action="test.action" encType="multipart/form-data"  method="post">
-			  <input type="file" class="hide" multiple="multiple" name="pics" id="fileupload">
-			  <input type="submit" style="display:none"/>
-			  </form>
 			  <div class="modal-footer">
 			    <a href="#" class="btn">关闭</a>
 			    <a href="#" class="btn btn-primary save">Save changes</a>
@@ -143,14 +150,58 @@
 			    <a href="#" class="btn btn-primary save">Save changes</a>
 			  </div>
 			</div>
-			
+			<div id="upload" style="display:none">
+			</div>
+			<form id="pictures">
+			<input class="uploaddesc" type="file" name="pics"/>
+			<input class="uploadactivity" type="file" name="pics"/>
+			</form>
 			<script>
 				$(function(){
-					$(".modal.oper").find(".btn-link.desc").bind("click",function(){
-						$("input[type='file']").trigger("click");
+					//var myDropzone = new Dropzone("div#myId", { url: "/file/post"});
+					$(".modal.oper").bind("show",function(){
 					});
-					$(".btn.save").bind("click",function(){
-						$('#fileupload').fileupload();
+					$(".modal.oper").find(".btn.save").bind("click",function(){
+							var type=$(".oper .controls.type").find("input").val();
+							var credit=$(".oper .controls.credit").find("input").val();
+							var score=$(".oper .controls.score").find("input").val();
+							var fileobj1 = $("input.uploaddesc")[0].files[0]; 
+							var fileobj2 = $("input.uploadactivity")[0].files[0];
+					        // FormData 对象
+					        console.log(fileobj1);
+					        var arr=[];
+					        arr.push(fileobj1.name);
+					        arr.push(fileobj2.name);
+				            var form = new FormData($("#pictures")[0]);
+				            form.append("aid", $(".modal.oper").data("data")["aid"]);
+				            form.append("credit", parseInt(credit)); 
+				            form.append("score", parseInt(score)); 
+				            form.append("descIndex",0);
+				            form.append("activityIndex",1);
+				            form.append("picsName",arr);                             
+				            //form.append("pics", fileobj1);
+				            //form.append("pics", fileobj2);                          
+				            // XMLHttpRequest 对象
+				            var xhr = new XMLHttpRequest();
+				            xhr.open("post","UpdateActivity.action", true);
+				            xhr.onload = function () {
+				                alert("上传完成!");
+				            };
+				            xhr.send(form);
+							//console.log("上传");
+							//myDropzone.processQueue();
+					});
+					$(".modal.oper").find(".btn-link.desc").bind("click",function(){
+						$(".uploaddesc").trigger("click");
+					});
+					$(".modal.oper").find(".btn-link.activity").bind("click",function(){
+						$(".uploadactivity").trigger("click");
+						//alert("");
+					});
+					$(".modal.oper").find(".btn.save").bind("click",function(){
+					});
+					$(".modal.oper").find(".btn-link.desc").bind("click",function(){
+						
 					});
 					$(".modal.oper").bind("hide",function(){
 						$(".oper").find("form").addClass("hide");
@@ -189,22 +240,3 @@
 					});
 				});
 			</script>
-	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-	<script src="resources/jquery-upload/jquery.ui.widget.js"></script>
-	<!-- The basic File Upload plugin -->
-	<script src="resources/jquery-upload/jquery.fileupload.js"></script>
-	<!-- The File Upload processing plugin -->
-	<script src="resources/jquery-upload/jquery.fileupload-process.js"></script>
-	<!-- The File Upload image preview & resize plugin -->
-	<script src="resources/jquery-upload/jquery.fileupload-image.js"></script>
-	<!-- The File Upload audio preview plugin -->
-	<script src="resources/jquery-upload/jquery.fileupload-audio.js"></script>
-	<!-- The File Upload video preview plugin -->
-	<script src="resources/jquery-upload/jquery.fileupload-video.js"></script>
-	<!-- The File Upload validation plugin -->
-	<script src="resources/jquery-upload/jquery.fileupload-validate.js"></script>
-	<!-- The File Upload user interface plugin -->
-	<script src="resources/jquery-upload/jquery.fileupload-ui.js"></script>
-	<script>
-
-	</script>
