@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					});
 
 					$a.attr({
-						href:'interact.action?aid=' + aid + '&type=' + type + '&descUrl=' + descUrl
+						href:'interact_beginActivity.action?aid=' + aid + '&type=' + type + '&descUrl=' + descUrl
 					});
 
 					if(done) {

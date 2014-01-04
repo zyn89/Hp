@@ -5,15 +5,13 @@
 	<package name="" namespace="/" extends="struts-default">
 		
 		<action name="register" class="userBasicAction" method="register">
-		<result name="success">/WEB-INF/jsp/main.jsp</result>
-			
+			<result name="success">/WEB-INF/jsp/userhome.jsp</result>
 		</action>
 		
-		<action name="interact" class="interactAction">
-			<result name="success">/WEB-INF/jsp/interactIn2.jsp</result>
-		</action>
-		<action name="manager" class="managerAction">
-			<result name="success">/WEB-INF/console/main.html</result>	
+		<action name="interact_*" class="interactAction" method="{1}">
+			<result name="beginactivity">/WEB-INF/jsp/interactIn2.jsp</result>
+			<result name="beginanswer">/WEB-INF/jsp/question2.jsp</result>
+			<result name="prizeinfo">/WEB-INF/jsp/prizeInfo.jsp</result>
 		</action>
 		
 		<action name="all" class="managerAction">
@@ -28,6 +26,7 @@
 			<result name="success">/WEB-INF/console/question.html</result>	
 		</action>
 		<action name="Login" class="userBasicAction" method="Login">
+			<result name="success">/WEB-INF/jsp/userhome.jsp</result>
 		</action>
 		
 		<action name="MotifyInfo" class="userBasicAction" method="MotifyInfo">
@@ -102,7 +101,7 @@
 		
 		<action name="QueryUserSurvey" class="surveyAction" method="QueryUserSurvey">
 		</action>
-		
+		<!-- 兑奖列表 -->
 		<action name="GetExchanges" class="presentAction" method="GetExchanges">
 		</action>
 		
@@ -115,12 +114,13 @@
 		<action name="DeleteExchange" class="presentAction" method="DeleteExchange">
 		</action>
 		
+		<!-- 完成兑奖 -->
 		<action name="DoneExchange" class="presentAction" method="DoneExchange">
 		</action>
 		
 		<action name="ExchangerList" class="presentAction" method="ExchangerList">
 		</action>
-		
+		<!-- 抽奖列表 数组只有1个 -->
 		<action name="LotteryList" class="presentAction" method="LotteryList">
 		</action>
 		
@@ -132,10 +132,10 @@
 		
 		<action name="DeleteLottery" class="presentAction" method="DeleteLottery">
 		</action>
-		
+		<!-- 完成抽奖 -->
 		<action name="DrawLottery" class="presentAction" method="DrawLottery">
 		</action>
-		
+		<!-- 查看奖品 -->
 		<action name="QueryLottery" class="presentAction" method="QueryLottery">
 		</action>
 		

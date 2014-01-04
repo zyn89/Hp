@@ -204,11 +204,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<% if(type.equals("pic") || type.equals("pic_word")) {%>
 		<form id="simpleUploadDropzone" action="/s2si/UplordPic.action" name="pics" class="dropzone" enctype="multipart/form-data">
 			<input id="j-aid" type="hidden" name="aid" value="<%= aid %>"/>
-			<input id="j-content" type="hidden" name="content"/>
 		</form>
 		<% } %>
-		
-		<button class="c_btn" >确定</button>
+		<% if(type.equals("qa")) { %>
+			<a href="interact_beginAnswer.action?aid=<%= aid %>" >开始答题</a>
+		<% } else { %>
+			<button class="c_btn" >确定</button>
+		<% } %>
+			
 	</div>
 </body>
 </html>

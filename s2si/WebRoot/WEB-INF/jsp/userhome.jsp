@@ -28,6 +28,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#j-whd').bind('click',function(event){
 			window.location.href="goTo.action?url=interact.jsp";
 		});
+
+
+
+		$('#login-btn').bind('click',function(event){
+			window.location.href="goTo.action?url=login1.jsp";
+		});
+
+		$('#reg-btn').bind('click',function(event){
+			window.location.href="goTo.action?url=register.jsp";
+		});
+		
 	});
 		
 	
@@ -71,19 +82,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	</style>
   </head>
-  
+  <%
+	  Object name = request.getAttribute("name");
+	  Object credit = request.getAttribute("credit");
+	 
+ %>
   <body>
  	<div class="main">
 		<div class="m-btns">
-			
+			<button type="button" id="login-btn">µÇÂ¼</button>
+			<button type="button" id="reg-btn">×¢²á</button>
 		</div>
 		<div class="m-info">
-			
+		<% if(name!=null && !((String)name).equals("") && credit!=null) { %>
+			<p><%= (String)name %></p>
+			<p><%= (Integer)credit %></p>
+		<% } %>
 		</div>
 		<div class="m-acts">
 			<div class="m-acts-l">
 				<ul>
-					<li><a href="javascript:void(0);"><img src="resources/image/a1.jpg" alt=""></a></li>
+					<li><a href="goTo.action?url=userInfo2.jsp"><img src="resources/image/a1.jpg" alt=""></a></li>
 					<li><a id="j-whd" href="javascript:void(0);"><img src="resources/image/a2.jpg" alt=""></a></li>
 					<li><a href="javascript:void(0);"><img src="resources/image/a3.jpg" alt=""></a></li>
 				</ul>
@@ -91,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="m-acts-r">
 				<ul>
 					<li><a href="javascript:void(0);"><img src="resources/image/a4.jpg" alt=""></a></li>
-					<li><a href="javascript:void(0);"><img src="resources/image/a5.jpg" alt=""></a></li>
+					<li><a href="goTo.action?url=prize.jsp"><img src="resources/image/a5.jpg" alt=""></a></li>
 				</ul>
 			</div>
 		</div>
