@@ -13,7 +13,9 @@
 			<result name="beginanswer">/WEB-INF/jsp/question2.jsp</result>
 			<result name="prizeinfo">/WEB-INF/jsp/prizeInfo.jsp</result>
 		</action>
-		
+		<action name="manager" class="managerAction">
+			<result name="success">/WEB-INF/console/main.html</result>	
+		</action>
 		<action name="all" class="managerAction">
 			<result name="success">/WEB-INF/console/activities.html</result>	
 		</action>
