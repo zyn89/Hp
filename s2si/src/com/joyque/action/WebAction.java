@@ -148,7 +148,7 @@ public class WebAction  extends BaseAction{
 			{
 				
 			}
-			if(!isValidateId(fid))
+			if(!isValidateImage(pics))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
@@ -157,6 +157,14 @@ public class WebAction  extends BaseAction{
 			
 		}
 		ajaxReturn(json.toString());
+	}
+
+	private boolean isValidateImage(List<File> pics) {
+		if(pics != null && pics.size() > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	private boolean isValidateId(long id) {
@@ -205,5 +213,21 @@ public class WebAction  extends BaseAction{
 
 	public void setFid(long fid) {
 		this.fid = fid;
+	}
+
+	public List<File> getPics() {
+		return pics;
+	}
+
+	public void setPics(List<File> pics) {
+		this.pics = pics;
+	}
+
+	public List<String> getPicsContentType() {
+		return picsContentType;
+	}
+
+	public void setPicsContentType(List<String> picsContentType) {
+		this.picsContentType = picsContentType;
 	}	
 }

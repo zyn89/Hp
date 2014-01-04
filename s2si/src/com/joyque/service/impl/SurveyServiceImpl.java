@@ -30,8 +30,10 @@ public class SurveyServiceImpl implements ISurveyService{
 	private IUserInfoDao userInfoDao;
 
 	@Override
-	public void GetSurveyList() {		
-		ActionContext.getContext().put("surveys", GetSurveyArray());
+	public JSONObject GetSurveyList() {		
+		JSONObject json = new JSONObject();
+		json.accumulate("surveys", GetSurveyArray());
+		return json;
 	}
 	
 	private JSONArray GetSurveyArray()

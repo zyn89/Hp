@@ -136,6 +136,12 @@ public class WebServiceImpl implements IWebService{
 		json.accumulate("four_level", jArray);
 		return json;
 	}
+	
+	@Override
+	public JSONObject AddCarouselInfo(long fid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public ICarouselInfoDao getCarouselInfoDao() {
 		return carouselInfoDao;

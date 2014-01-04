@@ -14,4 +14,6 @@ public interface IWebService {
 
 	JSONObject GetFourLevel(long fid);
 
+	JSONObject AddCarouselInfo(long fid);
+
 }
