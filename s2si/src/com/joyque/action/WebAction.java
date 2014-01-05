@@ -37,6 +37,8 @@ public class WebAction  extends BaseAction{
 	
 	private int isStatic;
 	
+	private int isFinal;
+	
 	@SuppressWarnings("unchecked")
 	public void GetWebs()
 	{
@@ -370,17 +372,18 @@ public class WebAction  extends BaseAction{
 				
 			}
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(hid) || !isValidateContent(content))
+					|| !isValidateId(hid) || !isValidateContent(content)
+					|| !isValidateIsFinal(isFinal))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.AddThreeLevel(uid, pics, picsContentType, content, hid, url);
+			json = webService.AddThreeLevel(uid, pics, picsContentType, content, hid, url, isFinal);
 		}catch(Exception e){			
 			
 		}
 		ajaxReturn(json.toString());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void UpdateThreeLevel()
 	{
@@ -394,11 +397,12 @@ public class WebAction  extends BaseAction{
 				
 			}
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(id) || !isValidateContent(content))
+					|| !isValidateId(id) || !isValidateContent(content)
+					|| !isValidateIsFinal(isFinal))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.UpdateThreeLevel(uid, pics, picsContentType, content, id, url);
+			json = webService.UpdateThreeLevel(uid, pics, picsContentType, content, id, url, isFinal);
 		}catch(Exception e){			
 			
 		}
@@ -497,6 +501,14 @@ public class WebAction  extends BaseAction{
 			
 		}
 		ajaxReturn(json.toString());
+	}
+	
+	private boolean isValidateIsFinal(int isFinal) {
+		if(isFinal == 0 || isFinal == 1)
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	private boolean isValidateIsStatic(int isStatic) {
@@ -625,5 +637,13 @@ public class WebAction  extends BaseAction{
 
 	public void setIsStatic(int isStatic) {
 		this.isStatic = isStatic;
+	}
+
+	public int getIsFinal() {
+		return isFinal;
+	}
+
+	public void setIsFinal(int isFinal) {
+		this.isFinal = isFinal;
 	}	
 }

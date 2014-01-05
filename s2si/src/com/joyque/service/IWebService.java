@@ -42,10 +42,10 @@ public interface IWebService {
 	JSONObject DeleteTwoLevel(long id);
 
 	JSONObject AddThreeLevel(String uid, List<File> pics,
-			List<String> picsContentType, String content, long hid, String url) throws IOException;
+			List<String> picsContentType, String content, long hid, String url, int isFinal) throws IOException;
 
 	JSONObject UpdateThreeLevel(String uid, List<File> pics,
-			List<String> picsContentType, String content, long id, String url) throws IOException;
+			List<String> picsContentType, String content, long id, String url, int isFinal) throws IOException;
 
 	JSONObject DeleteThreeLevel(long id);
 

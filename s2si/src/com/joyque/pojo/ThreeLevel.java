@@ -12,6 +12,13 @@ public class ThreeLevel {
 	
 	private String imageUrl;
 	
+	private int isFinal = -1;
+	
+	public void setDefaultValue()
+	{
+		isFinal = 0;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -50,5 +57,13 @@ public class ThreeLevel {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public int getIsFinal() {
+		return isFinal;
+	}
+
+	public void setIsFinal(int isFinal) {
+		this.isFinal = isFinal;
 	}
 }

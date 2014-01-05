@@ -313,7 +313,7 @@ public class WebServiceImpl implements IWebService{
 	
 	@Override
 	public JSONObject AddThreeLevel(String uid, List<File> pics,
-			List<String> picsContentType, String content, long hid, String url) throws IOException {
+			List<String> picsContentType, String content, long hid, String url, int isFinal) throws IOException {
 		JSONObject json = new JSONObject();
 		ThreeLevel three = new ThreeLevel();
 		three.setContent(content);
@@ -321,6 +321,7 @@ public class WebServiceImpl implements IWebService{
 		three.setUrl(url);
 		String imageUrl = FileUtil.SaveThreeLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
 		three.setImageUrl(imageUrl);
+		three.setIsFinal(isFinal);
 		threeLevelDao.insertThreeLevel(three);
 		
 		json = GetThreeLevel(hid);
@@ -329,11 +330,12 @@ public class WebServiceImpl implements IWebService{
 	
 	@Override
 	public JSONObject UpdateThreeLevel(String uid, List<File> pics,
-			List<String> picsContentType, String content, long id, String url) throws IOException {
+			List<String> picsContentType, String content, long id, String url, int isFinal) throws IOException {
 		JSONObject json = new JSONObject();
 		ThreeLevel three = threeLevelDao.GetThreeLevel(id);
 		three.setContent(content);
 		three.setUrl(url);
+		three.setIsFinal(isFinal);
 		if(pics != null && pics.size() > 0)
 		{
 			String imageUrl = FileUtil.SaveThreeLevelAsMedia(uid, pics.get(0), picsContentType.get(0));

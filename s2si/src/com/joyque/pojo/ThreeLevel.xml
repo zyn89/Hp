@@ -15,7 +15,7 @@
   </select>
 
   <insert id="insertThreeLevel" parameterClass="ThreeLevel">
-    insert into three_level values (null, #hid#, #url#, #content#, #imageUrl#)
+    insert into three_level values (null, #hid#, #url#, #content#, #imageUrl#, #isFinal#)
   </insert>
   
   <update id="updateThreeLevel" parameterClass="ThreeLevel">
@@ -24,6 +24,7 @@
 		<isNotEmpty property="content" prepend=","><![CDATA[ content=#content# ]]></isNotEmpty>
 		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>		
 		<isNotEmpty property="url" prepend=","><![CDATA[ url=#url# ]]></isNotEmpty>
+		<isNotEqual property="isFinal" compareValue="-1" prepend=","><![CDATA[ isFinal=#isFinal# ]]></isNotEqual>
 	</dynamic>
 	<dynamic prepend="WHERE">
 		 id = #id#
