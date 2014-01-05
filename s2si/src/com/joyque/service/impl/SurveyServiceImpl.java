@@ -20,7 +20,6 @@ import com.joyque.pojo.UserCredit;
 import com.joyque.pojo.UserInfo;
 import com.joyque.pojo.UserSurvey;
 import com.joyque.service.ISurveyService;
-import com.opensymphony.xwork2.ActionContext;
 
 public class SurveyServiceImpl implements ISurveyService{
 	private ISurveyInfoDao surveyInfoDao;
@@ -225,15 +224,19 @@ public class SurveyServiceImpl implements ISurveyService{
 		double sum = count1 + count2 + count3;
 		if(sum == 0)
 		{
-			json.accumulate("p1", 0);
-			json.accumulate("p2", 0);
-			json.accumulate("p3", 0);
+			JSONArray rArray = new JSONArray();
+			rArray.add(0);
+			rArray.add(0);
+			rArray.add(0);
+			json.accumulate("rate", rArray);
 		}
 		else
 		{
-			json.accumulate("p1", count1 / sum);
-			json.accumulate("p2", count2 / sum);
-			json.accumulate("p3", 1 - ((count1 + count2) / sum));
+			JSONArray rArray = new JSONArray();
+			rArray.add(count1 / sum);
+			rArray.add(count2 / sum);
+			rArray.add(1 - ((count1 + count2) / sum));
+			json.accumulate("rate", rArray);
 		}
 		if(isFinal == 1)
 		{
