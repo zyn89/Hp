@@ -38,6 +38,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#reg-btn').bind('click',function(event){
 			window.location.href="goTo.action?url=register.jsp";
 		});
+
+		//单击签到图片 ajax异步请求 {"isCheck":1,"credit":51}  
 		
 	});
 		
@@ -83,15 +85,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>
   </head>
   <%
-	  Object name = request.getAttribute("name");
-	  Object credit = request.getAttribute("credit");
+	  Object name = session.getAttribute("name");
+	  Object credit = session.getAttribute("credit");
+	  Object isCheck = session.getAttribute("isCheck");
 	 
  %>
   <body>
  	<div class="main">
 		<div class="m-btns">
-			<button type="button" id="login-btn">��¼</button>
-			<button type="button" id="reg-btn">ע��</button>
+		<% if(name==null) { %>
+			<button type="button" id="login-btn">登录</button>
+			<button type="button" id="reg-btn">注册</button>
+		<% } else { %>
+			<button type="button" id="reg-btn">注册</button>
+		<% } %> 
 		</div>
 		<div class="m-info">
 		<% if(name!=null && !((String)name).equals("") && credit!=null) { %>
@@ -104,12 +111,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul>
 					<li><a href="goTo.action?url=userInfo2.jsp"><img src="resources/image/a1.jpg" alt=""></a></li>
 					<li><a id="j-whd" href="javascript:void(0);"><img src="resources/image/a2.jpg" alt=""></a></li>
-					<li><a href="javascript:void(0);"><img src="resources/image/a3.jpg" alt=""></a></li>
+					<li><a href="goTo.action?url=research.jsp"><img src="resources/image/a3.jpg" alt=""></a></li>
 				</ul>
 			</div>
 			<div class="m-acts-r">
 				<ul>
+				<% if((Integer)isCheck == 1) { %>
+					<!-- 已经签到图片 不可点击  -->
+				<% } else{ %>
 					<li><a href="javascript:void(0);"><img src="resources/image/a4.jpg" alt=""></a></li>
+				<% } %>
+					
 					<li><a href="goTo.action?url=prize.jsp"><img src="resources/image/a5.jpg" alt=""></a></li>
 				</ul>
 			</div>

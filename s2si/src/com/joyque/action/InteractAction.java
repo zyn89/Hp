@@ -11,9 +11,21 @@ public class InteractAction extends BaseAction {
 	private String aid;
 	private String descUrl;
 	private String type;
+	private String eid;
 	
 	
-	
+	public String getEid() {
+		return eid;
+	}
+
+
+
+	public void setEid(String eid) {
+		this.eid = eid;
+	}
+
+
+
 	public String getAid() {
 		return aid;
 	}
@@ -50,13 +62,22 @@ public class InteractAction extends BaseAction {
 
 
 
-	public String execute() {
+	public String beginActivity() {
 		
 		ActionContext.getContext().put("aid", aid);
 		ActionContext.getContext().put("descUrl", descUrl);
 		ActionContext.getContext().put("type", type);
 		
-		return SUCCESS;
+		return "beginactivity";
 	}
 	
+	public String beginAnswer() {
+		return "beginanswer";
+	}
+	
+	
+	public String prizeInfo() {
+		ActionContext.getContext().put("eid", eid);
+		return "prizeinfo";
+	}
 }

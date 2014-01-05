@@ -129,7 +129,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					$ggks = $('.u-ggk').empty();
 
 				$('.m-credit p',contentDiv).text('剩余次数:' + lotteryCount);
-
+				state.m = [1,1,1];
+				state.status = 0;
 				$('.m-pic img',contentDiv).attr({
 					src :　lottery.lotteryUrl
 				});

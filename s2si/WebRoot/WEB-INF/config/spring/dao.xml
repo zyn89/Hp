@@ -101,7 +101,7 @@
 		</property>
 	</bean>
 	
-	<bean id="userprizeDao" class="com.joyque.dao.impl.UserPrizeDaoImpl" scope="prototype">
+	<bean id="userPrizeDao" class="com.joyque.dao.impl.UserPrizeDaoImpl" scope="prototype">
 		<property name="dataSource">
 		   <ref bean="dataSource"/>
 		</property>

@@ -33,7 +33,7 @@
 		
 		<action name="MotifyInfo" class="userBasicAction" method="MotifyInfo">
 		</action>
-		
+		<!-- 签到 ischeck=0 没签到-->
 		<action name="CheckIn" class="userBasicAction" method="CheckIn">
 		</action>
 		
@@ -77,6 +77,7 @@
 		<action name="QueryUplord" class="uplordAction" method="QueryUplord">
 		</action>
 		
+		<!-- 调研数组取第一项 -->
 		<action name="GetSurveyList" class="surveyAction" method="GetSurveyList">
 		</action>
 		
@@ -85,7 +86,7 @@
 		
 		<action name="DeleteSurvey" class="surveyAction" method="DeleteSurvey">
 		</action>
-		
+		<!-- 调研问题 -->
 		<action name="GetSurveyQuestion" class="surveyAction" method="GetSurveyQuestion">
 		</action>
 		
@@ -98,6 +99,7 @@
 		<action name="DeleteSurveyQuestion" class="surveyAction" method="DeleteSurveyQuestion">
 		</action>
 		
+		<!-- 调研每次 提交  -->
 		<action name="DoneSurveyQuestion" class="surveyAction" method="DoneSurveyQuestion">
 		</action>
 		
