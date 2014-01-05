@@ -57,6 +57,11 @@ public class UserBasicAction extends BaseAction{
 			{
 				session.put("uid", uid);
 			}
+			else
+			{
+				session.remove("uid");
+				session.put("uid", uid);
+			}
 
 		}catch(Exception e){
 			
