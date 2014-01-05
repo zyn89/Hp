@@ -16,8 +16,9 @@
 		<action name="manager" class="managerAction">
 			<result name="success">/WEB-INF/console/main.html</result>	
 		</action>
-		<action name="all" class="managerAction">
+		<action name="all_*" class="managerAction" method="{1}">
 			<result name="success">/WEB-INF/console/activities.html</result>	
+			<result name="wdy">/WEB-INF/console/wdy.html</result>	
 		</action>
 		<action name="set" class="managerAction" method="send">	
 		</action>

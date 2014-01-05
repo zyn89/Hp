@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+	</title>
+</head>
+<body>
+	<div id="content">
+		<div class="section_header">
+			<div class="btn-group pull-right">
+				<button id="j-addwdy" class="btn" data-loading-text="正在添加...">添加</button>
+				<button class="btn refresh btn-primary" data-loading-text="正在刷新...">刷新</button>
+			</div>
+			<p>调研活动</p>
+		</div>
+		
+		<div class="pagination">
+			<ul>
+				<li class="next la"><a href="#">&laquo;</a></li>
+				<li class="first"><a href="#">1</a></li>
+				<li class="next ra"><a href="#">&raquo;</a></li>
+			</ul>
+		</div>
+		
+		
+		<!--微调研记录表格 -->
+		<table id="j-wdytable" class="table table-striped">
+				<thead>
+					<tr>
+						<th>调研</th>
+						<th>说明图片</th>
+						<th>积分</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+		</table>
+		
+
+		<div id="j-addmodel" class="modal hide fade oper">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h3>操作</h3>
+			</div>
+			<div class="modal-body">
+				<a href="#" class="btn btn-danger">删除</a> <a href="#"
+					class="btn btn-primary change">修改</a> <a href="#"
+					class="btn btn-primary reupload hide">重新上传</a>
+				<form class="form-horizontal hide" style="margin-top:10px">
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">活动类型</label>
+						<div class="controls type">
+							<input type="text" id="inputEmail" placeholder="type">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">活动描述</label>
+						<div class="controls">
+							<a class="btn btn-link desc" style="padding-left:0px">点此上传</a> <a
+								class="btn btn-link hide temple"
+								style="padding-left:0px;
+							      color:rgb(51,51,51);
+							      cursor:deault;
+							      text-decoration:none;
+							      "></a>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">活动图片</label>
+						<div class="controls">
+							<a class="btn btn-link activity" style="padding-left:0px">点此上传</a>
+							<a class="btn btn-link hide temple"
+								style="padding-left:0px;
+							      color:rgb(51,51,51);
+							      cursor:deault;
+							      text-decoration:none;
+							      "></a>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">得分</label>
+						<div class="controls score">
+							<input type="text" id="" placeholder="score">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="inputPassword">积分</label>
+						<div class="controls credit">
+							<input type="text" id="" placeholder="credit">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn">关闭</a> <a href="#"
+					class="btn btn-primary save">Save changes</a>
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>
