@@ -15,7 +15,7 @@
   </select>
 
   <insert id="insertFourLevel" parameterClass="FourLevel">
-    insert into four_level values (null, #fid#, #content#, #imageUrl#)
+    insert into four_level values (null, #fid#, #content#, #imageUrl#, #url#)
   </insert>
   
   <update id="updateFourLevel" parameterClass="FourLevel">
@@ -23,6 +23,7 @@
 	<dynamic prepend="SET ">
 		<isNotEmpty property="content" prepend=","><![CDATA[ content=#content# ]]></isNotEmpty>
 		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
+		<isNotEmpty property="url" prepend=","><![CDATA[ url=#url# ]]></isNotEmpty>
 	</dynamic>
 	<dynamic prepend="WHERE">
 		 id = #id#

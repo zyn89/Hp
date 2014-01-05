@@ -50,10 +50,10 @@ public interface IWebService {
 	JSONObject DeleteThreeLevel(long id);
 
 	JSONObject AddFourLevel(String uid, List<File> pics,
-			List<String> picsContentType, String content, long fid) throws IOException;
+			List<String> picsContentType, String content, long fid, String url) throws IOException;
 
 	JSONObject UpdateFourLevel(String uid, List<File> pics,
-			List<String> picsContentType, String content, long id) throws IOException;
+			List<String> picsContentType, String content, long id, String url) throws IOException;
 
 	JSONObject DeleteFourLevel(long id);
 

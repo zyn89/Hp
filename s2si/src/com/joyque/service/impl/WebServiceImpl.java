@@ -368,11 +368,12 @@ public class WebServiceImpl implements IWebService{
 	
 	@Override
 	public JSONObject AddFourLevel(String uid, List<File> pics,
-			List<String> picsContentType, String content, long fid) throws IOException {
+			List<String> picsContentType, String content, long fid, String url) throws IOException {
 		JSONObject json = new JSONObject();
 		FourLevel four = new FourLevel();
 		four.setContent(content);
 		four.setFid(fid);	
+		four.setUrl(url);
 		String imageUrl = FileUtil.SaveFourLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
 		four.setImageUrl(imageUrl);
 		fourLevelDao.insertFourLevel(four);
@@ -383,7 +384,7 @@ public class WebServiceImpl implements IWebService{
 	
 	@Override
 	public JSONObject UpdateFourLevel(String uid, List<File> pics,
-			List<String> picsContentType, String content, long id) throws IOException {
+			List<String> picsContentType, String content, long id, String url) throws IOException {
 		JSONObject json = new JSONObject();
 		FourLevel four = fourLevelDao.GetFourLevel(id);
 		four.setContent(content);
@@ -392,7 +393,7 @@ public class WebServiceImpl implements IWebService{
 			String imageUrl = FileUtil.SaveFourLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
 			four.setImageUrl(imageUrl);
 		}
-		
+		four.setUrl(url);
 		fourLevelDao.updateFourLevel(four);
 		
 		json = GetFourLevel(four.getFid());

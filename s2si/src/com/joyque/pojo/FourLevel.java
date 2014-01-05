@@ -9,6 +9,8 @@ public class FourLevel {
 	private String content;
 	
 	private String imageUrl;
+	
+	private String url;
 
 	public long getId() {
 		return id;
@@ -40,5 +42,13 @@ public class FourLevel {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }

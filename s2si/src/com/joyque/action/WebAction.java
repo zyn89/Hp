@@ -449,13 +449,13 @@ public class WebAction  extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.AddFourLevel(uid, pics, picsContentType, content, fid);
+			json = webService.AddFourLevel(uid, pics, picsContentType, content, fid, url);
 		}catch(Exception e){			
 			
 		}
 		ajaxReturn(json.toString());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void UpdateFourLevel()
 	{
@@ -473,7 +473,7 @@ public class WebAction  extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.UpdateFourLevel(uid, pics, picsContentType, content, id);
+			json = webService.UpdateFourLevel(uid, pics, picsContentType, content, id, url);
 		}catch(Exception e){			
 			
 		}
