@@ -133,6 +133,7 @@ public class WebServiceImpl implements IWebService{
 			j.accumulate("id", info.getId());
 			j.accumulate("content", info.getContent());
 			j.accumulate("imageUrl", info.getImageUrl());
+			j.accumulate("url", info.getUrl());
 			jArray.add(j);
 		}
 		json.accumulate("four_level", jArray);
