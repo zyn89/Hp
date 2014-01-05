@@ -9,7 +9,7 @@ h1, h2, h3, h4, h5, h6 { font-size:100%; }
 
 /*通用*/
 
-.content { width:230px ; float:left; margin-left:-22% }
+.content { width:230px ; float:left; /*margin-left:-22% */}
 .main { margin:15px auto 0 auto;  overflow:hidden; zoom:1 }
 .main .left-sider { float:left; width:221px; }
 .operate h3 { font-family: "Microsoft YaHei",微软雅黑; font-size:16px; background:#f7f7f7; height:43px; line-height:43px; padding-left:12px; }
