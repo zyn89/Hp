@@ -85,9 +85,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>
   </head>
   <%
-	  Object name = session.getAttribute("name");
+  	  Object name = session.getAttribute("name");
+	 
 	  Object credit = session.getAttribute("credit");
-	  Object isCheck = session.getAttribute("isCheck");
+  	  Object isCheck = session.getAttribute("isCheck");
 	 
  %>
   <body>
@@ -101,9 +102,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<% } %> 
 		</div>
 		<div class="m-info">
-		<% if(name!=null && !((String)name).equals("") && credit!=null) { %>
-			<p><%= (String)name %></p>
-			<p><%= (Integer)credit %></p>
+		<% if(name!=null && credit!=null) { %>
+			<p><%= name %></p>
+			<p><%= credit %></p>
 		<% } %>
 		</div>
 		<div class="m-acts">
@@ -116,8 +117,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="m-acts-r">
 				<ul>
-				<% if((Integer)isCheck == 1) { %>
-					<!-- 已经签到图片 不可点击  -->
+				<% if(isCheck != null && (Integer)isCheck == 1){ %>
+					
 				<% } else{ %>
 					<li><a href="javascript:void(0);"><img src="resources/image/a4.jpg" alt=""></a></li>
 				<% } %>
