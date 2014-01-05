@@ -7,6 +7,13 @@ public class OneLevel {
 	private String url;
 	
 	private String imageUrl;
+	
+	private int isStatic = -1;
+	
+	public void setDefaultValue()
+	{
+		isStatic = 0;
+	}
 
 	public long getOid() {
 		return oid;
@@ -30,5 +37,13 @@ public class OneLevel {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public int getIsStatic() {
+		return isStatic;
+	}
+
+	public void setIsStatic(int isStatic) {
+		this.isStatic = isStatic;
 	}
 }

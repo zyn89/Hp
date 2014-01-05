@@ -79,6 +79,7 @@ public class WebServiceImpl implements IWebService{
 			j.accumulate("id", info.getOid());
 			j.accumulate("url", info.getUrl());
 			j.accumulate("imageUrl", info.getImageUrl());
+			j.accumulate("isStatic", info.getIsStatic());
 			jArray.add(j);
 		}
 		json.accumulate("one_level", jArray);
@@ -186,10 +187,11 @@ public class WebServiceImpl implements IWebService{
 	
 	@Override
 	public JSONObject AddOneLevel(String uid, List<File> pics,
-			List<String> picsContentType, String url) throws IOException {
+			List<String> picsContentType, String url, int isStatic) throws IOException {
 		JSONObject json = new JSONObject();
 		OneLevel one = new OneLevel();
 		one.setUrl(url);
+		one.setIsStatic(isStatic);
 		String imageUrl = FileUtil.SaveOneLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
 		one.setImageUrl(imageUrl);
 		oneLevelDao.insertOneLevel(one);
@@ -200,10 +202,11 @@ public class WebServiceImpl implements IWebService{
 	
 	@Override
 	public JSONObject UpdateOneLevel(String uid, List<File> pics,
-			List<String> picsContentType, String url, long id) throws IOException {
+			List<String> picsContentType, String url, long id, int isStatic) throws IOException {
 		JSONObject json = new JSONObject();
 		OneLevel one = oneLevelDao.GetOneLevel(id);
 		one.setUrl(url);
+		one.setIsStatic(isStatic);
 		if(pics != null && pics.size() > 0)
 		{
 			String imageUrl = FileUtil.SaveOneLevelAsMedia(uid, pics.get(0), picsContentType.get(0));

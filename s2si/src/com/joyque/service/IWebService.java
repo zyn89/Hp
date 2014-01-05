@@ -26,10 +26,10 @@ public interface IWebService {
 	JSONObject DeleteCarouselInfo(long cid);
 
 	JSONObject AddOneLevel(String uid, List<File> pics,
-			List<String> picsContentType, String url) throws IOException;
+			List<String> picsContentType, String url, int isStatic) throws IOException;
 
 	JSONObject UpdateOneLevel(String uid, List<File> pics,
-			List<String> picsContentType, String url, long id) throws IOException;
+			List<String> picsContentType, String url, long id, int isStatic) throws IOException;
 
 	JSONObject DeleteOneLevel(long id);
 

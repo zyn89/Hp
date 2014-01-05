@@ -15,7 +15,7 @@
   </select>
 
   <insert id="insertOneLevel" parameterClass="OneLevel">
-    insert into one_level values (null, #url#, #imageUrl#)
+    insert into one_level values (null, #url#, #imageUrl#, #isStatic#)
   </insert>
   
   <update id="updateOneLevel" parameterClass="OneLevel">
@@ -23,6 +23,7 @@
 	<dynamic prepend="SET ">
 		<isNotEmpty property="url" prepend=","><![CDATA[ url=#url# ]]></isNotEmpty>
 		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
+		<isNotEqual property="isStatic" compareValue="-1" prepend=","><![CDATA[ isStatic=#isStatic# ]]></isNotEqual>
 	</dynamic>
 	<dynamic prepend="WHERE">
 		 oid = #oid#

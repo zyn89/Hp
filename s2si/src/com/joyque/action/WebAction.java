@@ -35,6 +35,8 @@ public class WebAction  extends BaseAction{
 	
 	private String content;
 	
+	private int isStatic;
+	
 	@SuppressWarnings("unchecked")
 	public void GetWebs()
 	{
@@ -224,17 +226,19 @@ public class WebAction  extends BaseAction{
 			{
 				
 			}
-			if(!isValidateImage(pics) || !isValidateType(picsContentType))
+			if(!isValidateImage(pics) || !isValidateType(picsContentType)
+					|| !isValidateIsStatic(isStatic))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.AddOneLevel(uid, pics, picsContentType, url);
+			json = webService.AddOneLevel(uid, pics, picsContentType, url, isStatic);
 		}catch(Exception e){			
 			
 		}
 		ajaxReturn(json.toString());
 	}
 	
+
 	@SuppressWarnings("unchecked")
 	public void UpdateOneLevel()
 	{
@@ -248,11 +252,11 @@ public class WebAction  extends BaseAction{
 				
 			}
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(id))
+					|| !isValidateId(id)|| !isValidateIsStatic(isStatic))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.UpdateOneLevel(uid, pics, picsContentType, url, id);
+			json = webService.UpdateOneLevel(uid, pics, picsContentType, url, id, isStatic);
 		}catch(Exception e){			
 			
 		}
@@ -494,6 +498,14 @@ public class WebAction  extends BaseAction{
 		}
 		ajaxReturn(json.toString());
 	}
+	
+	private boolean isValidateIsStatic(int isStatic) {
+		if(isStatic == 0 || isStatic == 1)
+		{
+			return true;
+		}
+		return false;
+	}
 
 	private boolean isValidateContent(String content) {
 		if(content != null && !content.trim().equals(""))
@@ -605,5 +617,13 @@ public class WebAction  extends BaseAction{
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public int getIsStatic() {
+		return isStatic;
+	}
+
+	public void setIsStatic(int isStatic) {
+		this.isStatic = isStatic;
 	}	
 }

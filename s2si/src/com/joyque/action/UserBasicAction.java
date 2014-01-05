@@ -33,9 +33,18 @@ public class UserBasicAction extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			String uid = userBasicService.register(phone, pw, name, shopName);
+			JSONObject json = userBasicService.register(phone, pw, name, shopName);
 			Map session = getSession();
-			session.put("uid", uid);
+			session.remove("uid");
+			session.put("uid", json.get("uid"));
+			session.remove("phone");
+			session.put("phone", json.get("phone"));
+			session.remove("name");
+			session.put("name", json.get("name"));
+			session.remove("isCheck");
+			session.put("isCheck", json.get("isCheck"));
+			session.remove("credit");
+			session.put("credit", json.get("credit"));
 		}catch(Exception e){			
 			
 		}
@@ -51,18 +60,18 @@ public class UserBasicAction extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			String uid = userBasicService.Login(phone, pw);
+			JSONObject json = userBasicService.Login(phone, pw);
 			Map session = getSession();
-			if(session.get("uid") == null)
-			{
-				session.put("uid", uid);
-			}
-			else
-			{
-				session.remove("uid");
-				session.put("uid", uid);
-			}
-
+			session.remove("uid");
+			session.put("uid", json.get("uid"));
+			session.remove("phone");
+			session.put("phone", json.get("phone"));
+			session.remove("name");
+			session.put("name", json.get("name"));
+			session.remove("isCheck");
+			session.put("isCheck", json.get("isCheck"));
+			session.remove("credit");
+			session.put("credit", json.get("credit"));
 		}catch(Exception e){
 			
 		}

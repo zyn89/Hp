@@ -20,8 +20,9 @@ public class UserBasicServiceImpl implements IUserBasicService{
 	private IUserCreditDao userCreditDao;
 
 	@Override
-	public String register(String phone, String pw, String name,
+	public JSONObject register(String phone, String pw, String name,
 			String shopName) {
+		JSONObject json = new JSONObject();
 		//判断号码是否注册
 		UserInfo user = userInfoDao.getUserInfo(phone);
 		if(user != null)
@@ -50,15 +51,22 @@ public class UserBasicServiceImpl implements IUserBasicService{
 		if(user.getShopName() != null)
 		{
 			ActionContext.getContext().put("shopName", user.getShopName());
+			json.accumulate("shopName", user.getShopName());
 		}
 		ActionContext.getContext().put("name", user.getName());
 		ActionContext.getContext().put("isCheck", credit.getIsCheck());
 		ActionContext.getContext().put("credit", credit.getCredit());
-		return uid;
+		json.accumulate("name", user.getName());
+		json.accumulate("isCheck", credit.getIsCheck());
+		json.accumulate("credit", credit.getCredit());
+		json.accumulate("uid", user.getUid());
+		json.accumulate("phone", user.getPhone());
+		return json;
 	}
 	
 	@Override
-	public String Login(String phone, String pw) {
+	public JSONObject Login(String phone, String pw) {
+		JSONObject json = new JSONObject();
 		UserInfo user = userInfoDao.getUserInfo(phone);
 		if(user == null)
 		{
@@ -74,11 +82,17 @@ public class UserBasicServiceImpl implements IUserBasicService{
 		if(user.getShopName() != null)
 		{
 			ActionContext.getContext().put("shopName", user.getShopName());
+			json.accumulate("shopName", user.getShopName());
 		}
 		ActionContext.getContext().put("name", user.getName());
 		ActionContext.getContext().put("isCheck", credit.getIsCheck());
 		ActionContext.getContext().put("credit", credit.getCredit());
-		return user.getUid();
+		json.accumulate("name", user.getName());
+		json.accumulate("isCheck", credit.getIsCheck());
+		json.accumulate("credit", credit.getCredit());
+		json.accumulate("uid", user.getUid());
+		json.accumulate("phone", user.getPhone());
+		return json;
 	}
 	
 	@Override
