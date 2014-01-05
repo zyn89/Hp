@@ -16,6 +16,15 @@
 		<action name="manager" class="managerAction">
 			<result name="success">/WEB-INF/console/main.html</result>	
 		</action>
+		<action name="phone" class="managerAction">
+			<result name="success">/WEB-INF/phone/HP.html</result>	
+		</action>
+		<action name="second" class="managerAction">
+			<result name="success">/WEB-INF/phone/items.jsp</result>	
+		</action>
+		<action name="third" class="managerAction">
+			<result name="success">/WEB-INF/phone/third.jsp</result>	
+		</action>
 		<action name="all_*" class="managerAction" method="{1}">
 			<result name="success">/WEB-INF/console/activities.html</result>	
 			<result name="wdy">/WEB-INF/console/wdy.html</result>	
