@@ -4,9 +4,16 @@
 	<meta charset="UTF-8">
 	<title>
 	</title>
+	
+	<style>
+		#j-wdytable {
+			text-align:center;
+		}
+	</style>
 </head>
 <body>
 	<div id="content">
+		<script src="resources/js/wdy.js" type="text/javascript" charset="UTF-8"></script>
 		<div class="section_header">
 			<div class="btn-group pull-right">
 				<button id="j-addwdy" class="btn" data-loading-text="正在添加...">添加</button>
@@ -28,10 +35,10 @@
 		<table id="j-wdytable" class="table table-striped">
 				<thead>
 					<tr>
-						<th>调研</th>
-						<th>说明图片</th>
-						<th>积分</th>
-						<th>操作</th>
+						<th width="20%">调研</th>
+						<th width="20%">说明图片</th>
+						<th width="20%">积分</th>
+						<th width="40%">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,64 +46,37 @@
 		</table>
 		
 
-		<div id="j-addmodel" class="modal hide fade oper">
+		<div id="j-addmodel" class="modal fade hide">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">&times;</button>
-				<h3>操作</h3>
+				 <a class="close" data-dismiss="modal">×</a>
+				<h3>新增调研</h3>
 			</div>
 			<div class="modal-body">
-				<a href="#" class="btn btn-danger">删除</a> <a href="#"
-					class="btn btn-primary change">修改</a> <a href="#"
-					class="btn btn-primary reupload hide">重新上传</a>
-				<form class="form-horizontal hide" style="margin-top:10px">
-					<div class="control-group">
-						<label class="control-label" for="inputEmail">活动类型</label>
-						<div class="controls type">
-							<input type="text" id="inputEmail" placeholder="type">
+				 
+				<form id="j-addwdyform" action="" method="post"  class="form-horizontal" style="margin-top:10px">
+						
+					
+							
+						<div class="control-group">
+							<label class="control-label" for="inputEmail">活动图片</label>
+							<div class="controls">
+								<input id="j-uploadfile" type="file" name="pics" style="display:none;"/>
+								<a id="j-abtn" class="btn btn-link activity" style="padding-left:0px">点此上传</a>
+								<span id="j-filename"></span>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="inputEmail">活动描述</label>
-						<div class="controls">
-							<a class="btn btn-link desc" style="padding-left:0px">点此上传</a> <a
-								class="btn btn-link hide temple"
-								style="padding-left:0px;
-							      color:rgb(51,51,51);
-							      cursor:deault;
-							      text-decoration:none;
-							      "></a>
+						
+						<div class="control-group">
+							<label class="control-label" for="inputPassword">积分</label>
+							<div class="controls credit">
+								<input name="credit" type="text" id="j-credit" placeholder="积分">
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="inputEmail">活动图片</label>
-						<div class="controls">
-							<a class="btn btn-link activity" style="padding-left:0px">点此上传</a>
-							<a class="btn btn-link hide temple"
-								style="padding-left:0px;
-							      color:rgb(51,51,51);
-							      cursor:deault;
-							      text-decoration:none;
-							      "></a>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="inputEmail">得分</label>
-						<div class="controls score">
-							<input type="text" id="" placeholder="score">
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="inputPassword">积分</label>
-						<div class="controls credit">
-							<input type="text" id="" placeholder="credit">
-						</div>
-					</div>
-				</form>
+					</form>
 			</div>
 			<div class="modal-footer">
-				<a href="#" class="btn">关闭</a> <a href="#"
-					class="btn btn-primary save">Save changes</a>
+				<a href="#" class="btn class">关闭</a> 
+				<a id="j-savewdy" href="javascript:void(0);" class="btn btn-primary save">保存</a>
 			</div>
 		</div>
 		

@@ -105,7 +105,7 @@ String id=request.getParameter("id");
 							<span>指导价：25.2万-35.8万    
 							发动机1.6T / 2.0T            
 							变速箱：7速双离合</span>
-				   </a
+				   </a>
 	           	 </td>
 			</tr>
 		</tbody>

@@ -16,6 +16,9 @@
 		<action name="manager" class="managerAction">
 			<result name="success">/WEB-INF/console/main.html</result>	
 		</action>
+		<action name="autoTurnManage" class="managerAction">
+			<result name="success">/WEB-INF/console/autoTurnManage.html</result>	
+		</action>
 		<action name="phone" class="managerAction">
 			<result name="success">/WEB-INF/phone/HP.html</result>	
 		</action>
@@ -170,6 +173,11 @@
 		</action>
 		
 		<action name="GetFourLevel" class="webAction" method="GetFourLevel">
+		</action>
+		
+		<!--  首页轮转图  -->
+		
+		<action name="getCarouselInfo" class="webAction" method="GetWebs">
 		</action>
 		
 		<action name="AddCarouselInfo" class="webAction" method="AddCarouselInfo">

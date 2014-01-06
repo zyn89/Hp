@@ -14,7 +14,17 @@
 	type="text/css" />
 <script src="resources/js/dataManageTree/showlist.js"
 	type="text/javascript"></script>
-<script src="resources/js/wdy.js" type="text/javascript" charset="UTF-8"></script>
+	
+<script>
+
+jQuery(function($){
+	$('#j-wdy').bind('click.forload',function(event){
+		$('#j-content').load('all_wdy.action');
+	});
+});
+	
+
+</script>
 
 
 
@@ -50,106 +60,6 @@
 }
 </style>
 </head>
-<script type="text/javascript">
-	$(document).ready(
-			function() {
-				$li = $("#tmp_1");
-				/**  liuhezeng 暂时注释掉无用的js
-				$li.bind("click", function() {
-					$(this).siblings().removeClass('active');
-					//$(".mynav").find("li").removeClass("active");
-					$(this).siblings().find("i").removeClass("icon-white");
-					$(this).addClass("active");
-					$(this).find("i").addClass("icon-white");
-
-				});
-				$(".mynav").find(".ans").bind("click", function() {
-					$(".content").load("question.action");
-				});
-				$(".btn.send").bind("click", function() {
-					$.ajax({
-						url : "ActivityList.action",
-						type : "POST",
-						data : {},
-						success : function(data) {
-							console.log(data)
-						},
-					});
-
-				});
-				 **/
-				$li.bind("getinfo", function() {
-					$.ajax({
-						url : "ActivityList.action",
-						type : "POST",
-						data : {},
-						success : function(data) {
-							var data = JSON.parse(data);
-							$li.data("data", data);
-							$("#tmp_1").data("data", data);
-							$(".content").load("all.action", function() {
-								$("#tmp_1").trigger("table");
-							});
-						},
-					});
-				});
-				$("#tmp_1").bind(
-						"table",
-						function() {
-							var data = $(this).data("data");
-							var arr = data["activities"];
-							for ( var i = 0; i < arr.length; i++) {
-								var $tr = $("table").find("tr.temple").clone();
-								$tr.data("data", arr[i]);
-								$tr.removeClass("hide");
-								$tr.removeClass("temple");
-								$tr.find(".id").text((i + 1) + "");
-								$tr.find(".type").text(arr[i]["type"]);
-								$tr.find(".desc").data("data",
-										arr[i]["descUrl"]);
-								$tr.find("a.descURL").bind(
-										"click",
-										function() {
-											var $tmp = $(this).parent();
-											console.log($tmp.data("data"));
-											$(".modal.show")
-													.find(".modal-body").find(
-															"p").text(
-															$tmp.data("data"));
-											$(".modal.show").modal("show");
-										});
-								$tr.find(".activity").data("data",
-										arr[i]["activityUrl"]);
-								$tr.find("a.activityURL").bind(
-										"click",
-										function() {
-											var $tmp = $(this).parent();
-											console.log($tmp.data("data"));
-											$(".modal.show")
-													.find(".modal-body").find(
-															"p").text(
-															$tmp.data("data"));
-											$(".modal.show").modal("show");
-										});
-								$tr.find(".score").text(arr[i]["score"]);
-								$tr.find(".credit").text(arr[i]["credit"]);
-								$tr.find(".oper").bind(
-										"click",
-										function() {
-											$(".modal.oper").data(
-													"data",
-													$(this).parent().data(
-															"data"));
-											$(".modal.oper").modal("show");
-											$(".mynav").data("data",
-													$(".modal.oper"));
-										});
-								$tr.appendTo($("table"));
-							}
-						});
-				$("#tmp_1").trigger("getinfo");
-			});
-</script>
 
 <body>
 	<div class="container-fluid">
@@ -163,97 +73,98 @@
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						<li><a href="#">保存</a>
-						</li>
-						<li><a href="#">退出</a>
-						</li>
+						<li><a href="#">保存</a></li>
+						<li><a href="#">退出</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="container-fluid">
-		<!-- liuhezeng 注释掉无用的div -->
-		<div class="row-fluid">
-		
+	<!--   liuhezeng 添加树 用来支持分类  -->
+	<div class="row-fluid">
+
 			<div class="span3">
-			
 				<div class="content">
 					<div class="left-sider">
 						<div class="operate">
 							<h3>HP管理树</h3>
 							<ul id="J_navlist">
 								<li>
-									<h4 class="">首页轮换图管理</h4>
+									<h4>首页轮换图管理</h4>
 									<div class="list-item none">
 										<p>
-											<a id="autoTurnManage_MainPage" onclick="autoTurnManage()" href="javascript:void(0)">轮换图管理</a>
+											<a id="autoTurnManage_MainPage" href="javascript:void(0)"
+												title="autoTurnManage.action" >轮换图管理</a>
 										</p>
 										<p>
-											<a href="" target="_self">XXX管理</a>
+											<a href="javascript:void(0)" title="all.action" >活动管理</a>
 										</p>
 									</div>
 								</li>
-								
 								<li>
-									<h4 class="">首页图片管理</h4>
-									<div class="list-item none">
-										<p>
-											<a href="" target="_self">XXX管理</a>
-										</p>
-									</div>
-								</li>
-								
-								<li>
-									<h4 class="">二级页面维护管理</h4>
-									<div class="list-item none">
-										<p>
-											<a href="" target="_self">XXX管理</a>
-										</p>
-				
-									</div>
-								</li>
-								
-								<li>
-									<h4 class="">三级页面维护管理</h4>
-									<div class="list-item none">
-										<p>
-											<a href="" target="_self">管理</a>
-										</p>
-				
-									</div>
-								</li>
-								
-								<li>
-									<h4 class="">四级页面维护管理</h4>
+									<h4>首页图片管理</h4>
 									<div class="list-item none">
 										<p>
 											<a href="" target="_self">XXX管理</a>
 										</p>
 									</div>
 								</li>
-								
 								<li>
-									<h4 id="j-wdy" class="">微调研后台管理</h4>
-									<!--<div class="list-item none">
+									<h4>二级页面维护管理</h4>
+									<div class="list-item none">
 										<p>
-											<a href="" target="_self">调</a>
+											<a href="" target="_self">XXX管理</a>
+										</p>
+
+									</div>
+								</li>
+								<li>
+									<h4>三级页面维护管理</h4>
+									<div class="list-item none">
+										<p>
+											<a href="" target="_self">XXX管理</a>
+										</p>
+
+									</div>
+								</li>
+								<li>
+									<h4>四级页面维护管理</h4>
+									<div class="list-item none">
+										<p>
+											<a href="" target="_self">XXX管理</a>
 										</p>
 									</div>
-								--></li>
+											<li>
+												<h4 id="j-wdy" class="">微调研后台管理</h4>
+											 </li>
 							</ul>
-							 <script type="text/javascript" language="javascript">
+							<script type="text/javascript" language="javascript">
 								navList(12);
 							</script>
 						</div>
 					</div>
 				</div>
-			
-			
 			</div>
-			<div id="j-content" class="span9 content"></div>
 
+
+		<div id="j-content" class="span9 content">
+		<!--
+			两种方案:
+			1 采用iframe 如同 轮换图管理 通过iframe加载不同的页面 会有滚动条
+			2 选择采用load 加载 在不同的页面中写好script 这些脚本会在加载完dom后立即执行
+			  如 微调研管理
+			
+		-->
+			<iframe scrolling="auto" height="680px" frameborder="0" width="100%" id="r_iframe" name="r_iframe" ></iframe>
+			<!--   liuhezeng 添加树end -->
+			
 		</div>
-	</div>
+
 </body>
+<script type="text/javascript">
+	$("p a").click(function() {
+		$("#r_iframe").attr("src", $(this).attr("title"));
+	});
+</script>
 </html>
