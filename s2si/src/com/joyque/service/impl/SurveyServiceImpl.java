@@ -90,62 +90,69 @@ public class SurveyServiceImpl implements ISurveyService{
 		for(SurveyQuestion info : infos)
 		{
 			JSONObject j = new JSONObject();
-			j.accumulate("qid", info.getQid());
-			j.accumulate("imageUrl", info.getImageUrl());
-			JSONArray qArray = new JSONArray();
-			qArray.add(info.getA1());
-			qArray.add(info.getA2());
-			qArray.add(info.getA3());
-			j.accumulate("choiceItems", qArray);
-			UserSurvey userSurvey = userSurveyDao.GetUserSurvey(uid, info.getQid());
-			if(userSurvey == null)
-			{
-				j.accumulate("done", 0);
-			}
-			else
-			{
-				j.accumulate("done", 1);
-				List<UserSurvey> surveyInfos = userSurveyDao.GetUserSurveys(info.getQid());
-				double count1 = 0;
-				double count2 = 0;
-				double count3 = 0;
-				for(UserSurvey us : surveyInfos)
-				{
-					if(us.getaIndex() == 1)
-					{
-						count1 ++;
-					}
-					else if(us.getaIndex() == 2)
-					{
-						count2 ++;
-					}
-					else
-					{
-						count3 ++;
-					}
-				}
-				double sum = count1 + count2 + count3;
-				if(sum == 0)
-				{
-					JSONArray rArray = new JSONArray();
-					rArray.add(0);
-					rArray.add(0);
-					rArray.add(0);
-					j.accumulate("rate", rArray);
-				}
-				else
-				{
-					JSONArray rArray = new JSONArray();
-					rArray.add(count1 / sum);
-					rArray.add(count2 / sum);
-					rArray.add(1 - ((count1 + count2) / sum));
-					j.accumulate("rate", rArray);
-				}
-				
-			}
+			j = GetSurveyQutionJson(info, uid);
 			jArray.add(j);
 		}
 		return jArray;
+	}
+	
+	JSONObject GetSurveyQutionJson(SurveyQuestion info, String uid)
+	{
+		JSONObject j = new JSONObject();
+		j.accumulate("qid", info.getQid());
+		j.accumulate("imageUrl", info.getImageUrl());
+		JSONArray qArray = new JSONArray();
+		qArray.add(info.getA1());
+		qArray.add(info.getA2());
+		qArray.add(info.getA3());
+		j.accumulate("choiceItems", qArray);
+		UserSurvey userSurvey = userSurveyDao.GetUserSurvey(uid, info.getQid());
+		if(userSurvey == null)
+		{
+			j.accumulate("done", 0);
+		}
+		else
+		{
+			j.accumulate("done", 1);
+			List<UserSurvey> surveyInfos = userSurveyDao.GetUserSurveys(info.getQid());
+			double count1 = 0;
+			double count2 = 0;
+			double count3 = 0;
+			for(UserSurvey us : surveyInfos)
+			{
+				if(us.getaIndex() == 1)
+				{
+					count1 ++;
+				}
+				else if(us.getaIndex() == 2)
+				{
+					count2 ++;
+				}
+				else
+				{
+					count3 ++;
+				}
+			}
+			double sum = count1 + count2 + count3;
+			if(sum == 0)
+			{
+				JSONArray rArray = new JSONArray();
+				rArray.add(0);
+				rArray.add(0);
+				rArray.add(0);
+				j.accumulate("rate", rArray);
+			}
+			else
+			{
+				JSONArray rArray = new JSONArray();
+				rArray.add(count1 / sum);
+				rArray.add(count2 / sum);
+				rArray.add(1 - ((count1 + count2) / sum));
+				j.accumulate("rate", rArray);
+			}
+			
+		}
+		return j;
 	}
 	
 	@Override
@@ -160,7 +167,7 @@ public class SurveyServiceImpl implements ISurveyService{
 		String url = FileUtil.SaveSurveyQuestionAsMedia(uid, pics.get(0), picsContentType.get(0));
 		sq.setImageUrl(url);
 		surveyQuestionDao.insertSurveyQuestion(sq);
-		json.accumulate("questions", GetSurveyQutionArray(sid, uid));
+		json.accumulate("question", GetSurveyQutionJson(sq, uid));
 		return json;
 	}
 	
@@ -181,7 +188,7 @@ public class SurveyServiceImpl implements ISurveyService{
 		}
 		
 		surveyQuestionDao.updateSurveyQuestion(sq);
-		json.accumulate("questions", GetSurveyQutionArray(sid, uid));
+		json.accumulate("question", GetSurveyQutionJson(sq, uid));
 		return json;
 	}
 	
