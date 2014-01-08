@@ -166,7 +166,8 @@ public class SurveyServiceImpl implements ISurveyService{
 		sq.setA3(a3);
 		String url = FileUtil.SaveSurveyQuestionAsMedia(uid, pics.get(0), picsContentType.get(0));
 		sq.setImageUrl(url);
-		surveyQuestionDao.insertSurveyQuestion(sq);
+		long qid = surveyQuestionDao.insertSurveyQuestion(sq);
+		sq.setQid(qid);
 		json.accumulate("question", GetSurveyQutionJson(sq, uid));
 		return json;
 	}
@@ -176,7 +177,7 @@ public class SurveyServiceImpl implements ISurveyService{
 			List<String> picsContentType, String a1, String a2, String a3,
 			String uid) throws IOException {
 		JSONObject json = new JSONObject();
-		SurveyQuestion sq = new SurveyQuestion();
+		SurveyQuestion sq = surveyQuestionDao.GetSurveyQuestion(qid);
 		sq.setQid(qid);
 		sq.setA1(a1);
 		sq.setA2(a2);

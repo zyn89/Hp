@@ -61,10 +61,10 @@ public class SurveyQuestionDaoImpl extends SqlMapClientDaoSupport implements ISu
 	}
 
 	@Override
-	public int insertSurveyQuestion(SurveyQuestion info) {
-		int result = 0;
+	public long insertSurveyQuestion(SurveyQuestion info) {
+		long result = 0;
 		try{
-			this.getSqlMapClientTemplate().insert("insertSurveyQuestion", info);
+			result = (Long) this.getSqlMapClientTemplate().insert("insertSurveyQuestion", info);
 		} catch (DataAccessException e) {
 			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);
 		}

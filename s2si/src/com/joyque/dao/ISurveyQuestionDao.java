@@ -10,7 +10,7 @@ public interface ISurveyQuestionDao {
 	
 	public SurveyQuestion GetSurveyQuestion(long qid);
 	
-	public int insertSurveyQuestion(SurveyQuestion info);
+	public long insertSurveyQuestion(SurveyQuestion info);
 	
 	public int updateSurveyQuestion(SurveyQuestion info);
 	
