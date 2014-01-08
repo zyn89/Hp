@@ -16,7 +16,7 @@
 	    <value>red2game</value>
 	  </property>
 	  <property name="jdbcUrl">
-	    <value>jdbc:mysql://112.124.52.165:3306/hp</value>
+	    <value>jdbc:mysql://112.124.52.165:3306/hp?useUnicode=true&amp;characterEncoding=utf8</value>
 	  </property>
 	</bean>
 	
