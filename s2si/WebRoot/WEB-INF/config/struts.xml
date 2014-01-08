@@ -2,4 +2,23 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	 <include file="../config/struts/struts-sys.xml"></include>
+	 
+	 <package name="default" namespace="/" extends="struts-default">
+	 
+	    <interceptors>
+            <interceptor name="loginedCheck" class="com.joyque.common.interceptor.LoginedCheckInterceptor"/>
+            <interceptor-stack name="mystack">
+                <interceptor-ref name="loginedCheck" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors> 
+	 
+        <global-results>
+            <result name="exception-error">/WEB-INF/jsp/userhome.jsp</result>
+            <result name="tologin">/WEB-INF/jsp/userhome.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping result="exception-error" exception="java.lang.Exception"></exception-mapping>
+        </global-exception-mappings>    
+    </package>
 </struts>    

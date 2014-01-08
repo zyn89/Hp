@@ -39,26 +39,17 @@ public class QuestionAction extends BaseAction{
 	
 	private List<String> picsContentType;
 		
-	@SuppressWarnings("unchecked")
 	public void GetQuestionList()
 	{
 		JSONObject json = new JSONObject();
 		try{
-			String uid = null;
-			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
-			
 			if(!isValidateAid(aid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = questionService.GetQuestions(aid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -71,10 +62,6 @@ public class QuestionAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateScore(score) || !isValdateAid(aid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
@@ -86,18 +73,10 @@ public class QuestionAction extends BaseAction{
 		ajaxReturn(json.toString());
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void GetQaActivity()
 	{
 		JSONObject json = new JSONObject();
 		try{
-			String uid = null;
-			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			json = questionService.GetQaActivity();
 		}catch(Exception e){			
 			
@@ -105,25 +84,17 @@ public class QuestionAction extends BaseAction{
 		ajaxReturn(json.toString());
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void QueryUserScore()
 	{
 		JSONObject json = new JSONObject();
 		try{
-			String uid = null;
-			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateAid(aid) || !isValidatePage(start) || !isValidatePage(end))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = questionService.QueryUserScore(aid, start, end);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -136,10 +107,6 @@ public class QuestionAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateImage(pics) || !isValidateFormate(picsContentType)
 					|| !isValidateAnswer(a1) || !isValidateAnswer(a2)
 					|| !isValidateAnswer(a3) || !isValidateAindex(aIndex)
@@ -149,7 +116,7 @@ public class QuestionAction extends BaseAction{
 			}
 			json = questionService.AddQuestion(uid, aid, pics, picsContentType, a1, a2, a3, aIndex, score);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -162,10 +129,6 @@ public class QuestionAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateQid(qid) || !isValidateAid(aid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
@@ -173,30 +136,22 @@ public class QuestionAction extends BaseAction{
 			json = questionService.UpdateQuestion(uid, qid, pics, picsContentType,
 					a1, a2, a3, aIndex, score, aid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void deleteQuestion()
 	{
 		JSONObject json = new JSONObject();
 		try{
-			String uid = null;
-			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateQid(qid) || !isValidateAid(aid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = questionService.DeleteQuestion(qid, aid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}

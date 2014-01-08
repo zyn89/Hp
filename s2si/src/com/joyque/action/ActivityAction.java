@@ -44,13 +44,9 @@ public class ActivityAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			json = activityService.GetActivityList(uid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -63,10 +59,6 @@ public class ActivityAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateType(type) || !isValidateScore(score)
 					|| !isValidateCredit(credit) || !isValidatePics(pics)
 					|| !isValidatePicsType(picsContentType) || !isValidatePicIndex(activityIndex)
@@ -78,7 +70,7 @@ public class ActivityAction extends BaseAction{
 					pics, picsContentType, activityIndex,
 					descIndex ,uid, type, score, credit, picsName);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}	
@@ -91,17 +83,13 @@ public class ActivityAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateAid(aid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = activityService.DeleteActivity(aid, uid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -114,10 +102,6 @@ public class ActivityAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateAid(aid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
@@ -126,7 +110,7 @@ public class ActivityAction extends BaseAction{
 					aid, uid, pics, picsContentType,
 					activityIndex, descIndex, score, credit, picsName);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}

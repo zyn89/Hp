@@ -41,21 +41,13 @@ public class SurveyAction extends BaseAction{
 	
 	private int end;
 	
-	@SuppressWarnings("unchecked")
 	public void GetSurveyList()
 	{
 		JSONObject json = new JSONObject();
 		try{
-			String uid = null;
-			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			json = surveyService.GetSurveyList();
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -68,10 +60,6 @@ public class SurveyAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
 					|| !isValidateCredit(credit))
 			{
@@ -79,30 +67,22 @@ public class SurveyAction extends BaseAction{
 			}
 			json = surveyService.AddSurvey(uid, pics, picsContentType, credit);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public void DeleteSurvey()
 	{
 		JSONObject json = new JSONObject();
 		try{
-			String uid = null;
-			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateSid(sid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = surveyService.DeleteSurvey(sid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -115,17 +95,13 @@ public class SurveyAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateSid(sid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = surveyService.GetSurveyQuestions(sid, uid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -138,10 +114,6 @@ public class SurveyAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
 					|| !isValidateSid(sid) || !isValidateAnswer(a1)
 					|| !isValidateAnswer(a2) || !isValidateAnswer(a3))
@@ -150,7 +122,7 @@ public class SurveyAction extends BaseAction{
 			}
 			json = surveyService.AddSurveyQuestion(sid, pics, picsContentType, a1, a2, a3, uid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -163,17 +135,13 @@ public class SurveyAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateQid(qid) || !isValidateSid(sid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = surveyService.UpdateSurveyQuestion(sid, qid, pics, picsContentType, a1, a2, a3, uid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -186,17 +154,13 @@ public class SurveyAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateQid(qid) || !isValidateSid(sid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = surveyService.DeleteSurveyQuestion(uid, qid, sid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -209,10 +173,6 @@ public class SurveyAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateQid(qid) || !isValidateSid(sid)
 					|| !isValidateIsFinal(isFinal) || !isValidateIndex(aIndex))
 			{
@@ -220,7 +180,7 @@ public class SurveyAction extends BaseAction{
 			}
 			json = surveyService.DoneSurveyQuestion(uid, qid, sid, isFinal, aIndex);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -233,10 +193,6 @@ public class SurveyAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateQid(qid) || !isValidatePage(start)
 					|| !isValidatePage(end) || !isValidateSid(sid))
 			{
@@ -244,7 +200,7 @@ public class SurveyAction extends BaseAction{
 			}
 			json = surveyService.QuerySurvey(uid, qid, start, end, sid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}

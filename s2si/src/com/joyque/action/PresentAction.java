@@ -51,21 +51,13 @@ public class PresentAction extends BaseAction{
 	
 	private int isAward;
 	
-	@SuppressWarnings("unchecked")
 	public void GetExchanges()
 	{
 		JSONObject json = new JSONObject();
 		try{
-			String uid = null;
-			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			json = presentService.GetExchanges();
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -78,10 +70,6 @@ public class PresentAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
 					|| !isValidateName(picsName) || !isValidateCredit(credit)
 					|| !isValidateIndex(exTitleIndex) || !isValidateIndex(exDescIndex)
@@ -92,7 +80,7 @@ public class PresentAction extends BaseAction{
 			json = presentService.AddExchange(uid, pics, picsContentType, picsName,
 					credit, exTitleIndex, exDescIndex, prizeTitleIndex, prizeDescIndex);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -105,10 +93,6 @@ public class PresentAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
 					|| !isValidateName(picsName) || !isValidateCredit(credit)
 					|| !isValidateIndex(exTitleIndex) || !isValidateIndex(exDescIndex)
@@ -120,30 +104,22 @@ public class PresentAction extends BaseAction{
 			json = presentService.UpdateExchange(uid, eid, pics, picsContentType, picsName,
 					credit, exTitleIndex, exDescIndex, prizeTitleIndex, prizeDescIndex);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void DeleteExchange()
 	{
 		JSONObject json = new JSONObject();
 		try{
-			String uid = null;
-			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateEid(eid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = presentService.DeleteExchange(eid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -157,10 +133,6 @@ public class PresentAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateEid(eid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
@@ -168,24 +140,16 @@ public class PresentAction extends BaseAction{
 			json = presentService.DoneExchange(uid, eid);
 		}
 		catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void ExchangerList()
 	{
 		JSONObject json = new JSONObject();
 		try
 		{
-			String uid = null;
-			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateEid(eid) || !isValidatePage(start)
 					|| !isValidatePage(end))
 			{
@@ -194,7 +158,7 @@ public class PresentAction extends BaseAction{
 			json = presentService.QueryExchangers(eid, start, end);
 		}
 		catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -207,13 +171,9 @@ public class PresentAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			json = presentService.GetLotterys(uid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -226,10 +186,6 @@ public class PresentAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
 					|| !isValidateName(picsName) || !isValidateCredit(credit)
 					|| !isValidateIndex(prizeTitleIndex) || !isValidateIndex(prizeDescIndex)
@@ -242,7 +198,7 @@ public class PresentAction extends BaseAction{
 					credit, prizeTitleIndex, prizeDescIndex, bg1Index, bg2Index, bg3Index,
 					lotteryIndex);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -255,10 +211,6 @@ public class PresentAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateLid(lid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
@@ -267,7 +219,7 @@ public class PresentAction extends BaseAction{
 					credit, prizeTitleIndex, prizeDescIndex, bg1Index, bg2Index, bg3Index,
 					lotteryIndex, lid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -280,17 +232,13 @@ public class PresentAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateLid(lid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = presentService.DeleteLottery(lid, uid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -303,17 +251,13 @@ public class PresentAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateLid(lid)|| !isValidateIsAward(isAward))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = presentService.DrawLottery(uid, lid, isAward);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -327,14 +271,10 @@ public class PresentAction extends BaseAction{
 		try{
 			String uid = null;
 			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}			
+			uid = (String) session.get("uid");		
 			json = presentService.QueryLottery(uid);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -347,10 +287,6 @@ public class PresentAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}	
 			if(!isValidateLid(lid) || !isValidatePage(start)
 					|| !isValidatePage(end))
 			{
@@ -358,7 +294,7 @@ public class PresentAction extends BaseAction{
 			}
 			json = presentService.QueryLotteryUser(uid, lid, start, end);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}

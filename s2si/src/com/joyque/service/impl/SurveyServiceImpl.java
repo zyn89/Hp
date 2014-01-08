@@ -179,9 +179,19 @@ public class SurveyServiceImpl implements ISurveyService{
 		JSONObject json = new JSONObject();
 		SurveyQuestion sq = surveyQuestionDao.GetSurveyQuestion(qid);
 		sq.setQid(qid);
-		sq.setA1(a1);
-		sq.setA2(a2);
-		sq.setA3(a3);
+		if(a1 != null)
+		{
+			sq.setA1(a1);
+		}
+		if(a2 != null)
+		{
+			sq.setA2(a2);
+		}
+		if(a3 != null)
+		{
+			sq.setA3(a3);
+		}
+		
 		if(pics != null && pics.size() > 0)
 		{
 			String url = FileUtil.SaveSurveyQuestionAsMedia(uid, pics.get(0), picsContentType.get(0));

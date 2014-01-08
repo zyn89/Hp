@@ -37,10 +37,6 @@ public class UplordAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateAid(aid) || !isValidateImage(pics)
 					|| !isValdateFormate(picsContentType))
 			{
@@ -48,23 +44,15 @@ public class UplordAction extends BaseAction{
 			}
 			json = uplordService.UplordPic(uid, aid, pics, picsContentType, content);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
 
-	@SuppressWarnings("unchecked")
 	public void QueryUplord()
 	{
 		JSONObject json = new JSONObject();
 		try{
-			String uid = null;
-			Map session = getSession();
-			uid = (String) session.get("uid");
-			if(uid == null)
-			{
-				
-			}
 			if(!isValidateAid(aid) || !isValidatePage(start)
 					|| !isValidatePage(end))
 			{
@@ -72,7 +60,7 @@ public class UplordAction extends BaseAction{
 			}
 			json = uplordService.QueryUplord(aid, start, end);
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}

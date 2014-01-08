@@ -46,7 +46,7 @@ public class UserBasicAction extends BaseAction{
 			session.remove("credit");
 			session.put("credit", json.get("credit"));
 		}catch(Exception e){			
-			
+			throw new BaseException(e.getMessage());
 		}
 		
 		return SUCCESS;
@@ -73,7 +73,7 @@ public class UserBasicAction extends BaseAction{
 			session.remove("credit");
 			session.put("credit", json.get("credit"));
 		}catch(Exception e){
-			
+			throw new BaseException(e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -85,15 +85,10 @@ public class UserBasicAction extends BaseAction{
 		String uid = null;
 		Map session = getSession();
 		uid = (String) session.get("uid");
-		if(uid == null)
-		{
-			
-		}
 		try{
 			json = userBasicService.MotifyInfo(uid, phone, pw, name, shopName);
 		}catch(Exception e){
-			json.put("status", 400);
-			json.put("message", e.getMessage());
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -105,15 +100,10 @@ public class UserBasicAction extends BaseAction{
 		String uid = null;
 		Map session = getSession();
 		uid = (String) session.get("uid");
-		if(uid == null)
-		{
-			
-		}
 		try{
 			json = userBasicService.CheckIn(uid);
 		}catch(Exception e){
-			json.put("status", 400);
-			json.put("message", e.getMessage());
+			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}

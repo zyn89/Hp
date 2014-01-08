@@ -2,233 +2,306 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	 <include file="struts-default.xml"/>
-	<package name="" namespace="/" extends="struts-default">
+	<package name="" namespace="/" extends="default">
 		
 		<action name="register" class="userBasicAction" method="register">
 			<result name="success">/WEB-INF/jsp/userhome.jsp</result>
+			<interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="interact_*" class="interactAction" method="{1}">
 			<result name="beginactivity">/WEB-INF/jsp/interactIn2.jsp</result>
 			<result name="beginanswer">/WEB-INF/jsp/question2.jsp</result>
 			<result name="prizeinfo">/WEB-INF/jsp/prizeInfo.jsp</result>
+			<interceptor-ref name="mystack" />
 		</action>
 		<action name="manager" class="managerAction">
 			<result name="success">/WEB-INF/console/main.html</result>	
+			<interceptor-ref name="mystack" />
 		</action>
 		<action name="autoTurnManage" class="managerAction">
 			<result name="success">/WEB-INF/console/autoTurnManage.html</result>	
+			<interceptor-ref name="mystack" />
 		</action>
 		<action name="phone" class="managerAction">
 			<result name="success">/WEB-INF/phone/HP.html</result>	
+			<interceptor-ref name="mystack" />
 		</action>
 		<action name="second" class="managerAction">
 			<result name="success">/WEB-INF/phone/items.jsp</result>	
+			<interceptor-ref name="mystack" />
 		</action>
 		<action name="third" class="managerAction">
 			<result name="success">/WEB-INF/phone/third.jsp</result>	
+			<interceptor-ref name="mystack" />
 		</action>
 		<action name="all_*" class="managerAction" method="{1}">
 			<result name="success">/WEB-INF/console/activities.html</result>	
 			<result name="wdy">/WEB-INF/console/wdy.html</result>	
+			<interceptor-ref name="mystack" />
 		</action>
 		<action name="set" class="managerAction" method="send">	
+		    <interceptor-ref name="mystack" />
 		</action>
 		<action name="file" class="activityAction" method="test">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="question" class="managerAction">
 			<result name="success">/WEB-INF/console/question.html</result>	
+			<interceptor-ref name="mystack" />
 		</action>
 		<action name="Login" class="userBasicAction" method="Login">
 			<result name="success">/WEB-INF/jsp/userhome.jsp</result>
+			<interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="MotifyInfo" class="userBasicAction" method="MotifyInfo">
+		    <interceptor-ref name="mystack" />
 		</action>
 		<!-- 签到 ischeck=0 没签到-->
 		<action name="CheckIn" class="userBasicAction" method="CheckIn">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="ActivityList" class="activityAction" method="ActivityList">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddActivity" class="activityAction" method="AddActivity">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DeleteActivity" class="activityAction" method="DeleteActivity">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="UpdateActivity" class="activityAction" method="UpdateActivity">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="GetQuestionList" class="questionAction" method="GetQuestionList">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DoneQuestion" class="questionAction" method="DoneQuestion">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="GetQaActivity" class="questionAction" method="GetQaActivity">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="QueryUserScore" class="questionAction" method="QueryUserScore">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddQuestion" class="questionAction" method="AddQuestion">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="UpdateQuestion" class="questionAction" method="UpdateQuestion">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="deleteQuestion" class="questionAction" method="deleteQuestion">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="UplordPic" class="uplordAction" method="UplordPic">
 			<result name="success"></result>
+			<interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="QueryUplord" class="uplordAction" method="QueryUplord">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<!-- 调研数组取第一项 -->
 		<action name="GetSurveyList" class="surveyAction" method="GetSurveyList">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddSurvey" class="surveyAction" method="AddSurvey">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DeleteSurvey" class="surveyAction" method="DeleteSurvey">
+		    <interceptor-ref name="mystack" />
 		</action>
 		<!-- 调研问题 -->
 		<action name="GetSurveyQuestion" class="surveyAction" method="GetSurveyQuestion">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddSurveyQuestion" class="surveyAction" method="AddSurveyQuestion">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="UpdateSurveyQuestion" class="surveyAction" method="UpdateSurveyQuestion">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DeleteSurveyQuestion" class="surveyAction" method="DeleteSurveyQuestion">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<!-- 调研每次 提交  -->
 		<action name="DoneSurveyQuestion" class="surveyAction" method="DoneSurveyQuestion">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="QueryUserSurvey" class="surveyAction" method="QueryUserSurvey">
+		    <interceptor-ref name="mystack" />
 		</action>
 		<!-- 兑奖列表 -->
 		<action name="GetExchanges" class="presentAction" method="GetExchanges">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddExchange" class="presentAction" method="AddExchange">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="updateExchange" class="presentAction" method="updateExchange">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DeleteExchange" class="presentAction" method="DeleteExchange">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<!-- 完成兑奖 -->
 		<action name="DoneExchange" class="presentAction" method="DoneExchange">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="ExchangerList" class="presentAction" method="ExchangerList">
+		    <interceptor-ref name="mystack" />
 		</action>
 		<!-- 抽奖列表 数组只有1个 -->
 		<action name="LotteryList" class="presentAction" method="LotteryList">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddLottery" class="presentAction" method="AddLottery">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="UpdateLottery" class="presentAction" method="UpdateLottery">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DeleteLottery" class="presentAction" method="DeleteLottery">
+		    <interceptor-ref name="mystack" />
 		</action>
 		<!-- 完成抽奖 -->
 		<action name="DrawLottery" class="presentAction" method="DrawLottery">
+		    <interceptor-ref name="mystack" />
 		</action>
 		<!-- 查看奖品 -->
 		<action name="QueryLottery" class="presentAction" method="QueryLottery">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="QueryLotteryUser" class="presentAction" method="QueryLotteryUser">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<!-- 管理员查看一级菜单 -->
 		<action name="GetWebs" class="webAction" method="GetWebs">
+		    <interceptor-ref name="mystack" />
 		</action>
 		<!-- 手机界面查看一级菜单 -->
 		<action name="GetWeb" class="webAction" method="GetWeb">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="GetTwoLevel" class="webAction" method="GetTwoLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="GetThreeLevel" class="webAction" method="GetThreeLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="GetFourLevel" class="webAction" method="GetFourLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<!--  首页轮转图  -->
 		
 		<action name="getCarouselInfo" class="webAction" method="GetWebs">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddCarouselInfo" class="webAction" method="AddCarouselInfo">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="UpdateCarouselInfo" class="webAction" method="UpdateCarouselInfo">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DeleteCarouselInfo" class="webAction" method="DeleteCarouselInfo">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddOneLevel" class="webAction" method="AddOneLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="UpdateOneLevel" class="webAction" method="UpdateOneLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DeleteOneLevel" class="webAction" method="DeleteOneLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddTwoLevel" class="webAction" method="AddTwoLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="UpdateTwoLevel" class="webAction" method="UpdateTwoLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DeleteTwoLevel" class="webAction" method="DeleteTwoLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddThreeLevel" class="webAction" method="AddThreeLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="UpdateThreeLevel" class="webAction" method="UpdateThreeLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DeleteThreeLevel" class="webAction" method="DeleteThreeLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="AddFourLevel" class="webAction" method="AddFourLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="UpdateFourLevel" class="webAction" method="UpdateFourLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 		
 		<action name="DeleteFourLevel" class="webAction" method="DeleteFourLevel">
+		    <interceptor-ref name="mystack" />
 		</action>
 	</package>
 	
-	<package name="s" namespace="/"  extends="struts-default">
+	<package name="s" namespace="/"  extends="default">
 		<!--  <action name="userInfo" class="com.joyque.action.DispatchAction" method="userInfo"> <result name="success">/WEB-INF/jsp/userInfo.jsp</result></action>-->
-	 <action name="goTo" class="com.joyque.action.DispatchAction" method="execute"></action>
+	 <action name="goTo" class="com.joyque.action.DispatchAction" method="execute">
+	     <interceptor-ref name="mystack" />
+	 </action>
+	 
 	</package>
 	
 </struts>
