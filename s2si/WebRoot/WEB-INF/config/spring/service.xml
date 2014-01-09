@@ -30,6 +30,7 @@
 	    <property name="userSurveyDao" ref="userSurveyDao"></property>
 	    <property name="surveyQuestionDao" ref="surveyQuestionDao"></property>
 	    <property name="userCreditDao" ref="userCreditDao"></property>
+	    <property name="userInfoDao" ref="userInfoDao"></property>
 	</bean>
 	
 	<bean id="presentService" class="com.joyque.service.impl.PresentServiceImpl" scope="prototype">

@@ -25,7 +25,6 @@
 		</action>
 		<action name="phone" class="managerAction">
 			<result name="success">/WEB-INF/phone/HP.html</result>	
-			<interceptor-ref name="mystack" />
 		</action>
 		<action name="second" class="managerAction">
 			<result name="success">/WEB-INF/phone/items.jsp</result>	
