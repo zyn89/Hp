@@ -23,7 +23,7 @@ public class PresentAction extends BaseAction{
 	
 	private List<String> picsContentType;
 	
-	private List<String> picsName;
+	private List<String> picsFileName;
 	
 	private String exTitleIndex;
 	
@@ -71,13 +71,13 @@ public class PresentAction extends BaseAction{
 			Map session = getSession();
 			uid = (String) session.get("uid");
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateName(picsName) || !isValidateCredit(credit)
+					|| !isValidateName(picsFileName) || !isValidateCredit(credit)
 					|| !isValidateIndex(exTitleIndex) || !isValidateIndex(exDescIndex)
 					|| !isValidateIndex(prizeTitleIndex) || !isValidateIndex(prizeDescIndex))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = presentService.AddExchange(uid, pics, picsContentType, picsName,
+			json = presentService.AddExchange(uid, pics, picsContentType, picsFileName,
 					credit, exTitleIndex, exDescIndex, prizeTitleIndex, prizeDescIndex);
 		}catch(Exception e){			
 			throw new BaseException(e.getMessage());
@@ -94,14 +94,14 @@ public class PresentAction extends BaseAction{
 			Map session = getSession();
 			uid = (String) session.get("uid");
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateName(picsName) || !isValidateCredit(credit)
+					|| !isValidateName(picsFileName) || !isValidateCredit(credit)
 					|| !isValidateIndex(exTitleIndex) || !isValidateIndex(exDescIndex)
 					|| !isValidateIndex(prizeTitleIndex) || !isValidateIndex(prizeDescIndex)
 					|| !isValidateEid(eid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = presentService.UpdateExchange(uid, eid, pics, picsContentType, picsName,
+			json = presentService.UpdateExchange(uid, eid, pics, picsContentType, picsFileName,
 					credit, exTitleIndex, exDescIndex, prizeTitleIndex, prizeDescIndex);
 		}catch(Exception e){			
 			throw new BaseException(e.getMessage());
@@ -187,14 +187,14 @@ public class PresentAction extends BaseAction{
 			Map session = getSession();
 			uid = (String) session.get("uid");
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateName(picsName) || !isValidateCredit(credit)
+					|| !isValidateName(picsFileName) || !isValidateCredit(credit)
 					|| !isValidateIndex(prizeTitleIndex) || !isValidateIndex(prizeDescIndex)
 					|| !isValidateIndex(bg1Index) || !isValidateIndex(bg2Index)
 					|| !isValidateIndex(bg3Index) || !isValidateIndex(lotteryIndex))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = presentService.AddLottery(uid, pics, picsContentType, picsName,
+			json = presentService.AddLottery(uid, pics, picsContentType, picsFileName,
 					credit, prizeTitleIndex, prizeDescIndex, bg1Index, bg2Index, bg3Index,
 					lotteryIndex);
 		}catch(Exception e){			
@@ -215,7 +215,7 @@ public class PresentAction extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = presentService.UpdateLottery(uid, pics, picsContentType, picsName,
+			json = presentService.UpdateLottery(uid, pics, picsContentType, picsFileName,
 					credit, prizeTitleIndex, prizeDescIndex, bg1Index, bg2Index, bg3Index,
 					lotteryIndex, lid);
 		}catch(Exception e){			
@@ -443,12 +443,12 @@ public class PresentAction extends BaseAction{
 		this.prizeDescIndex = prizeDescIndex;
 	}
 
-	public List<String> getPicsName() {
-		return picsName;
+	public List<String> getPicsFileName() {
+		return picsFileName;
 	}
 
-	public void setPicsName(List<String> picsName) {
-		this.picsName = picsName;
+	public void setPicsFileName(List<String> picsFileName) {
+		this.picsFileName = picsFileName;
 	}
 
 	public int getStart() {
