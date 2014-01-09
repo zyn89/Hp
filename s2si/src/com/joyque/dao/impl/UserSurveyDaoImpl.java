@@ -70,4 +70,15 @@ public class UserSurveyDaoImpl extends SqlMapClientDaoSupport implements IUserSu
 		return result;
 	}
 
+	@Override
+	public int GetUserSurveysCount(long qid) {
+		int result = 0;
+		try{
+			result = (Integer) this.getSqlMapClientTemplate().queryForObject("GetUserSurveysCount", qid);
+		} catch (DataAccessException e) {
+			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);
+		}
+		return result;
+	}
+
 }

@@ -13,4 +13,6 @@ public interface IUserPrizeDao {
 	public int insertUserPrize(UserPrize info);
 	
 	public int deleteUserPrize(long id);
+	
+	public int GetUserPirzesCount(long pid);
 }

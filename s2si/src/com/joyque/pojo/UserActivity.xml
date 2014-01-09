@@ -11,6 +11,11 @@
     select * from user_activity where aid = #aid# limit #start#, #end#
   </select>
   
+  <select id="GetUserActivitiesCount" 
+  resultClass="Integer">
+    select count(*) from user_activity where aid = #aid# 
+  </select>
+  
   <select id="getUserActivity" parameterClass="java.util.Map"
       resultClass="UserActivity">
     select * from user_activity where uid = #uid# and aid = #aid#

@@ -215,6 +215,8 @@ public class PresentServiceImpl implements IPresentService{
 			jArray.add(j);
 		}
 		json.accumulate("users", jArray);
+		int counts = userPrizeDao.GetUserPirzesCount(pid);
+		json.accumulate("count", counts);
 		return json;
 	}
 	
@@ -475,7 +477,8 @@ public class PresentServiceImpl implements IPresentService{
 				jArray.add(j);
 			}
 		}
-		
+		int count = userPrizeDao.GetUserPirzesCount(pid);
+		json.accumulate("count", count);
 		json.accumulate("lottery_users", jArray);
 		return json;
 	}

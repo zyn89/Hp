@@ -94,6 +94,8 @@ public class QuestionServiceImpl implements IQuestionService{
 			j.accumulate("score", ua.getScore());
 			jArray.add(j);
 		}
+		int count = userActivityDao.GetUserActivitiesCount(aid);
+		json.accumulate("count", count);
 		json.accumulate("scores", jArray);
 		return json;
 	}

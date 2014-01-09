@@ -11,4 +11,6 @@ public interface IUserActivityDao {
 	public UserActivity getUserActivity(String uid, long aid);
 	
 	public int insertUserActivity(UserActivity info);
+	
+	public int GetUserActivitiesCount(long aid);
 }

@@ -66,4 +66,15 @@ public class UserPrizeDaoImpl extends SqlMapClientDaoSupport implements IUserPri
 		return result;
 	}
 
+	@Override
+	public int GetUserPirzesCount(long pid) {
+		int result = 0;
+		try{
+			result = (Integer) this.getSqlMapClientTemplate().queryForObject("GetUserPirzesCount", pid);
+		} catch (DataAccessException e) {
+			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);
+		}
+		return result;
+	}
+
 }

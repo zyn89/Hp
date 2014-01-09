@@ -10,6 +10,11 @@
   resultClass="UplordInfo">
     select * from uplord_info where aid = #value# limit #start#, #end#
   </select>
+  
+  <select id="GetUplordInfosCount" 
+  resultClass="Integer">
+    select count(*) from uplord_info where aid = #value# 
+  </select>
 
   <insert id="insertUplordInfo" parameterClass="UplordInfo">
     insert into uplord_info values (null, #aid#, #uid#, #date#, #picUrl1#, 

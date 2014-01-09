@@ -10,6 +10,10 @@
     select * from user_prize where uid = #value#
   </select>
   
+  <select id="GetUserPirzesCount" resultClass="Integer">
+    select count(*) from user_prize where pid = #value#
+  </select>
+  
   <select id="GetUserPirzesByPid"  parameterClass="java.util.Map"
   resultClass="UserPrize">
     select * from user_prize where pid = #pid#  limit #start#, #end#

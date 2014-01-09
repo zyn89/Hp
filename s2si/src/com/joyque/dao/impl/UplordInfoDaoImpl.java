@@ -42,4 +42,15 @@ public class UplordInfoDaoImpl extends SqlMapClientDaoSupport implements IUplord
 		return result;
 	}
 
+	@Override
+	public int GetUplordInfosCount(long aid) {
+		int result = 0;
+		try{
+			result = (Integer) this.getSqlMapClientTemplate().queryForObject("GetUplordInfosCount", aid);
+		} catch (DataAccessException e) {
+			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);
+		}
+		return result;
+	}
+
 }

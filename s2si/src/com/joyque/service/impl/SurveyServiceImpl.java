@@ -285,6 +285,8 @@ public class SurveyServiceImpl implements ISurveyService{
 			}
 			jArray.add(j);
 		}
+		int count = userSurveyDao.GetUserSurveysCount(qid);
+		json.accumulate("count", count);
 		json.accumulate("userSurvey", jArray);
 		return json;
 	}	

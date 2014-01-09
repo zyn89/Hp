@@ -57,4 +57,15 @@ public class UserActivityDaoImpl extends SqlMapClientDaoSupport implements IUser
 		return result;
 	}
 
+	@Override
+	public int GetUserActivitiesCount(long aid) {
+		int result = 0;
+		try{
+			result = (Integer) this.getSqlMapClientTemplate().queryForObject("GetUserActivitiesCount", aid);
+		} catch (DataAccessException e) {
+			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);
+		}
+		return result;
+	}
+
 }

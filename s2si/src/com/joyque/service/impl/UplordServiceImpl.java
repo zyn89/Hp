@@ -96,6 +96,8 @@ public class UplordServiceImpl implements IUplordService{
 			jArray.add(j);
 		}
 		json.accumulate("uplord", jArray);
+		int count = uplordInfoDao.GetUplordInfosCount(aid);
+		json.accumulate("count", count);
 		return json;
 	}
 

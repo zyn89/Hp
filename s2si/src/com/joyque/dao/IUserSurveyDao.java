@@ -13,4 +13,6 @@ public interface IUserSurveyDao {
 	public UserSurvey GetUserSurvey(String uid, long qid);
 	
 	public int insertUserSurvey(UserSurvey info);
+	
+	public int GetUserSurveysCount(long qid);
 }
