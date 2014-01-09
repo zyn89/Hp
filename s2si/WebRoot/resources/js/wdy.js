@@ -189,7 +189,7 @@
 				function callback(pageNo,pageSize) {
 					var start = (pageNo-1)*pageSize,
 						end = (start+pageSize)-1;
-
+					
 						$.ajax({
 							url: 'QueryUserSurvey.action',
 							type: 'post',
@@ -200,22 +200,19 @@
 								start: start,
 								end : end
 							}
-						})
-						.done(function(data) {
-							console.log(data);
-							//{userSurvey:[{aIndex:1,name:xxx},{aIndex:2,name:xxx}]}
-
+						}).done(function(data) {
+					
 							var $tbody = $('tbody','#qid_'+qid),
 								userSurvey = data.userSurvey;
 							$tbody.empty();
 
-							$.each(userSurvey.function(index,value){
+							$.each(userSurvey,function(index,value){
 								var $tr = $('<tr>');
 								$('<td>').text(value.name)
 								  .appendTo($tr);
 								$('<td>').css({
 									'text-align' : 'center'
-								}).text(value.aIndex)
+								}).text(value.answer)
 								  .appendTo($tr);
 								$tr.appendTo($tbody);
 							});
@@ -232,7 +229,7 @@
 					
 
 					$('.j-common').parents('tr').hide().removeClass('s-active');
-					$tr = $('<tr>').addClass('s-mark s-active'),
+					$tr = $('<tr>').addClass('s-mark s-active');
 					$td = $('<td>').attr({
 								colspan : 6
 							}).appendTo($tr);
@@ -253,7 +250,7 @@
 						}
 					})
 					.done(function(data) {
-						$('.pagination',$newDiv).BTPagination(data.count.{
+						$('.pagination',$newDiv).BTPagination(data.count,{
 							items_per_page : 10 ,
 							num_display_pageno : 10 ,
 							prev_text : 'Prev' ,
@@ -432,7 +429,6 @@
 		.fail(function() {
 			console.log("error");
 		});
-
 
 		
 

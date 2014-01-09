@@ -13,29 +13,30 @@
 </head>
 <body>
 	<div id="content">
-	
 		<script src="resources/js/BTPagination.js" type="text/javascript" charset="UTF-8"></script>
-		<script src="resources/js/wdy.js" type="text/javascript" charset="UTF-8"></script>
-		
+		<script src="resources/js/lottery.js" type="text/javascript" charset="UTF-8"></script>
 		<div class="section_header">
 			<div class="btn-group pull-right">
-				<button id="j-addwdy" class="btn" data-loading-text="正在添加...">添加</button>
+				<button id="j-addlottery" class="btn" data-loading-text="正在添加...">添加</button>
 				<button class="btn refresh btn-primary" data-loading-text="正在刷新...">刷新</button>
 			</div>
-			<p id="j-bread">调研活动</p>
+			<p id="j-bread">抽奖活动</p>
 		</div>
 		
 		
 		
 		
 		<!--微调研记录表格 -->
-		<table id="j-wdytable" class="table table-striped table-bordered" style="margin-top:20px;">
+		<table id="j-lotterytable" class="table table-striped table-bordered" style="margin-top:20px;">
 				<thead>
 					<tr>
-						<th width="20%">调研</th>
-						<th width="20%" style="text-align:center;">说明图片</th>
-						<th width="20%" style="text-align:center;">积分</th>
-						<th width="40%" style="text-align:center;">操作</th>
+						<th >兑奖</th>
+						<th style="text-align:center;">兑奖列表图</th>
+						<th style="text-align:center;">兑奖说明图</th>
+						<th style="text-align:center;">奖品列表图</th>
+						<th style="text-align:center;">奖品说明图</th>
+						<th style="text-align:center;">奖品说明图</th>
+						<th style="text-align:center;">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,11 +47,12 @@
 		<table id="j-wdyqtable" class="table table-striped table-bordered"" style="display:none;margin-top:20px;">
 				<thead>
 					<tr>
-						<th width="14%">调研问题</th>
-						<th width="14%" style="text-align:center;">说明图片</th>
-						<th width="14%" style="text-align:center;">选项1</th>
-						<th width="14%" style="text-align:center;">选项2</th>
-						<th width="14%" style="text-align:center;">选项3</th>
+						<th width="15%">调研问题</th>
+						<th width="15%" style="text-align:center;">说明图片</th>
+						<th width="15%" style="text-align:center;">选项1</th>
+						<th width="15%" style="text-align:center;">选项2</th>
+						<th width="15%" style="text-align:center;">选项3</th>
+						<th width="15%" style="text-align:center;">选项3</th>
 						<th width="30%" style="text-align:center;">操作</th>
 					</tr>
 				</thead>
@@ -85,19 +87,50 @@
 		<div id="j-addmodel" class="modal fade hide">
 			<div class="modal-header">
 				 <a class="close" data-dismiss="modal">×</a>
-				<h3>新增调研</h3>
+				<h3>新增兑奖</h3>
 			</div>
 			<div class="modal-body">
 				 
-				<form id="j-addwdyform" action="" method="post"  class="form-horizontal" style="margin-top:10px">
+				<form id="j-addlotteryform" action="" method="post"  class="form-horizontal" style="margin-top:10px">
 										
 							
 						<div class="control-group">
-							<label class="control-label" for="inputEmail">活动图片</label>
+							<label class="control-label" for="inputEmail">兑奖列表图</label>
 							<div class="controls">
-								<input id="j-uploadfile" type="file" name="pics" style="display:none;"/>
-								<a id="j-abtn" class="btn btn-link activity" style="padding-left:0px">点此上传</a>
-								<span id="j-filename"></span>
+								<input class="j-uploadfile" type="file" name="pics" style="display:none;"/>
+								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
+								<span class="j-filename"></span>
+								<input type="hidden" name="exTitleIndex" />
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label" for="inputEmail">兑奖说明图</label>
+							<div class="controls">
+								<input class="j-uploadfile" type="file" name="pics" style="display:none;"/>
+								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
+								<span class="j-filename"></span>
+								<input type="hidden" name="exDescIndex" />
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label" for="inputEmail">奖品列表图</label>
+							<div class="controls">
+								<input class="j-uploadfile" type="file" name="pics" style="display:none;"/>
+								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
+								<span class="j-filename"></span>
+								<input type="hidden" name="prizeTitleIndex" />
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label" for="inputEmail">奖品说明图</label>
+							<div class="controls">
+								<input class="j-uploadfile" type="file" name="pics" style="display:none;"/>
+								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
+								<span class="j-filename"></span>
+								<input type="hidden" name="prizeDescIndex" />
 							</div>
 						</div>
 						
@@ -111,7 +144,7 @@
 			</div>
 			<div class="modal-footer">
 				<a href="#" class="btn class" data-dismiss="modal">关闭</a> 
-				<a id="j-savewdy" href="javascript:void(0);" class="btn btn-primary save">保存</a>
+				<a id="j-savelottery" href="javascript:void(0);" class="btn btn-primary save">保存</a>
 			</div>
 		</div>
 		
