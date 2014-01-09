@@ -2,6 +2,7 @@ package com.joyque.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -272,11 +273,16 @@ public class SurveyServiceImpl implements ISurveyService{
 			long sid) {
 		JSONObject json = new JSONObject();
 		List<UserSurvey> infos = userSurveyDao.GetUserSurveysByPage(qid, start, end);
+		SurveyQuestion sq = surveyQuestionDao.GetSurveyQuestion(qid);
+		List<String> answers = new ArrayList<String>();
+		answers.add(sq.getA1());
+		answers.add(sq.getA2());
+		answers.add(sq.getA3());
 		JSONArray jArray = new JSONArray();
 		for(UserSurvey info : infos)
 		{
 			JSONObject j = new JSONObject();
-			j.accumulate("aIndex", info.getaIndex());
+			j.accumulate("answer", answers.get(info.getaIndex() - 1));
 			String id = info.getUid();
 			UserInfo user = userInfoDao.getUserInfoByUid(id);
 			if(user != null)
