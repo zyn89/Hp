@@ -8,12 +8,12 @@
   
   <select id="GetUplordInfos" parameterClass="java.util.Map"
   resultClass="UplordInfo">
-    select * from uplord_info where aid = #value# limit #start#, #end#
+    select * from uplord_info where aid = #aid# limit #start#, #end#
   </select>
   
   <select id="GetUplordInfosCount" 
   resultClass="Integer">
-    select count(*) from uplord_info where aid = #value# 
+    select count(*) from uplord_info where aid = #aid#
   </select>
 
   <insert id="insertUplordInfo" parameterClass="UplordInfo">
