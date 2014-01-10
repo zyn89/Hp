@@ -33,8 +33,8 @@ public class ManagerAction extends BaseAction{
 	public String questions() {
 		return "questions";
 	}
-	public String lottery() {
-		return "lottery";
+	public String exchange() {
+		return "exchange";
 	}
 
 }
