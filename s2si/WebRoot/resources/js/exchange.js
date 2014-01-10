@@ -24,7 +24,7 @@
 		function bindEvent() {
 
 			//弹出增加模态框
-			$('#j-addlottery').bind('click.foradd',function(){
+			$('#j-addexchange').bind('click.foradd',function(){
 				$('#j-addmodel').modal('show');
 			});
 			
@@ -48,8 +48,8 @@
 			});
 
 			//保存增加兑奖活动
-			$('#j-savelottery').bind('click.foradd',function(event){
-				uploadFile('j-addlotteryform','AddExchange.action');
+			$('#j-saveexchange').bind('click.foradd',function(event){
+				uploadFile('j-addexchangeform','AddExchange.action');
 				$('#j-addmodel').modal('hide');
 			});
 		}
