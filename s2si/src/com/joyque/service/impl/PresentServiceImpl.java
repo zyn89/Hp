@@ -53,7 +53,8 @@ public class PresentServiceImpl implements IPresentService{
 			j.accumulate("descUrl", info.getDescUrl());
 			j.accumulate("credit", info.getCredit());
 			PrizeInfo prize = prizeInfoDao.GetPrizeInfo(info.getPid());
-			j.accumulate("prizeUrl", prize.getDescUrl());
+			j.accumulate("prizeUrl", prize.getPrizeUrl());
+			j.accumulate("prizeDescUrl", prize.getDescUrl());
 			jArray.add(j);
 		}
 		return jArray;
