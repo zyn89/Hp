@@ -318,8 +318,12 @@ public class PresentServiceImpl implements IPresentService{
 		
 		json.accumulate("lotterys", jArray);
 		UserCredit credit = userCreditDao.getUserCredit(uid);
-		json.accumulate("credit", credit.getCredit());
-		json.accumulate("lotteryCount", credit.getLotteryCount());
+		if(credit != null)
+		{
+			json.accumulate("credit", credit.getCredit());
+			json.accumulate("lotteryCount", credit.getLotteryCount());
+		}
+		
 		return json;
 	}
 	
