@@ -84,7 +84,7 @@
 				//$(".mynav").data("data", $(".modal.add"));
 			});
 			$("a.back").bind("click",function(){
-				$("#activities").parent().trigger("click");
+				$("#activities").trigger("click");
 			});
 			//新增和修改两种不同的显示模式
 			$(".modal.oper").bind("show", function() {
