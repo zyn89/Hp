@@ -1,5 +1,5 @@
 ;$(function(){
-		$li=$("#activities").parent();
+		$li=$("#activities");
 		$li.bind("click", function() {
 							var date=new Date();
 							//$("#tmp_1").data("data", data);
