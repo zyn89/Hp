@@ -30,7 +30,9 @@ public class ManagerAction extends BaseAction{
 	public String wdy() {
 		return "wdy";
 	}
-	
+	public String questions() {
+		return "questions";
+	}
 	public String lottery() {
 		return "lottery";
 	}

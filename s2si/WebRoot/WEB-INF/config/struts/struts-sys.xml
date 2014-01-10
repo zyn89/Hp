@@ -36,7 +36,8 @@
 		</action>
 		<action name="all_*" class="managerAction" method="{1}">
 			<result name="success">/WEB-INF/console/activities.html</result>	
-			<result name="wdy">/WEB-INF/console/wdy.html</result>	
+			<result name="wdy">/WEB-INF/console/wdy.html</result>
+			<result name="questions">/WEB-INF/console/questions.html</result>	
 			<result name="lottery">/WEB-INF/console/lottery.html</result>
 			<interceptor-ref name="mystack" />
 		</action>

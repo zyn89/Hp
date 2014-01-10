@@ -1,0 +1,114 @@
+<script src="resources/js/questions_manage.js" type="text/javascript" charset="UTF-8"></script>
+		<div class="section_header">
+  			<div class="btn-group pull-right">
+  				<button class="btn add" data-loading-text="正在添加">添加</button>
+    		 	<button class="btn fresh btn-primary"  data-loading-text="正在刷新">刷新</button>
+ 			</div> 
+  			<p><a href="#" style="margin-right:20px" class="back">上一层<a/>问答活动管理</p>
+  		</div>
+  		
+  	       	<div class="pagination">
+  				<ul>
+    				<li class="next la"><a href="#">&laquo;</a></li>
+    				<li class="first"><a href="#">1</a></li>
+    				<li class="next ra"><a href="#">&raquo;</a></li>
+  				</ul>
+			</div>  
+    	<table class="table table-striped">
+              <thead>
+                <tr class="header">
+                  <th width="8%" style="text-align: center;">序号</th>
+                  <th width="8%" style="text-align: center;">正确答案</th>
+                  <th width="10%">选项一</th>
+                  <th width="10%">选项二</th>
+                  <th width="10%">选项三</th>
+                  <th>得分</th>
+                  <th>图片链接</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hide temple">
+                  <td class="id" style="vertical-align:middle;text-align: center;">1</td>
+                  <td class="aIndex" style="vertical-align:middle; text-align: center;">2</td>
+                  <td class="option_one" style="vertical-align:middle;">Burning</td>
+                  <td class="option_two" style="vertical-align:middle;">Mushi</td>
+                  <td class="option_three" style="vertical-align:middle;">MMY</td>
+                  <td class="score" style="vertical-align:middle;">10</td>
+                  <td class="url" style="vertical-align:middle;"><a class="btn btn-link questionUrl">查看</a></td>
+                  <td class="oper">
+                  	<button class="btn btn-primary delete">删除</button>
+                  	<button class="btn btn-primary change">修改</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+			<div class="modal hide fade show">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3>链接内容</h3>
+				</div>
+				<div class="modal-body">
+					<p>One fine body…</p>
+				</div>
+			</div>
+			<form id="pictures">
+				<input class="uploaddesc" type="file" name="pics" style="display:none"/> 
+			</form>
+<div class="modal hide fade oper">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">&times;</button>
+		<h3>新增问题</h3>
+	</div>
+	<div class="modal-body">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">正确答案序号</label>
+				<div class="controls aIndex">
+					<input type="text" id="inputEmail" placeholder="answer">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">问题描述</label>
+				<div class="controls">
+					<a class="btn btn-link desc" style="padding-left:0px">点此上传</a>
+					<a class="btn btn-link hide temple"
+						style="padding-left:0px;
+					      color:rgb(51,51,51);
+					      cursor:deault;
+					      text-decoration:none;
+					      "></a>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">得分</label>
+				<div class="controls score">
+					<input type="text" id="" placeholder="score">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputPassword">选项一</label>
+				<div class="controls option_one">
+					<input type="text" id="" placeholder="option">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputPassword">选项二</label>
+				<div class="controls option_two">
+					<input type="text" id="" placeholder="option">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputPassword">选项三</label>
+				<div class="controls option_three">
+					<input type="text" id="" placeholder="option">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn shutdown">关闭</button> 
+		<a href="#" class="btn btn-primary save">Save changes</a>
+	</div>
+</div>

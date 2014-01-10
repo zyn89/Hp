@@ -140,7 +140,6 @@
           <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a>
           <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a>
         </div>
-      </div>
 
 	<div style="width:100%;position:relative;margin:1px auto">
     	<div style="float:left; width:49%; ">
@@ -148,18 +147,19 @@
     			<img src="resources/image/leftbig.png" style="width:100%; display:none" />
     		</a>
     	</div>
-    	<div style="float:right; width:49%; position:absolute; height:100%; left:51%">
+    	<div style="float:right; width:49%; position:absolute; height:100%; right:0">
     		<a href="#" class="righttop_one">
     			<img src="resources/image/righttop.png" style="width:100%; display:none; position:absolute; height:49%;" />
     		</a>
     		<a href="#" class="rightbottom_one">
-    			<img src="resources/image/rightbottom.png" style="width:100%; display:none; position:absolute; height:49%; top:51%;" />
+    			<img src="resources/image/rightbottom.png" style="width:100%; display:none; position:absolute; height:49%; bottom:0;" />
     		</a>
     	</div>
     	<div style="clear:both;"></div>
     </div>
    
     <div style="clear:both"></div>
+    </div>
   <!-- End SlidesJS Required: Start Slides -->
 
   <!-- SlidesJS Required: Link to jQuery -->
@@ -182,7 +182,7 @@
 			data: {},
 			success:function(d){
 				var data=JSON.parse(d);
-				//console.log(data);
+				console.log(data);
 				var flag=$("a.slidesjs-previous");
 				var arr=data.carousels || [];
 				//console.log(arr);

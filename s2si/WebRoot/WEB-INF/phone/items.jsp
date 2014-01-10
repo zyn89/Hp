@@ -35,18 +35,19 @@ String id=request.getParameter("id");
 				console.log(data);
 				data=data.two_level || [];
 				for(var i=0;i<data.length;i++){
-					var $tr=$("table").find("tr.temple").clone();
+					var $tr=$("table").find("tr.temple2").clone();
 					console.log($tr[0]);
 					$tr.removeClass("hide");
-					$tr.removeClass("temple");
+					$tr.removeClass("temple2");
 					$tr.find("a").attr("href","third.action?hid="+data[i].id);
-					$tr.find("td").bind("click",function(){
+					$tr.bind("click",function(){
 							var $urls = $(this).find("a").attr("href");
 							console.log($urls);
 							if($urls){
 								location.href=$urls;
 							}
 					});	
+					$tr.find("td.one").find("div").css("background-image","url("+data[i].imageUrl+")");
 					$tr.appendTo($("table"));
 					var str=data[i].content;
 					if(str.length>10){
@@ -54,7 +55,7 @@ String id=request.getParameter("id");
 						console.log(str);
 						str=str+"...";
 					}
-					$tr.find("td").find("span").text(str);	
+					$tr.find("td.two").find("span").text(str);	
 				}	
 				},
 		 	});
@@ -65,7 +66,7 @@ String id=request.getParameter("id");
   
   <body style="padding:0px">
   <div>
-    <table class="table table-hover table-striped" style="margin-top:5px">
+    <table class="table table-hover" style="margin-top:5px">
 		<tbody>
 			<!--tr>
 			  <td>
@@ -107,6 +108,18 @@ String id=request.getParameter("id");
 							变速箱：7速双离合</span>
 				   </a>
 	           	 </td>
+			</tr>
+			<tr class="hide temple2">
+				<td style="vertical-align:middle;width:5%" class="one">
+				<div style="float:left;background-image:url('');height:48px;width:48px"></div>
+				</td>
+			  	<td style="vertical-align:middle;padding-left:2px" class="two">
+			  	<a href="mobile.html" style="text-decoration:none;">			 	
+				<span style="color: rgb(102, 102, 102)">指导价：25.2万-35.8万    
+						发动机1.6T / 2.0T            
+						变速箱：7速双离合</span>
+               </a>
+            </td>
 			</tr>
 		</tbody>
 	</table>

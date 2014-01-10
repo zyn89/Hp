@@ -55,8 +55,13 @@ String id=request.getParameter("hid");
 					$tr.find("span").text(str);
 					if(data[i].isFinal==1){
 						$tr.find("a").attr("href",data[i].url);
-						$tr.find("td").bind("click",function(){
-							$tr.find("a").trigger("click");
+						$tr.bind("click",function(){
+							//$tr.find("a").trigger("click");
+							var $urls = $(this).find("a").attr("href");
+							console.log($urls);
+							if($urls){
+								location.href=$urls;
+							}
 						});
 					}else{
 						$tr.find("td").bind("click",function(){
@@ -114,7 +119,7 @@ String id=request.getParameter("hid");
   </script>
   <body style="padding:0px">
   <div>
-    <table class="table table-hover table-striped third" style="margin-top:5px">
+    <table class="table table-hover third" style="margin-top:5px">
 		<tbody>
 			<tr class="hide temple" style="">
 			  
@@ -138,7 +143,7 @@ String id=request.getParameter("hid");
 	    <h4 id="myModalLabel">详细信息</h4>
 	  </div>
 	  <div class="modal-body">
-	    <table class="table table-hover table-striped other_table" style="margin-top:5px">
+	    <table class="table table-hover other_table" style="margin-top:5px">
 		<tbody>
 			<tr class="hide other_temple" style="">			  
 				  <td style="vertical-align:middle;
