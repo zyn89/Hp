@@ -63,7 +63,7 @@
 					'next': $next
 				});
 
-				for (_i = real_display_num; _i > 0; _i--) {
+				for (_i = real_display_num; _i > 0; _i-=1) {
 					$pageElem = $('<li>').append('<a href="javascript:void(0)">' + _i + '</a>')
 						.insertAfter($prev)
 						.bind('click', function(event) {
@@ -82,7 +82,7 @@
 				var _i,
 					len = arguments.length,
 					eventHandler = arguments[len - 1];
-				for (_i = len - 2; _i >= 0; _i--) {
+				for (_i = len - 2; _i >= 0; _i-=1) {
 					arguments[_i].bind('click', function(event) {
 						eventHandler(event, $(this));
 					});

@@ -26,7 +26,7 @@
 		
 		
 		
-		<!--微调研记录表格 -->
+		<!--兑奖活动记录表格 -->
 		<table id="j-exchangetable" class="table table-striped table-bordered" style="margin-top:20px;">
 				<thead>
 					<tr>
@@ -43,22 +43,7 @@
 				</tbody>
 		</table>
 		
-		<!--微调研问题记录表格 -->
-		<table id="j-wdyqtable" class="table table-striped table-bordered"" style="display:none;margin-top:20px;">
-				<thead>
-					<tr>
-						<th width="15%">调研问题</th>
-						<th width="15%" style="text-align:center;">说明图片</th>
-						<th width="15%" style="text-align:center;">选项1</th>
-						<th width="15%" style="text-align:center;">选项2</th>
-						<th width="15%" style="text-align:center;">选项3</th>
-						<th width="15%" style="text-align:center;">选项3</th>
-						<th width="30%" style="text-align:center;">操作</th>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-		</table>
+		
 		
 		<!-- 用来clone -->
 		<div id="j-clone" class="j-common" style="display:none;">
@@ -74,8 +59,8 @@
 			<table id="j-wdyquser" class="table table-striped table-bordered" >
 					<thead>
 						<tr>
-							<th width="50%">用户名</th>
-							<th width="50%" style="text-align:center;">用户的选择</th>
+							<th style="text-align:center;">参与兑奖的用户名</th>
+				
 						</tr>
 					</thead>
 					<tbody>
@@ -162,58 +147,79 @@
 				</div>
 		</div>
 		
-		<div id="j-add-qustion-modal" class="modal fade hide">
+		<div id="j-update-exchange-modal" class="modal fade hide">
 			<div class="modal-header">
 				 <a class="close" data-dismiss="modal">×</a>
-				<h3>新增调研问题</h3>
+				<h3>修改兑奖活动</h3>
 			</div>
 			<div class="modal-body">
 				 
-				<form id="j-addwdyqform" action="" method="post"  class="form-horizontal" style="margin-top:10px">		
+				<form id="j-update-form" action="" method="post"  class="form-horizontal" style="margin-top:10px">		
 					
-						<div class="control-group" style="display:none;" id="j-oldimg">
-							<label class="control-label" for="inputEmail">调研问题原图</label>
+						<div class="control-group"  id="j-oldimg">
+							<label class="control-label" for="inputEmail">活动原图</label>
 							<div class="controls">
 								<img src="" />
-								<input type="hidden" id="qid" name="qid"/>
+								<img src="" />
+								<img src="" />
+								<img src="" />
+								<input type="hidden" id="eid" name="eid"/>
 							</div>
 						</div>
 									
 						<div class="control-group">
-							<label class="control-label" for="inputEmail">调研问题图片</label>
+							<label class="control-label" for="inputEmail">兑奖列表图</label>
 							<div class="controls">
-								<input id="j-q-uploadfile" type="file" name="pics" style="display:none;"/>
-								<a id="j-q-abtn" class="btn btn-link activity" style="padding-left:0px">点此上传</a>
-								<span id="j-q-filename"></span>
+								<input class="j-uploadfile" type="file" name="pics" style="display:none;"/>
+								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
+								<span class="j-filename"></span>
+								<input type="hidden" name="exTitleIndex" />
 							</div>
 						</div>
 						
 						<div class="control-group">
-							<label class="control-label" for="inputPassword">选项1</label>
-							<div class="controls credit">
-								<input name="a1" type="text" id="j-q-a1" placeholder="选项1">
+							<label class="control-label" for="inputEmail">兑奖说明图</label>
+							<div class="controls">
+								<input class="j-uploadfile" type="file" name="pics" style="display:none;"/>
+								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
+								<span class="j-filename"></span>
+								<input type="hidden" name="exDescIndex" />
 							</div>
 						</div>
 						
 						<div class="control-group">
-							<label class="control-label" for="inputPassword">选项2</label>
-							<div class="controls credit">
-								<input name="a2" type="text" id="j-q-a2" placeholder="选项2">
+							<label class="control-label" for="inputEmail">奖品列表图</label>
+							<div class="controls">
+								<input class="j-uploadfile" type="file" name="pics" style="display:none;"/>
+								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
+								<span class="j-filename"></span>
+								<input type="hidden" name="prizeTitleIndex" />
 							</div>
 						</div>
 						
 						<div class="control-group">
-							<label class="control-label" for="inputPassword">选项3</label>
-							<div class="controls credit">
-								<input name="a3" type="text" id="j-q-a3" placeholder="选项3">
+							<label class="control-label" for="inputEmail">奖品说明图</label>
+							<div class="controls">
+								<input class="j-uploadfile" type="file" name="pics" style="display:none;"/>
+								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
+								<span class="j-filename"></span>
+								<input type="hidden" name="prizeDescIndex" />
 							</div>
-						</div>	
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="inputPassword">积分</label>
+							<div class="controls credit">
+								<input name="credit" type="text" id="j-u-credit" placeholder="积分">
+							</div>
+						</div>
+					
 				</form>
 				
 			</div>
 			<div class="modal-footer">
 				<a href="#" class="btn class" data-dismiss="modal">关闭</a> 
-				<a id="j-q-savewdy" href="javascript:void(0);" class="btn btn-primary save">保存</a>
+				<a id="j-ex-update" href="javascript:void(0);" class="btn btn-primary save">保存</a>
 			</div>
 		</div>
 	
