@@ -11,25 +11,25 @@ import java.util.Random;
 public class FileUtil {
 
 	//活动图片文件夹
-	public static final String HeaderActivity = "resources/image/ActivityPic/";
+	public static final String HeaderActivity = "D:\\ActivityPic\\";
 	//问题图片文件夹
-	public static final String HeaderQuestion = "resources/image/QuestionPic/";
+	public static final String HeaderQuestion = "D:\\QuestionPic\\";
 	//上传图片文件夹
-	public static final String HeaderUplord = "resources/image/UplordPic/";
+	public static final String HeaderUplord = "D:\\UplordPic\\";
 	//调研图片文件夹
-	public static final String HeaderSurvey = "resources/image/SurveyPic/";
+	public static final String HeaderSurvey = "D:\\SurveyPic\\";
 	//礼品图片文件夹
-	public static final String HeaderExchange = "resources/image/ExchangePic/";
+	public static final String HeaderExchange = "D:\\ExchangePic\\";
 	//轮播图片文件夹
-	public static final String HeaderCarousel = "resources/image/CarouselPic/";
+	public static final String HeaderCarousel = "D:\\CarouselPic\\";
 	//一级图片文件夹
-	public static final String HeaderOneLevel = "resources/image/OneLevelPic/";
+	public static final String HeaderOneLevel = "D:\\OneLevelPic\\";
 	//二级图片文件夹
-	public static final String HeaderTwoLevel = "resources/image/TwoLevelPic/";
+	public static final String HeaderTwoLevel = "D:\\TwoLevelPic\\";
 	//三级图片文件夹
-	public static final String HeaderThreeLevel = "resources/image/ThreeLevelPic/";
+	public static final String HeaderThreeLevel = "D:\\ThreeLevelPic\\";
 	//四级图片文件夹
-	public static final String HeaderFourLevel = "resources/image/FourLevelPic/";
+	public static final String HeaderFourLevel = "D:\\FourLevelPic\\";
 	
 	private static String SaveFile(String uid, File file, String Type, String header, String pic) throws IOException
 	{

@@ -37,4 +37,11 @@ public class ManagerAction extends BaseAction{
 		return "exchange";
 	}
 
+	public String imgManage() {
+		return "imgManage";
+	}
+	
+	public String lottery() {
+		return "lottery";
+	}
 }

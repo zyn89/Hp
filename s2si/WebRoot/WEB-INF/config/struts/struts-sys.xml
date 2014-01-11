@@ -39,6 +39,8 @@
 			<result name="wdy">/WEB-INF/console/wdy.html</result>
 			<result name="questions">/WEB-INF/console/questions.html</result>	
 			<result name="exchange">/WEB-INF/console/exchange.html</result>
+			<result name="imgManage">/WEB-INF/console/imgManage.html</result>
+			<result name="lottery">/WEB-INF/console/lottery.html</result>
 			<interceptor-ref name="mystack" />
 		</action>
 		<action name="set" class="managerAction" method="send">	

@@ -22,8 +22,12 @@ jQuery(function($){
 		$('#j-content').load('all_wdy.action');
 	});
 
-	$('#j-lottery').bind('click.forload',function(event){
+	$('#exchange').bind('click.forload',function(event){
 		$('#j-content').load('all_exchange.action');
+	});
+	
+	$('#lottery').bind('click.forload',function(event){
+		$('#j-content').load('all_lottery.action');
 	});
 
 	
@@ -116,35 +120,11 @@ button,a {
 									<h4>首页图片管理</h4>
 									<div class="list-item none">
 										<p>
-											<a href="" target="_self">XXX管理</a>
+											<a href="javascript:void(0)" title="all_imgManage.action">XXX管理</a>
 										</p>
 									</div>
-								</li>
-								<li>
-									<h4>二级页面维护管理</h4>
-									<div class="list-item none">
-										<p>
-											<a href="" target="_self">XXX管理</a>
-										</p>
-
-									</div>
-								</li>
-								<li>
-									<h4>三级页面维护管理</h4>
-									<div class="list-item none">
-										<p>
-											<a href="" target="_self">XXX管理</a>
-										</p>
-
-									</div>
-								</li>
-								<li>
-									<h4>四级页面维护管理</h4>
-									<div class="list-item none">
-										<p>
-											<a href="" target="_self">XXX管理</a>
-										</p>
-									</div>
+								</li>				
+							
 								<li>
 									<h4 id="j-wdy" class="">微调研管理</h4>
 								</li>
@@ -152,7 +132,10 @@ button,a {
 									<h4 id="activities" class="">全部活动后台管理</h4>
 								</li>
 								<li>
-									<h4 id="j-lottery" class="">兑奖管理</h4>
+									<h4 id="exchange" class="">兑奖管理</h4>
+								</li>
+								<li>
+									<h4 id="lottery" class="">抽奖管理</h4>
 								</li>
 							</ul>
 							<script type="text/javascript" language="javascript">

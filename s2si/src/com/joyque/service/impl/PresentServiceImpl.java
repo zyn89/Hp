@@ -474,7 +474,7 @@ public class PresentServiceImpl implements IPresentService{
 		for(UserPrize info : infos)
 		{
 			String uid = info.getUid();
-			UserInfo user = userInfoDao.getUserInfo(uid);
+			UserInfo user = userInfoDao.getUserInfoByUid(uid);
 			if(user != null)
 			{
 				JSONObject j = new JSONObject();
@@ -484,7 +484,7 @@ public class PresentServiceImpl implements IPresentService{
 		}
 		int count = userPrizeDao.GetUserPirzesCount(pid);
 		json.accumulate("count", count);
-		json.accumulate("lottery_users", jArray);
+		json.accumulate("users", jArray);
 		return json;
 	}
 	
