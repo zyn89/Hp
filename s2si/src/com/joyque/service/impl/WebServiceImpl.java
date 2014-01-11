@@ -43,6 +43,7 @@ public class WebServiceImpl implements IWebService{
 		for(CarouselInfo info : carouselInfos)
 		{
 			JSONObject j = new JSONObject();
+			j.accumulate("cid", info.getCid());
 			j.accumulate("image1Url", info.getImage1Url());
 			j.accumulate("image2Url", info.getImage2Url());
 			j.accumulate("image3Url", info.getImage3Url());
