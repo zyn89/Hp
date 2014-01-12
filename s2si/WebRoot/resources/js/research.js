@@ -1,6 +1,6 @@
 jQuery(function($){
 		var sid = $('#sid').val(),
-			questions,curIndex = 1,answered = 0,score=0;
+			questions,curIndex = 1,answered = 0,score=0,count=0;
 
 		function makeQuestion(questionData) {
 				var num2alph = {1 : 'A', 2 : 'B','3' : 'C' ,4 : 'D'},
@@ -13,18 +13,19 @@ jQuery(function($){
 					questionPicArea = $('.m-question').find('>img');
 
 					if(done) {
+						count++;
 						answered = 1;
 						curIndex++;
-						$('.m-submit a').text("下一题");
+						$('.m-submit a').text("已答! 下一题");
 						$('.m-result').text(rate?rate[0] + " " + rate[1] + " " + rate[2] : "" ).show();
 					} else {
 						answered = 0;
 						$('.m-submit a').text("提交");
 					}
 						
-					/*questionPicArea.attr({
+					questionPicArea.attr({
 						src : questionUrl
-					});*/
+					});
 					questionAnswerArea.empty();
 
 					$.each(choiceItems,function(index,value){
@@ -65,6 +66,7 @@ jQuery(function($){
 			data: {sid: sid},
 		})
 		.done(function(data) {
+			count = 0;
 			questions = data.questions;
 			makeQuestion(questions[curIndex-1]);
 		})
@@ -80,7 +82,11 @@ jQuery(function($){
 			if(answered) {
 				//下一题
 				if(curIndex>questions.length) {
-					alert("答题结速");
+					if(count == questions.length) {
+						alert('已经参与过此次调研');
+					} else {
+						alert("感谢你的参与调研！恭喜获得10个积分！");
+					}
 				} else {
 					$resultDiv.hide();
 					makeQuestion(questions[curIndex-1]);
@@ -103,7 +109,9 @@ jQuery(function($){
 				})
 				.done(function(data) {
 					console.log(data);
-					$resultDiv.text("p1:" + (data.rate)[0] + " p2:" + (data.rate)[1] + " p3:" + (data.rate)[2] + data.credit?data.credit : "");
+					console.log((data.rate)[0]);
+					
+					$resultDiv.text("p1:" + (data.rate)[0] + " p2:" + (data.rate)[1] + " p3:" + (data.rate)[2]);
 					$resultDiv.show();
 				})
 				.fail(function(err) {

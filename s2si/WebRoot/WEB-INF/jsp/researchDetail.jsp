@@ -21,11 +21,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	</script>
 	<style>
+		.m-question {
+			
+		}
 		.m-question ,.m-result{
 		 	margin:0 auto;
 		 	width: 100%;
-		 	height: 50px;
-		 	border: 1px solid red;
+		 	text-align:center;
 		}
 		.m-result {
 			margin-top: 10px;
@@ -34,9 +36,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <%
 	  String sid=request.getParameter("sid");
+	  String credit=request.getParameter("credit");
  %>
 <body>
 	<input id="sid" type="hidden" value="<%= sid %>"/>
+	<input id="credit" type="hidden"  value="<%= credit %>"/>
+	
 	<div id="page1" data-role="page">
 		
 			<div data-role="content">
@@ -49,14 +54,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="m-answer">
 					<fieldset data-role="controlgroup" data-iconpos="right">
 					   		
-					        <!-- <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked">
-					        <label for="radio-choice-1">A. Cat</label>
-					        <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2">
-					        <label for="radio-choice-2">B. Dog</label>
-					        <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3">
-					        <label for="radio-choice-3">C. Hamster</label>
-					        <input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4">
-					        <label for="radio-choice-4">D. Lizard</label> -->
 					</fieldset>
 				</div>
 				<div class="m-submit">
