@@ -18,7 +18,7 @@
     insert into carousel_info values (null, #image1Url#, #image2Url#, #image3Url#)
   </insert>
   
-  <update id="updateCarouselInfo" parameterClass="ActivityInfo">
+  <update id="updateCarouselInfo" parameterClass="CarouselInfo">
 	update carousel_info
 	<dynamic prepend="SET ">
 		<isNotEmpty property="image1Url" prepend=","><![CDATA[ image1Url=#image1Url# ]]></isNotEmpty>

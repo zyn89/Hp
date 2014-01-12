@@ -8,28 +8,31 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.Random;
 
-public class FileUtil {
+import org.apache.struts2.ServletActionContext;
 
+public class FileUtil {
+	//基础路径
+    public static final String BaseUrl = ServletActionContext.getServletContext().getRealPath("/");
 	//活动图片文件夹
-	public static final String HeaderActivity = "D:\\ActivityPic\\";
+	public static final String HeaderActivity = "resources/image/ActivityPic/";
 	//问题图片文件夹
-	public static final String HeaderQuestion = "D:\\QuestionPic\\";
+	public static final String HeaderQuestion = "resources/image/QuestionPic/";
 	//上传图片文件夹
-	public static final String HeaderUplord = "D:\\UplordPic\\";
+	public static final String HeaderUplord = "resources/image/UplordPic/";
 	//调研图片文件夹
-	public static final String HeaderSurvey = "D:\\SurveyPic\\";
+	public static final String HeaderSurvey = "resources/image/SurveyPic/";
 	//礼品图片文件夹
-	public static final String HeaderExchange = "D:\\ExchangePic\\";
+	public static final String HeaderExchange = "resources/image/ExchangePic/";
 	//轮播图片文件夹
-	public static final String HeaderCarousel = "D:\\CarouselPic\\";
+	public static final String HeaderCarousel = "resources/image/CarouselPic/";
 	//一级图片文件夹
-	public static final String HeaderOneLevel = "D:\\OneLevelPic\\";
+	public static final String HeaderOneLevel = "resources/image/OneLevelPic/";
 	//二级图片文件夹
-	public static final String HeaderTwoLevel = "D:\\TwoLevelPic\\";
+	public static final String HeaderTwoLevel = "resources/image/TwoLevelPic/";
 	//三级图片文件夹
-	public static final String HeaderThreeLevel = "D:\\ThreeLevelPic\\";
+	public static final String HeaderThreeLevel = "resources/image/ThreeLevelPic/";
 	//四级图片文件夹
-	public static final String HeaderFourLevel = "D:\\FourLevelPic\\";
+	public static final String HeaderFourLevel = "resources/image/FourLevelPic/";
 	
 	private static String SaveFile(String uid, File file, String Type, String header, String pic) throws IOException
 	{
@@ -41,7 +44,7 @@ public class FileUtil {
 		String Url = header + pic + 
 		uid + "_" + current + "_" + r + "." + Type.substring(6);
 		rtInStream = new FileInputStream(file);
-		File outFile = new File(Url);
+		File outFile = new File(BaseUrl + Url);
 		FileOutputStream fos = new FileOutputStream(outFile);
 		byte buffer[] = new byte[1024];
 		int temp = 0;
