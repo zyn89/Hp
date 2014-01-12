@@ -122,41 +122,41 @@ public class PresentServiceImpl implements IPresentService{
 		int prizeDesc = 0;
 		for(int i = 0; i < picsName.size(); i ++)
 		{
-			if(exTitleIndex != null && exTitleIndex.equals(picsName.get(i)))
+			if(exTitleIndex != null && !exTitleIndex.trim().equals("") && exTitleIndex.equals(picsName.get(i)))
 			{
 				exTitle = i;
 			}
-			else if(exDescIndex != null && exDescIndex.equals(picsName.get(i)))
+			else if(exDescIndex != null && !exDescIndex.trim().equals("") && exDescIndex.equals(picsName.get(i)))
 			{
 				exDesc = i;
 			}
-			else if(prizeTitleIndex != null && prizeTitleIndex.equals(picsName.get(i)))
+			else if(prizeTitleIndex != null && !prizeTitleIndex.trim().equals("") && prizeTitleIndex.equals(picsName.get(i)))
 			{
 				prizeTitle = i;
 			}
-			else if(prizeDescIndex != null && prizeDescIndex.equals(picsName.get(i)))
+			else if(prizeDescIndex != null && !prizeDescIndex.trim().equals("") && prizeDescIndex.equals(picsName.get(i)))
 			{
 				prizeDesc = i;
 			}
 		}
 		exchange.setCredit(credit);
 		String url = null;
-		if(exTitleIndex != null)
+		if(exTitleIndex != null && !exTitleIndex.trim().equals(""))
 		{
 			url = FileUtil.SavePrizeAsMedia(uid, pics.get(prizeTitle), picsContentType.get(prizeTitle));
 			exchange.setExchangeUrl(url);
 		}
-		if(exDescIndex != null)
+		if(exDescIndex != null && !exDescIndex.trim().equals(""))
 		{
 			url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeDesc), picsContentType.get(prizeDesc));
 			exchange.setDescUrl(url);
 		}
-		if(prizeTitleIndex != null)
+		if(prizeTitleIndex != null && !prizeTitleIndex.trim().equals(""))
 		{
 			url = FileUtil.SaveExchangeAsMedia(uid, pics.get(exTitle), picsContentType.get(exTitle));
 			prize.setPrizeUrl(url);
 		}
-		if(prizeDescIndex != null)
+		if(prizeDescIndex != null && !prizeDescIndex.trim().equals(""))
 		{
 			url = FileUtil.SaveExchangeDescAsMedia(uid, pics.get(exDesc), picsContentType.get(exDesc));
 			prize.setDescUrl(url);
@@ -343,27 +343,27 @@ public class PresentServiceImpl implements IPresentService{
 		int bg3Index = 0;
 		for(int i = 0; i < picsName.size(); i ++)
 		{
-			if(prizeTitleName != null && prizeTitleName.equals(picsName.get(i)))
+			if(prizeTitleName != null && !prizeTitleName.trim().equals("") && prizeTitleName.equals(picsName.get(i)))
 			{
 				prizeTitleIndex = i;
 			}
-			else if(prizeDescName != null && prizeDescName.equals(picsName.get(i)))
+			else if(prizeDescName != null && !prizeDescName.trim().equals("") && prizeDescName.equals(picsName.get(i)))
 			{
 				prizeDescIndex = i;
 			}
-			else if(lotteryName != null && lotteryName.equals(picsName.get(i)))
+			else if(lotteryName != null && !lotteryName.trim().equals("") && lotteryName.equals(picsName.get(i)))
 			{
 				lotteryIndex = i;
 			}
-			else if(bg1Name !=null && bg1Name.equals(picsName.get(i)))
+			else if(bg1Name !=null && !bg1Name.trim().equals("") && bg1Name.equals(picsName.get(i)))
 			{
 				bg1Index = i;
 			}
-			else if(bg2Name != null && bg2Name.equals(picsName.get(i)))
+			else if(bg2Name != null && !bg2Name.trim().equals("") && bg2Name.equals(picsName.get(i)))
 			{
 				bg2Index = i;
 			}
-			else if(bg3Name != null && bg3Name.equals(picsName.get(i)))
+			else if(bg3Name != null && !bg3Name.trim().equals("") && bg3Name.equals(picsName.get(i)))
 			{
 				bg3Index = i;
 			}
@@ -371,32 +371,32 @@ public class PresentServiceImpl implements IPresentService{
 		
 		lottery.setCredit(credit);
 		String url = null;
-		if(prizeTitleName != null)
+		if(prizeTitleName != null && !prizeTitleName.trim().equals(""))
 		{
 			url = FileUtil.SavePrizeAsMedia(uid, pics.get(prizeTitleIndex), picsContentType.get(prizeTitleIndex));
 			prize.setPrizeUrl(url);
 		}
-		if(prizeDescName != null)
+		if(prizeDescName != null && !prizeDescName.trim().equals(""))
 		{
 			url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeDescIndex), picsContentType.get(prizeDescIndex));
 			prize.setDescUrl(url);
 		}
-		if(lotteryName != null)
+		if(lotteryName != null && !lotteryName.trim().equals(""))
 		{
 			url = FileUtil.SaveLotteryAsMedia(uid, pics.get(lotteryIndex), picsContentType.get(lotteryIndex));
 			lottery.setImageUrl(url);
 		}
-		if(bg1Name != null)
+		if(bg1Name != null && !bg1Name.trim().equals(""))
 		{
 			url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg1Index), picsContentType.get(bg1Index));
 			lottery.setBg1Url(url);
 		}
-		if(bg2Name != null)
+		if(bg2Name != null && !bg2Name.trim().equals(""))
 		{
 			url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg2Index), picsContentType.get(bg2Index));
 			lottery.setBg2Url(url);
 		}
-		if(bg3Name != null)
+		if(bg3Name != null && !bg3Name.trim().equals(""))
 		{
 			url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg3Index), picsContentType.get(bg3Index));
 			lottery.setBg3Url(url);
