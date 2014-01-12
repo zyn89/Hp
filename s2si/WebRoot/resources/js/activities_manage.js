@@ -200,10 +200,38 @@
 				//修改操作中的保存操作
 				$(".modal.oper").find(".btn.save").bind("click", function() {
 								var type = $(".oper .controls.type").find("input").val();
+								var flag=true
 								var credit = $(".oper .controls.credit").find("input").val();
+								if(!credit || credit.trim()==""){
+									$(".modal.oper").find("p.credit").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.oper").find("p.credit").css("display","none");
+								}
 								var score = $(".oper .controls.score").find("input").val();
+								if(!score || score.trim()==""){
+									$(".modal.oper").find("p.score").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.oper").find("p.score").css("display","none");
+								}
 								var fileobj1 = $("input.uploaddesc")[0].files[0];
+								if(!fileobj1){
+									$(".modal.oper").find("p.file1").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.oper").find("p.file1").css("display","none");
+								}
 								var fileobj2 = $("input.uploadactivity")[0].files[0];
+								if(!fileobj2){
+									$(".modal.oper").find("p.file2").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.oper").find("p.file2").css("display","none");
+								}
+								if(flag==false){
+									return;
+								}
 								// FormData 对象
 								//console.log(fileobj1);
 								var arr = [];
@@ -228,7 +256,20 @@
 									$(".modal.oper").modal("hide");
 									$(".btn.fresh").trigger("click");
 								};
-								xhr.send(form);
+								//xhr.send(form);
+								$.ajax({
+									url : "UpdateActivity.action",
+									type : "POST",
+									data : form,
+									contentType: false,
+									processData: false,
+									success : function(data) {
+										//console.log(data);
+										alert("上传完成");
+										$(".modal.add").modal("hide");
+										$(".btn.fresh").trigger("click");
+									},
+								});
 								//console.log("上传");
 			});
 			$(".modal.add").find(".btn.save").bind("click", function() {
@@ -237,11 +278,43 @@
 								var score = $(".add .controls.score").find("input").val();
 								var fileobj1 = $("input.uploaddesc")[0].files[0];
 								var fileobj2 = $("input.uploadactivity")[0].files[0];
+								var flag=true
+								if(!credit || credit.trim()==""){
+									$(".modal.add").find("p.credit").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.add").find("p.credit").css("display","none");
+								}
+								if(score.trim()==""){
+									//alert("");
+									$(".modal.add").find("p.score").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.add").find("p.score").css("display","none");
+								}
+								if(!fileobj1){
+									$(".modal.add").find("p.file1").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.add").find("p.file1").css("display","none");
+								}
+								if(!fileobj2){
+									$(".modal.add").find("p.file2").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.add").find("p.file2").css("display","none");
+								}
+								if(flag==false){
+									return;
+								}
 								// FormData 对象
 								//console.log(fileobj1);
 								var arr = [];
-								arr.push(fileobj1.name);
-								arr.push(fileobj2.name);
+								var arr = [];
+								if(fileobj1 && fileobj2){
+										arr.push(fileobj1.name);
+										arr.push(fileobj2.name);
+								}
 								var form = new FormData($("#pictures")[0]);
 								//form.append("aid", $(".modal.oper").data("data")["aid"]);\
 								form.append("type", type);
@@ -253,7 +326,7 @@
 								//form.append("pics", fileobj1);
 								//form.append("pics", fileobj2);                          
 								// XMLHttpRequest 对象
-								console.log(form);
+								//console.log(form);
 								//var xhr = new XMLHttpRequest();
 								//xhr.open("post", "AddActivity.action", true);
 								//xhr.onload = function() {
@@ -270,10 +343,14 @@
 									processData: false,
 									success : function(data) {
 										//console.log(data);
-										alert("上传完成");
+										//alert("上传完成");
 										$(".modal.add").modal("hide");
 										$(".btn.fresh").trigger("click");
 									},
+									error:function(data){
+										console.log(data);
+										//alert("出错");
+									}
 								});
 			});
 			//查看上传图片时的事件处理
@@ -363,9 +440,11 @@
 			});
 			//让页面知道弹出的是修改框还是新增框
 			$(".modal.oper").bind("show", function() {
+				$(this).find("p.oper").css("display","none");
 				$("#j-content").data("modal","oper");
 			});
 			$(".modal.add").bind("show", function() {
+				$(this).find("p.add").css("display","none");
 				$("#j-content").data("modal","add");
 				$(".add .controls.type").find("input").val("");
 				$(".add .controls.credit").find("input").val("");

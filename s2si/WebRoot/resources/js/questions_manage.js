@@ -90,6 +90,7 @@
 			$(".modal.oper").bind("show", function() {
 				var str=$("#j-content").data("oper");
 				//console.log(str);
+				$(this).find("p").css("display","none");
 				if(str=="change"){
 					var obj = $(".modal.oper").data("data");
 					//console.log(obj);
@@ -138,6 +139,37 @@
 								var option_two= $(".oper .controls.option_two").find("input").val();
 								var option_three = $(".oper .controls.option_three").find("input").val();
 								var options=[];
+								var flag=true;
+								if(!aIndex || aIndex.trim()==""){
+									$(".modal.oper").find("p.aIndex").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.oper").find("p.aIndex").css("display","none");
+								}
+								if(!score || score.trim()==""){
+									$(".modal.oper").find("p.score").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.oper").find("p.score").css("display","none");
+								}
+								if(!option_one || option_one==""){
+									$(".modal.oper").find("p.option_one").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.oper").find("p.option_one").css("display","none");
+								}
+								if(!option_two || option_two==""){
+									$(".modal.oper").find("p.option_two").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.oper").find("p.option_two").css("display","none");
+								}
+								if(!option_three || option_three==""){
+									$(".modal.oper").find("p.option_three").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.oper").find("p.option_three").css("display","none");
+								}
 								if($(".modal.oper").data("data")){									
 									var qid=$(".modal.oper").data("data")["qid"];
 								}
@@ -146,6 +178,15 @@
 								options.push(option_two);
 								options.push(option_three);
 								var files = $("input.uploaddesc")[0].files;
+								if(!files || files.length==0){
+									$(".modal.oper").find("p.desc").css("display","inline-block");
+									flag=false;
+								}else{
+									$(".modal.oper").find("p.desc").css("display","none");
+								}
+								if(flag==false){
+									return;
+								}
 								// FormData 对象
 								var arr = [];
 								for(var i=0;i<files.length;i++){
