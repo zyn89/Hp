@@ -204,46 +204,28 @@
 								var type = $(".oper .controls.type").find("input").val();
 								var flag=true
 								var credit = $(".oper .controls.credit").find("input").val();
-								if(!credit || credit.trim()==""){
-									$(".modal.oper").find("p.credit").css("display","inline-block");
-									flag=false;
-								}else{
-									$(".modal.oper").find("p.credit").css("display","none");
-								}
 								var score = $(".oper .controls.score").find("input").val();
-								if(!score || score.trim()==""){
-									$(".modal.oper").find("p.score").css("display","inline-block");
-									flag=false;
-								}else{
-									$(".modal.oper").find("p.score").css("display","none");
-								}
 								var fileobj1 = $("input.uploaddesc")[0].files[0];
-								if(!fileobj1){
-									$(".modal.oper").find("p.file1").css("display","inline-block");
-									flag=false;
-								}else{
-									$(".modal.oper").find("p.file1").css("display","none");
-								}
 								var fileobj2 = $("input.uploadactivity")[0].files[0];
-								if(!fileobj2){
-									$(".modal.oper").find("p.file2").css("display","inline-block");
-									flag=false;
-								}else{
-									$(".modal.oper").find("p.file2").css("display","none");
-								}
-								if(flag==false){
-									return;
-								}
 								// FormData 对象
 								//console.log(fileobj1);
 								var arr = [];
 								var filename1="";
 								var filename2="";
-								if(fileobj1 && fileobj2){
-										arr.push(fileobj1.name);
-										filename1=fileobj1.name;
-										arr.push(fileobj2.name);
-										filename2=fileobj2.name;
+								var index=0;
+								if(fileobj1){
+									filename1=index;
+									index++;
+									arr.push(fileobj1.name);
+								}else{
+									filename1="-1";
+								}
+								if(fileobj2){
+									filename2=index;
+									index++;
+									arr.push(fileobj2.name);
+								}else{
+									filename2="-1";
 								}
 								var form = new FormData($("#pictures")[0]);
 								form.append("aid", $(".modal.oper").data("data")["aid"]);
@@ -330,8 +312,8 @@
 								form.append("type", type);
 								form.append("credit", parseInt(credit));
 								form.append("score", parseInt(score));
-								form.append("descIndex", filename1);
-								form.append("activityIndex", filename2);
+								form.append("descIndex", 0);
+								form.append("activityIndex", 1);
 								form.append("picsName", arr);
 								//form.append("pics", fileobj1);
 								//form.append("pics", fileobj2);                          

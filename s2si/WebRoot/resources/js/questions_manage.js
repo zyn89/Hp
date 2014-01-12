@@ -38,6 +38,7 @@
 											var $tmp = $(this).parent();
 											//console.log($tmp.data("data"));
 											$(".modal.show").find(".modal-body").find("p").text($tmp.data("data"));
+											$(".modal.show").find(".modal-body").find("img").attr("src",$tmp.data("data"));
 											$(".modal.show").modal("show");
 										});
 								$tr.find(".score").text(arr[i]["score"]);
@@ -133,6 +134,7 @@
 			});
 			//保存按钮事件
 			$(".modal.oper").find(".btn.save").bind("click", function() {
+								var oper=$("#j-content").data("oper");
 								var aIndex = $(".oper .controls.aIndex").find("input").val();
 								var score = $(".oper .controls.score").find("input").val();
 								var option_one = $(".oper .controls.option_one").find("input").val();
@@ -140,31 +142,31 @@
 								var option_three = $(".oper .controls.option_three").find("input").val();
 								var options=[];
 								var flag=true;
-								if(!aIndex || aIndex.trim()==""){
+								if((!aIndex || aIndex.trim()=="") && oper=="add"){
 									$(".modal.oper").find("p.aIndex").css("display","inline-block");
 									flag=false;
 								}else{
 									$(".modal.oper").find("p.aIndex").css("display","none");
 								}
-								if(!score || score.trim()==""){
+								if((!score || score.trim()=="") && oper=="add"){
 									$(".modal.oper").find("p.score").css("display","inline-block");
 									flag=false;
 								}else{
 									$(".modal.oper").find("p.score").css("display","none");
 								}
-								if(!option_one || option_one==""){
+								if((!option_one || option_one=="") && oper=="add"){
 									$(".modal.oper").find("p.option_one").css("display","inline-block");
 									flag=false;
 								}else{
 									$(".modal.oper").find("p.option_one").css("display","none");
 								}
-								if(!option_two || option_two==""){
+								if((!option_two || option_two=="") && oper=="add"){
 									$(".modal.oper").find("p.option_two").css("display","inline-block");
 									flag=false;
 								}else{
 									$(".modal.oper").find("p.option_two").css("display","none");
 								}
-								if(!option_three || option_three==""){
+								if((!option_three || option_three=="") && oper=="add"){
 									$(".modal.oper").find("p.option_three").css("display","inline-block");
 									flag=false;
 								}else{
@@ -178,7 +180,7 @@
 								options.push(option_two);
 								options.push(option_three);
 								var files = $("input.uploaddesc")[0].files;
-								if(!files || files.length==0){
+								if((!files || files.length==0) && oper=="add"){
 									$(".modal.oper").find("p.desc").css("display","inline-block");
 									flag=false;
 								}else{
