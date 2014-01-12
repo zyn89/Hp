@@ -36,6 +36,7 @@
 											var $tmp = $(this).parent();
 											console.log($tmp.data("data"));
 											$(".modal.show").find(".modal-body").find("p").text($tmp.data("data"));
+											$(".modal.show").find(".modal-body").find("img").attr("src",$tmp.data("data"));
 											$(".modal.show").modal("show");
 										});
 								$tr.find(".activity").data("data",arr[i]["activityUrl"]);
@@ -43,13 +44,14 @@
 											var $tmp = $(this).parent();
 											str=$tmp.data("data");
 											console.log(str);
-											str=str.substr(2);
-											str="resources\\image"+str;
-											console.log(str);
+											//str=str.substr(2);
+											//str="resources\\image"+str;
+											//console.log(str);
 											//console.log($tmp.data("data"));
 											//$(".modal.show").find(".modal-body").find("p").text($tmp.data("data"));
 											$(".modal.show").find(".modal-body").find("img").attr("src",
 												str);
+											$(".modal.show").find(".modal-body").find("p").text(str);
 											$(".modal.show").modal("show");
 										});
 								$tr.find(".score").text(arr[i]["score"]);
@@ -235,16 +237,20 @@
 								// FormData 对象
 								//console.log(fileobj1);
 								var arr = [];
+								var filename1="";
+								var filename2="";
 								if(fileobj1 && fileobj2){
 										arr.push(fileobj1.name);
+										filename1=fileobj1.name;
 										arr.push(fileobj2.name);
+										filename2=fileobj2.name;
 								}
 								var form = new FormData($("#pictures")[0]);
 								form.append("aid", $(".modal.oper").data("data")["aid"]);
 								form.append("credit", parseInt(credit));
 								form.append("score", parseInt(score));
-								form.append("descIndex", 0);
-								form.append("activityIndex", 1);
+								form.append("descIndex", filename1);
+								form.append("activityIndex", filename2);
 								form.append("picsName", arr);
 								//form.append("pics", fileobj1);
 								//form.append("pics", fileobj2);                          
@@ -311,17 +317,21 @@
 								//console.log(fileobj1);
 								var arr = [];
 								var arr = [];
+								var filename1="";
+								var filename2="";
 								if(fileobj1 && fileobj2){
 										arr.push(fileobj1.name);
+										filename1=fileobj1.name;
 										arr.push(fileobj2.name);
+										filename2=fileobj2.name;
 								}
 								var form = new FormData($("#pictures")[0]);
 								//form.append("aid", $(".modal.oper").data("data")["aid"]);\
 								form.append("type", type);
 								form.append("credit", parseInt(credit));
 								form.append("score", parseInt(score));
-								form.append("descIndex", 0);
-								form.append("activityIndex", 1);
+								form.append("descIndex", filename1);
+								form.append("activityIndex", filename2);
 								form.append("picsName", arr);
 								//form.append("pics", fileobj1);
 								//form.append("pics", fileobj2);                          
