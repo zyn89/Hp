@@ -23,23 +23,21 @@ public class PresentAction extends BaseAction{
 	
 	private List<String> picsContentType;
 	
-	private List<String> picsFileName;
+	private int exTitleIndex;
 	
-	private String exTitleIndex;
+	private int exDescIndex;
 	
-	private String exDescIndex;
+	private int prizeTitleIndex;
 	
-	private String prizeTitleIndex;
+	private int prizeDescIndex;
 	
-	private String prizeDescIndex;
+	private int lotteryIndex;
 	
-	private String lotteryIndex;
+	private int bg1Index;
 	
-	private String bg1Index;
+	private int bg2Index;
 	
-	private String bg2Index;
-	
-	private String bg3Index;
+	private int bg3Index;
 	
 	private int credit;
 	
@@ -71,13 +69,13 @@ public class PresentAction extends BaseAction{
 			Map session = getSession();
 			uid = (String) session.get("uid");
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateName(picsFileName) || !isValidateCredit(credit)
+					|| !isValidateCredit(credit)
 					|| !isValidateIndex(exTitleIndex) || !isValidateIndex(exDescIndex)
 					|| !isValidateIndex(prizeTitleIndex) || !isValidateIndex(prizeDescIndex))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = presentService.AddExchange(uid, pics, picsContentType, picsFileName,
+			json = presentService.AddExchange(uid, pics, picsContentType,
 					credit, exTitleIndex, exDescIndex, prizeTitleIndex, prizeDescIndex);
 		}catch(Exception e){			
 			throw new BaseException(e.getMessage());
@@ -94,14 +92,14 @@ public class PresentAction extends BaseAction{
 			Map session = getSession();
 			uid = (String) session.get("uid");
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateName(picsFileName) || !isValidateCredit(credit)
+					|| !isValidateCredit(credit)
 					|| !isValidateIndex(exTitleIndex) || !isValidateIndex(exDescIndex)
 					|| !isValidateIndex(prizeTitleIndex) || !isValidateIndex(prizeDescIndex)
 					|| !isValidateEid(eid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = presentService.UpdateExchange(uid, eid, pics, picsContentType, picsFileName,
+			json = presentService.UpdateExchange(uid, eid, pics, picsContentType,
 					credit, exTitleIndex, exDescIndex, prizeTitleIndex, prizeDescIndex);
 		}catch(Exception e){			
 			throw new BaseException(e.getMessage());
@@ -187,14 +185,14 @@ public class PresentAction extends BaseAction{
 			Map session = getSession();
 			uid = (String) session.get("uid");
 			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateName(picsFileName) || !isValidateCredit(credit)
+					|| !isValidateCredit(credit)
 					|| !isValidateIndex(prizeTitleIndex) || !isValidateIndex(prizeDescIndex)
 					|| !isValidateIndex(bg1Index) || !isValidateIndex(bg2Index)
 					|| !isValidateIndex(bg3Index) || !isValidateIndex(lotteryIndex))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = presentService.AddLottery(uid, pics, picsContentType, picsFileName,
+			json = presentService.AddLottery(uid, pics, picsContentType,
 					credit, prizeTitleIndex, prizeDescIndex, bg1Index, bg2Index, bg3Index,
 					lotteryIndex);
 		}catch(Exception e){			
@@ -215,7 +213,7 @@ public class PresentAction extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = presentService.UpdateLottery(uid, pics, picsContentType, picsFileName,
+			json = presentService.UpdateLottery(uid, pics, picsContentType,
 					credit, prizeTitleIndex, prizeDescIndex, bg1Index, bg2Index, bg3Index,
 					lotteryIndex, lid);
 		}catch(Exception e){			
@@ -331,8 +329,8 @@ public class PresentAction extends BaseAction{
 		return false;
 	}
 
-	private boolean isValidateIndex(String Index) {
-		if(Index != null && !Index.trim().equals(""))
+	private boolean isValidateIndex(int Index) {
+		if(Index >= -1)
 		{
 			return true;
 		}
@@ -341,14 +339,6 @@ public class PresentAction extends BaseAction{
 
 	private boolean isValidateCredit(int credit) {
 		if(credit > 0)
-		{
-			return true;
-		}
-		return false;
-	}
-
-	private boolean isValidateName(List<String> picsName) {
-		if(picsName != null && picsName.size() > 0)
 		{
 			return true;
 		}
@@ -411,46 +401,6 @@ public class PresentAction extends BaseAction{
 		this.credit = credit;
 	}
 
-	public String getExTitleIndex() {
-		return exTitleIndex;
-	}
-
-	public void setExTitleIndex(String exTitleIndex) {
-		this.exTitleIndex = exTitleIndex;
-	}
-
-	public String getExDescIndex() {
-		return exDescIndex;
-	}
-
-	public void setExDescIndex(String exDescIndex) {
-		this.exDescIndex = exDescIndex;
-	}
-
-	public String getPrizeTitleIndex() {
-		return prizeTitleIndex;
-	}
-
-	public void setPrizeTitleIndex(String prizeTitleIndex) {
-		this.prizeTitleIndex = prizeTitleIndex;
-	}
-
-	public String getPrizeDescIndex() {
-		return prizeDescIndex;
-	}
-
-	public void setPrizeDescIndex(String prizeDescIndex) {
-		this.prizeDescIndex = prizeDescIndex;
-	}
-
-	public List<String> getPicsFileName() {
-		return picsFileName;
-	}
-
-	public void setPicsFileName(List<String> picsFileName) {
-		this.picsFileName = picsFileName;
-	}
-
 	public int getStart() {
 		return start;
 	}
@@ -467,38 +417,6 @@ public class PresentAction extends BaseAction{
 		this.end = end;
 	}
 
-	public String getLotteryIndex() {
-		return lotteryIndex;
-	}
-
-	public void setLotteryIndex(String lotteryIndex) {
-		this.lotteryIndex = lotteryIndex;
-	}
-
-	public String getBg1Index() {
-		return bg1Index;
-	}
-
-	public void setBg1Index(String bg1Index) {
-		this.bg1Index = bg1Index;
-	}
-
-	public String getBg2Index() {
-		return bg2Index;
-	}
-
-	public void setBg2Index(String bg2Index) {
-		this.bg2Index = bg2Index;
-	}
-
-	public String getBg3Index() {
-		return bg3Index;
-	}
-
-	public void setBg3Index(String bg3Index) {
-		this.bg3Index = bg3Index;
-	}
-
 	public int getLid() {
 		return lid;
 	}
@@ -513,5 +431,69 @@ public class PresentAction extends BaseAction{
 
 	public void setIsAward(int isAward) {
 		this.isAward = isAward;
+	}
+
+	public int getExTitleIndex() {
+		return exTitleIndex;
+	}
+
+	public void setExTitleIndex(int exTitleIndex) {
+		this.exTitleIndex = exTitleIndex;
+	}
+
+	public int getExDescIndex() {
+		return exDescIndex;
+	}
+
+	public void setExDescIndex(int exDescIndex) {
+		this.exDescIndex = exDescIndex;
+	}
+
+	public int getPrizeTitleIndex() {
+		return prizeTitleIndex;
+	}
+
+	public void setPrizeTitleIndex(int prizeTitleIndex) {
+		this.prizeTitleIndex = prizeTitleIndex;
+	}
+
+	public int getPrizeDescIndex() {
+		return prizeDescIndex;
+	}
+
+	public void setPrizeDescIndex(int prizeDescIndex) {
+		this.prizeDescIndex = prizeDescIndex;
+	}
+
+	public int getLotteryIndex() {
+		return lotteryIndex;
+	}
+
+	public void setLotteryIndex(int lotteryIndex) {
+		this.lotteryIndex = lotteryIndex;
+	}
+
+	public int getBg1Index() {
+		return bg1Index;
+	}
+
+	public void setBg1Index(int bg1Index) {
+		this.bg1Index = bg1Index;
+	}
+
+	public int getBg2Index() {
+		return bg2Index;
+	}
+
+	public void setBg2Index(int bg2Index) {
+		this.bg2Index = bg2Index;
+	}
+
+	public int getBg3Index() {
+		return bg3Index;
+	}
+
+	public void setBg3Index(int bg3Index) {
+		this.bg3Index = bg3Index;
 	}
 }

@@ -21,9 +21,9 @@
   <update id="updateThreeLevel" parameterClass="ThreeLevel">
 	update three_level
 	<dynamic prepend="SET ">
-		<isNotEmpty property="content" prepend=","><![CDATA[ content=#content# ]]></isNotEmpty>
+		<isNotNull property="content" prepend=","><![CDATA[ content=#content# ]]></isNotNull>
 		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>		
-		<isNotEmpty property="url" prepend=","><![CDATA[ url=#url# ]]></isNotEmpty>
+		<isNotNull property="url" prepend=","><![CDATA[ url=#url# ]]></isNotNull>
 		<isNotEqual property="isFinal" compareValue="-1" prepend=","><![CDATA[ isFinal=#isFinal# ]]></isNotEqual>
 	</dynamic>
 	<dynamic prepend="WHERE">

@@ -21,7 +21,7 @@
   <update id="updateTwoLevel" parameterClass="TwoLevel">
 	update two_level
 	<dynamic prepend="SET ">
-		<isNotEmpty property="content" prepend=","><![CDATA[ content=#content# ]]></isNotEmpty>
+		<isNotNull property="content" prepend=","><![CDATA[ content=#content# ]]></isNotNull>
 		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
 	</dynamic>
 	<dynamic prepend="WHERE">

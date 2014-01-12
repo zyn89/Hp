@@ -62,45 +62,22 @@ public class PresentServiceImpl implements IPresentService{
 	
 	@Override
 	public JSONObject AddExchange(String uid, List<File> pics,
-			List<String> picsContentType, List<String> picsName, int credit,
-			String exTitleIndex, String exDescIndex, String prizeTitleIndex,
-			String prizeDescIndex) throws IOException {
-		int exTitle = 0;
-		int exDesc = 0;
-		int prizeTitle = 0;
-		int prizeDesc = 0;
-		for(int i = 0; i < picsName.size(); i ++)
-		{
-			if(exTitleIndex.equals(picsName.get(i)))
-			{
-				exTitle = i;
-			}
-			else if(exDescIndex.equals(picsName.get(i)))
-			{
-				exDesc = i;
-			}
-			else if(prizeTitleIndex.equals(picsName.get(i)))
-			{
-				prizeTitle = i;
-			}
-			else
-			{
-				prizeDesc = i;
-			}
-		}
+			List<String> picsContentType, int credit,
+			int exTitleIndex, int exDescIndex, int prizeTitleIndex,
+			int prizeDescIndex) throws IOException {
 		JSONObject json = new JSONObject();
 		PrizeInfo prize = new PrizeInfo();
-		String url = FileUtil.SavePrizeAsMedia(uid, pics.get(prizeTitle), picsContentType.get(prizeTitle));
+		String url = FileUtil.SavePrizeAsMedia(uid, pics.get(prizeTitleIndex), picsContentType.get(prizeTitleIndex));
 		prize.setPrizeUrl(url);
-		url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeDesc), picsContentType.get(prizeDesc));
+		url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeDescIndex), picsContentType.get(prizeDescIndex));
 		prize.setDescUrl(url);
 		long pid = prizeInfoDao.insertPrizeInfo(prize);
 		ExchangeInfo exchange = new ExchangeInfo();
 		exchange.setPid(pid);
 		exchange.setCredit(credit);
-		url = FileUtil.SaveExchangeAsMedia(uid, pics.get(exTitle), picsContentType.get(exTitle));
+		url = FileUtil.SaveExchangeAsMedia(uid, pics.get(exTitleIndex), picsContentType.get(exTitleIndex));
 		exchange.setExchangeUrl(url);
-		url = FileUtil.SaveExchangeDescAsMedia(uid, pics.get(exDesc), picsContentType.get(exDesc));
+		url = FileUtil.SaveExchangeDescAsMedia(uid, pics.get(exDescIndex), picsContentType.get(exDescIndex));
 		exchange.setDescUrl(url);
 		exchangeInfoDao.insertExchangeInfo(exchange);
 		
@@ -110,55 +87,32 @@ public class PresentServiceImpl implements IPresentService{
 	
 	@Override
 	public JSONObject UpdateExchange(String uid, long eid, List<File> pics,
-			List<String> picsContentType, List<String> picsName, int credit,
-			String exTitleIndex, String exDescIndex, String prizeTitleIndex,
-			String prizeDescIndex) throws IOException {
+			List<String> picsContentType, int credit,
+			int exTitleIndex, int exDescIndex, int prizeTitleIndex,
+			int prizeDescIndex) throws IOException {
 		JSONObject json = new JSONObject();
 		ExchangeInfo exchange = exchangeInfoDao.GetExchangeInfo(eid);
 		PrizeInfo prize = prizeInfoDao.GetPrizeInfo(exchange.getPid());
-		int exTitle = 0;
-		int exDesc = 0;
-		int prizeTitle = 0;
-		int prizeDesc = 0;
-		for(int i = 0; i < picsName.size(); i ++)
-		{
-			if(exTitleIndex != null && !exTitleIndex.trim().equals("") && exTitleIndex.equals(picsName.get(i)))
-			{
-				exTitle = i;
-			}
-			else if(exDescIndex != null && !exDescIndex.trim().equals("") && exDescIndex.equals(picsName.get(i)))
-			{
-				exDesc = i;
-			}
-			else if(prizeTitleIndex != null && !prizeTitleIndex.trim().equals("") && prizeTitleIndex.equals(picsName.get(i)))
-			{
-				prizeTitle = i;
-			}
-			else if(prizeDescIndex != null && !prizeDescIndex.trim().equals("") && prizeDescIndex.equals(picsName.get(i)))
-			{
-				prizeDesc = i;
-			}
-		}
 		exchange.setCredit(credit);
 		String url = null;
-		if(exTitleIndex != null && !exTitleIndex.trim().equals(""))
+		if(exTitleIndex != -1)
 		{
-			url = FileUtil.SavePrizeAsMedia(uid, pics.get(prizeTitle), picsContentType.get(prizeTitle));
+			url = FileUtil.SaveExchangeAsMedia(uid, pics.get(exTitleIndex), picsContentType.get(exTitleIndex));
 			exchange.setExchangeUrl(url);
 		}
-		if(exDescIndex != null && !exDescIndex.trim().equals(""))
+		if(exDescIndex != -1)
 		{
-			url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeDesc), picsContentType.get(prizeDesc));
+			url = FileUtil.SaveExchangeAsMedia(uid, pics.get(exDescIndex), picsContentType.get(exDescIndex));
 			exchange.setDescUrl(url);
 		}
-		if(prizeTitleIndex != null && !prizeTitleIndex.trim().equals(""))
+		if(prizeTitleIndex != -1)
 		{
-			url = FileUtil.SaveExchangeAsMedia(uid, pics.get(exTitle), picsContentType.get(exTitle));
+			url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeTitleIndex), picsContentType.get(prizeTitleIndex));
 			prize.setPrizeUrl(url);
 		}
-		if(prizeDescIndex != null && !prizeDescIndex.trim().equals(""))
+		if(prizeDescIndex != -1)
 		{
-			url = FileUtil.SaveExchangeDescAsMedia(uid, pics.get(exDesc), picsContentType.get(exDesc));
+			url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeDescIndex), picsContentType.get(prizeDescIndex));
 			prize.setDescUrl(url);
 		}
 		exchangeInfoDao.updateExchangeInfo(exchange);
@@ -223,60 +177,27 @@ public class PresentServiceImpl implements IPresentService{
 	
 	@Override
 	public JSONObject AddLottery(String uid, List<File> pics,
-			List<String> picsContentType, List<String> picsName, int credit,
-			String prizeTitleName, String prizeDescName, String bg1Name,
-			String bg2Name, String bg3Name, String lotteryName) throws IOException {
+			List<String> picsContentType, int credit,
+			int prizeTitleName, int prizeDescName, int bg1Name,
+			int bg2Name, int bg3Name, int lotteryName) throws IOException {
 		JSONObject json = new JSONObject();
-		int lotteryIndex = 0;
-		int prizeTitleIndex = 0;
-		int prizeDescIndex = 0;
-		int bg1Index = 0;
-		int bg2Index = 0;
-		int bg3Index = 0;
-		for(int i = 0; i < picsName.size(); i ++)
-		{
-			if(prizeTitleName.equals(picsName.get(i)))
-			{
-				prizeTitleIndex = i;
-			}
-			else if(prizeDescName.equals(picsName.get(i)))
-			{
-				prizeDescIndex = i;
-			}
-			else if(lotteryName.equals(picsName.get(i)))
-			{
-				lotteryIndex = i;
-			}
-			else if(bg1Name.equals(picsName.get(i)))
-			{
-				bg1Index = i;
-			}
-			else if(bg2Name.equals(picsName.get(i)))
-			{
-				bg2Index = i;
-			}
-			else
-			{
-				bg3Index = i;
-			}
-		}
 		PrizeInfo prize = new PrizeInfo();
-		String url = FileUtil.SavePrizeAsMedia(uid, pics.get(prizeTitleIndex), picsContentType.get(prizeTitleIndex));
+		String url = FileUtil.SavePrizeAsMedia(uid, pics.get(prizeTitleName), picsContentType.get(prizeTitleName));
 		prize.setPrizeUrl(url);
-		url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeDescIndex), picsContentType.get(prizeDescIndex));
+		url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeDescName), picsContentType.get(prizeDescName));
 		prize.setDescUrl(url);
 		long pid = prizeInfoDao.insertPrizeInfo(prize);
 		
 		LotteryInfo lottery = new LotteryInfo();
 		lottery.setCredit(credit);
 		lottery.setPid(pid);
-		url = FileUtil.SaveLotteryAsMedia(uid, pics.get(lotteryIndex), picsContentType.get(lotteryIndex));
+		url = FileUtil.SaveLotteryAsMedia(uid, pics.get(lotteryName), picsContentType.get(lotteryName));
 		lottery.setImageUrl(url);
-		url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg1Index), picsContentType.get(bg1Index));
+		url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg1Name), picsContentType.get(bg1Name));
 		lottery.setBg1Url(url);
-		url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg2Index), picsContentType.get(bg2Index));
+		url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg2Name), picsContentType.get(bg2Name));
 		lottery.setBg2Url(url);
-		url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg3Index), picsContentType.get(bg3Index));
+		url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg3Name), picsContentType.get(bg3Name));
 		lottery.setBg3Url(url);
 		lotteryInfoDao.insertLotteryInfo(lottery);
 		
@@ -329,76 +250,42 @@ public class PresentServiceImpl implements IPresentService{
 	
 	@Override
 	public JSONObject UpdateLottery(String uid, List<File> pics,
-			List<String> picsContentType, List<String> picsName, int credit,
-			String prizeTitleName, String prizeDescName, String bg1Name,
-			String bg2Name, String bg3Name, String lotteryName, int lid)
+			List<String> picsContentType, int credit,
+			int prizeTitleName, int prizeDescName, int bg1Name,
+			int bg2Name, int bg3Name, int lotteryName, int lid)
 			throws IOException {
 		LotteryInfo lottery = lotteryInfoDao.GetLotteryInfo(lid);
-		PrizeInfo prize = prizeInfoDao.GetPrizeInfo(lottery.getPid());
-		int lotteryIndex = 0;
-		int prizeTitleIndex = 0;
-		int prizeDescIndex = 0;
-		int bg1Index = 0;
-		int bg2Index = 0;
-		int bg3Index = 0;
-		for(int i = 0; i < picsName.size(); i ++)
-		{
-			if(prizeTitleName != null && !prizeTitleName.trim().equals("") && prizeTitleName.equals(picsName.get(i)))
-			{
-				prizeTitleIndex = i;
-			}
-			else if(prizeDescName != null && !prizeDescName.trim().equals("") && prizeDescName.equals(picsName.get(i)))
-			{
-				prizeDescIndex = i;
-			}
-			else if(lotteryName != null && !lotteryName.trim().equals("") && lotteryName.equals(picsName.get(i)))
-			{
-				lotteryIndex = i;
-			}
-			else if(bg1Name !=null && !bg1Name.trim().equals("") && bg1Name.equals(picsName.get(i)))
-			{
-				bg1Index = i;
-			}
-			else if(bg2Name != null && !bg2Name.trim().equals("") && bg2Name.equals(picsName.get(i)))
-			{
-				bg2Index = i;
-			}
-			else if(bg3Name != null && !bg3Name.trim().equals("") && bg3Name.equals(picsName.get(i)))
-			{
-				bg3Index = i;
-			}
-		}
-		
+		PrizeInfo prize = prizeInfoDao.GetPrizeInfo(lottery.getPid());		
 		lottery.setCredit(credit);
 		String url = null;
-		if(prizeTitleName != null && !prizeTitleName.trim().equals(""))
+		if(prizeTitleName != -1)
 		{
-			url = FileUtil.SavePrizeAsMedia(uid, pics.get(prizeTitleIndex), picsContentType.get(prizeTitleIndex));
+			url = FileUtil.SavePrizeAsMedia(uid, pics.get(prizeTitleName), picsContentType.get(prizeTitleName));
 			prize.setPrizeUrl(url);
 		}
-		if(prizeDescName != null && !prizeDescName.trim().equals(""))
+		if(prizeDescName != -1)
 		{
-			url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeDescIndex), picsContentType.get(prizeDescIndex));
+			url = FileUtil.SavePrizeDescAsMedia(uid, pics.get(prizeDescName), picsContentType.get(prizeDescName));
 			prize.setDescUrl(url);
 		}
-		if(lotteryName != null && !lotteryName.trim().equals(""))
+		if(lotteryName != -1)
 		{
-			url = FileUtil.SaveLotteryAsMedia(uid, pics.get(lotteryIndex), picsContentType.get(lotteryIndex));
+			url = FileUtil.SaveLotteryAsMedia(uid, pics.get(lotteryName), picsContentType.get(lotteryName));
 			lottery.setImageUrl(url);
 		}
-		if(bg1Name != null && !bg1Name.trim().equals(""))
+		if(bg1Name != -1)
 		{
-			url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg1Index), picsContentType.get(bg1Index));
+			url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg1Name), picsContentType.get(bg1Name));
 			lottery.setBg1Url(url);
 		}
-		if(bg2Name != null && !bg2Name.trim().equals(""))
+		if(bg2Name != -1)
 		{
-			url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg2Index), picsContentType.get(bg2Index));
+			url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg2Name), picsContentType.get(bg2Name));
 			lottery.setBg2Url(url);
 		}
-		if(bg3Name != null && !bg3Name.trim().equals(""))
+		if(bg3Name != -1)
 		{
-			url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg3Index), picsContentType.get(bg3Index));
+			url = FileUtil.SaveLotteryBgAsMedia(uid, pics.get(bg3Name), picsContentType.get(bg3Name));
 			lottery.setBg3Url(url);
 		}
 		

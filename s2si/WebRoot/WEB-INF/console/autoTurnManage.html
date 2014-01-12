@@ -91,7 +91,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<div class="modal hide fade show">
+	<div class="modal hide fade details">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"
 				aria-hidden="true">&times;</button>
@@ -172,6 +172,7 @@
 			<a href="#"	class="btn btn-primary save">添加</a>
 		</div>
 	</div>
+	
 </body>
 <script>
 	$(function() {
@@ -187,8 +188,6 @@
 				if ($("table").find("tr").length > 1) {
 					$("table tr:gt(0):not(:eq(0))").remove();
 				}
-				var windowLocation = window.location.href;
-				var windowLocation_Final = windowLocation.substring(0, windowLocation.length-21);
 				var lineCount = 1;
 				for ( var i = 0; i < arr_tmp.length; i++) {
 
@@ -205,11 +204,11 @@
 								function() {
 							
 									var $tmp = $(this).parent();
-									$(".modal.show").find(".modal-body").find(
-											"p").text("存放位置："+windowLocation_Final +$tmp.data("data"));
-									$(".modal.show").find(".modal-body").find(
-											"img").attr("src",windowLocation_Final + $tmp.data("data"));
-									$(".modal.show").modal("show");
+									$(".modal.details").find(".modal-body").find(
+											"p").text("存放位置："+$tmp.data("data"));
+									$(".modal.details").find(".modal-body").find(
+											"img").attr("src",$tmp.data("data"));
+									$(".modal.details").modal("show");
 								});
 						
 					}

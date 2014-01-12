@@ -18,11 +18,6 @@ public interface IWebService {
 
 	JSONObject GetFourLevel(long fid);
 
-	JSONObject AddCarouselInfo(String uid, List<File> pics, List<String> picsContentType) throws IOException;
-
-	JSONObject UpdateCarouselInfo(String uid, long cid, List<File> pics,
-			List<String> picsContentType) throws IOException;
-
 	JSONObject DeleteCarouselInfo(long cid);
 
 	JSONObject AddOneLevel(String uid, List<File> pics,
@@ -56,5 +51,11 @@ public interface IWebService {
 			List<String> picsContentType, String content, long id, String url) throws IOException;
 
 	JSONObject DeleteFourLevel(long id);
+
+	JSONObject AddCarouselInfo(String uid, File pic1, File pic2, File pic3,
+			String pic1Type, String pic2Type, String pic3Type)throws IOException;
+
+	JSONObject UpdateCarouselInfo(String uid, long cid, File pic1, File pic2,
+			File pic3, String pic1Type, String pic2Type, String pic3Type) throws IOException;
 
 }

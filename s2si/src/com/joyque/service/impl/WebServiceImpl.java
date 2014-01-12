@@ -142,14 +142,15 @@ public class WebServiceImpl implements IWebService{
 	}
 	
 	@Override
-	public JSONObject AddCarouselInfo(String uid, List<File> pics, List<String> picsContentType) throws IOException {
+	public JSONObject AddCarouselInfo(String uid, File pic1, File pic2, File pic3,
+			String pic1Type, String pic2Type, String pic3Type) throws IOException {
 		JSONObject json = new JSONObject();
 		CarouselInfo carouselInfo = new CarouselInfo();
-		String url = FileUtil.SaveCarouselAsMedia(uid, pics.get(0), picsContentType.get(0));
+		String url = FileUtil.SaveCarouselAsMedia(uid, pic1, pic1Type);
 		carouselInfo.setImage1Url(url);
-		url = FileUtil.SaveCarouselAsMedia(uid, pics.get(1), picsContentType.get(1));
+		url = FileUtil.SaveCarouselAsMedia(uid, pic2, pic2Type);
 		carouselInfo.setImage2Url(url);
-		url = FileUtil.SaveCarouselAsMedia(uid, pics.get(2), picsContentType.get(2));
+		url = FileUtil.SaveCarouselAsMedia(uid, pic3, pic3Type);
 		carouselInfo.setImage3Url(url);
 		carouselInfoDao.insertCarouselInfo(carouselInfo);
 		
@@ -158,20 +159,23 @@ public class WebServiceImpl implements IWebService{
 	}
 	
 	@Override
-	public JSONObject UpdateCarouselInfo(String uid, long cid, List<File> pics,
-			List<String> picsContentType) throws IOException {
+	public JSONObject UpdateCarouselInfo(String uid, long cid, File pic1, File pic2,
+			File pic3, String pic1Type, String pic2Type, String pic3Type) throws IOException {
 		JSONObject json = new JSONObject();
 		CarouselInfo carouselInfo = carouselInfoDao.GetCarouselInfo(cid);
-		String url = FileUtil.SaveCarouselAsMedia(uid, pics.get(0), picsContentType.get(0));
-		carouselInfo.setImage1Url(url);
-		if(pics.size() > 1)
+		if(pic1 != null)
 		{
-			url = FileUtil.SaveCarouselAsMedia(uid, pics.get(1), picsContentType.get(1));
+			String url = FileUtil.SaveCarouselAsMedia(uid, pic1, pic1Type);
+			carouselInfo.setImage1Url(url);
+		}
+		if(pic2 != null)
+		{
+			String url = FileUtil.SaveCarouselAsMedia(uid, pic2, pic2Type);
 			carouselInfo.setImage2Url(url);
 		}
-		if(pics.size() > 2)
+		if(pic3 != null)
 		{
-			url = FileUtil.SaveCarouselAsMedia(uid, pics.get(2), picsContentType.get(2));
+			String url = FileUtil.SaveCarouselAsMedia(uid, pic3, pic3Type);
 			carouselInfo.setImage3Url(url);
 		}		
 		carouselInfoDao.updateCarouselInfo(carouselInfo);

@@ -62,6 +62,15 @@
 		<action name="MotifyInfo" class="userBasicAction" method="MotifyInfo">
 		    <interceptor-ref name="mystack" />
 		</action>
+		
+		<action name="Logout" class="userBasicAction" method="Logout">
+		    <interceptor-ref name="mystack" />
+		</action>
+		
+		<action name="AdminLogin" class="userBasicAction" method="AdminLogin">
+		    <interceptor-ref name="mystack" />
+		</action>
+		
 		<!-- 签到 ischeck=0 没签到-->
 		<action name="CheckIn" class="userBasicAction" method="CheckIn">
 		    <interceptor-ref name="mystack" />

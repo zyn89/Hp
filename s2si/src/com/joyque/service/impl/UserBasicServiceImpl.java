@@ -8,8 +8,10 @@ import net.sf.json.JSONObject;
 import com.joyque.common.exception.BaseServiceException;
 import com.joyque.common.util.DefaultValue;
 import com.joyque.common.util.ExceptionUtil;
+import com.joyque.dao.IAdminInfoDao;
 import com.joyque.dao.IUserCreditDao;
 import com.joyque.dao.IUserInfoDao;
+import com.joyque.pojo.AdminInfo;
 import com.joyque.pojo.UserCredit;
 import com.joyque.pojo.UserInfo;
 import com.joyque.service.IUserBasicService;
@@ -18,6 +20,7 @@ import com.opensymphony.xwork2.ActionContext;
 public class UserBasicServiceImpl implements IUserBasicService{
 	private IUserInfoDao userInfoDao;
 	private IUserCreditDao userCreditDao;
+	private IAdminInfoDao adminInfoDao;
 
 	@Override
 	public JSONObject register(String phone, String pw, String name,
@@ -92,6 +95,22 @@ public class UserBasicServiceImpl implements IUserBasicService{
 		json.accumulate("credit", credit.getCredit());
 		json.accumulate("uid", user.getUid());
 		json.accumulate("phone", user.getPhone());
+		return json;
+	}
+	
+	@Override
+	public JSONObject AdminLogin(String account, String pw) {
+		JSONObject json = new JSONObject();
+		AdminInfo admin = adminInfoDao.GetAdminInfo(account);
+		if(admin == null)
+		{
+			throw new BaseServiceException(ExceptionUtil.NoUser,account);
+		}
+		if(!admin.getPw().equals(pw))
+		{
+			throw new BaseServiceException(ExceptionUtil.PwError,account);
+		}
+		json.accumulate("uid", admin.getUid());
 		return json;
 	}
 	

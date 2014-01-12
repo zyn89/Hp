@@ -22,6 +22,8 @@ public class UserBasicAction extends BaseAction{
 	
 	private String shopName;
 	
+	private String account;
+	
 	private IUserBasicService userBasicService;
 	
 	@SuppressWarnings("unchecked")
@@ -79,6 +81,37 @@ public class UserBasicAction extends BaseAction{
 	}
 	
 	@SuppressWarnings("unchecked")
+	public void Logout()
+	{
+		Map session = getSession();
+		session.remove("uid");
+		session.remove("phone");
+		session.remove("name");
+		session.remove("isCheck");
+		session.remove("credit");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void AdminLogin()
+	{
+		JSONObject json = new JSONObject();
+		try{
+			if(!isValidateAccount() || !isValidatePw())
+			{
+				throw new BaseException(ExceptionUtil.IllegalInput);
+			}
+			json = userBasicService.AdminLogin(account, pw);
+			Map session = getSession();
+			session.remove("uid");
+			session.put("uid", json.get("uid"));
+		}catch(Exception e){
+			throw new BaseException(e.getMessage());
+		}
+		ajaxReturn(json.toString());
+	}
+	
+
+	@SuppressWarnings("unchecked")
 	public void MotifyInfo()
 	{
 		JSONObject json = new JSONObject();
@@ -107,6 +140,15 @@ public class UserBasicAction extends BaseAction{
 		}
 		ajaxReturn(json.toString());
 	}
+	
+	private boolean isValidateAccount() {
+		if(account != null && !account.trim().equals(""))
+		{
+			return true;
+		}
+		return false;
+	}
+	
 
 	private boolean isValidateName() {
 		if(name != null && !name.trim().equals("")
@@ -174,5 +216,13 @@ public class UserBasicAction extends BaseAction{
 
 	public void setUserBasicService(IUserBasicService userBasicService) {
 		this.userBasicService = userBasicService;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}	
 }

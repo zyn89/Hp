@@ -21,7 +21,7 @@
   <update id="updateOneLevel" parameterClass="OneLevel">
 	update one_level
 	<dynamic prepend="SET ">
-		<isNotEmpty property="url" prepend=","><![CDATA[ url=#url# ]]></isNotEmpty>
+		<isNotNull property="url" prepend=","><![CDATA[ url=#url# ]]></isNotNull>
 		<isNotEmpty property="imageUrl" prepend=","><![CDATA[ imageUrl=#imageUrl# ]]></isNotEmpty>
 		<isNotEqual property="isStatic" compareValue="-1" prepend=","><![CDATA[ isStatic=#isStatic# ]]></isNotEqual>
 	</dynamic>

@@ -39,14 +39,15 @@ public class ActivityServiceImpl implements IActivityService{
 			if(ua == null)
 			{
 				j.accumulate("done", 0);
+				j.accumulate("activityUrl", info.getImageUrl());
 			}
 			else
 			{
 				j.accumulate("done", 1);
+				j.accumulate("activityUrl", "resources/image/done.jpg");
 			}
 			j.accumulate("aid", info.getAid());
-			j.accumulate("type", info.getType());
-			j.accumulate("activityUrl", info.getImageUrl());
+			j.accumulate("type", info.getType());		
 			j.accumulate("descUrl", info.getDescUrl());
 			j.accumulate("score", info.getScore());
 			j.accumulate("credit", info.getCredit());
@@ -57,28 +58,16 @@ public class ActivityServiceImpl implements IActivityService{
 	
 	@Override
 	public JSONObject AddActivity(List<File> pics, List<String> picsContentType,
-			String activityIndex, String descIndex,
-			String uid, String type, int score, int credit, List<String> picsName) throws IOException {
+			int activityIndex, int descIndex,
+			String uid, String type, int score, int credit) throws IOException {
 		JSONObject json = new JSONObject();
 		ActivityInfo activity = new ActivityInfo();
 		activity.setDefaultValue();
 		
-		int aIndex = 0;
-		int dIndex = 0;
-		if(activityIndex.equals(picsName.get(0)))
-		{
-			aIndex = 0;
-			dIndex = 1;
-		}
-		else
-		{
-			aIndex = 1;
-			dIndex = 0;
-		}
-		String url = FileUtil.SaveActivityStringAsMedia(uid, pics.get(aIndex), picsContentType.get(aIndex));
+		String url = FileUtil.SaveActivityStringAsMedia(uid, pics.get(activityIndex), picsContentType.get(activityIndex));
 		activity.setImageUrl(url);
 		
-		url = FileUtil.SaveActivityDescStringAsMedia(uid, pics.get(dIndex), picsContentType.get(dIndex));
+		url = FileUtil.SaveActivityDescStringAsMedia(uid, pics.get(descIndex), picsContentType.get(descIndex));
 		activity.setDescUrl(url);
 		
 		activity.setCredit(credit);
@@ -102,38 +91,20 @@ public class ActivityServiceImpl implements IActivityService{
 	
 	@Override
 	public JSONObject UpdateActivity(long aid, String uid, List<File> pics, List<String> picsContentType, 
-			String activityIndex, String descIndex, int score, int credit, List<String> picsName) throws IOException {
+			int activityIndex, int descIndex, int score, int credit) throws IOException {
 		JSONObject json = new JSONObject();
 		ActivityInfo activity = new ActivityInfo();
 		activity.setAid(aid);
 		
-		if(activityIndex != null && !activityIndex.trim().equals(""))
+		if(activityIndex != -1)
 		{
-			int aIndex = 0;
-			if(activityIndex.equals(picsName.get(0)))
-			{
-				aIndex = 0;
-			}
-			else
-			{
-				aIndex = 1;
-			}
-			String activityUrl = FileUtil.SaveActivityStringAsMedia(uid, pics.get(aIndex), picsContentType.get(aIndex));
+			String activityUrl = FileUtil.SaveActivityStringAsMedia(uid, pics.get(activityIndex), picsContentType.get(activityIndex));
 			activity.setImageUrl(activityUrl);
 		}
 		
-		if(descIndex != null && !descIndex.trim().equals(""))
+		if(descIndex != -1)
 		{
-			int dIndex = 0;
-			if(descIndex.equals(picsName.get(0)))
-			{
-				dIndex = 0;
-			}
-			else
-			{
-				dIndex = 1;
-			}
-			String descUrl = FileUtil.SaveActivityDescStringAsMedia(uid, pics.get(dIndex), picsContentType.get(dIndex));
+			String descUrl = FileUtil.SaveActivityDescStringAsMedia(uid, pics.get(descIndex), picsContentType.get(descIndex));
 			activity.setDescUrl(descUrl);
 		}
 		

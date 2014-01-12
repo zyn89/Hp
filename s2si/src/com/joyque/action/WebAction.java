@@ -29,6 +29,18 @@ public class WebAction  extends BaseAction{
 	
 	private List<String> picsContentType;
 	
+	private File pic1;
+	
+	private File pic2;
+	
+	private File pic3;
+	
+	private String pic1Type;
+	
+	private String pic2Type;
+	
+	private String pic3Type;
+	
 	private long cid;
 	
 	private String url;
@@ -114,17 +126,20 @@ public class WebAction  extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidateImage(pics) || !isValidateType(picsContentType))
+			if(!isValidatePic(pic1) || !isValidatePicType(pic1Type)
+					|| !isValidatePic(pic2) || !isValidatePicType(pic2Type)
+					|| !isValidatePic(pic3) || !isValidatePicType(pic3Type))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.AddCarouselInfo(uid, pics, picsContentType);
+			json = webService.AddCarouselInfo(uid, pic1, pic2, pic3, pic1Type, pic2Type, pic3Type);
 		}catch(Exception e){			
 			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
 	
+
 	@SuppressWarnings("unchecked")
 	public void UpdateCarouselInfo()
 	{
@@ -133,12 +148,11 @@ public class WebAction  extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(cid))
+			if(!isValidateId(cid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.UpdateCarouselInfo(uid, cid, pics, picsContentType);
+			json = webService.UpdateCarouselInfo(uid, cid, pic1, pic2, pic3, pic1Type, pic2Type, pic3Type);
 		}catch(Exception e){			
 			throw new BaseException(e.getMessage());
 		}
@@ -189,8 +203,7 @@ public class WebAction  extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(id)|| !isValidateIsStatic(isStatic))
+			if(!isValidateId(id)|| !isValidateIsStatic(isStatic))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
@@ -383,6 +396,22 @@ public class WebAction  extends BaseAction{
 		ajaxReturn(json.toString());
 	}
 	
+	private boolean isValidatePicType(String type) {
+		if(type != null && !type.trim().equals(""))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isValidatePic(File pic) {
+		if(pic != null)
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	private boolean isValidateIsFinal(int isFinal) {
 		if(isFinal == 0 || isFinal == 1)
 		{
@@ -525,5 +554,53 @@ public class WebAction  extends BaseAction{
 
 	public void setIsFinal(int isFinal) {
 		this.isFinal = isFinal;
+	}
+
+	public File getPic1() {
+		return pic1;
+	}
+
+	public void setPic1(File pic1) {
+		this.pic1 = pic1;
+	}
+
+	public File getPic2() {
+		return pic2;
+	}
+
+	public void setPic2(File pic2) {
+		this.pic2 = pic2;
+	}
+
+	public File getPic3() {
+		return pic3;
+	}
+
+	public void setPic3(File pic3) {
+		this.pic3 = pic3;
+	}
+
+	public String getPic1Type() {
+		return pic1Type;
+	}
+
+	public void setPic1Type(String pic1Type) {
+		this.pic1Type = pic1Type;
+	}
+
+	public String getPic2Type() {
+		return pic2Type;
+	}
+
+	public void setPic2Type(String pic2Type) {
+		this.pic2Type = pic2Type;
+	}
+
+	public String getPic3Type() {
+		return pic3Type;
+	}
+
+	public void setPic3Type(String pic3Type) {
+		this.pic3Type = pic3Type;
 	}	
 }

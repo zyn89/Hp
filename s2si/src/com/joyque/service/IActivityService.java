@@ -10,13 +10,13 @@ public interface IActivityService {
 
 	JSONObject GetActivityList(String uid);
 
-	JSONObject AddActivity(List<File> pics, List<String> picsContentType, String activityIndex,
-			String descIndex, String uid, String type, int score, int credit, List<String> picsName) throws IOException;
+	JSONObject AddActivity(List<File> pics, List<String> picsContentType, int activityIndex,
+			int descIndex, String uid, String type, int score, int credit) throws IOException;
 
 	JSONObject DeleteActivity(long aid, String uid);
 
 	JSONObject UpdateActivity(long aid, String uid, List<File> pics,
-			List<String> picsContentType, String activityIndex,
-			String descIndex, int score, int credit, List<String> picsName) throws IOException;
+			List<String> picsContentType, int activityIndex,
+			int descIndex, int score, int credit) throws IOException;
 
 }

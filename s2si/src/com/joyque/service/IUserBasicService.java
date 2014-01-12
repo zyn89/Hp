@@ -13,4 +13,6 @@ public interface IUserBasicService {
 			String name, String shopName);
 
 	public JSONObject CheckIn(String uid);
+
+	public JSONObject AdminLogin(String account, String pw);
 }

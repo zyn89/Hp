@@ -160,10 +160,11 @@ button,a {
 			
 		</div>
 
+
 </body>
 <script type="text/javascript">
 	$("p a").click(function() {
-		$("#r_iframe").attr("src", $(this).attr("title"));
+		$("#j-content").html('<iframe scrolling="auto" height="680px" frameborder="0" width="100%" id="r_iframe" name="r_iframe" src="' + $(this).attr("title") + '" ></iframe>');
 	});
 </script>
 </html>

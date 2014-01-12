@@ -146,9 +146,12 @@ public class SurveyServiceImpl implements ISurveyService{
 			else
 			{
 				JSONArray rArray = new JSONArray();
-				rArray.add(count1 / sum);
-				rArray.add(count2 / sum);
-				rArray.add(1 - ((count1 + count2) / sum));
+				int p1 = (int)(count1 / sum * 100);
+				int p2 = (int)(count2 / sum * 100);
+				int p3 = 100 - p1 - p2;
+				rArray.add(p1);
+				rArray.add(p2);
+				rArray.add(p3);
 				j.accumulate("rate", rArray);
 			}
 			
@@ -252,9 +255,12 @@ public class SurveyServiceImpl implements ISurveyService{
 		else
 		{
 			JSONArray rArray = new JSONArray();
-			rArray.add(count1 / sum);
-			rArray.add(count2 / sum);
-			rArray.add(1 - ((count1 + count2) / sum));
+			int p1 = (int)(count1 / sum * 100);
+			int p2 = (int)(count2 / sum * 100);
+			int p3 = 100 - p1 - p2;
+			rArray.add(p1);
+			rArray.add(p2);
+			rArray.add(p3);
 			json.accumulate("rate", rArray);
 		}
 		if(isFinal == 1)

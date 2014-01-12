@@ -30,11 +30,10 @@ public class ActivityAction extends BaseAction{
 	
 	private List<String> picsContentType;
 	
-	private String activityIndex;
+	private int activityIndex;
 	
-	private String descIndex;
+	private int descIndex;
 	
-	private List<String> picsName;
 	
 	@SuppressWarnings("unchecked")
 	public void ActivityList()
@@ -62,13 +61,13 @@ public class ActivityAction extends BaseAction{
 			if(!isValidateType(type) || !isValidateScore(score)
 					|| !isValidateCredit(credit) || !isValidatePics(pics)
 					|| !isValidatePicsType(picsContentType) || !isValidatePicIndex(activityIndex)
-					|| !isValidatePicIndex(descIndex) || !isValidatePicName(picsName))
+					|| !isValidatePicIndex(descIndex))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
 			json = activityService.AddActivity(
 					pics, picsContentType, activityIndex,
-					descIndex ,uid, type, score, credit, picsName);
+					descIndex ,uid, type, score, credit);
 		}catch(Exception e){			
 			throw new BaseException(e.getMessage());
 		}
@@ -108,23 +107,15 @@ public class ActivityAction extends BaseAction{
 			}
 			json = activityService.UpdateActivity(
 					aid, uid, pics, picsContentType,
-					activityIndex, descIndex, score, credit, picsName);
+					activityIndex, descIndex, score, credit);
 		}catch(Exception e){			
 			throw new BaseException(e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
 	
-	private boolean isValidatePicName(List<String> picsName) {
-		if(picsName != null && picsName.size() > 0)
-		{
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean isValidatePicIndex(String activityIndex) {
-		if(activityIndex != null && !activityIndex.trim().equals(""))
+	private boolean isValidatePicIndex(int activityIndex) {
+		if(activityIndex >= 0)
 		{
 			return true;
 		}
@@ -237,27 +228,19 @@ public class ActivityAction extends BaseAction{
 		this.picsContentType = picsContentType;
 	}
 
-	public String getActivityIndex() {
+	public int getActivityIndex() {
 		return activityIndex;
 	}
 
-	public void setActivityIndex(String activityIndex) {
+	public void setActivityIndex(int activityIndex) {
 		this.activityIndex = activityIndex;
 	}
 
-	public String getDescIndex() {
+	public int getDescIndex() {
 		return descIndex;
 	}
 
-	public void setDescIndex(String descIndex) {
+	public void setDescIndex(int descIndex) {
 		this.descIndex = descIndex;
-	}
-
-	public List<String> getPicsName() {
-		return picsName;
-	}
-
-	public void setPicsName(List<String> picsName) {
-		this.picsName = picsName;
 	}
 }
