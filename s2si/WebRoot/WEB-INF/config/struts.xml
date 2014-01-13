@@ -16,9 +16,14 @@
         <global-results>
             <result name="exception-error">/WEB-INF/jsp/userhome.jsp</result>
             <result name="tologin">/WEB-INF/jsp/userhome.jsp</result>
+            <result name="adminLogin">/WEB-INF/jsp/userhome.jsp</result>
         </global-results>
         <global-exception-mappings>
             <exception-mapping result="exception-error" exception="java.lang.Exception"></exception-mapping>
         </global-exception-mappings>    
     </package>
+    
+    
+    <constant name="struts.multipart.maxSize" value="9000000"/>  
+    
 </struts>    

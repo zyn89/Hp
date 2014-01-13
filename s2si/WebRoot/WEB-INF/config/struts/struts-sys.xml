@@ -43,12 +43,6 @@
 			<result name="lottery">/WEB-INF/console/lottery.html</result>
 			<interceptor-ref name="mystack" />
 		</action>
-		<action name="set" class="managerAction" method="send">	
-		    <interceptor-ref name="mystack" />
-		</action>
-		<action name="file" class="activityAction" method="test">
-		    <interceptor-ref name="mystack" />
-		</action>
 		
 		<action name="question" class="managerAction">
 			<result name="success">/WEB-INF/console/question.html</result>	
@@ -73,6 +67,10 @@
 		
 		<!-- 签到 ischeck=0 没签到-->
 		<action name="CheckIn" class="userBasicAction" method="CheckIn">
+		    <interceptor-ref name="mystack" />
+		</action>
+		
+		<action name="ActivityList_Web" class="activityAction" method="ActivityList_Web">
 		    <interceptor-ref name="mystack" />
 		</action>
 		
@@ -196,6 +194,9 @@
 		    <interceptor-ref name="mystack" />
 		</action>
 		
+		<action name="LotteryList_Web" class="presentAction" method="LotteryList_Web">
+		    <interceptor-ref name="mystack" />
+		</action>
 		<action name="AddLottery" class="presentAction" method="AddLottery">
 		    <interceptor-ref name="mystack" />
 		</action>

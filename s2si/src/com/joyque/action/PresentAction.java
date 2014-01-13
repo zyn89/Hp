@@ -176,6 +176,11 @@ public class PresentAction extends BaseAction{
 		ajaxReturn(json.toString());
 	}
 	
+	public void LotteryList_Web()
+	{
+		LotteryList();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void AddLottery()
 	{

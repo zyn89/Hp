@@ -347,7 +347,7 @@
 			}
 		});
 		$.ajax({
-			url: 'LotteryList.action',
+			url: 'LotteryList_Web.action',
 			type: 'post',
 			dataType: 'json',
 		})

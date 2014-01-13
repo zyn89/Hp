@@ -174,7 +174,7 @@
 				$(".btn.fresh").bind("click",function(){
 					$(this).button("loading");
 					$.ajax({
-						url : "ActivityList.action",
+						url : "ActivityList_Web.action",
 						type : "POST",
 						data : {},
 						success : function(data) {

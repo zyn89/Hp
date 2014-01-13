@@ -50,6 +50,11 @@ public class ActivityAction extends BaseAction{
 		ajaxReturn(json.toString());
 	}
 	
+	public void ActivityList_Web()
+	{
+		ActivityList();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void AddActivity()
 	{
