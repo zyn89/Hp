@@ -97,6 +97,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 border: 1px solid red;
 			 width : 100%;
 			 margin-bottom:10px;
+			 position: relative;
+		}
+
+		.main .m-logo .m-wwz {
+			background: url(resources/image/wwz.png);
+			background-size: cover;
+			width: 72px;
+			height: 52px;
+			position: absolute;
+			left: 5px;
+			top: 5px;
 		}
 
 		.m-btns .btn-up,
@@ -202,16 +213,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	  	<div class="main">
 	  		<div class="m-logo">
-
+				<a href="javasrcipt:void(0);" class="m-wwz" id="j-wwz"></a>
 			</div>
 			<div class="m-btns">
-			<% if(name==null) { %>
-				<a href="javasrcipt:void(0);" class="btn btn-large btn-up" id="login-btn">登录</a>
-				<a href="javasrcipt:void(0);" class="btn btn-large btn-bottom" id="reg-btn">注册</a>
-			<% } else { %>
-				<a href="javasrcipt:void(0);" class="btn btn-large btn-up" id="logout-btn">退出</a>
-				<a href="javasrcipt:void(0);" class="btn btn-large btn-bottom" id="reg-btn">注册</a>
-			<% } %> 
+				
 			</div>
 			<div class="m-info">
 			<% if(name!=null && credit!=null) { %>

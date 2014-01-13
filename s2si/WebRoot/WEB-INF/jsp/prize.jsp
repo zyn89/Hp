@@ -14,194 +14,175 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script src="resources/js/jquery-1.9.1.js"></script>
 	<script src="resources/js/wScratchPad.js"></script>
+	<script type="text/javascript" src="resources/js/prize.js"></script>
 	<style>
-		.u-ggk {
+	
+		html,body {
+			height:100%;
+			width : 100%;
+		}
+
+		body,ul {
+			margin:0px;
+			padding:0px;
+		}
+		
+		ul {
+			list-style: none;
+		}
+
+		#wrap {
+			width:100%;
+			min-height: 100%;
+			background: url(resources/image/背景.png) repeat-y fixed;	
+			background-size:cover;
+		}
+
+
+		.main {
+			width : 320px;
+			min-height: 100%;
+			margin : 0px auto;
+			
+		}
+		
+		.main .m-logo {
+			 height: 135px;
+			 border: 1px solid red;
+			 width : 100%;
+			 margin-bottom:10px;
+		}
+
+		.main .m-tabs {
+			
+			width : 100%;
+		}
+		.main .m-tabs .m-tabs-btns {
+
+
+		}
+
+		.main .m-tabs .m-tabs-btns ul {
+			overflow: hidden;
+			zoom: 1;
+		}
+
+		.main .m-tabs .m-tabs-btns ul li {
+			display: block;
+			height: 32px;
+			width: 80px;
+			text-align: center;
+			line-height: 30px;
+			float:left;
+			cursor : pointer;
+		}
+		.main .m-tabs .m-tabs-btns ul li.tab-light {
+			background:url('resources/image/tab-light.png') no-repeat;
+			background-size: cover;
+			color: #fff;
+			
+		}
+
+		.main .m-tabs .m-tabs-btns ul li.tab-dark {
+			background:url('resources/image/tab-dark.png') no-repeat;
+			background-size: cover;
+			color: #999;
+		}
+		.main .m-tabs .m-tabs-btns ul li a {
+			text-align: center;
+			text-decoration: none;
+			color:inherit;
+			font-weight:bold;
+			font-size:12px;
+		}
+
+		.u-pitem {
+			width: 100%;
+			height: 92px;
+			background: url('resources/image/listdb.png') no-repeat;
+			background-size:cover;
+			vertical-align: middle;
+			text-align: center;
+			position: relative;
+			display: block;
+			margin-bottom: 2px;
+			cursor: pointer;
+		}
+
+		.u-pitem .u-prize{
+			display: inline-block;
+			height: 80%;
+			position: absolute;
+			left:6%;
+			top:10%;
+		}
+
+		.u-pitem .u-arrow {
+			display: inline-block;
+			height:30%;
+			position: absolute;
+			right:7%;
+			top:39%;
+		}
+		
+		.m-tabs-content {
+			margin:0 auto;
+			width : 100%;
+		}
+	
+		.m-tabs-content .tab-content {
+			margin:0 auto;
+			width : 100%;
+		}
+
+		.m-tabs-content .tab-content .m-credit {
+			background:url(resources/image/lefttimes.png) no-repeat;
+			background-size: contain;
+			height: 34px;
+			width: 134px;
+			margin:0 auto;
+			line-height:32px;
+			color : #fff;
+			font-weight : bold;
+			font-size:13px;
+		}
+		
+		.m-tabs-content .tab-content .m-pic {
+			width: 80%;
+			margin: 0 auto;
+			display: block;
+			margin-top: 15px;
+		}
+		
+		.m-tabs-content .tab-content .m-ggk {
 			margin-top: 20px;
-		}	
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			height :98px;
+		}
+		
+		.m-tabs-content .tab-content .u-ggk {
+			width: 98px;
+			height: 98px;
+			display: inline-block;
+			border: 1px solid red;
+			
+			
+		}
+		.m-tabs-content .tab-content .u-ggk:first-child {
+			margin-left:1%;
+		}
+		
+		.m-tabs-content .tab-content .u-ggk:last-child {
+			margin-left:1%;
+		}
 	</style>
 
 
 	
-	<script>
-		jQuery(function($){
-
-
-
-
-			//start ggk part
-				var state = { status : 0 ,m : [1,1,1]};
-
-
-				function _callback(e,percentage,state,index,_this) {
-					if(percentage > 80 && state.m[index]) {
-						state.status += 1;
-						_this.clear();
-						if(state.status == 3) {
-							alert($('#lottery_result').text());
-						}
-						state.m[index] = 0;
-					}
-					console.log('p:' + percentage);
-					console.log('s:' + state.status);
-				}
-
-
-
-				function initGGK(options) {
-					var defaultOpt = {
-						width : 210,
-						height : 100,
-						color : '#999',
-						size : 20
-					},
-					opts = $.extend(defaultOpt,options || {});
-					opts.container.wScratchPad({
-					    width           : opts.width,                
-					    height          : opts.height,                
-					    image           : opts.imgUrl,  
-					    image2          : null,              
-					    color           : opts.color,     
-					    overlay         : 'none',    
-					    size            : opts.size,               
-					    realtimePercent : true,             
-					    scratchDown     : function(e,percent){
-					    						opts.callback(e,percent,opts.state,opts.index,this);
-					    				 },               
-					    scratchUp       : function(e,percent){
-					    						opts.callback(e,percent,opts.state,opts.index,this);
-					    				 },                   
-					    scratchMove     : function(e,percent){	
-					    						opts.callback(e,percent,opts.state,opts.index,this);
-					    				 },                   
-					    cursor          : '/images/coin.png'        
-					});
-
-				}
-	
-
-
-
-			//end ggk 
-
-
-
-			function displayInfo(url,callback,contentDiv) {
-				$.ajax({
-					url: url,
-					type: 'post',
-					dataType: 'json'
-				})
-				.done(function(data) {
-					callback(data,contentDiv);
-				})
-				.fail(function(err) {
-					console.log("error");
-				});
-			}
-
-			
-			function _btn1Callback(data,contentDiv) {
-				var exchanges = data.exchanges,
-					$ul = $('<ul>');
-				$.each(exchanges,function(index,value){
-					var $li = $('<li>'),
-						$a = $('<a>'),
-						$img = $('<img>');
-					$a.attr({
-						href : "interact_prizeInfo.action?eid=" + value.eid + '&descUrl=' + value.descUrl
-					});
-					$img.attr({
-						src : value.exchangeUrl
-					});
-
-					$a.append($img).appendTo($li);
-					$li.appendTo($ul);
-				});
-				contentDiv.empty();
-				contentDiv.append($ul);
-			}
-
-			function _btn2Callback(data,contentDiv) {
-				var lottery = (data.lotterys)[0],
-					lotteryCount = data.lotteryCount,
-					credit = data.credit,
-					choiceItems = lottery.choiceItems,
-					$ggks = $('.u-ggk').empty();
-
-				$('.m-credit p',contentDiv).text('剩余次数:' + lotteryCount);
-				state.m = [1,1,1];
-				state.status = 0;
-				$('.m-pic img',contentDiv).attr({
-					src :　lottery.lotteryUrl
-				});
-
-				if(choiceItems[0] == choiceItems[1] && choiceItems[1] == choiceItems[2]) {
-					$('#lottery_result').text('获奖');
-				} else {
-					$('#lottery_result').text('遗憾没获奖');
-				}
-				$.each(choiceItems,function(index,value){
-					initGGK({
-						'imgUrl' : value,
-						callback : _callback,
-						state : state,
-						index : index,
-						container : $ggks.eq(index)
-					});
-
-				});
-			}
-
-			function _btn3Callback(data,contentDiv) {
-				var lotterys = data.lotterys;
-				contentDiv.empty();
-				if(!lotterys || lotterys.length == 0) {
-					contentDiv.html('<p>没有获得奖品</p>');
-				} else {
-					$.each(lotterys,function(index,value){
-						var $a = $('<a>'),
-							$img = $('<img>');
-
-						$a.attr({
-							href : 'javascript:void(0);'
-						});
-						$img.attr({
-							src : value.prizeUrl
-						});
-						$a.append($img).appendTo(contentDiv);
-					});
-				}
-			}
-
-			$('.m-tabs-btns ul button').bind('click',function(event){
-				var _this = $(this),
-				    btnId = _this.attr('id'),
-					contentId = btnId.substring(0, btnId.length-1);
-				$('.tab-content').hide();
-				$('#' + contentId).show();
-
-				switch(contentId) {
-					case "one" : 
-						displayInfo("GetExchanges.action",_btn1Callback,$('#' + contentId));
-						break;
-					case "two" :
-						displayInfo("LotteryList.action",_btn2Callback,$('#' + contentId));
-						break;
-					case "three" :
-						displayInfo("QueryLottery.action",_btn3Callback,$('#' + contentId));
-						break;
-				}
-
-			}); 
-			
-			$('.m-tabs-btns ul button:eq(0)').trigger('click');
-			
+	<script >
 		
-
-
-
-
-		});
 	</script>
 	<style>
 	
@@ -209,44 +190,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body>
-	<div class="main">
-		<div class="m-tabs">
-			<div class="m-tabs-btns">
-				<ul>
-					<li><button id="one#">兑奖</button></li>
-					<li><button id="two#">抽奖</button></li>
-					<li><button id="three#">奖品</button></li>
-				</ul>
+	<div id="wrap">
+			<div class="main">
+			
+				<div class="m-logo">
+
+				</div>
+				<div class="m-tabs">
+					<div class="m-tabs-btns">
+						<ul>
+							<li id="one#" class="tab-light"><a href="javascript:void(0);">兑奖</a></li>
+							<li id="two#" class="tab-light"><a href="javascript:void(0);">抽奖</a></li>
+							<li id="three#" class="tab-light"><a href="javascript:void(0);">奖品</a></li>
+						</ul>
+					</div>
+					<div class="m-tabs-content">
+						<div id="one" style="display:none;" class="tab-content">
+							<ul id="exchange-items">
+								<li class="u-pitem">	
+										<img class="u-prize" src="resources/image/list.png" alt="">						
+										<img class="u-arrow" src="resources/image/arrow.png" alt="">
+								</li>
+									<li class="u-pitem">	
+										<img class="u-prize" src="resources/image/list.png" alt="">
+								
+										<img class="u-arrow" src="resources/image/arrow.png" alt="">
+								</li>
+								<li class="u-pitem">	
+										<img class="u-prize" src="resources/image/list.png" alt="">
+								
+										<img class="u-arrow" src="resources/image/arrow.png" alt="">
+								</li>
+								<li class="u-pitem">	
+										<img class="u-prize" src="resources/image/list.png" alt="">
+								
+										<img class="u-arrow" src="resources/image/arrow.png" alt="">
+								</li>
+							</ul>
+						</div>
+						<div id="two" style="" class="tab-content">
+							<div class="m-credit" >
+								<p style="padding-left: 22px;">剩余次数：12</p>
+							</div>
+							<img class="m-pic" src="resources/image/prizedb.png" alt=""></a>
+							<div class="m-ggk">
+								 <div class="u-ggk"></div>
+								 <div class="u-ggk"></div>
+								 <div class="u-ggk"></div> 
+								 <div id="lottery_result" style="display:none;">
+								 </div>
+							</div>
+						</div>
+						<div id="three" style="display:none;" class="tab-content">
+							
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="m-tabs-content">
-				<div id="one" style="display:none;" class="tab-content">
-					<ul>
-						<li><a href=""><img src="" alt=""></a></li>
-						<li><a href=""><img src="" alt=""></a></li>
-						<li><a href=""><img src="" alt=""></a></li>
-					</ul>
-				</div>
-				<div id="two" style="display:none;" class="tab-content">
-					<div class="m-credit" >
-						<p></p>
-					</div>
-					<div class="m-pic">
-						<a href=""><img src="" alt=""></a>
-					</div>
-					<div class="m-ggk">
-						 <div class="u-ggk"></div>
-						 <div class="u-ggk"></div>
-						 <div class="u-ggk"></div> 
-						 <div id="lottery_result" style="display:none;">
-						 </div>
-					</div>
-				</div>
-				<div id="three" style="display:none;" class="tab-content">
-					
-				</div>
-			</div>
-		</div>
 	</div>
+	<li id="u-pitem-clone" class="u-pitem" style="display:none;">	
+		<img class="u-prize" src="resources/image/list.png" alt="">						
+		<img class="u-arrow" src="resources/image/arrow.png" alt="">
+	</li>
 </body>
 </html>
 
