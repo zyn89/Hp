@@ -39,13 +39,12 @@ public class ActivityServiceImpl implements IActivityService{
 			if(ua == null)
 			{
 				j.accumulate("done", 0);
-				j.accumulate("activityUrl", info.getImageUrl());
 			}
 			else
 			{
 				j.accumulate("done", 1);
-				j.accumulate("activityUrl", "resources/image/done.jpg");
 			}
+			j.accumulate("activityUrl", info.getImageUrl());
 			j.accumulate("aid", info.getAid());
 			j.accumulate("type", info.getType());		
 			j.accumulate("descUrl", info.getDescUrl());
