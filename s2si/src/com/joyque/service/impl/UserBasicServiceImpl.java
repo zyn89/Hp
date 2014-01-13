@@ -202,4 +202,12 @@ public class UserBasicServiceImpl implements IUserBasicService{
 	public void setUserCreditDao(IUserCreditDao userCreditDao) {
 		this.userCreditDao = userCreditDao;
 	}
+
+	public IAdminInfoDao getAdminInfoDao() {
+		return adminInfoDao;
+	}
+
+	public void setAdminInfoDao(IAdminInfoDao adminInfoDao) {
+		this.adminInfoDao = adminInfoDao;
+	}
 }
