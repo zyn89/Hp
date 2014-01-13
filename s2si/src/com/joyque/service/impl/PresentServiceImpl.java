@@ -125,10 +125,7 @@ public class PresentServiceImpl implements IPresentService{
 	@Override
 	public JSONObject DeleteExchange(long eid) {
 		JSONObject json = new JSONObject();
-		ExchangeInfo exchange = exchangeInfoDao.GetExchangeInfo(eid);
-		exchangeInfoDao.deleteExchangeInfo(eid);
-		prizeInfoDao.deletePrizeInfo(exchange.getPid());
-		
+		exchangeInfoDao.deleteExchangeInfo(eid);		
 		json.accumulate("exchanges", GetExchangeArray());
 		return json;
 	}
