@@ -41,6 +41,7 @@
 			<result name="exchange">/WEB-INF/console/exchange.html</result>
 			<result name="imgManage">/WEB-INF/console/imgManage.html</result>
 			<result name="lottery">/WEB-INF/console/lottery.html</result>
+<result name="login">/WEB-INF/console/login.html</result>
 			<interceptor-ref name="mystack" />
 		</action>
 		

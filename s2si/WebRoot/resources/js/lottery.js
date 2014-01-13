@@ -20,45 +20,48 @@
 				var $tr =  $('<tr>').attr({
 					'data-lid' : record.lid
 				});
-				$('<td>').text(index+1).appendTo($tr);
+				$('<td>').css({
+					'vertical-align':'middle',
+				}).text(index+1).appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center'
 				}).attr({
 					'data-imgUrl' : record.lotteryUrl
-				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
+				}).html('<button type="button" class="btn btn-link j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center'
 				}).attr({
 					'data-imgUrl' : record.choiceItems[0]
-				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
+				}).html('<button type="button" class="btn btn-link j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center'
 				}).attr({
 					'data-imgUrl' : record.choiceItems[1]
-				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
+				}).html('<button type="button" class="btn btn-link j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center'
 				}).attr({
 					'data-imgUrl' : record.choiceItems[2]
-				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
+				}).html('<button type="button" class="btn btn-link j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center'
 				}).attr({
 					'data-imgUrl' : record.prizeUrl
-				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
+				}).html('<button type="button" class="btn btn-link j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center'
 				}).attr({
 					'data-imgUrl' : record.descUrl
-				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
+				}).html('<button type="button" class="btn btn-link j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
-					'text-align' : 'center'
+					'text-align' : 'center',
+					'vertical-align':'middle',
 				}).text(record.credit)
 				  .appendTo($tr);
 				$('<td>').css({
@@ -71,7 +74,8 @@
 
 		function uploadFile(formId,url,callback) {
 			var index=0;
-			$("#"+formId).find('input[type="hidden"]').each(function(index,e){
+			var vali=$("body").data("validate");
+			$("#"+formId).find('div input[type="hidden"]').each(function(index,e){
 				var str=$(e).val();
 				//console.log(str);
 				var name=$(e).attr("name");
@@ -79,10 +83,26 @@
 					$(e).val(index);
 					console.log($(e).val());
 					index=index+1;
+					$("p."+name).css("display","none");
 				}else{
-					$(e).val(-1)
+					if(vali){						
+						$("p."+name).css("display","inline-block");
+						flag=true;
+					}
+					$(e).val(-1);
 				}				
 			});
+			var str=$("#"+formId).find("input[name='credit']").val();
+			console.log(str);
+			if(str=="" || !str){
+				$("p.credit").css("display","inline-block");
+				flag=true;
+			}else{
+				$("p.credit").css("display","none");
+			}
+			if(flag==true){
+				return;
+			}
 			var form = document.getElementById(formId),
 				formData = new FormData(form);
 			$.ajax({
@@ -94,13 +114,17 @@
 			})
 			.done(function(data) {
 				try{
-					JSON.parse(data);
+					if(typeof(data)!="object"){					
+						JSON.parse(data);
+					} 
 				 }catch(exception){				
 				     alert("an error processed");
+				     return;
 				 }
 				 if(callback) {
 					callback($.parseJSON(data));
 					bindEventAfterDataLoaded();
+					$('#j-addmodel').modal('show');
 				}
 			})
 			.fail(function(err) {
@@ -112,7 +136,9 @@
 
 			//弹出增加模态框
 			$('#j-addlottery').bind('click.foradd',function(){
+				$("body").data("validate",true);
 				$('#j-addmodel').modal('show');
+				$('#j-addmodel').find("p.text-error").css("display","none");
 			});
 			
 			//点击上传 时间绑定
@@ -139,7 +165,7 @@
 			//保存增加兑奖活动
 			$('#j-savelottery').bind('click.foradd',function(event){
 				uploadFile('j-addlotteryform','AddLottery.action',fillInLotteryTable);
-				$('#j-addmodel').modal('hide');
+				//$('#j-addmodel').modal('hide');
 			});
 
 			//保存修改
@@ -180,6 +206,14 @@
 					},
 				})
 				.done(function(data) {
+					try{
+						if(typeof(data)!="object"){					
+							JSON.parse(data);
+						} 
+					 }catch(exception){	
+					     alert("an error processed");
+					     return;
+					 }
 					var $tr = _this.parents('tr');
 					//修改序号
 					$trs = _this.parents('tbody').find('tr').not($tr);
@@ -201,14 +235,15 @@
 					$tds = $pTr.find('td:gt(0):lt(7)'),
 					credit = $pTr.find('td:eq(7)').text(),
 					$imgs = $('#j-oldimg').find('img');
-				$.each($tds,function(index,tr){
+				/*$.each($tds,function(index,tr){
 					$imgs.eq(index).attr({
 						src : $(tr).attr('data-imgUrl')
 					});
-				});
+				});*/
 				$('#lid','#j-update-lottery-modal').val(lid);
 				$('#j-u-credit','#j-update-lottery-modal').val(credit);
 				$('#j-update-lottery-modal').modal('show');
+				$("body").data("validate",false);
 			});
 
 			//4.统计活动
@@ -346,13 +381,21 @@
 				$('.pagination').addClass("hide");
 			}
 		});
+		$(".btn.refresh").button("loading");
 		$.ajax({
-			url: 'LotteryList_Web.action',
+			url: 'LotteryList.action',
 			type: 'post',
 			dataType: 'json',
 		})
 		.done(function(data) {
-			$(".btn.refresh").button("loading");
+			try{
+				if(typeof(data)!="object"){					
+					JSON.parse(data);
+				} 
+			 }catch(exception){	
+			     alert("an error processed");
+			     return;
+			 }
 			fillInLotteryTable(data);
 			bindEventAfterDataLoaded();
 			$(".btn.refresh").button("reset");

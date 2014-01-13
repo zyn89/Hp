@@ -29,7 +29,7 @@
 								$tr.data("data", arr[i]);
 								$tr.removeClass("hide");
 								$tr.removeClass("temple");
-								$tr.find(".id").text(arr[i]["aid"]);
+								$tr.find(".id").text(i+1);
 								$tr.find(".type").text(dict[arr[i]["type"]]);
 								$tr.find(".desc").data("data",arr[i]["descUrl"]);
 								$tr.find("a.descURL").bind("click",function() {
@@ -169,16 +169,25 @@
 								});
 								$tr.appendTo($("table.all"));
 							}
+							var callback=$("table.all").data("callback");
+							callback();
 							$(".btn.fresh").button("reset");
 						});
 				$(".btn.fresh").bind("click",function(){
 					$(this).button("loading");
 					$.ajax({
-						url : "ActivityList_Web.action",
+						url : "ActivityList.action",
 						type : "POST",
 						data : {},
 						success : function(data) {
-							var data = JSON.parse(data);
+							try{
+								 var data=JSON.parse(data);
+							 }catch(exception){				
+							     alert("an error processed");
+							     return;
+							 }
+							//var data = JSON.parse(data);
+							//console.log(data);
 							$("#j-content").data("data", data);
 							$(".btn.fresh").trigger("fresh");
 						},
@@ -253,7 +262,14 @@
 									processData: false,
 									success : function(data) {
 										//console.log(data);
-										alert("上传完成");
+										try{
+											if(typeof(data)!="object"){					
+												JSON.parse(data);
+											} 
+										 }catch(exception){				
+										     alert("an error processed");
+										}
+										//alert("上传完成");
 										$(".modal.add").modal("hide");
 										$(".btn.fresh").trigger("click");
 									},
@@ -336,6 +352,13 @@
 									success : function(data) {
 										//console.log(data);
 										//alert("上传完成");
+										try{
+											if(typeof(data)!="object"){					
+												JSON.parse(data);
+											} 
+										 }catch(exception){				
+										     alert("an error processed");
+										 }
 										$(".modal.add").modal("hide");
 										$(".btn.fresh").trigger("click");
 									},
@@ -347,8 +370,8 @@
 			});
 			//查看上传图片时的事件处理
 			$(".modal.show").bind("show",function(){
-				//$(this).css({"width":"auto"});
-				$('.modal-body',this).css({height:'auto', 'max-height':'100%'});
+				  $(this).css({width:'auto'});
+			      $('.modal-body',this).css({width:'auto',height:'auto', 'max-height':'100%'});
 			});
 			//点击打开文件上传框
 			$(".modal").find(".btn-link.desc").bind("click", function() {
@@ -390,41 +413,55 @@
 				$(".modal.oper").modal("hide");
 				$(".modal.add").modal("hide");
 				$(".modal.res").modal("hide");
-			});
-			//删除用按钮的相关处理
-			$(".btn.btn-danger").bind("click", function() {
-				//var $modal=$(".mynav").data("data");
-				var obj = $(".modal.oper").data("data");
-				if(confirm("确定删除吗？") == true){     //如果用户单击了确定按钮 
-						 console.log("删除");
-						 $.ajax({
-							url : "DeleteActivity.action",
-							type : "POST",
-							data : {
-									"aid" : obj.aid,
-							},
-							success : function(data) {
-									console.log("delete!");
-									$(".modal.oper").modal("hide");
-									$(".btn.fresh").trigger("click");
-							},
-						});
-				} 
-				else{ 
-						console.log("不删除");
-				} 
-			});
-			//点击修改按钮，出现修改用的列表，并给输入框填上数据
-			$(".btn.change").bind("click", function() {
-				//console.log($(".modal.oper").data("data"));
-				$(".oper").find("form").removeClass("hide");
-				var obj = $(".modal.oper").data("data");
-				console.log("为啥没填");
-				console.log(obj);
-				$(".oper .controls.type").find("select").val(obj["type"]);
-				$(".oper .controls.credit").find("input").val(obj["credit"]);
-				$(".oper .controls.score").find("input").val(obj["score"]);
-			});
+			});			
+			function callback(){
+				//点击修改按钮，出现修改用的列表，并给输入框填上数据
+				$("table.all").find(".btn.change").bind("click", function() {
+					//console.log($(".modal.oper").data("data"));
+					$(".modal.oper").modal("show");
+					$(".oper").find("form").removeClass("hide");
+					//var obj = $(".modal.oper").data("data");
+					var obj = $(this).parent().parent().data("data");
+					console.log("为啥没填");
+					console.log(obj);
+					$(".oper .controls.type").find("select").val(obj["type"]);
+					$(".oper .controls.credit").find("input").val(obj["credit"]);
+					$(".oper .controls.score").find("input").val(obj["score"]);
+				});
+				//删除用按钮的相关处理
+				$("table.all").find(".btn.clean").bind("click", function() {
+					//var $modal=$(".mynav").data("data");
+					var obj = $(".modal.oper").data("data");
+					var obj = $(this).parent().parent().data("data");
+					if(confirm("确定删除吗？") == true){     //如果用户单击了确定按钮 
+							 console.log("删除");
+							 $.ajax({
+								url : "DeleteActivity.action",
+								type : "POST",
+								data : {
+										"aid" : obj.aid,
+								},
+								success : function(data) {
+										console.log("delete!");
+										try{
+											if(typeof(data)!="object"){					
+												JSON.parse(data);
+											} 
+										 }catch(exception){				
+										     alert("an error processed");
+										     return;
+										 }
+										//$(".modal.oper").modal("hide");
+										$(".btn.fresh").trigger("click");
+								},
+							});
+					} 
+					else{ 
+							console.log("不删除");
+					} 
+				});
+			}
+			$("table.all").data("callback",callback);
 			//点击新增按钮，弹出新增操作用到的对话框
 			$(".btn.add").bind("click", function() {
 				$(".modal.add").modal("show");

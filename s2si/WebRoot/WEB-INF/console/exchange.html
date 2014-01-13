@@ -90,6 +90,7 @@
 								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
 								<span class="j-filename"></span>
 								<input type="hidden" name="exTitleIndex" />
+								<p class="text-error exTitleIndex" style="margin-left:20px;display:none;font-size:14px">必须选择一个文件上传</p>
 							</div>
 						</div>
 						
@@ -100,6 +101,7 @@
 								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
 								<span class="j-filename"></span>
 								<input type="hidden" name="exDescIndex" />
+								<p class="text-error exDescIndex" style="margin-left:20px;display:none;font-size:14px">必须选择一个文件上传</p>
 							</div>
 						</div>
 						
@@ -110,6 +112,7 @@
 								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
 								<span class="j-filename"></span>
 								<input type="hidden" name="prizeTitleIndex" />
+								<p class="text-error prizeTitleIndex" style="margin-left:20px;display:none;font-size:14px">必须选择一个文件上传</p>
 							</div>
 						</div>
 						
@@ -120,6 +123,7 @@
 								<a class="j-abtn" class="btn btn-link activity" style="padding-top: 5px;display: inline-block;cursor:pointer;">点此上传</a>
 								<span class="j-filename"></span>
 								<input type="hidden" name="prizeDescIndex" />
+								<p class="text-error prizeDescIndex" style="margin-left:20px;display:none;font-size:14px">必须选择一个文件上传</p>
 							</div>
 						</div>
 						
@@ -127,6 +131,7 @@
 							<label class="control-label" for="inputPassword">积分</label>
 							<div class="controls credit">
 								<input name="credit" type="text" id="j-credit" placeholder="积分">
+								<p class="text-error credit" style="display:none;font-size:14px">不能为空</p>
 							</div>
 						</div>
 					</form>
@@ -170,7 +175,7 @@
 								<input type="hidden" id="eid" name="eid"/>
 							</div>
 						</div-->
-									
+						<input type="hidden" id="eid" name="eid" class="eid"/>			
 						<div class="control-group">
 							<label class="control-label" for="inputEmail">兑奖列表图</label>
 							<div class="controls">

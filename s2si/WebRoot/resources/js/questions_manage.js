@@ -8,14 +8,25 @@
 			type : "POST",
 			data : {"aid":aid},
 			success : function(data) {
-				var data = JSON.parse(data);
 				//console.log("question");
-				console.log(data);
+				 try{
+					 if(typeof(data)!="object"){					
+							var data=JSON.parse(data);
+						} 
+				 }catch(exception){				
+				     alert("an error processed");
+				     return;
+				 }
 				$("#j-content").data("data", data);
 				//$("#tmp_1").data("data", data);
 				$(".btn.fresh").trigger("fresh");
 			},
 		});
+	});
+	//让显示图片的对话框自适应大小
+	$(".modal.show").bind("show",function(){
+		  $(this).css({width:'auto'});
+	      $('.modal-body',this).css({width:'auto',height:'auto', 'max-height':'100%'});
 	});
 	$(".btn.fresh").bind("fresh",function() {
 							$("table").find("tr:not(.hide):not(.header)").remove();
@@ -58,6 +69,14 @@
 													},
 													success : function(data) {
 														console.log("delete!");
+														try{
+															if(typeof(data)!="object"){					
+																JSON.parse(data);
+															} 
+														 }catch(exception){				
+														     alert("an error processed");
+														     return;
+														 }
 														$(".btn.fresh").trigger("click");
 													},
 												});
@@ -221,7 +240,26 @@
 									$(".modal.oper").modal("hide");
 									$(".btn.fresh").trigger("click");
 								};
-								xhr.send(form);
+								//xhr.send(form);
+								$.ajax({
+									url : actionName,
+									type : "POST",
+									data : form,
+									contentType: false,
+									processData: false,
+									success : function(data) {
+										//console.log(data);
+										 try{
+											 if(typeof(data)!="object"){					
+													JSON.parse(data);
+												} 
+										 }catch(exception){				
+										     alert("an error processed");
+										 }
+										$(".modal.add").modal("hide");
+										$(".btn.fresh").trigger("click");
+									},
+								});
 								//console.log("上传");
 			});
 });

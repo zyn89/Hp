@@ -20,7 +20,9 @@
 				var $tr =  $('<tr>').attr({
 					'data-eid' : record.eid
 				});
-				$('<td>').text(index+1).appendTo($tr);
+				$('<td>').css({
+					'vertical-align':'middle',
+				}).text(index+1).appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center'
 				}).attr({
@@ -46,7 +48,8 @@
 				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
-					'text-align' : 'center'
+					'text-align' : 'center',
+					'vertical-align':'middle',
 				}).text(record.credit)
 				  .appendTo($tr);
 				$('<td>').css({
@@ -58,8 +61,10 @@
 		}
 
 		function uploadFile(formId,url,callback) {
+			var vali=$("body").data("validate");
+			var flag=false;
 			var index=0;
-			$("#"+formId).find('input[type="hidden"]').each(function(index,e){
+			$("#"+formId).find('div input[type="hidden"]').each(function(index,e){
 				var str=$(e).val();
 				//console.log(str);
 				var name=$(e).attr("name");
@@ -67,10 +72,25 @@
 					$(e).val(index);
 					console.log($(e).val());
 					index=index+1;
+					$("p."+name).css("display","none");
 				}else{
+					if(vali){						
+						$("p."+name).css("display","inline-block");
+						flag=true;
+					}
 					$(e).val(-1)
 				}				
 			});
+			var str=$("#"+formId).find("input[name='credit']").val();
+			if(str=="" || !str){
+				$("p.credit").css("display","inline-block");
+				flag=true;
+			}else{
+				$("p.credit").css("display","none");
+			}
+			if(flag==true){
+				return;
+			}
 			var form = document.getElementById(formId),
 				formData = new FormData(form);
 			$.ajax({
@@ -88,9 +108,10 @@
 						callback($.parseJSON(data));
 						bindEventAfterDataLoaded();
 					}
+					$('#j-addmodel').modal('hide');
 				 }catch(exception){				
 				     alert("an error processed");
-				 }
+				 }				 
 			
 			})
 			.fail(function(err) {
@@ -101,8 +122,10 @@
 		function bindEvent() {
 
 			//弹出增加模态框
-			$('#j-addexchange').bind('click.foradd',function(){
+			$('#j-addexchange').bind('click.foradd',function(e){
+				console.log(e);
 				$('#j-addmodel').modal('show');
+				$('#j-addmodel').find("p.text-error").css("display","none");
 			});
 			
 			//点击上传 时间绑定
@@ -128,8 +151,9 @@
 
 			//保存增加兑奖活动
 			$('#j-saveexchange').bind('click.foradd',function(event){
+				$("body").data("validate",true);
 				uploadFile('j-addexchangeform','AddExchange.action',fillInExchangeTable);
-				$('#j-addmodel').modal('hide');
+				//$('#j-addmodel').modal('hide');
 			});
 
 			//保存修改
@@ -170,6 +194,14 @@
 					},
 				})
 				.done(function(data) {
+					try{
+						if(typeof(data)!="object"){					
+							JSON.parse(data);
+						} 
+					 }catch(exception){	
+					     alert("an error processed");
+					     return;
+					 }
 					var $tr = _this.parents('tr');
 					//修改序号
 					$trs = _this.parents('tbody').find('tr').not($tr);
@@ -185,17 +217,18 @@
 
 			//3.修改活动
 			$('.j-c-modify').bind('click.for.modify',function(event){
+				$("body").data("validate",false);
 				var _this = $(this);
 					$pTr = _this.parents('tr'),
 					eid = $pTr.attr('data-eid'),
 					$tds = $pTr.find('td:gt(0):lt(4)'),
 					credit = $pTr.find('td:eq(5)').text(),
 					$imgs = $('#j-oldimg').find('img');
-				$.each($tds,function(index,tr){
+				/*$.each($tds,function(index,tr){
 					$imgs.eq(index).attr({
 						src : $(tr).attr('data-imgUrl')
 					});
-				});
+				});*/
 				$('#eid','#j-update-exchange-modal').val(eid);
 				$('#j-u-credit','#j-update-exchange-modal').val(credit);
 				$('#j-update-exchange-modal').modal('show');
@@ -344,6 +377,14 @@
 			dataType: 'json',
 		})
 		.done(function(data) {
+			try{
+				if(typeof(data)!="object"){					
+					JSON.parse(data);
+				} 
+			 }catch(exception){	
+			     alert("an error processed");
+			     return;
+			 }
 			fillInExchangeTable(data);
 			bindEventAfterDataLoaded();
 			$(".btn.refresh").button("reset");

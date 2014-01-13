@@ -19,6 +19,14 @@
 				data: formData
 			})
 			.done(function(data) {
+				try{
+					if(typeof(data)!="object"){					
+						JSON.parse(data);
+					} 
+				 }catch(exception){	
+				     alert("an error processed");
+				     return;
+				 }
 				console.log(data);
 				if(sid) {
 					$('#j-wdytable tbody').find('tr[data-sid=' + sid + ']').find('.j-mqestion')
@@ -48,7 +56,7 @@
 					$('<td>').css({
 								'text-align' : 'center'
 							  })
-							 .html('<button class="btn btn-primary j-preview" type="button">查看</button>')
+							 .html('<button class="btn btn-link j-preview" type="button">查看</button>')
 							 .appendTo($tr);
 					$('<td>').css({
 								'text-align' : 'center'
@@ -98,7 +106,7 @@
 				$('<td>').css({
 								'text-align' : 'center'
 							  })
-							 .html('<button class="btn btn-primary j-q-preview" type="button">查看</button>')
+							 .html('<button class="btn btn-link j-q-preview" type="button">查看</button>')
 							 .appendTo($tr);
 				$.each(value.choiceItems,function(i,val){
 					$('<td>').css({
@@ -144,6 +152,14 @@
 					},
 				})
 				.done(function(data) {
+					try{
+						if(typeof(data)!="object"){					
+							JSON.parse(data);
+						} 
+					 }catch(exception){	
+					     alert("an error processed");
+					     return;
+					 }
 					_this.parents('tr').remove();
 				})
 				.fail(function() {
@@ -164,7 +180,7 @@
 				$('#j-oldimg img','#j-add-qustion-modal').attr({src:imgUrl});
 				$('#qid','#j-add-qustion-modal').val(qid);
 				$('#j-oldimg','#j-add-qustion-modal').show();
-				$('#j-q-filename','#j-add-qustion-modal').text(imgUrl);//应该显示图片
+				//$('#j-q-filename','#j-add-qustion-modal').text(imgUrl);//应该显示图片
 
 				$('#j-q-a1','#j-add-qustion-modal').val(a1);
 				$('#j-q-a2','#j-add-qustion-modal').val(a2);
@@ -224,10 +240,15 @@
 							$("a.back p").addClass("s-detail");
 							//$("a.back").addClass("rear");
 							$('.pagination').removeClass("hide");
-							$("#j-wdyqtable").fadeOut();
+							$("#j-wdyqtable").fadeOut("fast",function(){
+								$('#j-wdyquser').fadeIn("fast",function(){
+									_this.button("reset");
+								});	
+							});
 							$('#j-wdyquser').removeClass("hide");
-							$('#j-wdyquser').fadeIn();
-							_this.button("reset");
+							/*$('#j-wdyquser').fadeIn("fast",function(){
+								_this.button("reset");
+							});*/
 						})
 						.fail(function(err) {
 							console.log(err);
@@ -246,6 +267,14 @@
 						}
 					})
 					.done(function(data) {
+						try{
+							if(typeof(data)!="object"){					
+								JSON.parse(data);
+							} 
+						 }catch(exception){	
+						     alert("an error processed");
+						     return;
+						 }
 						$('.pagination',$newDiv).BTPagination(data.count,{
 							items_per_page : 10 ,
 							num_display_pageno : 10 ,
@@ -311,6 +340,11 @@
 		
 		function bindEventAfterDataLoaded() {
 			$('.j-delete').on('click.del',function(event){
+					if(confirm("确定要删除吗?")){
+						
+					}else{
+						return;
+					}
 					var _this = $(this),
 						sid = _this.parents('tr').attr('data-sid');
 					
@@ -320,7 +354,15 @@
 						dataType: 'json',
 						data: {sid: sid},
 					})
-					.done(function(data) {	
+					.done(function(data) {
+						try{
+							if(typeof(data)!="object"){					
+								JSON.parse(data);
+							} 
+						 }catch(exception){	
+						     alert("an error processed");
+						     return;
+						 }
 						console.log(data);
 						_this.parents('tr').remove();
 					})
@@ -480,6 +522,14 @@
 			dataType: 'json',
 		})
 		.done(function(data) {
+			try{
+				if(typeof(data)!="object"){					
+					JSON.parse(data);
+				} 
+			 }catch(exception){	
+			     alert("an error processed");
+			     return;
+			 }
 			var surveys = data.surveys;
 			fillDataInWdyTable(surveys);
 			bindEventAfterDataLoaded();

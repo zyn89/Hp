@@ -44,4 +44,7 @@ public class ManagerAction extends BaseAction{
 	public String lottery() {
 		return "lottery";
 	}
+	public String Login() {
+		return "login";
+	}
 }
