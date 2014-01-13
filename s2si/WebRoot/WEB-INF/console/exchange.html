@@ -18,16 +18,22 @@
 		<div class="section_header">
 			<div class="btn-group pull-right">
 				<button id="j-addexchange" class="btn" data-loading-text="正在添加...">添加</button>
-				<button class="btn refresh btn-primary" data-loading-text="正在刷新...">刷新</button>
+				<button class="btn refresh btn-primary" data-loading-text="正在刷新">刷新</button>
 			</div>
-			<p id="j-bread">兑奖活动</p>
+			<a href="#" class="back"><p id="j-bread">兑奖活动</p></a>
 		</div>
 		
 		
-		
+		<div class="hide pagination">
+				<ul>
+					<li class="next la"><a href="#">&laquo;</a></li>
+					<li class="first"><a href="#">1</a></li>
+					<li class="next ra"><a href="#">&raquo;</a></li>
+				</ul>
+		</div>
 		
 		<!--兑奖活动记录表格 -->
-		<table id="j-exchangetable" class="table table-striped table-bordered" style="margin-top:20px;">
+		<table id="j-exchangetable" class="table" style="margin-top:20px;">
 				<thead>
 					<tr>
 						<th >兑奖</th>
@@ -46,17 +52,16 @@
 		
 		
 		<!-- 用来clone -->
-		<div id="j-clone" class="j-common" style="display:none;">
 			<!-- 参与调查用户分页 -->
-			<div class="pagination">
+			<!--div class="pagination">
 				<ul>
 					<li class="next la"><a href="#">&laquo;</a></li>
 					<li class="first"><a href="#">1</a></li>
 					<li class="next ra"><a href="#">&raquo;</a></li>
 				</ul>
-			</div>
+			</div-->
 			<!-- 调研问题统计表格 -->
-			<table id="j-wdyquser" class="table table-striped table-bordered" >
+			<table id="j-wdyquser" class="hide table table-striped" >
 					<thead>
 						<tr>
 							<th style="text-align:center;">参与兑奖的用户名</th>
@@ -67,7 +72,6 @@
 						
 					</tbody>
 			</table>
-		</div>
 
 		<div id="j-addmodel" class="modal fade hide">
 			<div class="modal-header">
@@ -156,7 +160,7 @@
 				 
 				<form id="j-update-form" action="" method="post"  class="form-horizontal" style="margin-top:10px">		
 					
-						<div class="control-group"  id="j-oldimg">
+						<!--div class="control-group"  id="j-oldimg">
 							<label class="control-label" for="inputEmail">活动原图</label>
 							<div class="controls">
 								<img src="" />
@@ -165,7 +169,7 @@
 								<img src="" />
 								<input type="hidden" id="eid" name="eid"/>
 							</div>
-						</div>
+						</div-->
 									
 						<div class="control-group">
 							<label class="control-label" for="inputEmail">兑奖列表图</label>

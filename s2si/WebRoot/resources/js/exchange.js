@@ -10,7 +10,7 @@
 				records = data.exchanges,
 				operateBtns = '<button style="margin-right:10px;" class="btn btn-primary j-c-delete" type="button">删除</button>'
 							  +  '<button style="margin-right:10px;" class="btn btn-primary j-c-modify" type="button">修改</button>'
-							  + '<button style="margin-right:10px;" class="btn btn-primary j-c-statics" type="button">统计<span class="caret"></span></button>';
+							  + '<button style="margin-right:10px;" class="btn btn-primary j-c-statics" data-loading-text="正在加载" type="button">统计</button>';
 				
 			console.log(records);
 			$tbody.empty();
@@ -58,9 +58,21 @@
 		}
 
 		function uploadFile(formId,url,callback) {
+			var index=0;
+			$("#"+formId).find('input[type="hidden"]').each(function(index,e){
+				var str=$(e).val();
+				//console.log(str);
+				var name=$(e).attr("name");
+				if(str==99){					
+					$(e).val(index);
+					console.log($(e).val());
+					index=index+1;
+				}else{
+					$(e).val(-1)
+				}				
+			});
 			var form = document.getElementById(formId),
 				formData = new FormData(form);
-			
 			$.ajax({
 				url: url,
 				type: 'post',
@@ -69,10 +81,16 @@
 				data: formData
 			})
 			.done(function(data) {
-				if(callback) {
-					callback($.parseJSON(data));
-					bindEventAfterDataLoaded();
-				}
+				//console.log(data);
+				//console.log(data);
+				try{
+					if(callback) {
+						callback($.parseJSON(data));
+						bindEventAfterDataLoaded();
+					}
+				 }catch(exception){				
+				     alert("an error processed");
+				 }
 			
 			})
 			.fail(function(err) {
@@ -103,7 +121,9 @@
 					$input_hidden = $divParent.find('input[type="hidden"]');
 				$fileName.text(value);
 
-				$input_hidden.val(value.substring(value.lastIndexOf('\\') + 1));
+				//$input_hidden.val(value.substring(value.lastIndexOf('\\') + 1));
+				//99只是个标记值，没有任何意义
+				$input_hidden.val(99);
 			});
 
 			//保存增加兑奖活动
@@ -133,6 +153,11 @@
 
 			//2.删除活动
 			$('.j-c-delete').bind('click.for.del',function(event){
+				if(confirm("确定要删除吗？")){
+					
+				}else{
+					return;
+				}
 				var _this = $(this),
 					eid = _this.parents('tr').attr('data-eid');
 					
@@ -178,6 +203,7 @@
 
 			//4.统计活动
 			$('.j-c-statics').bind('click.for.statics',function(event){
+				$(this).button("loading");
 				var _this = $(this),
 					$curTr = _this.parents('tr'),
 					$nextTr = $curTr.next(),
@@ -199,7 +225,8 @@
 							}
 						}).done(function(data) {
 					
-							var $tbody = $('tbody','#eid_'+eid),
+							//var $tbody = $('tbody','#eid_'+eid),
+							var $tbody=$('#j-wdyquser').find("tbody");
 								users = data.users;
 							$tbody.empty();
 
@@ -212,16 +239,45 @@
 								  .appendTo($tr);
 								$tr.appendTo($tbody);
 							});
-
+							$("a.back").text("返回上一级");
+							$("a.back").addClass("rear");
+							$('.pagination').removeClass("hide");
+							$("#j-exchangetable").fadeOut();
+							$('#j-wdyquser').removeClass("hide");
+							$('#j-wdyquser').fadeIn();
+							_this.button("reset");
 						})
 						.fail(function(err) {
 							console.log(err);
 						});
 				}
-
-				if(!$nextTr.hasClass('s-mark')) {
-
-
+				$.ajax({
+						url: 'ExchangerList.action',
+						type: 'post',
+						dataType: 'json',
+						data: {
+							eid: eid,
+							start: 0,
+							end : 1
+						}
+					})
+					.done(function(data) {
+						if(data.count==0){
+							_this.button("reset");
+							alert("没有统计数据");
+							return;
+						}
+						$('.pagination',$newDiv).BTPagination(data.count,{
+							items_per_page : 10 ,
+							num_display_pageno : 10 ,
+							prev_text : '上一页' ,
+							next_text : '下一页' ,
+							getItemsAjax : callback
+						});
+						//$curTr.after($tr);
+					});
+				/*
+				 * if(!$nextTr.hasClass('s-mark')) {
 					
 
 					$('.j-common').parents('tr').hide().removeClass('s-active');
@@ -252,7 +308,7 @@
 							next_text : '下一页' ,
 							getItemsAjax : callback
 						});
-						$curTr.after($tr);
+						//$curTr.after($tr);
 					});
 				} else {
 					if($nextTr.hasClass('s-active')) {
@@ -261,7 +317,7 @@
 						$('.j-common').parents('tr').hide().removeClass('s-active');
 						$nextTr.show().addClass('s-active');
 					}
-				}	
+				}*/	
 
 
 				//加载用户信息 初始化分页
@@ -270,9 +326,18 @@
 
 		}
 
-	
+		$("a.back").bind("click",function(){
+			if($(this).hasClass("rear")){
+				$(this).removeClass("rear");
+				$("#j-exchangetable").fadeIn();
+				$('#j-wdyquser').addClass("hide");
+				$('#j-wdyquser').fadeOut();
+				$(this).text("兑奖管理");
+				$('.pagination').addClass("hide");
+			}
+		});
 		bindEvent(); 
-		  
+		$(".btn.refresh").button("loading");
 		$.ajax({
 			url: 'GetExchanges.action',
 			type: 'post',
@@ -281,6 +346,7 @@
 		.done(function(data) {
 			fillInExchangeTable(data);
 			bindEventAfterDataLoaded();
+			$(".btn.refresh").button("reset");
 		})
 		.fail(function(err) {
 			console.log(err);

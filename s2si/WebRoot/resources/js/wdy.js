@@ -33,6 +33,7 @@
 
 
 		function fillDataInWdyTable(surveys) {
+			//$(".btn.refresh").button("loading");
 			var $tbody = $('#j-wdytable tbody'),
 				operateBtns = '<button style="margin-right:10px;" class="btn btn-primary j-delete" type="button">删除</button>'
 							  +  '<button style="margin-right:10px;" class="btn btn-primary j-mqestion" type="button">管理调研问题</button>';
@@ -85,7 +86,7 @@
 			var $tbody = $('tbody','#j-wdyqtable'),
 				operateBtns = '<button style="margin-right:10px;" class="btn btn-primary j-q-delete" type="button">删除</button>'
 							  +  '<button style="margin-right:10px;" class="btn btn-primary j-q-modify" type="button">修改</button>'
-							  + '<button style="margin-right:10px;" class="btn btn-primary j-q-statics" type="button">统计<span class="caret"></span></button>';
+							  + '<button style="margin-right:10px;" class="btn btn-primary j-q-statics" data-loading-text="正在加载" type="button">统计</button>';
 			$tbody.empty();
 			$.each(questions,function(index,value){
 				var $tr = $('<tr>');
@@ -178,14 +179,14 @@
 			//3 问题统计
 			$('.j-q-statics').bind('click.for.statics',function(event){
 
-
+				
 				var _this = $(this),
 					$curTr = _this.parents('tr'),
 					$nextTr = $curTr.next(),
 					qid = $curTr.attr('data-qid'),
 					sid = _this.parents('#j-wdyqtable').attr('data-sid'),
 					$tr,$td,$newDiv;
-
+				_this.button("loading");
 				function callback(pageNo,pageSize) {
 					var start = (pageNo-1)*pageSize,
 						end = (start+pageSize)-1;
@@ -201,14 +202,16 @@
 								end : end
 							}
 						}).done(function(data) {
-					
-							var $tbody = $('tbody','#qid_'+qid),
+							var $tbody=$('#j-wdyquser').find("tbody"),
+							 //var $tbody = $('tbody','#qid_'+qid),
 								userSurvey = data.userSurvey;
 							$tbody.empty();
 
 							$.each(userSurvey,function(index,value){
 								var $tr = $('<tr>');
-								$('<td>').text(value.name)
+								$('<td>').css({
+									'text-align' : 'center'
+								}).text(value.name)
 								  .appendTo($tr);
 								$('<td>').css({
 									'text-align' : 'center'
@@ -216,14 +219,44 @@
 								  .appendTo($tr);
 								$tr.appendTo($tbody);
 							});
-
+							$("a.back p").text("返回第二级");
+							$("a.back p").removeClass("s-mark");
+							$("a.back p").addClass("s-detail");
+							//$("a.back").addClass("rear");
+							$('.pagination').removeClass("hide");
+							$("#j-wdyqtable").fadeOut();
+							$('#j-wdyquser').removeClass("hide");
+							$('#j-wdyquser').fadeIn();
+							_this.button("reset");
 						})
 						.fail(function(err) {
 							console.log(err);
 						});
 				}
-
-				if(!$nextTr.hasClass('s-mark')) {
+				
+				$.ajax({
+						url: 'QueryUserSurvey.action',
+						type: 'post',
+						dataType: 'json',
+						data: {
+							sid: sid,
+							qid: qid,
+							start: 0,
+							end : 1
+						}
+					})
+					.done(function(data) {
+						$('.pagination',$newDiv).BTPagination(data.count,{
+							items_per_page : 10 ,
+							num_display_pageno : 10 ,
+							prev_text : '上一页' ,
+							next_text : '下一页' ,
+							getItemsAjax : callback
+						});
+						//$curTr.after($tr);
+					});
+				
+				/*if(!$nextTr.hasClass('s-mark')) {
 
 
 					
@@ -267,7 +300,7 @@
 						$nextTr.show().addClass('s-active');
 					}
 				}	
-
+				*/
 
 				//加载用户信息 初始化分页
 
@@ -307,8 +340,8 @@
 			$('.j-mqestion').bind('click.manager.question',function(event){
 				var _this = $(this),
 					sid = _this.parents('tr').attr('data-sid');
-				$('#j-wdytable').fadeOut('slow',function(){
-					$('#j-bread').text('<<返回').addClass('s-mark')
+				$('#j-wdytable').fadeOut('2',function(){
+					$('#j-bread').text('返回第一级').addClass('s-mark')
 								 .css({
 									  cursor : 'pointer'
 								 })
@@ -323,7 +356,7 @@
 											  color : '#000'
 										 });
 								 });
-					$('#j-wdyqtable').fadeIn()
+					$('#j-wdyqtable').fadeIn("2")
 									.attr({
 										'data-sid' :  sid
 									});
@@ -398,14 +431,27 @@
 			$('#j-bread').bind('click.forback',function(event){
 				var _this = $(this);
 				if(_this.hasClass('s-mark')) {
-					$('#j-wdyqtable').fadeOut('slow',function(){
+					$('#j-wdyqtable').fadeOut('2',function(){
 						$('#j-bread').text('调研活动').removeClass('s-mark')
 									 .unbind('mouseover').unbind('mouseout')
 									 .css({
 										 'text-decoration' : 'none',
 										  color : '#000'
 									 });
-						$('#j-wdytable').fadeIn();
+						$('#j-wdytable').fadeIn("2");
+					});
+				}else if(_this.hasClass("s-detail")){
+					$('#j-wdyquser').fadeOut('fast',function(){
+						$('#j-bread').text('返回第一级').removeClass('s-detail')
+									 .unbind('mouseover').unbind('mouseout')
+									 .css({
+										 'text-decoration' : 'none',
+										  color : '#000'
+									 });
+						$("#j-wdyqtable").fadeIn();
+						$('#j-bread').addClass('s-mark');
+						$('.pagination').addClass("hide");
+						//$('#j-wdyquser').addClass("hide");
 					});
 				}
 			});
@@ -416,6 +462,18 @@
 				
 		
 		bindEvent();
+		
+		/*$("a.back").bind("click",function(){
+			if($(this).hasClass("rear")){
+				$(this).removeClass("rear");
+				$("#j-wdyqtable").fadeIn();
+				$('#j-wdyquser').addClass("hide");
+				$('#j-wdyquser').fadeOut();
+				//$(this).text("兑奖管理");
+				$('.pagination').addClass("hide");
+			}
+		});*/
+		$(".btn.refresh").button("loading");
 		$.ajax({
 			url: 'GetSurveyList.action',
 			type: 'post',
@@ -425,6 +483,7 @@
 			var surveys = data.surveys;
 			fillDataInWdyTable(surveys);
 			bindEventAfterDataLoaded();
+			$(".btn.refresh").button("reset");
 		})
 		.fail(function() {
 			console.log("error");

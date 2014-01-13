@@ -125,8 +125,8 @@
 												console.log(length);
 												$(".pagination").BTPagination(data.count, {
 													getItemsAjax: $("table.res").data("callback"),
-													prev_text: '&laquo;',
-													next_text: '&raquo;',
+													prev_text: '上一页',
+													next_text: '下一页',
 													num_display_pageno: 8,
 													items_per_page :5,
 												});
@@ -156,8 +156,8 @@
 												//console.log(length);
 												$(".pagination").BTPagination(data.count, {
 													getItemsAjax: $("table.pics").data("callback"),
-													prev_text: '&laquo;',
-													next_text: '&raquo;',
+													prev_text: '上一页',
+													next_text: '下一页',
 													num_display_pageno: 8,
 													items_per_page :5,
 												});
