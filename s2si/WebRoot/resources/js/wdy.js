@@ -77,7 +77,7 @@
 		
 		function loadSurveyQuestions(sid) {
 			$.ajax({
-				url: 'GetSurveyQuestion.action',
+				url: 'GetSurveyQuestion_Web.action',
 				type: 'post',
 				dataType: 'json',
 				data: {sid: sid},

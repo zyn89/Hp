@@ -145,6 +145,10 @@
 		    <interceptor-ref name="mystack" />
 		</action>
 		
+		<action name="GetSurveyQuestion_Web" class="surveyAction" method="GetSurveyQuestion_Web">
+		    <interceptor-ref name="mystack" />
+		</action>
+		
 		<action name="AddSurveyQuestion" class="surveyAction" method="AddSurveyQuestion">
 		    <interceptor-ref name="mystack" />
 		</action>
