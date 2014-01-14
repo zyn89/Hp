@@ -110,26 +110,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			top: 5px;
 		}
 
-		.m-btns .btn-up,
-		.m-btns .btn-bottom {
+		.m-btns .btn-left,
+		.m-btns .btn-right {
 			display: block;
-			width: 238px;
-			height: 36px;
-			line-height: 36px;
+			width: 112px;
+			height: 34px;
+			line-height: 34px;
 			display: block;
-			margin: 0 auto;
-			margin-bottom:20px;
 			font-weight: bold;
 		}
 
-		.m-btns .btn-up {
-			background: url(resources/image/btn-green.png);
+		.m-btns .btn-left {
+			background: url(resources/image/btnsm-blue.png);
 			background-size:cover;
+			float : left;
+			margin-left: 5px;
 		}
 		
-		.m-btns .btn-bottom {
-			background: url(resources/image/btn-blue.png);
+		.m-btns .btn-right {
+			background: url(resources/image/btnsm-logout.png);
 			background-size:cover;	
+			float : right;
+			margin-right:5px;
 		}
 		
 		.m-btns,.m-info {
@@ -143,22 +145,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 		.m-info {
-			clear: both;
-			height: 30px;
-		
-			border-radius : 5px;
-			width : 80%;
+			width : 100%;
 			margin-right: auto;
 			margin-left: auto;
 			margin-bottom : 5px;
+			margin-top : 15px;
 		}
 		
 		.m-info p {
-			line-height : 30px;
-			font-size : 16px;
-			border : 1px solid #999;
+			display: block;
+			width: 226px;
+			height: 34px;
+			margin: 0 auto;
+			line-height : 34px;
+			background: url(resources/image/input1.png);
+			background-size: cover;
+			color:#999;
 		}
 		
+		.m-check {
+			width:100%;
+			height:56px;
+			margin-bottom: 10px;
+		}
+
+		.m-check p {
+			display: block;
+			margin:0 auto;
+			width:118px;
+			height:56px;
+			line-height: 72px;
+			color: #fff;
+			font-size: 14px;
+			background: url(resources/image/checkIn.png);
+			background-size: cover;
+			cursor : pointer;
+		}
+
+		.m-check p.checked {
+			background: url(resources/image/checked.png);
+			background-size: cover;
+			cursor : text;
+		}
+
 		.m-acts {
 	
 		}
@@ -216,13 +245,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a href="javasrcipt:void(0);" class="m-wwz" id="j-wwz"></a>
 			</div>
 			<div class="m-btns">
-				
+				<a href="javasrcipt:void(0);" class="btn-left" id="login-btn">登录</a>
+				<a href="javasrcipt:void(0);" class="btn-right" id="reg-btn">退出</a>
 			</div>
 			<div class="m-info">
-			<% if(name!=null && credit!=null) { %>
-				<p><%= name %>/<%= credit %></p>
-			<% } %>
+				<p>用户名/积分:123456</p>
 			</div>
+			
+			<div class="m-check">
+				<p class="checked">已签到</p>
+			</div>
+			
 			<div class="m-acts">
 				<div class="m-acts-l">
 					<ul>

@@ -87,28 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  	}
 			};
 
-			/*function handleFileSelect(evt) {
-				var files = evt.target.files;
-				var f = files[0];
-				var reader = new FileReader();
-
-				reader.onload = (function(theFile) {
-					return function(e) {
-						var innerHtml = ['<img src="', e.target.result, '" title="', theFile.name, '" width="50" />'].join('');
-						$(".p_preview") .html(innerHtml);
-					};
-				})(f);
-
-				reader.readAsDataURL(f);
-			}
-
-		 	if (window.FileReader) {
-				$('.j-file').bind('change.pupload',function(event){
-					handleFileSelect(event);
-				});
-			} else {
-				  alert('This browser does not support FileReader');
-			}*/
+			
 
 
 
@@ -123,81 +102,217 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	
 	 </script>
 	<style type="text/css">
-		body{
-			background-color: #ddd;
+
+		html,body {
+			height:100%;
+			width : 100%;
+			font-family:"黑体","微软雅黑";
+			font-size: 14px;
 		}
-		.main {
+
+		body,ul {
+			margin:0px;
+			padding:0px;
+		}
+		
+		ul {
+			list-style: none;
+		}
+
+		button ,a {
+			outline: none !important;
+		}
+		a {
+			text-decoration: none;
+			color: #fff;
+		}
+
+		#wrap {
 			width:100%;
-			margin: 0px auto;
-			border: 1px solid red;
-			overflow: hidden;
-			zoom:1;
+			min-height: 100%;
+			background: url(resources/image/背景.png) repeat-y fixed;	
+			background-size:cover;
 		}
-		.main .a_info {	
+
+		.main {
+			width : 320px;
+			min-height: 100%;
+			margin : 0px auto;
+			overflow:hidden;
+			zoom:1;
+			text-align:center;
+		}
+	
+		
+		.main .m-logo {
+			 height: 135px;
+			 border: 1px solid red;
+			 width : 100%;
+			 margin-bottom:10px;
+			 position: relative;
+		}
+
+		.main .m-info {	
 			margin: 0 auto;
 			text-align: center;
-
-		}
-		.main .p_upload {
-			margin: 5px;
-			text-align: center;
-			height: 200px;
-			border: 1px solid #000;
-
-		}
-		.dropzone .dz-preview {
-			margin:10px;
-		}
-		.dropzone .dz-filename {
-			display: none;
-		}
-		.dropzone .dz-size {
-			display: none;
-		}
-		.dropzone .dz-preview  .dz-details {
-			width: 40px;
-			height: 40px;
-			margin-bottom: 5px;
-		}
-		.dropzone a.dz-remove {
-			font-size: 12px;
-			margin-top: 0px;
+			width: 100%;
+			margin-bottom : 20px;	
 		}
 
-		.dropzone .dz-preview .dz-details img {
-			width: 40px;
-			height: 40px;
+		.main .m-info img {
+			width : 260px;
+			height:83px;
+			margin: 0 auto;
 		}
-		.dropzone .dz-default.dz-message {
-			background-image:none;
+
+		.main .m-content {
+			width: 100%;
+			margin-bottom: 10px;
 		}
-		
-		.dropzone .dz-preview .dz-error-message {
-			display:none;
-		}
-		
-		.c_btn {
+
+		.main .m-content input.u-content {
+			width : 254px;
+			height: 39px;
+			line-height : 39px;
 			display: block;
+			border: 0px;
 			margin:0 auto;
+			outline: none;
+			text-indent: 15px;
+			font-size: 14px;
+			font-weight: bold;
+			color: #999;
+			padding-right:15px;
+			background: url(resources/image/input1.png);
+			background-size:cover;
+
+		}
+		.main .m-upload {
+			width: 100%;
 			text-align: center;
-			height: 40px;
-			width: 100px;
+		}
+
+		.main .m-upload .u-upload {
+			width: 260px;
+			height: 217px;
+			margin: 0 auto;
+			background: url(resources/image/uploaddb.png);
+			background-size:cover;
+		}
+
+		.main .m-upload .u-upload input{
+			display: none;
+		}
+
+		.main .m-upload .u-upload li {
+			display: block;
+			float : left;
+			width: 60px;
+			height: 52px;
+			background: url(resources/image/upload_td.png);
+			background-size:cover;
+			margin-top: 20px;
+			margin-left: 16px;
+			position: relative;
+		}
+
+		.main .m-upload .u-upload li.first {
+			margin-left: 24px;
+		}
+
+		.main .m-upload .u-upload li.title {
+			width: 100%;
+			text-align: center;
+			color: #fff;
+			font-size: 16px;
+			height: 28px;
+			line-height: 28px;
+			margin-top: 10px;
+			background:none;
+			margin-left: 0;
+		}
+
+		.main .m-upload .u-upload li a {
+			display: block;
+			width: 32px;
+			height:32px;
+			background:url(resources/image/upload_plus.png);
+			background-size:cover;
+			position: absolute;
+			top : 10px;
+			left : 14px;
+		}
+		
+		.main .m-confirmbtn {
+			width: 100%;
+			margin-top:10px;
+		}
+
+		.main .m-confirmbtn a {
+			display:block;
+			width: 260px;
+			height:40px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/btn-blue.png);
+			background-size:cover;
+			letter-spacing: 1.8;
 		}
 	</style>
 </head>
 
 <body>
-	<div class="main">
-		<div class="a_info"> 
-			<img src="resources/image/actInfo.jpg"/>
+	<div id="wrap">
+
+	
+		<div class="main">
+			<div class="m-logo">
+
+			</div>
+
+			<div class="m-info"> 
+				<img src="resources/image/list.png"/>
+			</div>
+			<div class="m-content"> 
+				<input class="u-content" type="text" name="content" autocomplete="off" placeholder="请输入"/>
+			</div>
+			
+			<div class="m-upload">
+				<form name="" id="" class="">
+					<ul class="u-upload">
+						<li class="title">上传图片</li>
+						<li class="first">
+							<a href="javacript:void(0);"></a>
+							<input type="file" name="pics">
+							<img src="" class="u-thumbnail" />
+						</li>
+						<li>
+							<a href="javacript:void(0);"><img src="" alt=""></a>
+							<input type="file" name="pics">
+						</li>
+						<li>
+							<input type="file" name="pics">
+						</li>
+						<li class="first">
+							<input type="file" name="pics">
+						</li>
+						<li>
+							<input type="file" name="pics">
+						</li>
+						<li>
+							<input type="file" name="pics">
+						</li>
+					</ul>
+				</form>
+			
+			</div>
+			
+			<div class="m-confirmbtn">
+				<a href="javascript:void(0);" id="j-confirmbtn">确定</a>
+			</div>
+		
+			
 		</div>
-		
-		<form id="simpleUploadDropzone" action="/s2si/uploadtest_savefile.action" name="pics" class="dropzone" enctype="multipart/form-data">
-			<input type="hidden" name="var1" value="1"/>
-			<input type="hidden" name="var2" value="2"/>
-		</form>
-		
-		<button class="c_btn" >确定</button>
 	</div>
 </body>
 </html>

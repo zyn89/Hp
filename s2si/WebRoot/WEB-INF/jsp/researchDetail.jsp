@@ -10,28 +10,167 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">  
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Document</title>
-	<link rel="stylesheet" href="resources/tools/jQuery-mobile-1.4/jquery.mobile-1.4.0.min.css">
-	<script src="resources/js/jquery-1.9.1.js"></script>
+	<title>调研</title>
 	
-	<script src="resources/tools/jQuery-mobile-1.4/jquery.mobile-1.4.0.min.js"></script>
+	<script src="resources/js/jquery-1.9.1.js"></script>
 	<script src="resources/js/research.js"></script>
 	
 	<script>
 	
 	</script>
 	<style>
+		html,body {
+			height:100%;
+			width : 100%;
+			font-family:"黑体","微软雅黑";
+			font-size: 14px;
+			color: #fff;
+		}
+
+		body,ul {
+			margin:0px;
+			padding:0px;
+		}
+		
+		ul {
+			list-style: none;
+		}
+
+		button ,a {
+			outline: none !important;
+		}
+		a {
+			text-decoration: none;
+			color: #fff;
+		}
+
+		#wrap {
+			width:100%;
+			min-height: 100%;
+			background: url(resources/image/背景.png) repeat-y fixed;	
+			background-size:cover;
+		}
+
+		.main {
+			width : 320px;
+			min-height: 100%;
+			margin : 0px auto;
+			overflow:hidden;
+			zoom:1;
+			text-align:center;
+		}
+	
+
+		.main .m-logo {
+			 height: 135px;
+			 border: 1px solid red;
+			 width : 100%;
+			 margin-bottom:10px;
+		}
+
 		.m-question {
-			
+			width:100%;
+			margin-bottom: 20px;
 		}
-		.m-question ,.m-result{
-		 	margin:0 auto;
-		 	width: 100%;
-		 	text-align:center;
+		
+		.m-question img {
+			width: 280px;
+			height: 112px;
+			margin: 0 auto;
 		}
-		.m-result {
-			margin-top: 10px;
+
+		.m-answer {
+			width: 100%;
 		}
+
+		.m-answer ul{
+			width: 310px;
+			margin: 0 auto;
+		}
+
+		.m-answer ul li {
+			display: block;
+			height : 40px;
+			zoom:1;
+			position: relative;
+			height: 50px;
+			margin-bottom: 20px;
+		}
+
+		.m-answer ul li span {
+			display: block;
+			float: left;
+			position: absolute;
+			top : 3px;
+		}
+
+		.m-answer ul li span.alph {
+			background: url(resources/image/bubble.png);
+			background-size: cover;
+			height: 40px;
+			width: 56px;
+			line-height: 36px;
+			text-align: left;
+			text-indent: 15px;
+			color: #fff;
+			font-size: 20px;
+			left:0px;
+		}
+
+		.m-answer ul li span.content {
+			background: url(resources/image/content.png);
+			background-size: cover;
+			height: 36px;
+			width: 200px;
+			left : 60px;
+			line-height: 36px;
+			color: #fff;
+			font-size: 16px;
+		}
+		
+		.m-answer ul li span.radio {
+			width: 47px;
+			height: 50px;
+			background: url(resources/image/radio-dark.png);
+			background-size: cover;
+			top:-3px;
+			right : 0px;
+		}
+		
+		.m-answer ul li span.tip {
+			width: 82px;
+			height: 30px;
+			background: url(resources/image/rate.png);
+			background-size: cover;
+			top:40px;
+			right : 20px;
+			text-align: left;
+			line-height: 28px;
+			color: #fff;
+			text-indent:50px;
+		}
+
+		.m-answer ul li span.radio-light {
+			background: url(resources/image/radio-light.png);
+			background-size: cover;
+		}
+
+		.main .m-submit {
+			width: 100%;
+			margin-top:15px;
+		}
+
+		.main .m-submit a {
+			display:block;
+			width: 260px;
+			height:40px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/btn-blue.png);
+			background-size:cover;
+			letter-spacing: 1.8;
+		}
+		
 	</style>
 </head>
 <%
@@ -42,26 +181,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<input id="sid" type="hidden" value="<%= sid %>"/>
 	<input id="credit" type="hidden"  value="<%= credit %>"/>
 	
-	<div id="page1" data-role="page">
-		
-			<div data-role="content">
-				<div class="m-question">
-					<img src="" />
-				</div>
-				<div class="m-result" style="display:none;">
 
-				</div>
-				<div class="m-answer">
-					<fieldset data-role="controlgroup" data-iconpos="right">
-					   		
-					</fieldset>
-				</div>
-				<div class="m-submit">
-					<a data-role="button">提交</a>
-				</div>
+	<div id="wrap">
+		<div class="main">
+			<div class="m-logo">
+				<!--<img src="resources/image/logo.png" alt="">-->
 			</div>
+			<div class="m-question">
+				<img src="resources/image/list.png" />
+			</div>
+			<div class="m-result" style="display:none;">
 
+			</div>
+			<div class="m-answer">
+				<ul class="u-answer">
+					<li>
+						<span class="alph">A</span>
+						<span class="content">调研内容</span>
+						<span class="radio"></span>
+						<span class="tip">30%</span>
+					</li>
+					<li>
+						<span class="alph">B</span>
+						<span class="content">调研内容</span>
+						<span class="radio"></span>
+						<span class="tip">30%</span>
+					</li>
+					<li>
+						<span class="alph">C</span>
+						<span class="content">ksjdfsdjkfhjsdhfjh</span>
+						<span class="radio"></span>
+						<span class="tip">30%</span>
+					</li>
+				</ul>
+			</div>
+			<div class="m-submit">
+				<a href="javascript:void(0);" id="j-confirmbtn">确定</a>
+			</div>
+		</div>
 	</div>
+				
+
 </body>
 </html>
 

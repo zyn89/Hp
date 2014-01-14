@@ -166,9 +166,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			width: 98px;
 			height: 98px;
 			display: inline-block;
-			border: 1px solid red;
-			
-			
 		}
 		.m-tabs-content .tab-content .u-ggk:first-child {
 			margin-left:1%;
