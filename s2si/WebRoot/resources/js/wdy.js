@@ -13,8 +13,8 @@
 				formData.append('sid',sid);
 			}
 			if(qid!=undefined && !qid) {
+				console.log(qid);
 				formData.append('qid',qid);
-				alert("");
 			}
 			$.ajax({
 				url: url,
@@ -32,10 +32,15 @@
 				     alert("an error processed");
 				     return;
 				 }
-				console.log(data);
 				if(sid) {
 					$('#j-wdytable tbody').find('tr[data-sid=' + sid + ']').find('.j-mqestion')
 																		   .trigger('click.manager.question');
+				}else{
+					var str=$('#j-bread').text();
+					console.log("刷新");
+					if(str=="调研活动"){
+						fresh();
+					}
 				}
 			})
 			.fail(function() {
@@ -83,7 +88,7 @@
 		
 		function loadSurveyQuestions(sid) {
 			$.ajax({
-				url: 'GetSurveyQuestion.action',
+				url: 'GetSurveyQuestion_Web.action',
 				type: 'post',
 				dataType: 'json',
 				data: {sid: sid},
@@ -194,9 +199,10 @@
 					a1 = $tr.find('td').eq(2).text(),
 					a2 = $tr.find('td').eq(3).text(),
 					a3 = $tr.find('td').eq(4).text();
+				$('#j-addmodel').data("qid",qid);
 				$('.modal-header h3','#j-add-qustion-modal').text('修改调研问题');
 				$('#j-oldimg img','#j-add-qustion-modal').attr({src:imgUrl});
-				$('#qid','#j-add-qustion-modal').val(qid);
+				//$('#qid','#j-add-qustion-modal').val(qid);
 				$('#j-oldimg','#j-add-qustion-modal').show();
 				//$('#j-q-filename','#j-add-qustion-modal').text(imgUrl);//应该显示图片
 
@@ -441,11 +447,12 @@
 			
 			//增加微调研弹出模态框
 			$('#j-addwdy').bind('click.foradd',function(){
-				var qid=$(this).parent().parent().data("qid");
+				//var qid=$(this).parent().parent().data("qid");
 				if($('#j-bread').hasClass('s-mark')) {
 					$('.modal-header h3','#j-add-qustion-modal').text('增加调研问题');
 					$('#j-oldimg','#j-add-qustion-modal').hide();
-					$('#j-addmodel').data("qid",parseInt(qid));
+					//console.log("1+"+qid);
+					//$('#j-addmodel').data("qid",qid);
 					$('#j-q-filename','#j-add-qustion-modal').text("");//应该显示图片
 
 					$('#j-q-a1','#j-add-qustion-modal').val("");
@@ -473,9 +480,9 @@
 
 			$('#j-q-savewdy').bind('click.forsave',function(event){
 				if($(this).parents('#j-add-qustion-modal').hasClass('s-mark')) {
-					uploadFile('j-addwdyqform','UpdateSurveyQuestion.action',$('#j-wdyqtable').attr('data-sid'));
+					uploadFile('j-addwdyqform','UpdateSurveyQuestion.action',$('#j-wdyqtable').attr('data-sid'),$('#j-addmodel').data("qid"));
 				} else {
-					uploadFile('j-addwdyqform','AddSurveyQuestion.action',$('#j-wdyqtable').attr('data-sid'),$('#j-addmodel').data("qid"));
+					uploadFile('j-addwdyqform','AddSurveyQuestion.action',$('#j-wdyqtable').attr('data-sid'),null);
 					
 				}
 				$('#j-add-qustion-modal').modal('hide');
@@ -535,6 +542,7 @@
 				$('.pagination').addClass("hide");
 			}
 		});*/
+		function fresh(){
 		$(".btn.refresh").button("loading");
 		$.ajax({
 			url: 'GetSurveyList.action',
@@ -558,8 +566,7 @@
 		.fail(function() {
 			console.log("error");
 		});
-
-		
-
+		}
+		fresh();
 	});
 })(jQuery,window);

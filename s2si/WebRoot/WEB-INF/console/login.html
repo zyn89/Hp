@@ -17,6 +17,35 @@
   <script>
   		$(function(){
   			$("#myModal").modal("show");
+  			var username=$("#username").val();
+  			var password=$("#password").val();
+  			$(".btn.login").bind("click",function(){
+  				$.ajax({
+						url: 'AdminLogin.action',
+						type: 'post',
+						dataType: 'json',
+						data:{"account":username,
+						"pw":password,
+						},
+					})
+					.done(function(data) {
+						console.log(data);
+						try{
+							if(typeof(data)!="object"){					
+								JSON.parse(data);
+							} 
+						 }catch(exception){	
+						     alert("an error processed");
+						     return;
+						 }
+						 location.href="manager.action";
+					})
+					.fail(function(err) {
+						console.log(err);
+						alert("登录失败");
+						//location.href="all_Login.action";
+				});
+  			});
   		});
   </script>
   <body>
@@ -30,13 +59,13 @@
 				  <div class="control-group">
 				    <label class="control-label" for="inputEmail">用户名</label>
 				    <div class="controls">
-				      <input type="text" id="inputEmail" placeholder="Username">
+				      <input type="text" id="username" placeholder="Username">
 				    </div>
 				  </div>
 				  <div class="control-group">
 				    <label class="control-label" for="inputPassword">密码</label>
 				    <div class="controls">
-				      <input type="password" id="inputPassword" placeholder="Password">
+				      <input type="password" id="password" placeholder="Password">
 				    </div>
 				  </div>
 				</form>
