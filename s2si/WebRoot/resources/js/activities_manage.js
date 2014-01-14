@@ -270,16 +270,22 @@
 										     alert("an error processed");
 										}
 										//alert("上传完成");
-										$(".modal.add").modal("hide");
+										$(".modal.oper").modal("hide");
 										$(".btn.fresh").trigger("click");
 									},
 								});
 								//console.log("上传");
 			});
+			//关闭对话框的时候清空表单
+			$(".modal.add").bind("hide",function(){
+				$("form#pictures")[0].reset();
+			});
 			$(".modal.add").find(".btn.save").bind("click", function() {
 								var type = $(".add .controls.type").find("select").val();
 								var credit = $(".add .controls.credit").find("input").val();
 								var score = $(".add .controls.score").find("input").val();
+								console.log($("input.uploaddesc")[0].files);
+								console.log($("input.uploadactivity")[0].files);
 								var fileobj1 = $("input.uploaddesc")[0].files[0];
 								var fileobj2 = $("input.uploadactivity")[0].files[0];
 								var flag=true
@@ -387,6 +393,7 @@
 				var $a=$(".modal."+$modal).find("a.desc ~ a.temple").clone();
 				console.log($(this)[0].files[0].name);
 				$(".modal."+$modal).find("a.desc ~ a.already").remove();
+				$(".modal."+$modal).find("a.desc ~ p.text-error").css("display","none");
 				$a.text($(this)[0].files[0].name);
 				$a.removeClass("hide");
 				$a.removeClass("temple");
@@ -398,6 +405,7 @@
 				var $a=$(".modal."+$modal).find("a.activity ~ a.temple").clone();
 				console.log($(this)[0].files[0].name);
 				$(".modal."+$modal).find("a.activity ~ a.already").remove();
+				$(".modal."+$modal).find("a.activity ~ p.text-error").css("display","none");
 				$a.text($(this)[0].files[0].name);
 				$a.removeClass("hide");
 				$a.removeClass("temple");
@@ -422,6 +430,7 @@
 					$(".oper").find("form").removeClass("hide");
 					//var obj = $(".modal.oper").data("data");
 					var obj = $(this).parent().parent().data("data");
+					$(".modal.oper").data("data",obj);
 					console.log("为啥没填");
 					console.log(obj);
 					$(".oper .controls.type").find("select").val(obj["type"]);
@@ -431,8 +440,9 @@
 				//删除用按钮的相关处理
 				$("table.all").find(".btn.clean").bind("click", function() {
 					//var $modal=$(".mynav").data("data");
-					var obj = $(".modal.oper").data("data");
+					$(".modal.oper").data("data");
 					var obj = $(this).parent().parent().data("data");
+					//$(".modal.oper").data("data");
 					if(confirm("确定删除吗？") == true){     //如果用户单击了确定按钮 
 							 console.log("删除");
 							 $.ajax({

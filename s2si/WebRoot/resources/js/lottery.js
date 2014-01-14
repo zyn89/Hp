@@ -2,7 +2,12 @@
 	$(function(){
 		
 //{"eid":4,"lotteryUrl":"D:\\LotteryPic\\lottery19546027_1389339858470_2740.jpeg","descUrl":"D:\\LotteryPic\\lotteryDesc19546027_1389339859193_3097.jpeg","credit":12,"prizeUrl":"D:\\LotteryPic\\prizeDesc19546027_1389339854042_1210.jpeg"}]}
-
+		$( document ).ajaxComplete(function(data,xhr) {
+			$(".btn.refresh").button("reset");
+		});
+		$( document ).ajaxSend(function() {
+			$(".btn.refresh").button("loading");
+		});
 
 
 		function fillInLotteryTable(data) {
@@ -73,10 +78,14 @@
 		}
 
 		function uploadFile(formId,url,callback) {
+			var lid=$('#lid','#j-update-lottery-modal').val();
+			if(!lid || lid==undefined){
+				$('#lid','#j-update-lottery-modal').val(-1);
+			}
 			var index=0;
 			var flag=false;
 			var vali=$("body").data("validate");
-			$("#"+formId).find('div input[type="hidden"]').each(function(index,e){
+			$("#"+formId).find('div input[type="hidden"]').each(function(i,e){
 				var str=$(e).val();
 				//console.log(str);
 				var name=$(e).attr("name");
@@ -84,13 +93,27 @@
 					$(e).val(index);
 					console.log($(e).val());
 					index=index+1;
+					//$("p."+name).css("display","none");
+				}else{
+					//if(vali){						
+					//	$("p."+name).css("display","inline-block");
+					//	flag=true;
+					//}
+					$(e).val(-1);
+				}				
+			});
+			$("#"+formId).find('div input[type="file"]').each(function(i,e){
+				var str=$(e).val();
+				//console.log(str);
+				var name=$(e).parent().find("input[type='hidden']").attr("name");
+				console.log(e.files);
+				if(e.files.length!=0){
 					$("p."+name).css("display","none");
 				}else{
 					if(vali){						
 						$("p."+name).css("display","inline-block");
 						flag=true;
 					}
-					$(e).val(-1);
 				}				
 			});
 			var str=$("#"+formId).find("input[name='credit']").val();
@@ -102,6 +125,7 @@
 				$("p.credit").css("display","none");
 			}
 			if(flag==true && vali==true){
+				//$("#"+formId)[0].reset();
 				return;
 			}
 			var form = document.getElementById(formId),
@@ -142,6 +166,7 @@
 				$("body").data("validate",true);
 				$('#j-addmodel').modal('show');
 				$('#j-addmodel').find("p.text-error").css("display","none");
+				$('#j-addmodel').find("span.j-filename").text("");
 			});
 			
 			//点击上传 时间绑定
@@ -159,7 +184,7 @@
 					$fileName =$divParent.find('.j-filename'),
 					$input_hidden = $divParent.find('input[type="hidden"]');
 				$fileName.text(value);
-
+				$(this).parent().find("p.text-error").css("display","none");
 				//$input_hidden.val(value.substring(value.lastIndexOf('\\') + 1));
 				//99只是标志位，没有任何实际意义
 				$input_hidden.val(99);
@@ -170,7 +195,10 @@
 				uploadFile('j-addlotteryform','AddLottery.action',fillInLotteryTable);
 				//$('#j-addmodel').modal('hide');
 			});
-
+			//增加兑奖活动的窗口关闭时清空表单
+			$('#j-addmodel').bind("hide",function(){
+				$(this).find("form")[0].reset();
+			});
 			//保存修改
 			$('#j-ex-update').bind('click.for.update',function(event){
 				uploadFile('j-update-form','UpdateLottery.action',fillInLotteryTable);

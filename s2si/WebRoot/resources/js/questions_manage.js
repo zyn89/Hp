@@ -145,11 +145,15 @@
 				for(var i=0;i<arr.length;i++){
 					var $a=$(".modal.oper").find("a.desc ~ a.temple").clone();
 					$a.text($(this)[0].files[i].name);
+					$(".modal.oper").find("a.desc ~ p.text-error").css("display","none");
 					$a.removeClass("hide");
 					$a.removeClass("temple");
 					$a.addClass("already");
 					$a.insertAfter($(".modal.oper").find("a.desc ~ a.temple"));
 				}
+			});
+			$(".modal.oper").bind("hide",function(){
+				$("form#pictures")[0].reset();
 			});
 			//保存按钮事件
 			$(".modal.oper").find(".btn.save").bind("click", function() {

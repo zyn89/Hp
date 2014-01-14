@@ -2,7 +2,9 @@
 	$(function(){
 		
 //{"eid":4,"exchangeUrl":"D:\\ExchangePic\\exchange19546027_1389339858470_2740.jpeg","descUrl":"D:\\ExchangePic\\exchangeDesc19546027_1389339859193_3097.jpeg","credit":12,"prizeUrl":"D:\\ExchangePic\\prizeDesc19546027_1389339854042_1210.jpeg"}]}
-
+		$( document ).ajaxComplete(function(data,xhr) {
+			//console.log(xhr);
+		});
 
 
 		function fillInExchangeTable(data) {
@@ -64,21 +66,36 @@
 			var vali=$("body").data("validate");
 			var flag=false;
 			var index=0;
-			$("#"+formId).find('div input[type="hidden"]').each(function(index,e){
+			$("#"+formId).find('div input[type="hidden"]').each(function(i,e){
+				var str=$(e).val();
+				console.log(str);
+				var name=$(e).attr("name");
+				console.log("index="+index);
+				if(str==99 || str=='99'){					
+					$(e).val(index);
+					index=index+1;
+					//$("p."+name).css("display","none");
+				}else{
+					//if(vali){						
+					//	$("p."+name).css("display","inline-block");
+					//	flag=true;
+					//}
+					$(e).val(-1)
+				}				
+			});
+			$("#"+formId).find('div input[type="file"]').each(function(i,e){
 				var str=$(e).val();
 				//console.log(str);
-				var name=$(e).attr("name");
-				if(str==99){					
-					$(e).val(index);
-					console.log($(e).val());
-					index=index+1;
+				var name=$(e).parent().find("input[type='hidden']").attr("name");
+				console.log(name);
+				console.log(e.files);
+				if(e.files.length!=0){	
 					$("p."+name).css("display","none");
 				}else{
-					if(vali){						
+					if(vali){
 						$("p."+name).css("display","inline-block");
 						flag=true;
 					}
-					$(e).val(-1)
 				}				
 			});
 			var str=$("#"+formId).find("input[name='credit']").val();
@@ -89,6 +106,7 @@
 				$("p.credit").css("display","none");
 			}
 			if(flag==true && vali==true){
+				//$("#"+formId)[0].reset();
 				return;
 			}
 			var form = document.getElementById(formId),
@@ -125,6 +143,7 @@
 			$('#j-addexchange').bind('click.foradd',function(e){
 				console.log(e);
 				$('#j-addmodel').modal('show');
+				$('#j-addmodel').find("span.j-filename").text("");
 				$('#j-addmodel').find("p.text-error").css("display","none");
 			});
 			
@@ -143,7 +162,7 @@
 					$fileName =$divParent.find('.j-filename'),
 					$input_hidden = $divParent.find('input[type="hidden"]');
 				$fileName.text(value);
-
+				$(this).parent().find("p.text-error").css("display","none");
 				//$input_hidden.val(value.substring(value.lastIndexOf('\\') + 1));
 				//99只是个标记值，没有任何意义
 				$input_hidden.val(99);
@@ -155,7 +174,10 @@
 				uploadFile('j-addexchangeform','AddExchange.action',fillInExchangeTable);
 				//$('#j-addmodel').modal('hide');
 			});
-
+			//增加活动对话框关闭时清空form
+			$('#j-addmodel').bind('hide',function(){
+				$(this).find("form")[0].reset();
+			});
 			//保存修改
 			$('#j-ex-update').bind('click.for.update',function(event){
 				uploadFile('j-update-form','updateExchange.action',fillInExchangeTable);

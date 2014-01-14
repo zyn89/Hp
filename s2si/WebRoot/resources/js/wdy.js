@@ -1,14 +1,20 @@
 (function($,window){
 	$(function(){
-		
+		$( document ).ajaxComplete(function(data,xhr) {
+			$(".btn.refresh").button("reset");
+		});
+		$( document ).ajaxSend(function() {
+			$(".btn.refresh").button("loading");
+		});
 		function uploadFile(formId,url,sid,qid) {
 			var form = document.getElementById(formId),
 				formData = new FormData(form);
 			if(sid) {
 				formData.append('sid',sid);
-			} 
-			if(qid!=undefined || !qid) {
+			}
+			if(qid!=undefined && !qid) {
 				formData.append('qid',qid);
+				alert("");
 			}
 			$.ajax({
 				url: url,
@@ -77,7 +83,7 @@
 		
 		function loadSurveyQuestions(sid) {
 			$.ajax({
-				url: 'GetSurveyQuestion_Web.action',
+				url: 'GetSurveyQuestion.action',
 				type: 'post',
 				dataType: 'json',
 				data: {sid: sid},
@@ -435,10 +441,11 @@
 			
 			//增加微调研弹出模态框
 			$('#j-addwdy').bind('click.foradd',function(){
+				var qid=$(this).parent().parent().data("qid");
 				if($('#j-bread').hasClass('s-mark')) {
 					$('.modal-header h3','#j-add-qustion-modal').text('增加调研问题');
 					$('#j-oldimg','#j-add-qustion-modal').hide();
-
+					$('#j-addmodel').data("qid",parseInt(qid));
 					$('#j-q-filename','#j-add-qustion-modal').text("");//应该显示图片
 
 					$('#j-q-a1','#j-add-qustion-modal').val("");
@@ -460,7 +467,7 @@
 			
 			//保存上传wdy信息
 			$('#j-savewdy').bind('click.forsave',function(event){
-				uploadFile('j-addwdyform','AddSurvey.action');
+				uploadFile('j-addwdyform','AddSurvey.action',null,null);
 				$('#j-addmodel').modal('hide');
 			});
 
@@ -468,7 +475,8 @@
 				if($(this).parents('#j-add-qustion-modal').hasClass('s-mark')) {
 					uploadFile('j-addwdyqform','UpdateSurveyQuestion.action',$('#j-wdyqtable').attr('data-sid'));
 				} else {
-					uploadFile('j-addwdyqform','AddSurveyQuestion.action',$('#j-wdyqtable').attr('data-sid'));
+					uploadFile('j-addwdyqform','AddSurveyQuestion.action',$('#j-wdyqtable').attr('data-sid'),$('#j-addmodel').data("qid"));
+					
 				}
 				$('#j-add-qustion-modal').modal('hide');
 			});
