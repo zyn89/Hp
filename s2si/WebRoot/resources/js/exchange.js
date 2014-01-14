@@ -82,13 +82,13 @@
 				}				
 			});
 			var str=$("#"+formId).find("input[name='credit']").val();
-			if(str=="" || !str){
+			if((str=="" || !str) && vali==true){
 				$("p.credit").css("display","inline-block");
 				flag=true;
 			}else{
 				$("p.credit").css("display","none");
 			}
-			if(flag==true){
+			if(flag==true && vali==true){
 				return;
 			}
 			var form = document.getElementById(formId),

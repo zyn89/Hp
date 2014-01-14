@@ -74,6 +74,7 @@
 
 		function uploadFile(formId,url,callback) {
 			var index=0;
+			var flag=false;
 			var vali=$("body").data("validate");
 			$("#"+formId).find('div input[type="hidden"]').each(function(index,e){
 				var str=$(e).val();
@@ -94,13 +95,13 @@
 			});
 			var str=$("#"+formId).find("input[name='credit']").val();
 			console.log(str);
-			if(str=="" || !str){
+			if((str=="" || !str) && vali==true){
 				$("p.credit").css("display","inline-block");
 				flag=true;
 			}else{
 				$("p.credit").css("display","none");
 			}
-			if(flag==true){
+			if(flag==true && vali==true){
 				return;
 			}
 			var form = document.getElementById(formId),
@@ -124,7 +125,7 @@
 				 if(callback) {
 					callback($.parseJSON(data));
 					bindEventAfterDataLoaded();
-					$('#j-addmodel').modal('show');
+					$('#j-addmodel').modal('hide');
 				}
 			})
 			.fail(function(err) {
