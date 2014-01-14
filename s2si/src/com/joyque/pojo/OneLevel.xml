@@ -11,7 +11,7 @@
   </select>
   
   <select id="GetOneLevels" resultClass="OneLevel">
-    select * from one_level 
+    select * from one_level order by oid asc
   </select>
 
   <insert id="insertOneLevel" parameterClass="OneLevel">

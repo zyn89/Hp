@@ -11,7 +11,7 @@
   </select>
   
   <select id="GetSurveyInfos" resultClass="SurveyInfo">
-    select * from survey_info 
+    select * from survey_info order by sid asc
   </select>
 
   <insert id="insertSurveyInfo" parameterClass="SurveyInfo">

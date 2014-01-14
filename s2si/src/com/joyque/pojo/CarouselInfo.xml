@@ -11,7 +11,7 @@
   </select>
   
   <select id="GetCarouselInfos" resultClass="CarouselInfo">
-    select * from carousel_info 
+    select * from carousel_info order by cid asc
   </select>
 
   <insert id="insertCarouselInfo" parameterClass="CarouselInfo">

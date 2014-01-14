@@ -7,7 +7,7 @@
   <typeAlias alias="TwoLevel" type="com.joyque.pojo.TwoLevel"/>
   
   <select id="GetTwoLevels" resultClass="TwoLevel">
-    select * from two_level where tid = #value#
+    select * from two_level where tid = #value# order by id asc
   </select>
   
   <select id="GetTwoLevel" resultClass="TwoLevel">

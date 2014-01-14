@@ -8,7 +8,7 @@
   
   <select id="GetUplordInfos" parameterClass="java.util.Map"
   resultClass="UplordInfo">
-    select * from uplord_info where aid = #aid# limit #start#, #end#
+    select * from uplord_info where aid = #aid# limit #start#, #end# order by id asc
   </select>
   
   <select id="GetUplordInfosCount" 

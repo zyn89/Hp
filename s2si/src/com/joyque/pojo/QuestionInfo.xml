@@ -7,11 +7,11 @@
   <typeAlias alias="QuestionInfo" type="com.joyque.pojo.QuestionInfo"/>
   
   <select id="GetQuestionInfoList" resultClass="QuestionInfo">
-    select * from question_info where aid = #value#
+    select * from question_info where aid = #value# order by qid asc
   </select>
   
   <select id="getQuestionInfo" resultClass="QuestionInfo">
-    select * from question_info where aid = #value#
+    select * from question_info where qid = #value#
   </select>
 
   <insert id="insertQuestionInfo" parameterClass="QuestionInfo">

@@ -11,7 +11,7 @@
   </select>
   
   <select id="GetLotteryInfos" resultClass="LotteryInfo">
-    select * from lottery_info 
+    select * from lottery_info order by lid asc
   </select>
 
   <insert id="insertLotteryInfo" parameterClass="LotteryInfo">

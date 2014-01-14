@@ -11,7 +11,7 @@
   </select>
   
   <select id="getActivityInfos" resultClass="ActivityInfo">
-    select * from activity_info 
+    select * from activity_info order by aid asc
   </select>
 
   <insert id="insertActivityInfo" parameterClass="ActivityInfo">

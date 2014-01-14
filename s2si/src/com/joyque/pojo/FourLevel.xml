@@ -7,7 +7,7 @@
   <typeAlias alias="FourLevel" type="com.joyque.pojo.FourLevel"/>
   
   <select id="GetFourLevels" resultClass="FourLevel">
-    select * from four_level where fid = #value#
+    select * from four_level where fid = #value# order by id asc
   </select>
   
   <select id="GetFourLevel" resultClass="FourLevel">

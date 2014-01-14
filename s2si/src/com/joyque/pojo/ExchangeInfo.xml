@@ -11,7 +11,7 @@
   </select>
   
   <select id="GetExchangeInfos" resultClass="ExchangeInfo">
-    select * from exchange_info 
+    select * from exchange_info order by eid asc
   </select>
 
   <insert id="insertExchangeInfo" parameterClass="ExchangeInfo">

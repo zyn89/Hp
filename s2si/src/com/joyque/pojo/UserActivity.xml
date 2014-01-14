@@ -8,7 +8,7 @@
   
   <select id="getUserActivities" parameterClass="java.util.Map"
   resultClass="UserActivity">
-    select * from user_activity where aid = #aid# limit #start#, #end#
+    select * from user_activity where aid = #aid# limit #start#, #end# 
   </select>
   
   <select id="GetUserActivitiesCount" 
