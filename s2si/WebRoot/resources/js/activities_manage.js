@@ -431,9 +431,9 @@
 					//var obj = $(".modal.oper").data("data");
 					var obj = $(this).parent().parent().data("data");
 					$(".modal.oper").data("data",obj);
-					console.log("为啥没填");
 					console.log(obj);
-					$(".oper .controls.type").find("select").val(obj["type"]);
+					console.log(dict[obj["type"]]);
+					$(".oper .controls.type").find("input").val(dict[obj["type"]]);
 					$(".oper .controls.credit").find("input").val(obj["credit"]);
 					$(".oper .controls.score").find("input").val(obj["score"]);
 				});

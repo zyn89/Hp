@@ -224,13 +224,15 @@
 					     alert("an error processed");
 					     return;
 					 }
-					var $tr = _this.parents('tr');
+					 fillInExchangeTable(data);
+					 bindEventAfterDataLoaded();
+					/*var $tr = _this.parents('tr');
 					//修改序号
 					$trs = _this.parents('tbody').find('tr').not($tr);
 					$tr.remove();
 					$.each($trs,function(index,tr){
 						$(tr).find('td:eq(0)').text(index+1);
-					});
+					});*/
 				})
 				.fail(function() {
 					console.log("error");
@@ -246,6 +248,7 @@
 					$tds = $pTr.find('td:gt(0):lt(4)'),
 					credit = $pTr.find('td:eq(5)').text(),
 					$imgs = $('#j-oldimg').find('img');
+					
 				/*$.each($tds,function(index,tr){
 					$imgs.eq(index).attr({
 						src : $(tr).attr('data-imgUrl')

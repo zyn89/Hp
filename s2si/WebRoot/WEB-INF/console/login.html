@@ -17,13 +17,14 @@
   <script>
   		$(function(){
   			$("#myModal").modal("show");
-  			var username=$("#username").val();
-  			var password=$("#password").val();
   			$(".btn.login").bind("click",function(){
+  				var username=$("#username").val();
+  				console.log(username);
+  				var password=$("#password").val();
+  				console.log(password);
   				$.ajax({
 						url: 'AdminLogin.action',
 						type: 'post',
-						dataType: 'json',
 						data:{"account":username,
 						"pw":password,
 						},
@@ -43,7 +44,7 @@
 					.fail(function(err) {
 						console.log(err);
 						alert("登录失败");
-						//location.href="all_Login.action";
+						location.href="all_Login.action";
 				});
   			});
   		});

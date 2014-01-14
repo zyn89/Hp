@@ -39,7 +39,7 @@
 								$tr.data("data", arr[i]);
 								$tr.removeClass("hide");
 								$tr.removeClass("temple");
-								$tr.find(".id").text(arr[i]["qid"]);
+								$tr.find(".id").text(i+1);
 								$tr.find(".aIndex").text(arr[i]["aIndex"]);
 								for(var j=0;j<3;j++){
 									$tr.find("."+options[j]).text(arr[i]["choiceitems"][j]);
@@ -260,7 +260,7 @@
 										 }catch(exception){				
 										     alert("an error processed");
 										 }
-										$(".modal.add").modal("hide");
+										$(".modal.oper").modal("hide");
 										$(".btn.fresh").trigger("click");
 									},
 								});

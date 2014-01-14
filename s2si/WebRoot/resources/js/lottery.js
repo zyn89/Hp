@@ -245,13 +245,15 @@
 					     alert("an error processed");
 					     return;
 					 }
-					var $tr = _this.parents('tr');
+					/*var $tr = _this.parents('tr');
 					//修改序号
 					$trs = _this.parents('tbody').find('tr').not($tr);
 					$tr.remove();
 					$.each($trs,function(index,tr){
 						$(tr).find('td:eq(0)').text(index+1);
-					});
+					});*/
+					fillInLotteryTable(data);
+					bindEventAfterDataLoaded();
 				})
 				.fail(function() {
 					console.log("error");

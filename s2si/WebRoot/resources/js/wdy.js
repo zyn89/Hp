@@ -32,16 +32,19 @@
 				     alert("an error processed");
 				     return;
 				 }
-				if(sid) {
-					$('#j-wdytable tbody').find('tr[data-sid=' + sid + ']').find('.j-mqestion')
-																		   .trigger('click.manager.question');
-				}else{
+				//if(sid) {
+				//	$('#j-wdytable tbody').find('tr[data-sid=' + sid + ']').find('.j-mqestion')
+				//														   .trigger('click.manager.question');
+				//}else{
 					var str=$('#j-bread').text();
 					console.log("刷新");
 					if(str=="调研活动"){
 						fresh();
+					}else if(str=="返回第一级"){
+						var sid=$('#j-wdyqtable').data("sid");
+					 	loadSurveyQuestions(sid);
 					}
-				}
+				//}
 			})
 			.fail(function() {
 				console.log("error");
@@ -183,7 +186,9 @@
 					     alert("an error processed");
 					     return;
 					 }
-					_this.parents('tr').remove();
+					//_this.parents('tr').remove();
+					 var sid=$('#j-wdyqtable').data("sid");
+					 loadSurveyQuestions(sid);
 				})
 				.fail(function() {
 					console.log("error");
@@ -429,7 +434,7 @@
 				});
 				
 				
-				
+				$('#j-wdyqtable').data("sid",sid);
 				//获取数据填充表格
 				loadSurveyQuestions(sid);
 				
