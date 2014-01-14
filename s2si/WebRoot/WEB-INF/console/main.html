@@ -106,30 +106,17 @@ button,a {
 							<h3>HP管理树</h3>
 							<ul id="J_navlist">
 								<li>
-									<h4>首页轮换图管理</h4>
-									<div class="list-item none">
-										<p>
-											<a id="autoTurnManage_MainPage" href="javascript:void(0)"
-												title="autoTurnManage.action" >轮换图管理</a>										</p>
-										<p>
-
-										</p>
-									</div>
+									<h4 class="other" data-loc="autoTurnManage.action">轮播图管理</h4>
 								</li>
 								<li>
-									<h4>首页图片管理</h4>
-									<div class="list-item none">
-										<p>
-											<a href="javascript:void(0)" title="all_imgManage.action">XXX管理</a>
-										</p>
-									</div>
+									<h4 class="other" data-loc="all_imgManage.action">微网站管理</h4>
 								</li>				
 							
 								<li>
 									<h4 id="j-wdy" class="">微调研管理</h4>
 								</li>
 								<li>
-									<h4 id="activities" class="">全部活动后台管理</h4>
+									<h4 id="activities" class="">微活动管理</h4>
 								</li>
 								<li>
 									<h4 id="exchange" class="">兑奖管理</h4>
@@ -163,8 +150,10 @@ button,a {
 
 </body>
 <script type="text/javascript">
-	$("p a").click(function() {
-		$("#j-content").html('<iframe scrolling="auto" height="680px" frameborder="0" width="100%" id="r_iframe" name="r_iframe" src="' + $(this).attr("title") + '" ></iframe>');
+	$(".other").click(function() {
+		var location=$(this).data("loc");
+		//console.log(_this);
+		$("#j-content").html('<iframe scrolling="auto" height="680px" frameborder="0" width="100%" id="r_iframe" name="r_iframe" src="' + location + '" ></iframe>');
 	});
 </script>
 </html>
