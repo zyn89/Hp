@@ -12,7 +12,7 @@
 			if(sid) {
 				formData.append('sid',sid);
 			}
-			if(qid!=undefined && !qid) {
+			if(qid!=undefined && qid) {
 				console.log(qid);
 				formData.append('qid',qid);
 			}
