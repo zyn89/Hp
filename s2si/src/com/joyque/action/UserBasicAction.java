@@ -92,7 +92,7 @@ public class UserBasicAction extends BaseAction{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void AdminLogin()
+	public String AdminLogin()
 	{
 		JSONObject json = new JSONObject();
 		try{
@@ -107,7 +107,7 @@ public class UserBasicAction extends BaseAction{
 		}catch(Exception e){
 			throw new BaseException(e.getMessage());
 		}
-		ajaxReturn(json.toString());
+		return SUCCESS;
 	}
 	
 

@@ -35,11 +35,11 @@ public class WebAction  extends BaseAction{
 	
 	private File pic3;
 	
-	private String pic1Type;
+	private String pic1ContentType;
 	
-	private String pic2Type;
+	private String pic2ContentType;
 	
-	private String pic3Type;
+	private String pic3ContentType;
 	
 	private long cid;
 	
@@ -126,13 +126,13 @@ public class WebAction  extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidatePic(pic1) || !isValidatePicType(pic1Type)
-					|| !isValidatePic(pic2) || !isValidatePicType(pic2Type)
-					|| !isValidatePic(pic3) || !isValidatePicType(pic3Type))
+			if(!isValidatePic(pic1) || !isValidatePicType(pic1ContentType)
+					|| !isValidatePic(pic2) || !isValidatePicType(pic2ContentType)
+					|| !isValidatePic(pic3) || !isValidatePicType(pic3ContentType))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.AddCarouselInfo(uid, pic1, pic2, pic3, pic1Type, pic2Type, pic3Type);
+			json = webService.AddCarouselInfo(uid, pic1, pic2, pic3, pic1ContentType, pic2ContentType, pic3ContentType);
 		}catch(Exception e){			
 			throw new BaseException(e.getMessage());
 		}
@@ -152,7 +152,7 @@ public class WebAction  extends BaseAction{
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			json = webService.UpdateCarouselInfo(uid, cid, pic1, pic2, pic3, pic1Type, pic2Type, pic3Type);
+			json = webService.UpdateCarouselInfo(uid, cid, pic1, pic2, pic3, pic1ContentType, pic2ContentType, pic3ContentType);
 		}catch(Exception e){			
 			throw new BaseException(e.getMessage());
 		}
@@ -579,28 +579,28 @@ public class WebAction  extends BaseAction{
 	public void setPic3(File pic3) {
 		this.pic3 = pic3;
 	}
-
-	public String getPic1Type() {
-		return pic1Type;
+	
+	public String getPic1ContentType() {
+		return pic1ContentType;
 	}
 
-	public void setPic1Type(String pic1Type) {
-		this.pic1Type = pic1Type;
+	public void setPic1ContentType(String pic1ContentType) {
+		this.pic1ContentType = pic1ContentType;
 	}
 
-	public String getPic2Type() {
-		return pic2Type;
+	public String getPic2ContentType() {
+		return pic2ContentType;
 	}
 
-	public void setPic2Type(String pic2Type) {
-		this.pic2Type = pic2Type;
+	public void setPic2ContentType(String pic2ContentType) {
+		this.pic2ContentType = pic2ContentType;
 	}
 
-	public String getPic3Type() {
-		return pic3Type;
+	public String getPic3ContentType() {
+		return pic3ContentType;
 	}
 
-	public void setPic3Type(String pic3Type) {
-		this.pic3Type = pic3Type;
-	}	
+	public void setPic3ContentType(String pic3ContentType) {
+		this.pic3ContentType = pic3ContentType;
+	}
 }
