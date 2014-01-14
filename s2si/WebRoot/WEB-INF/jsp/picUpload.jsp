@@ -29,6 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	
    	 <link rel="stylesheet" href="resources/css/dropzone.css" />
+   	  <link rel="stylesheet" href="resources/css/common.css" />
 	 <script type="text/javascript" src="resources/js/jquery-1.9.1.js"></script>
 	 <script type="text/javascript" src="resources/js/dropzone.js"></script>
 	 <script type="text/javascript">
@@ -103,55 +104,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 </script>
 	<style type="text/css">
 
-		html,body {
-			height:100%;
-			width : 100%;
-			font-family:"黑体","微软雅黑";
-			font-size: 14px;
-		}
-
-		body,ul {
-			margin:0px;
-			padding:0px;
-		}
-		
-		ul {
-			list-style: none;
-		}
-
-		button ,a {
-			outline: none !important;
-		}
-		a {
-			text-decoration: none;
-			color: #fff;
-		}
-
-		#wrap {
-			width:100%;
-			min-height: 100%;
-			background: url(resources/image/背景.png) repeat-y fixed;	
-			background-size:cover;
-		}
-
-		.main {
-			width : 320px;
-			min-height: 100%;
-			margin : 0px auto;
-			overflow:hidden;
-			zoom:1;
-			text-align:center;
-		}
-	
-		
-		.main .m-logo {
-			 height: 135px;
-			 border: 1px solid red;
-			 width : 100%;
-			 margin-bottom:10px;
-			 position: relative;
-		}
-
 		.main .m-info {	
 			margin: 0 auto;
 			text-align: center;
@@ -208,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			display: block;
 			float : left;
 			width: 60px;
-			height: 52px;
+			height: 51px;
 			background: url(resources/image/upload_td.png);
 			background-size:cover;
 			margin-top: 20px;
@@ -239,7 +191,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			background:url(resources/image/upload_plus.png);
 			background-size:cover;
 			position: absolute;
-			top : 10px;
+			top : 9.5px;
 			left : 14px;
 		}
 		

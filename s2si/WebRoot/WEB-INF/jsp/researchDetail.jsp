@@ -12,62 +12,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>调研</title>
 	
+	<link rel="stylesheet" href="resources/css/common.css" />
 	<script src="resources/js/jquery-1.9.1.js"></script>
 	<script src="resources/js/research.js"></script>
 	
-	<script>
-	
+	<script>	
+		jQuery(function($){
+
+
+
+			
+		});
 	</script>
 	<style>
-		html,body {
-			height:100%;
-			width : 100%;
-			font-family:"黑体","微软雅黑";
-			font-size: 14px;
-			color: #fff;
-		}
-
-		body,ul {
-			margin:0px;
-			padding:0px;
-		}
-		
-		ul {
-			list-style: none;
-		}
-
-		button ,a {
-			outline: none !important;
-		}
-		a {
-			text-decoration: none;
-			color: #fff;
-		}
-
-		#wrap {
-			width:100%;
-			min-height: 100%;
-			background: url(resources/image/背景.png) repeat-y fixed;	
-			background-size:cover;
-		}
-
-		.main {
-			width : 320px;
-			min-height: 100%;
-			margin : 0px auto;
-			overflow:hidden;
-			zoom:1;
-			text-align:center;
-		}
-	
-
-		.main .m-logo {
-			 height: 135px;
-			 border: 1px solid red;
-			 width : 100%;
-			 margin-bottom:10px;
-		}
-
 		.m-question {
 			width:100%;
 			margin-bottom: 20px;
@@ -157,7 +114,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		.main .m-submit {
 			width: 100%;
-			margin-top:15px;
+			margin-top:35px;
 		}
 
 		.main .m-submit a {
@@ -168,9 +125,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			margin: 0 auto;
 			background:url(resources/image/btn-blue.png);
 			background-size:cover;
-			letter-spacing: 1.8;
+			letter-spacing: 3px;
 		}
-		
+	
 	</style>
 </head>
 <%
@@ -216,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</ul>
 			</div>
 			<div class="m-submit">
-				<a href="javascript:void(0);" id="j-confirmbtn">确定</a>
+				<a href="javascript:void(0);" id="j-confirmbtn">提交</a>
 			</div>
 		</div>
 	</div>
