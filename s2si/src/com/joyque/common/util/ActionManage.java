@@ -13,5 +13,5 @@ public class ActionManage {
 		                                      "QueryLotteryUser", "AddQuestion", "UpdateQuestion", "AddSurvey", "AddSurveyQuestion",
 		                                      "UpdateSurveyQuestion", "DeleteSurveyQuestion", "QueryUserSurvey", "UplordPic", "AddCarouselInfo",
 		                                      "UpdateCarouselInfo", "AddOneLevel", "UpdateOneLevel", "AddTwoLevel", "UpdateTwoLevel",
-		                                      "AddThreeLevel", "UpdateThreeLevel", "AddFourLevel", "UpdateFourLevel", ""};
+		                                      "AddThreeLevel", "UpdateThreeLevel", "AddFourLevel", "UpdateFourLevel", "GetSurveyQuestion_Web"};
 }

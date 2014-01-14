@@ -87,6 +87,11 @@ public class SurveyAction extends BaseAction{
 		ajaxReturn(json.toString());
 	}
 	
+	public void GetSurveyQuestion_Web()
+	{
+		GetSurveyQuestion();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void GetSurveyQuestion()
 	{

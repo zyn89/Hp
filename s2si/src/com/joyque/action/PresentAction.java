@@ -91,8 +91,7 @@ public class PresentAction extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateCredit(credit)
+			if(!isValidateCredit(credit)
 					|| !isValidateIndex(exTitleIndex) || !isValidateIndex(exDescIndex)
 					|| !isValidateIndex(prizeTitleIndex) || !isValidateIndex(prizeDescIndex)
 					|| !isValidateEid(eid))

@@ -42,7 +42,11 @@ public class LoginedCheckInterceptor extends AbstractInterceptor {
 			//验证Session是否过期
 			if(!ServletActionContext.getRequest().isRequestedSessionIdValid()){
 				//session过期,转向session过期提示页,最终跳转至登录页面
-				return "tologin";
+				if(find == 1)
+				    return "tologin";
+				else
+					//return "adminLogin";
+					return ai.invoke();
 			}
 			else{
 				user = (String)ServletActionContext.getRequest().getSession().getAttribute("uid");
