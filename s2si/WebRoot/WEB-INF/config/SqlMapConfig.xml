@@ -43,6 +43,7 @@
   <sqlMap resource="com/joyque/pojo/TwoLevel.xml"/>
   <sqlMap resource="com/joyque/pojo/ThreeLevel.xml"/>
   <sqlMap resource="com/joyque/pojo/FourLevel.xml"/>
+  <sqlMap resource="com/joyque/pojo/AdminInfo.xml"/>
   <!-- List more here...
   <sqlMap resource="com/mydomain/data/Order.xml"/>
   <sqlMap resource="com/mydomain/data/Documents.xml"/>
