@@ -16,7 +16,7 @@
         <global-results>
             <result name="exception-error">/WEB-INF/jsp/userhome.jsp</result>
             <result name="tologin">/WEB-INF/jsp/userhome.jsp</result>
-            <result name="adminLogin">/WEB-INF/jsp/userhome.jsp</result>
+            <result name="adminLogin">/WEB-INF/console/login.html</result>
         </global-results>
         <global-exception-mappings>
             <exception-mapping result="exception-error" exception="java.lang.Exception"></exception-mapping>
