@@ -27,25 +27,25 @@
 					'text-align' : 'center'
 				}).attr({
 					'data-imgUrl' : record.exchangeUrl
-				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
+				}).html('<button type="button" class="btn btn-link j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center'
 				}).attr({
 					'data-imgUrl' : record.descUrl
-				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
+				}).html('<button type="button" class="btn btn-link j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center'
 				}).attr({
 					'data-imgUrl' : record.prizeUrl
-				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
+				}).html('<button type="button" class="btn btn-link j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center'
 				}).attr({
 					'data-imgUrl' : record.prizeDescUrl
-				}).html('<button type="button" class="btn btn-primary j-imgpreview">查看</button>')
+				}).html('<button type="button" class="btn btn-link j-imgpreview">查看</button>')
 				  .appendTo($tr);
 				$('<td>').css({
 					'text-align' : 'center',

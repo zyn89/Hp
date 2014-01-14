@@ -123,9 +123,11 @@
 				     return;
 				 }
 				 if(callback) {
+					$(".btn.refresh").button("loading"); 
 					callback($.parseJSON(data));
 					bindEventAfterDataLoaded();
 					$('#j-addmodel').modal('hide');
+					$(".btn.refresh").button("reset"); 
 				}
 			})
 			.fail(function(err) {

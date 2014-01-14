@@ -4,11 +4,10 @@
 		function uploadFile(formId,url,sid,qid) {
 			var form = document.getElementById(formId),
 				formData = new FormData(form);
-			
 			if(sid) {
 				formData.append('sid',sid);
 			} 
-			if(qid) {
+			if(qid!=undefined || !qid) {
 				formData.append('qid',qid);
 			}
 			$.ajax({
@@ -52,14 +51,17 @@
 							  	"data-sid" : value.sid,
 							  	"data-imgUrl" : value.imageUrl
 							  });
-					$('<td>').text(index+1).appendTo($tr);
+					$('<td>').css({
+								'vertical-align':'middle',
+							  }).text(index+1).appendTo($tr);
 					$('<td>').css({
 								'text-align' : 'center'
 							  })
 							 .html('<button class="btn btn-link j-preview" type="button">查看</button>')
 							 .appendTo($tr);
 					$('<td>').css({
-								'text-align' : 'center'
+								'text-align' : 'center',
+								'vertical-align':'middle',
 							  })
 							 .text(value.credit).appendTo($tr);
 					$('<td>').css({
@@ -81,8 +83,10 @@
 				data: {sid: sid},
 			})
 			.done(function(data) {
+				$(".btn.refresh").button("loading");
 				fillDataInWdyqTable(data.questions);
 				bindEventAfterQuestionsLoaded();
+				$(".btn.refresh").button("reset");
 			})
 			.fail(function(err) {
 				console.log("error");
@@ -102,7 +106,9 @@
 					'data-qid' : value.qid,
 					'data-imgUrl' : value.imageUrl
 				});
-				$('<td>').text(index+1).appendTo($tr);
+				$('<td>').css({
+					'vertical-align':'middle',
+				}).text(index+1).appendTo($tr);
 				$('<td>').css({
 								'text-align' : 'center'
 							  })
@@ -110,7 +116,8 @@
 							 .appendTo($tr);
 				$.each(value.choiceItems,function(i,val){
 					$('<td>').css({
-								'text-align' : 'center'
+								'text-align' : 'center',
+								'vertical-align':'middle',
 							  })
 							 .text(val).appendTo($tr);
 				});
@@ -139,6 +146,11 @@
 			
 			//2 问题删除
 			$('.j-q-delete').bind('click.for.del',function(event){
+				if(confirm("确定要删除吗？")){
+					
+				}else{
+					return;
+				}
 				var _this = $(this),
 					qid = _this.parents('tr').attr('data-qid'),
 					sid = _this.parents('#j-wdyqtable').attr('data-sid');
@@ -382,7 +394,7 @@
 			$('.j-mqestion').bind('click.manager.question',function(event){
 				var _this = $(this),
 					sid = _this.parents('tr').attr('data-sid');
-				$('#j-wdytable').fadeOut('2',function(){
+				$('#j-wdytable').fadeOut('fast',function(){
 					$('#j-bread').text('返回第一级').addClass('s-mark')
 								 .css({
 									  cursor : 'pointer'
@@ -398,7 +410,7 @@
 											  color : '#000'
 										 });
 								 });
-					$('#j-wdyqtable').fadeIn("2")
+					$('#j-wdyqtable').fadeIn("fast")
 									.attr({
 										'data-sid' :  sid
 									});
@@ -473,14 +485,14 @@
 			$('#j-bread').bind('click.forback',function(event){
 				var _this = $(this);
 				if(_this.hasClass('s-mark')) {
-					$('#j-wdyqtable').fadeOut('2',function(){
+					$('#j-wdyqtable').fadeOut('fast',function(){
 						$('#j-bread').text('调研活动').removeClass('s-mark')
 									 .unbind('mouseover').unbind('mouseout')
 									 .css({
 										 'text-decoration' : 'none',
 										  color : '#000'
 									 });
-						$('#j-wdytable').fadeIn("2");
+						$('#j-wdytable').fadeIn("fast");
 					});
 				}else if(_this.hasClass("s-detail")){
 					$('#j-wdyquser').fadeOut('fast',function(){
