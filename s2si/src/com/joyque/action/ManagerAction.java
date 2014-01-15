@@ -50,4 +50,7 @@ public class ManagerAction extends BaseAction{
 	public String Error() {
 		return "error";
 	}
+	public String wwz() {
+		return "wwz";
+	}
 }
