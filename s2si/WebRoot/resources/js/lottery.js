@@ -423,7 +423,7 @@
 
 		}
 
-	
+		
 		bindEvent(); 
 		$("a.back").bind("click",function(){
 			if($(this).hasClass("rear")){
@@ -435,6 +435,7 @@
 				$('.pagination').addClass("hide");
 			}
 		});
+		function fresh(){
 		$(".btn.refresh").button("loading");
 		$.ajax({
 			url: 'LotteryList_Web.action',
@@ -458,6 +459,10 @@
 		.fail(function(err) {
 			console.log(err);
 		});
-
+		}
+		fresh();
+		$(".btn.refresh").bind("click",function(){
+			fresh();
+		});
 	});
 })(window,jQuery);

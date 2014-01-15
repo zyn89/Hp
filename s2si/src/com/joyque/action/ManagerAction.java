@@ -47,4 +47,7 @@ public class ManagerAction extends BaseAction{
 	public String Login() {
 		return "login";
 	}
+	public String Error() {
+		return "error";
+	}
 }

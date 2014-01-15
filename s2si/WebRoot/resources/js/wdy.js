@@ -642,5 +642,18 @@
 		});
 		}
 		fresh();
+		$(".btn.refresh").bind("click",function(e){
+			var str=$('#j-bread').text();
+			console.log("刷新");
+			if(str=="调研活动"){
+				fresh();
+			}else if(str=="返回第一级"){
+				var sid=$('#j-wdyqtable').data("sid");
+				if(!sid || sid==undefined){
+					return
+				}
+				loadSurveyQuestions(sid);
+			}
+		});
 	});
 })(jQuery,window);

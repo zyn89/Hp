@@ -418,7 +418,8 @@
 				$('.pagination').addClass("hide");
 			}
 		});
-		bindEvent(); 
+		bindEvent();
+		function fresh(){
 		$(".btn.refresh").button("loading");
 		$.ajax({
 			url: 'GetExchanges.action',
@@ -441,6 +442,10 @@
 		.fail(function(err) {
 			console.log(err);
 		});
-
+		}
+		fresh();
+		$(".btn.refresh").bind("click",function(){
+			fresh();
+		});
 	});
 })(window,jQuery);
