@@ -115,6 +115,7 @@ public class SurveyServiceImpl implements ISurveyService{
 		else
 		{
 			j.accumulate("done", 1);
+			j.accumulate("aIndex", userSurvey.getaIndex());
 			List<UserSurvey> surveyInfos = userSurveyDao.GetUserSurveys(info.getQid());
 			double count1 = 0;
 			double count2 = 0;
