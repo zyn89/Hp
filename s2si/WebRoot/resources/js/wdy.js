@@ -90,6 +90,7 @@
 
 		
 		function loadSurveyQuestions(sid) {
+			$(".btn.refresh").button("loading");
 			$.ajax({
 				url: 'GetSurveyQuestion_Web.action',
 				type: 'post',
@@ -97,7 +98,6 @@
 				data: {sid: sid},
 			})
 			.done(function(data) {
-				$(".btn.refresh").button("loading");
 				fillDataInWdyqTable(data.questions);
 				bindEventAfterQuestionsLoaded();
 				$(".btn.refresh").button("reset");
