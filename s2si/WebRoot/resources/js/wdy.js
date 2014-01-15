@@ -1,10 +1,22 @@
 (function($,window){
 	$(function(){
-		$( document ).ajaxComplete(function(data,xhr) {
+		$( document ).ajaxError(function(data,xhr) {
 			//$(".btn.refresh").button("reset");
-		});
-		$( document ).ajaxSend(function() {
-			//$(".btn.refresh").button("loading");
+			console.log(xhr);
+			var str=xhr.getAllResponseHeaders();
+			var reg=/.*errorType:.*[\r\n|\n]/;
+			var res=str.match(reg);
+			console.log(res[0]);
+			var tmp=res[0].replace(/[\r\n|\n]/,"");
+			console.log(tmp);
+			var type=tmp.substr(11);
+			console.log(type.length);
+			console.log(type=="exception");
+			if(type=="exception"){
+				location.href="all_Error.action";
+			}else if(type=="adminLogin"){
+				location.href="all_Login.action";
+			}
 		});
 		function uploadFile(formId,url,sid,qid) {
 			var vali=true;

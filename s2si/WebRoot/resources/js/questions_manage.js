@@ -1,4 +1,22 @@
 ;$(function(){
+	$( document ).ajaxError(function(data,xhr) {
+			//$(".btn.refresh").button("reset");
+			console.log(xhr);
+			var str=xhr.getAllResponseHeaders();
+			var reg=/.*errorType:.*[\r\n|\n]/;
+			var res=str.match(reg);
+			console.log(res[0]);
+			var tmp=res[0].replace(/[\r\n|\n]/,"");
+			console.log(tmp);
+			var type=tmp.substr(11);
+			console.log(type.length);
+			console.log(type=="exception");
+			if(type=="exception"){
+				location.href="all_Error.action";
+			}else if(type=="adminLogin"){
+				location.href="all_Login.action";
+			}
+		});
 	//载入数据
 	$(".btn.fresh").bind("click",function(){
 		$(this).button("loading");

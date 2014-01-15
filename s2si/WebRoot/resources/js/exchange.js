@@ -2,8 +2,23 @@
 	$(function(){
 		
 //{"eid":4,"exchangeUrl":"D:\\ExchangePic\\exchange19546027_1389339858470_2740.jpeg","descUrl":"D:\\ExchangePic\\exchangeDesc19546027_1389339859193_3097.jpeg","credit":12,"prizeUrl":"D:\\ExchangePic\\prizeDesc19546027_1389339854042_1210.jpeg"}]}
-		$( document ).ajaxComplete(function(data,xhr) {
-			//console.log(xhr);
+		$( document ).ajaxError(function(data,xhr) {
+			//$(".btn.refresh").button("reset");
+			console.log(xhr);
+			var str=xhr.getAllResponseHeaders();
+			var reg=/.*errorType:.*[\r\n|\n]/;
+			var res=str.match(reg);
+			console.log(res[0]);
+			var tmp=res[0].replace(/[\r\n|\n]/,"");
+			console.log(tmp);
+			var type=tmp.substr(11);
+			console.log(type.length);
+			console.log(type=="exception");
+			if(type=="exception"){
+				location.href="all_Error.action";
+			}else if(type=="adminLogin"){
+				location.href="all_Login.action";
+			}
 		});
 
 

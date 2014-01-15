@@ -14,9 +14,18 @@
         </interceptors> 
 	 
         <global-results>
-            <result name="exception-error">/WEB-INF/jsp/userhome.jsp</result>
-            <result name="tologin">/WEB-INF/jsp/userhome.jsp</result>
-            <result name="adminLogin">/WEB-INF/console/login.html</result>
+            <result type="httpheader" name="exception-error">all_Error.action
+            	<param name="status">500</param>
+            	<param name="headers.errorType">exception</param>
+            </result>
+            <result type="httpheader" name="tologin">/WEB-INF/jsp/userhome.jsp
+            	<param name="status">500</param>
+            	<param name="headers.errorType">userLogin</param>
+            </result>
+            <result type="httpheader" name="adminLogin">all_Login.action
+            	<param name="status">500</param>
+            	<param name="headers.errorType">adminLogin</param>
+            </result>
         </global-results>
         <global-exception-mappings>
             <exception-mapping result="exception-error" exception="java.lang.Exception"></exception-mapping>
