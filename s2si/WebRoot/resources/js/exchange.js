@@ -127,6 +127,9 @@
 						bindEventAfterDataLoaded();
 					}
 					$('#j-addmodel').modal('hide');
+					$('#j-update-exchange-modal').modal('hide');
+					//$("#"+formId)[0].reset();
+					//$("#"+formId).find(".controls span").text("");
 				 }catch(exception){				
 				     alert("an error processed");
 				 }				 
@@ -136,7 +139,13 @@
 			
 			});
 		}
-
+		//对话框的关闭按钮点击时清空
+		$(".modal-footer").find(".btn.class").bind("click",function(){
+				$(this).parents(".modal").find("form").each(function(index,e){
+					e.reset();
+				});
+				$(this).parents(".modal").find(".controls span").text("");
+		});
 		function bindEvent() {
 
 			//弹出增加模态框
@@ -174,14 +183,19 @@
 				uploadFile('j-addexchangeform','AddExchange.action',fillInExchangeTable);
 				//$('#j-addmodel').modal('hide');
 			});
-			//增加活动对话框关闭时清空form
+			//对话框关闭时清空form
 			$('#j-addmodel').bind('hide',function(){
 				$(this).find("form")[0].reset();
+				$(this).find("span.j-filename").text("");
+			});
+			$('#j-update-exchange-modal').bind('hide',function(){
+				$(this).find("form")[0].reset();
+				$(this).find("span.j-filename").text("");
 			});
 			//保存修改
 			$('#j-ex-update').bind('click.for.update',function(event){
 				uploadFile('j-update-form','updateExchange.action',fillInExchangeTable);
-				$('#j-update-exchange-modal').modal('hide');
+				//$('#j-update-exchange-modal').modal('hide');
 			});
 		}
 

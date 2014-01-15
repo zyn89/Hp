@@ -39,11 +39,17 @@
 					var str=$('#j-bread').text();
 					console.log("刷新");
 					if(str=="调研活动"){
+						//$("#"+formId)[0].reset();
+						////$("#"+formId).find(".controls span").text();
 						fresh();
 					}else if(str=="返回第一级"){
 						var sid=$('#j-wdyqtable').data("sid");
 					 	loadSurveyQuestions(sid);
+					 	//$("#"+formId)[0].reset();
+					 	//$("#"+formId).find(".controls span").text();
 					}
+					$('#j-addmodel').modal('hide');
+					$('#j-add-qustion-modal').modal('hide');
 				//}
 			})
 			.fail(function() {
@@ -219,7 +225,13 @@
 				
 
 			});
-
+			//关闭对话框的事件
+			$(".modal").bind("hide",function(){
+				$(this).find("form").each(function(index,e){
+					e.reset();
+				});
+				$(this).find(".controls span").text("");
+			});
 
 			//3 问题统计
 			$('.j-q-statics').bind('click.for.statics',function(event){
@@ -468,7 +480,6 @@
 					$('#j-addmodel').modal('show');
 				}
 			});
-			
 			//获取上传图片的名称
 			document.getElementById('j-uploadfile').onchange = function () {
 				  $("#j-filename").text(this.value);
@@ -480,7 +491,7 @@
 			//保存上传wdy信息
 			$('#j-savewdy').bind('click.forsave',function(event){
 				uploadFile('j-addwdyform','AddSurvey.action',null,null);
-				$('#j-addmodel').modal('hide');
+				//$('#j-addmodel').modal('hide');
 			});
 
 			$('#j-q-savewdy').bind('click.forsave',function(event){
@@ -490,7 +501,7 @@
 					uploadFile('j-addwdyqform','AddSurveyQuestion.action',$('#j-wdyqtable').attr('data-sid'),null);
 					
 				}
-				$('#j-add-qustion-modal').modal('hide');
+				//$('#j-add-qustion-modal').modal('hide');
 			});
 			
 			//上传图片触发事件

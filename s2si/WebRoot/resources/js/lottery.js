@@ -151,14 +151,23 @@
 					callback($.parseJSON(data));
 					bindEventAfterDataLoaded();
 					$('#j-addmodel').modal('hide');
-					$(".btn.refresh").button("reset"); 
+					$('#j-update-lottery-modal').modal('hide');
+					$(".btn.refresh").button("reset");
+					//$("#"+formId)[0].reset();
+					//$("#"+formId).find(".controls span").text("");
 				}
 			})
 			.fail(function(err) {
 			
 			});
 		}
-
+		//对话框的关闭按钮点击时清空
+		$(".modal-footer").find(".btn.class").bind("click",function(){
+				$(this).parents(".modal").find("form").each(function(index,e){
+					e.reset();
+				});
+				$(this).parents(".modal").find(".controls span").text("");
+		});
 		function bindEvent() {
 
 			//弹出增加模态框
@@ -195,14 +204,19 @@
 				uploadFile('j-addlotteryform','AddLottery.action',fillInLotteryTable);
 				//$('#j-addmodel').modal('hide');
 			});
-			//增加兑奖活动的窗口关闭时清空表单
-			$('#j-addmodel').bind("hide",function(){
+			//窗口关闭时清空表单
+			$('#j-addmodel').bind('hide',function(){
 				$(this).find("form")[0].reset();
+				$(this).find("span.j-filename").text("");
+			});
+			$('#j-update-lottery-modal').bind('hide',function(){
+				$(this).find("form")[0].reset();
+				$(this).find("span.j-filename").text("");
 			});
 			//保存修改
 			$('#j-ex-update').bind('click.for.update',function(event){
 				uploadFile('j-update-form','UpdateLottery.action',fillInLotteryTable);
-				$('#j-update-lottery-modal').modal('hide');
+				//$('#j-update-lottery-modal').modal('hide');
 			});
 		}
 

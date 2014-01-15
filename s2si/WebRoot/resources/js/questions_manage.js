@@ -153,6 +153,7 @@
 				}
 			});
 			$(".modal.oper").bind("hide",function(){
+				$(".modal.oper").find("a.desc ~ a.already").remove();
 				$("form#pictures")[0].reset();
 			});
 			//保存按钮事件
