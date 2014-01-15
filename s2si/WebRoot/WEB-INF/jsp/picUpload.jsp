@@ -31,75 +31,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	 <link rel="stylesheet" href="resources/css/dropzone.css" />
    	  <link rel="stylesheet" href="resources/css/common.css" />
 	 <script type="text/javascript" src="resources/js/jquery-1.9.1.js"></script>
-	 <script type="text/javascript" src="resources/js/dropzone.js"></script>
+	 <script type="text/javascript" src="resources/js/upload.js"></script>
 	 <script type="text/javascript">
 
-		 jQuery(function($){
-
-
-
-			 Dropzone.options.simpleUploadDropzone = {
-				maxFilesize: 2,
-				thumbnailWidth : 20,
-				thumbnailHeight : 20,
-				autoProcessQueue : false,
-				parallelUploads: 6,
-				uploadMultiple:true,
-				paramName:'pics',
-				addRemoveLinks : true,
-				maxFiles : 6,
-	      		acceptedFiles: 'image/*',
-				init: function() {
-
-				    this.on("maxfilesexceeded", function(file){
-				        alert("最多只能添加六个图片");
-				    });
-
-				    this.on("removedfile",function(file){
-				    		// console.log("a file " + file.name + "is removed");
-				    		if(uploaded[file.name]&&uploaded[file.name].length !=0&&isPost==0) {
-				    			var fname = uploaded[file.name].shift();
-		    					$.ajax({
-										url: '/deleteImg',
-										type: 'post',
-										dataType: 'json',
-										data: {
-											filename: fname
-										}
-								}).done(function(data){
-
-								}).fail(function(err){
-
-								});
-				    		}
-				    });
-
-				    this.on("success",function(file,data){
-				    	isPost = 0;
-				    	var filename = file.name;
-				    	// console.log("file:" + file.name);
-				    	// console.log('已上传:' + this.getAcceptedFiles().length);
-				    	// console.log("总共可以上传几个文件:" + Dropzone.options.simpleUploadDropzone['maxFiles']);
-				    	if(!uploaded[filename]) {
-				    		uploaded[filename] = [];
-				    	} 
-				    	uploaded[filename].push(data);
-				    });
-			  	}
-			};
-
-			
-
-
-
-
-			 $('.c_btn').click(function(event) {
-					var myDropzone = Dropzone.forElement("form#simpleUploadDropzone");
-					myDropzone.processQueue();
-			 });
-
-
-		 });
+		
 	 	
 	 </script>
 	<style type="text/css">
@@ -163,9 +98,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			height: 51px;
 			background: url(resources/image/upload_td.png);
 			background-size:cover;
-			margin-top: 20px;
+			margin-bottom: 10px;
 			margin-left: 16px;
 			position: relative;
+			margin-top:10px;
+			z-index: 100;
 		}
 
 		.main .m-upload .u-upload li.first {
@@ -182,6 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			margin-top: 10px;
 			background:none;
 			margin-left: 0;
+			margin-bottom : 10px;
 		}
 
 		.main .m-upload .u-upload li a {
@@ -195,6 +133,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			left : 14px;
 		}
 		
+		   
+		 .main .m-upload .u-upload li .thumbnail {
+			   	display: table-cell;
+				vertical-align: middle;
+				text-align: center;
+				width : 60px;
+				height : 51px;
+		 }
+		
+		.main .m-upload .u-upload li .thumbnail img{
+			/*width : 58px;
+			height: 49px;*/
+			width : 56px;
+			height: 47px;
+		}
+
 		.main .m-confirmbtn {
 			width: 100%;
 			margin-top:10px;
@@ -210,6 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			background-size:cover;
 			letter-spacing: 1.8;
 		}
+
 	</style>
 </head>
 
@@ -230,29 +185,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			
 			<div class="m-upload">
-				<form name="" id="" class="">
+				<form name="" id="picform" class="">
 					<ul class="u-upload">
 						<li class="title">上传图片</li>
 						<li class="first">
-							<a href="javacript:void(0);"></a>
-							<input type="file" name="pics">
-							<img src="" class="u-thumbnail" />
+							<a href="javacript:void(0);" ></a>
+							<input style="display:none;" type="file" name="pics" accept="image/*"  >
+							<div class="thumbnail">
+							</div>
 						</li>
 						<li>
-							<a href="javacript:void(0);"><img src="" alt=""></a>
-							<input type="file" name="pics">
+							<a style="display:none;"  href="javacript:void(0);"></a>
+							<input style="display:none;" type="file" name="pics" accept="image/*" >
+							<div class="thumbnail">
+							</div>
 						</li>
 						<li>
-							<input type="file" name="pics">
+							<a style="display:none;"  href="javacript:void(0);"></a>
+							<input type="file" name="pics" accept="image/*" >
+							<div class="thumbnail">
+							</div>
 						</li>
 						<li class="first">
-							<input type="file" name="pics">
+							<a style="display:none;"  href="javacript:void(0);"></a>
+							<input type="file" name="pics" accept="image/*" >
+							<div class="thumbnail">
+							</div>
 						</li>
 						<li>
-							<input type="file" name="pics">
+							<a style="display:none;"  href="javacript:void(0);"></a>
+							<input type="file" name="pics" accept="image/*" >
+							<div class="thumbnail">
+							</div>
 						</li>
 						<li>
-							<input type="file" name="pics">
+							<a style="display:none;" href="javacript:void(0);"></a>
+							<input type="file" name="pics" accept="image/*" >
+							<div class="thumbnail">
+							</div>
 						</li>
 					</ul>
 				</form>
