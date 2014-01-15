@@ -257,8 +257,7 @@ public class WebAction  extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(id) || !isValidateContent(content))
+			if(!isValidateId(id))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
@@ -283,7 +282,10 @@ public class WebAction  extends BaseAction{
 		}
 		ajaxReturn(json.toString());
 	}
-	
+	/**
+	 * isFinal 是否静态
+	 * url链接
+	 */
 	@SuppressWarnings("unchecked")
 	public void AddThreeLevel()
 	{
@@ -313,8 +315,7 @@ public class WebAction  extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(id) || !isValidateContent(content)
+			if(!isValidateId(id)
 					|| !isValidateIsFinal(isFinal))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
@@ -369,8 +370,7 @@ public class WebAction  extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(id) || !isValidateContent(content))
+			if(!isValidateId(id))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}

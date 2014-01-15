@@ -1,11 +1,36 @@
 $(function() {
 	var CLevel = -1;
 	var CID = -1;
+	var L1, L2;
+	function updateLevelAndId(level, id) {
+		CLevel = level;
+		CID = id;
+		if (CLevel == 2) {
+			L1 = id;
+		} else if(CLevel == 3) {
+			L2 = id;
+		}
+		var titles = ['微网站管理', '<a class="prev-level" href="javascript:void(0);">返回上一级</a>', '<a class="prev-level" href="javascript:void(0);">返回上一级</a>', '<a class="prev-level" href="javascript:void(0);">返回上一级</a>']
+		$('#autoManageTitle').html(titles[CLevel-1]);
+	}
+	
+	$('#autoManageTitle').delegate('a.prev-level', 'click', function(event) {
+		if (CLevel == 2) {
+			loadImgList(1, 0);
+		} else if (CLevel == 3) {
+			loadImgList(2, L1);
+		} else if(CLevel == 4) {
+			loadImgList(3, L2);
+		}
+			
+	});
+	
 	//load data
 	function loadImgList(level, id) {
 		//update current level and id
-		CLevel = level;
-		CID = id;
+//		CLevel = level;
+//		CID = id;
+		updateLevelAndId(level, id);
 		//load data 
 		var url="";
 		var data = {};
@@ -43,28 +68,28 @@ $(function() {
 		var table = '';
 		if (level === 1) {
 			arr = data["one_level"];
-			table = oneTable(arr);
+			table = tmplTable(arr);
 		} else if (level ===2){
 			arr = data["two_level"];
-			table = otherTable(arr);
+			table = tmplTable(arr);
 		} else if (level ===3){
 			arr = data["three_level"];
-			table = otherTable(arr);
+			table = tmplTable(arr);
 		} else if (level ===4){
 			arr = data["four_level"];
-			table = otherTable(arr);
+			table = tmplTable(arr);
 		}		
 		
 		$("#img-table-container").html(table);
 	}
 	
-	function oneTable(arr) {
-		return  _.template($('#one-table-template').html(),{datas: arr})
+	function tmplTable(arr) {
+		return  _.template($('#table-template-level' + CLevel).html(),{datas: arr})
 	}
 	
-	function otherTable(arr) {
-		return  _.template($('#one-table-template').html(),{datas: arr})
-	}
+//	function otherTable(arr) {
+		//return  _.template($('#one-table-template').html(),{datas: arr})
+//	}
 	
 	//crud
 
@@ -76,16 +101,19 @@ $(function() {
 	});
 	//oper img
 	$('#img-table-container').delegate('button.oper', 'click', function(event) {
-		//todo save  id
+		//todo save id
 		var id = $(this).closest('tr').find('td.id').text();
 		console.log('img id is: ' + id);
-		$('#img-oper').data('currentId', id);
-		$('#img-oper').modal('show');
+		var formData = $(this).closest('tr').find('td.form-data').text();
+		$('#img-oper-level' + CLevel).data('currentId', id);
+		$('#img-oper-level' + CLevel).data('currentFormData', formData);
+		$('#img-oper-form-level' + CLevel).hide()[0].reset();
+		$('#img-oper-level' + CLevel).modal('show');
 	});
 	
 	//form action
-	$('#img-oper').delegate('.delete', 'click', function(event) {
-		var curId = $('#img-oper').data('currentId');
+	$('.img-oper').delegate('.delete', 'click', function(event) {
+		var curId = $('#img-oper-level' + CLevel).data('currentId');
 		//todo ajax delete
 		console.log('ajax delete' + curId);
 		//todo ajax delete
@@ -100,27 +128,30 @@ $(function() {
 			//location.reload();
 			loadImgList(CLevel, CID);
 			console.log('delete success');
-			$('#img-oper').modal('hide');
+			$('#img-oper-level' + CLevel).modal('hide');
 		}).fail(function() {
 			alert("删除失败");
 		});
 		
 	});
-	$('#img-oper').delegate('.change', 'click', function(event) {
-		var curId = $('#img-oper').data('currentId');
-		$('#img-oper-form').show();
+	$('.img-oper').delegate('.change', 'click', function(event) {
+		var curId = $('#img-oper-level' + CLevel).data('currentId');
+		var formData = $('#img-oper-level' + CLevel).data('currentFormData');
+		$('#img-oper-form-level' + CLevel)[0].reset();
+		$('#img-oper-form-level' + CLevel).loadJSON(JSON.parse(formData));
+		$('#img-oper-form-level' + CLevel).show();
 	});
 	
 	//cancel 
-	$('#img-oper-form').delegate('.cancel', 'click', function(event) {
-		$('#img-oper-form').hide();
+	$('.img-oper-form').delegate('.cancel', 'click', function(event) {
+		$("#img-oper-form-level" + CLevel).hide();
 	});
 	//save 
-	$('#img-oper-form').delegate('.save', 'click', function(event) {
+	$('.img-oper-form').delegate('.save', 'click', function(event) {
 		//todo ajax save
 		console.log('save...')
-		var curId = $('#img-oper').data('currentId');
-		var fd = new FormData(document.getElementById("img-oper-form"));
+		var curId = $('#img-oper-level' + CLevel).data('currentId');
+		var fd = new FormData(document.getElementById("img-oper-form-level" + CLevel));
 		fd.append('id', curId);
 		urls = ['UpdateOneLevel', 'UpdateTwoLevel', 'UpdateThreeLevel', 'UpdateFourLevel']
 		$.ajax({
@@ -133,7 +164,8 @@ $(function() {
 			//refresh
 			loadImgList(CLevel, CID);
 			console.log('change success');
-			$('#img-oper').modal('hide');			
+			$('#img-oper-form-level' + CLevel).hide()[0].reset();
+			$('#img-oper-level' + CLevel).modal('hide');
 		}).fail(function() {
 			alert("修改失败");
 		});
@@ -142,18 +174,27 @@ $(function() {
 	
 	//add img action
 	$('#add-img-btn').click(function() {
-		$('#img-add').modal('show');
+		//todo add by level
+		$('#img-add-form-level' + CLevel)[0].reset();
+		$('#img-add-level' + CLevel).modal('show');
+		//$('#img-add').modal('show');
 	});
 
 	//add cancel 
-	$('#img-add-form').delegate('.cancel', 'click', function(event) {
-		$('#img-add-form').hide();
+	$('.img-add-form').delegate('.cancel', 'click', function(event) {
+		var sl = 'img-add-level' + CLevel;
+		$('#' + sl).modal('hide');
+		//$('#img-add').modal('hide');
 	});
 	//save 
-	$('#img-add-form').delegate('.save', 'click', function(event) {
+	$('.img-add-form').delegate('.save', 'click', function(event) {
 		//ajax save
 		console.log('save...')
-		var fd = new FormData(document.getElementById("img-add-form"));
+		var fd = new FormData(document.getElementById("img-add-form-level" + CLevel));
+		var idName = ['', '', 'tid', 'hid', 'fid'][CLevel];
+		if (idName) {
+			fd.append(idName, CID);
+		}		
 		//todo ajax delete
 		urls = ['AddOneLevel', 'AddTwoLevel', 'AddThreeLevel', 'AddFourLevel']
 		$.ajax({
@@ -166,7 +207,7 @@ $(function() {
 			//refresh
 			loadImgList(CLevel, CID);
 			console.log('add success');
-			$('#img-add').modal('hide');			
+			$("#img-add-level" + CLevel).modal('hide');			
 		}).fail(function() {
 			alert("添加失败");
 		});

@@ -13,6 +13,8 @@
 	<script src="resources/tools/underscore-min.js" type="text/javascript"></script>
 	<script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="resources/js/imgManage.js" type="text/javascript"></script>
+	<script src="resources/tools/jquery.loadJSON.js" type="text/javascript"></script>
+	
 	<style type="text/css">
 	.my {
 		float: right;
@@ -53,7 +55,7 @@
 				<button class="btn add" data-loading-text="正在添加" id="add-img-btn">添加</button>
 				<button class="btn refresh btn-primary" data-loading-text="正在刷新" id="refresh-btn">刷新</button>
 			</div>
-			<p id="autoManageTitle">首页图片管理</p>
+			<p id="autoManageTitle">微网站管理</p>
 		</div>
 		
 		<div id="img-table-container"></div>
@@ -70,7 +72,7 @@
 	 	 </div>	
 	
 	
-	<div class="modal hide fade oper" id="img-oper">
+	<div class="modal hide fade oper img-oper" id="img-oper-level1">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			<h3>操作</h3>
@@ -79,27 +81,27 @@
 			<a href="#" class="btn btn-danger delete">删除</a> 
 			<a href="#" class="btn btn-primary change">修改</a> 
 			
-			<form class="form-horizontal hide" style="margin-top:10px" id="img-oper-form">
+			<form class="form-horizontal hide img-oper-form" style="margin-top:10px" id="img-oper-form-level1">
 				<div class="control-group">
-					<label class="control-label" for="pics">图片1</label>
+					<label class="control-label">图片1</label>
 					<div class="controls type">
-						<input type="file" id="pics" name="pics">
+						<input type="file" name="pics">
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="url">连接</label>
+					<label class="control-label">连接</label>
 					<div class="controls type">
-						<input type="text" name="url" id="url" placeholder="URL">
+						<input type="text" name="url" placeholder="URL">
 					</div>
 				</div>
 				<div class="control-group">
 				    <div class="controls">
 				    
 				      <label class="radio">
-				      <input type="radio" name="isStatic" id="optionsRadios1" value="1" checked>静态
+				      <input type="radio" name="isStatic" value="1">静态
 				      </label>
 				       <label class="radio">			      
-					  <input type="radio" name="isStatic" id="optionsRadios1" value="0" checked>非静态
+					  <input type="radio" name="isStatic" value="0">非静态
 				      </label>
 				    </div>
 				  </div>
@@ -110,34 +112,34 @@
 			</form>
 		</div>
 	</div>
-	<div class="modal hide fade oper" id="img-add">
+	<div class="modal hide fade add img-add" id="img-add-level1">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			<h3>添加</h3>
 		</div>
 		<div class="modal-body">
 		
-			<form class="form-horizontal" style="margin-top:10px" id="img-add-form">
+			<form class="form-horizontal img-add-form" style="margin-top:10px" id="img-add-form-level1">
 				<div class="control-group">
-					<label class="control-label" for="pics">图片1</label>
+					<label class="control-label">图片1</label>
 					<div class="controls type">
-						<input type="file" id="pics" name="pics">
+						<input type="file" name="pics">
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="url">连接</label>
+					<label class="control-label">连接</label>
 					<div class="controls type">
-						<input type="text" name="url" id="url" placeholder="URL">
+						<input type="text" name="url"  placeholder="URL">
 					</div>
 				</div>
 				<div class="control-group">
 				    <div class="controls">
 				    
 				      <label class="radio">
-				      <input type="radio" name="isStatic" id="optionsRadios1" value="1" checked>静态
+				      <input type="radio" name="isStatic" value="1">静态
 				      </label>
 				       <label class="radio">			      
-					  <input type="radio" name="isStatic" id="optionsRadios1" value="0" checked>非静态
+					  <input type="radio" name="isStatic" value="0" >非静态
 				      </label>
 				    </div>
 				  </div>
@@ -148,11 +150,229 @@
 			</form>
 		</div>
 	</div>	
-  <script type="text/html" id="one-table-template">
+	<div class="modal hide fade oper img-oper" id="img-oper-level2">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>操作</h3>
+		</div>
+		<div class="modal-body">
+			<a href="#" class="btn btn-danger delete">删除</a> 
+			<a href="#" class="btn btn-primary change">修改</a> 
+			
+			<form class="form-horizontal hide img-oper-form" style="margin-top:10px" id="img-oper-form-level2">
+				<div class="control-group">
+					<label class="control-label">图片</label>
+					<div class="controls type">
+						<input type="file" name="pics">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">内容</label>
+					<div class="controls type">
+						<input type="text" name="content" placeholder="内容">
+					</div>
+				</div>
+				<div class="control-group pull-right">
+					<a href="#" class="btn cancel">取消</a> 
+					<a href="#"	class="btn btn-primary save">保存</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="modal hide fade add img-add" id="img-add-level2">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>添加</h3>
+		</div>
+		<div class="modal-body">
+		
+			<form class="form-horizontal img-add-form" style="margin-top:10px" id="img-add-form-level2">
+				<div class="control-group">
+					<label class="control-label">图片l2</label>
+					<div class="controls type">
+						<input type="file" name="pics">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">内容</label>
+					<div class="controls type">
+						<input type="text" name="content" placeholder="内容">
+					</div>
+				</div>
+				<div class="control-group pull-right">
+					<a href="#" class="btn cancel">取消</a> 
+					<a href="#"	class="btn btn-primary save">保存</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="modal hide fade oper img-oper" id="img-oper-level3">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>操作</h3>
+		</div>
+		<div class="modal-body">
+			<a href="#" class="btn btn-danger delete">删除</a> 
+			<a href="#" class="btn btn-primary change">修改</a> 
+			
+			<form class="form-horizontal hide img-oper-form" style="margin-top:10px" id="img-oper-form-level3">
+				<div class="control-group">
+					<label class="control-label">图片</label>
+					<div class="controls type">
+						<input type="file" name="pics">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">内容</label>
+					<div class="controls type">
+						<input type="text" name="content" placeholder="内容">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">连接</label>
+					<div class="controls type">
+						<input type="text" name="url"  placeholder="URL">
+					</div>
+				</div>
+				<div class="control-group">
+				    <div class="controls">
+				    
+				      <label class="radio">
+				      <input type="radio" name="isFinal"  value="1" >静态
+				      </label>
+				       <label class="radio">			      
+					  <input type="radio" name="isFinal" value="0" >非静态
+				      </label>
+				    </div>
+				  </div>
+				<div class="control-group pull-right">
+					<a href="#" class="btn cancel">取消</a> 
+					<a href="#"	class="btn btn-primary save">保存</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="modal hide fade add img-add" id="img-add-level3">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>添加</h3>
+		</div>
+		<div class="modal-body">
+		
+			<form class="form-horizontal img-add-form" style="margin-top:10px" id="img-add-form-level3">
+				<div class="control-group">
+					<label class="control-label">图片</label>
+					<div class="controls type">
+						<input type="file" name="pics">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">内容</label>
+					<div class="controls type">
+						<input type="text" name="content" placeholder="CONTENT">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">连接</label>
+					<div class="controls type">
+						<input type="text" name="url"  placeholder="URL">
+					</div>
+				</div>
+				<div class="control-group">
+				    <div class="controls">
+				    
+				      <label class="radio">
+				      <input type="radio" name="isFinal"  value="1" >静态
+				      </label>
+				       <label class="radio">			      
+					  <input type="radio" name="isFinal" value="0" >非静态
+				      </label>
+				    </div>
+				  </div>
+				<div class="control-group pull-right">
+					<a href="#" class="btn cancel">取消</a> 
+					<a href="#"	class="btn btn-primary save">保存</a>
+				</div>
+			</form>
+		</div>
+	</div>	
+	
+	<div class="modal hide fade oper img-oper" id="img-oper-level4">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>操作</h3>
+		</div>
+		<div class="modal-body">
+			<a href="#" class="btn btn-danger delete">删除</a> 
+			<a href="#" class="btn btn-primary change">修改</a> 
+			
+			<form class="form-horizontal hide img-oper-form" style="margin-top:10px" id="img-oper-form-level4">
+				<div class="control-group">
+					<label class="control-label">图片</label>
+					<div class="controls type">
+						<input type="file" name="pics">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">内容</label>
+					<div class="controls type">
+						<input type="text" name="content" placeholder="内容">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">连接</label>
+					<div class="controls type">
+						<input type="text" name="url"  placeholder="URL">
+					</div>
+				</div>
+				<div class="control-group pull-right">
+					<a href="#" class="btn cancel">取消</a> 
+					<a href="#"	class="btn btn-primary save">保存</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="modal hide fade add img-add" id="img-add-level4">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>添加</h3>
+		</div>
+		<div class="modal-body">
+		
+			<form class="form-horizontal img-add-form" style="margin-top:10px" id="img-add-form-level4">
+				<div class="control-group">
+					<label class="control-label">图片</label>
+					<div class="controls type">
+						<input type="file" name="pics">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">内容</label>
+					<div class="controls type">
+						<input type="text" name="content" placeholder="CONTENT">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">连接</label>
+					<div class="controls type">
+						<input type="text" name="url"  placeholder="URL">
+					</div>
+				</div>
+				<div class="control-group pull-right">
+					<a href="#" class="btn cancel">取消</a> 
+					<a href="#"	class="btn btn-primary save">保存</a>
+				</div>
+			</form>
+		</div>
+	</div>		
+	
+  <script type="text/html" id="table-template-level1">
 		<table class="table table-striped all">
 				<thead>
 					<tr class="header">
-						<th>#</th>
+						<th class="hide">#</th>
+						<th>组名</th>
 						<th>图片</th>
 						<th>连接</th>
 						<th>静态图</th>
@@ -161,9 +381,10 @@
 				</thead>
 				<tbody>
 					<%console.log(this);%>
-					<% _.each( datas, function( row ){ %>
+					<% _.each( datas, function( row, index ){ %>
                    		<tr> 
-							<td class="id" style="padding-top:12px"><%= row.id %></td>
+							<td class="id hide" style="padding-top:12px"><%= row.id %></td>
+							<td class="group" style="padding-top:12px"><%= index+1 %></td>
 							<td class="display" style="padding-top:12px"><a class="show-img" href="javascript:void(0);" imgURL="<%= row.imageUrl %>">查看</a></td>
 							<td class="url" style="padding-top:12px"><%= row.url %></td>
 							<td class="static" style="padding-top:12px">
@@ -177,6 +398,105 @@
 								<button class="btn btn-primary oper">操作</button>
 								<button class="btn btn-primary all nextlevel" style="margin-left:10px">下级管理</button>
 							</td>
+							<td class="hide form-data"><%= JSON.stringify({url: row.url, isStatic: row.isStatic})%></td>
+						</tr>
+ 		           <% }); %>
+				</tbody>
+	</table>
+  </script>	
+  <script type="text/html" id="table-template-level2">
+		<table class="table table-striped all">
+				<thead>
+					<tr class="header">
+						<th class="hide">#</th>
+						<th>组名</th>
+						<th>图片</th>
+						<th>内容</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%console.log(this);%>
+					<% _.each( datas, function( row, index ){ %>
+                   		<tr> 
+							<td class="id hide" style="padding-top:12px"><%= row.id %></td>
+							<td class="group" style="padding-top:12px"><%= index+1 %></td>
+							<td class="display" style="padding-top:12px"><a class="show-img" href="javascript:void(0);" imgURL="<%= row.imageUrl %>">查看</a></td>
+							<td class="content" style="padding-top:12px"><%= row.content %></td>
+							<td class="oper">
+								<button class="btn btn-primary oper">操作</button>
+								<button class="btn btn-primary all nextlevel" style="margin-left:10px">下级管理</button>
+							</td>
+							<td class="hide form-data"><%= JSON.stringify({content: row.content})%></td>
+						</tr>
+ 		           <% }); %>
+				</tbody>
+	</table>
+  </script>	
+  <script type="text/html" id="table-template-level3">
+		<table class="table table-striped all">
+				<thead>
+					<tr class="header">
+						<th class="hide">#</th>
+						<th>组名</th>
+						<th>图片</th>
+						<th>内容</th>
+						<th>连接</th>
+						<th>静态图</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%console.log(this);%>
+					<% _.each( datas, function( row, index ){ %>
+                   		<tr> 
+							<td class="id hide" style="padding-top:12px"><%= row.id %></td>
+							<td class="group" style="padding-top:12px"><%= index+1 %></td>
+							<td class="display" style="padding-top:12px"><a class="show-img" href="javascript:void(0);" imgURL="<%= row.imageUrl %>">查看</a></td>
+							<td class="content" style="padding-top:12px"><%= row.content %></td>
+							<td class="url" style="padding-top:12px"><%= row.url %></td>
+							<td class="static" style="padding-top:12px">
+							 <% if ( row.isFinal === 1 ){ %>
+            	             	是
+                	    	 <% } else { %>
+								否
+							 <% }%>	
+							</td>
+							<td class="oper">
+								<button class="btn btn-primary oper">操作</button>
+								<button class="btn btn-primary all nextlevel" style="margin-left:10px">下级管理</button>
+							</td>
+							<td class="hide form-data"><%= JSON.stringify({content: row.content, url: row.url, isFinal: row.isFinal})%></td>
+						</tr>
+ 		           <% }); %>
+				</tbody>
+	</table>
+  </script>	
+  <script type="text/html" id="table-template-level4">
+		<table class="table table-striped all">
+				<thead>
+					<tr class="header">
+						<th class="hide">#</th>
+						<th>组名</th>
+						<th>图片</th>
+						<th>内容</th>
+						<th>连接</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%console.log(this);%>
+					<% _.each( datas, function( row, index ){ %>
+                   		<tr> 
+							<td class="id hide" style="padding-top:12px"><%= row.id %></td>
+							<td class="group" style="padding-top:12px"><%= index+1 %></td>
+							<td class="display" style="padding-top:12px"><a class="show-img" href="javascript:void(0);" imgURL="<%= row.imageUrl %>">查看</a></td>
+							<td class="url" style="padding-top:12px"><%= row.url %></td>
+							<td class="content" style="padding-top:12px"><%= row.content %></td>
+							<td class="oper">
+								<button class="btn btn-primary oper">操作</button>
+							</td>
+							<td class="hide form-data"><%= JSON.stringify({url: row.url})%></td>
 						</tr>
  		           <% }); %>
 				</tbody>
