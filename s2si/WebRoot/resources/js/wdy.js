@@ -1,12 +1,48 @@
 (function($,window){
 	$(function(){
 		$( document ).ajaxComplete(function(data,xhr) {
-			$(".btn.refresh").button("reset");
+			//$(".btn.refresh").button("reset");
 		});
 		$( document ).ajaxSend(function() {
-			$(".btn.refresh").button("loading");
+			//$(".btn.refresh").button("loading");
 		});
 		function uploadFile(formId,url,sid,qid) {
+			var vali=true;
+			var flag=false;
+			if(url.toLowerCase().indexOf("add")>=0){
+				vali=true;
+			}else{
+				vali=false;
+			}
+			$("#"+formId).find('div input[type="file"]').each(function(i,e){
+				//var str=$(e).val();
+				//console.log(str);
+				var name=$(e).parent().find("input[type='hidden']").attr("name");
+				console.log(name);
+				console.log(e.files);
+				if(e.files.length!=0){	
+					$(this).parent().find("p.text-error").css("display","none");
+				}else{
+					if(vali){
+						$(this).parent().find("p.text-error").css("display","inline-block");
+						flag=true;
+					}
+				}				
+			});
+			$("#"+formId).find('div input[type="text"]').each(function(i,e){
+				var str=$(e).val();
+				console.log(str);
+				var name=$(e).attr("name");
+				if((str=="" || !str) && vali==true){
+					$("p."+name).css("display","inline-block");
+					flag=true;
+				}else{
+					$("p."+name).css("display","none");
+				}			
+			});
+			if(flag==true && vali==true){
+				return;
+			}
 			var form = document.getElementById(formId),
 				formData = new FormData(form);
 			if(sid) {
@@ -150,7 +186,23 @@
 				$tr.appendTo($tbody);
 			});
 		}
-
+		//关闭对话框的事件
+		$(".modal").bind("hide",function(){
+				console.log("hide");
+				$(this).find("form").each(function(index,e){
+					e.reset();
+				});
+				$(this).find(".controls span").text("");
+		});
+			//打开对话框的清理事件
+		$(".modal").bind("show",function(){
+				console.log("show")
+				$(this).find("form").each(function(index,e){
+					e.reset();
+				});
+				$(this).find("p.text-error").css("display","none");
+				$(this).find(".controls span").text("");
+		});
 		
 		function bindEventAfterQuestionsLoaded(){
 			//关于问题的一些事件
@@ -225,14 +277,6 @@
 				
 
 			});
-			//关闭对话框的事件
-			$(".modal").bind("hide",function(){
-				$(this).find("form").each(function(index,e){
-					e.reset();
-				});
-				$(this).find(".controls span").text("");
-			});
-
 			//3 问题统计
 			$('.j-q-statics').bind('click.for.statics',function(event){
 
@@ -452,8 +496,8 @@
 				
 			});
 		}
-
-		
+		//弹出增加对话框时清空
+		$(".modal").bind("modal")
 		
 		function bindEvent() {
 			
@@ -483,9 +527,11 @@
 			//获取上传图片的名称
 			document.getElementById('j-uploadfile').onchange = function () {
 				  $("#j-filename").text(this.value);
+				  $(this).parent().find("p.text-error").css("display","none");
 			};
 			document.getElementById('j-q-uploadfile').onchange = function () {
 				  $("#j-q-filename").text(this.value);
+				  $(this).parent().find("p.text-error").css("display","none");
 			};
 			
 			//保存上传wdy信息
