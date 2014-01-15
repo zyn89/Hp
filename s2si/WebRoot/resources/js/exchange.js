@@ -334,11 +334,6 @@
 						}
 					})
 					.done(function(data) {
-						if(data.count==0){
-							_this.button("reset");
-							alert("没有统计数据");
-							return;
-						}
 						$('.pagination',$newDiv).BTPagination(data.count,{
 							items_per_page : 10 ,
 							num_display_pageno : 10 ,
