@@ -237,8 +237,7 @@ public class WebAction  extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(tid) || !isValidateContent(content))
+			if(!isValidateId(tid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
@@ -294,9 +293,7 @@ public class WebAction  extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(hid) || !isValidateContent(content)
-					|| !isValidateIsFinal(isFinal))
+			if(!isValidateId(hid) || !isValidateIsFinal(isFinal))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
@@ -350,8 +347,7 @@ public class WebAction  extends BaseAction{
 			String uid = null;
 			Map session = getSession();
 			uid = (String) session.get("uid");
-			if(!isValidateImage(pics) || !isValidateType(picsContentType)
-					|| !isValidateId(fid) || !isValidateContent(content))
+			if(!isValidateId(fid))
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
