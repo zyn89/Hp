@@ -1,4 +1,22 @@
 $(function() {
+	$( document ).ajaxError(function(data,xhr) {
+			//$(".btn.refresh").button("reset");
+			console.log(xhr);
+			var str=xhr.getAllResponseHeaders();
+			var reg=/.*errorType:.*[\r\n|\n]/;
+			var res=str.match(reg);
+			console.log(res[0]);
+			var tmp=res[0].replace(/[\r\n|\n]/,"");
+			console.log(tmp);
+			var type=tmp.substr(11);
+			console.log(type.length);
+			console.log(type=="exception");
+			if(type=="exception"){
+				location.href="all_Error.action";
+			}else if(type=="adminLogin"){
+				location.href="all_Login.action";
+			}
+	});
 	var CLevel = -1;
 	var CID = -1;
 	var L1, L2;
@@ -30,6 +48,7 @@ $(function() {
 		//update current level and id
 //		CLevel = level;
 //		CID = id;
+		$('#refresh-btn').button("loading");
 		updateLevelAndId(level, id);
 		//load data 
 		var url="";
@@ -54,7 +73,8 @@ $(function() {
 		})
 		.done(function(data) {
 			console.log(data);
-			createTable(level, id, data)
+			createTable(level, id, data);
+			$('#refresh-btn').button("reset");
 			//create table
 		})
 		.fail(function() {
