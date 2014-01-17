@@ -5,8 +5,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 String id=request.getParameter("id");
 %>
 <!DOCTYPE>
-<html>
-  <head>
+<html style=""> 
+	<head>
     <title>二级页面</title>
 	<meta charset="UTF-8">
 	<meta http-equiv="pragma" content="no-cache"> 
@@ -22,10 +22,48 @@ String id=request.getParameter("id");
     <link href="resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <script language="javascript" type="text/javascript" src="resources/js/jquery-1.9.1.js"></script>
 	<script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<style>
+    .container {
+      margin: 0 auto
+    }
+
+    /* For tablets & smart phones */
+    @media (max-width: 767px) {
+      body {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .container {
+        width: auto
+      }
+    }
+
+    /* For smartphones */
+    @media (max-width: 480px) {
+      .container {
+        width: auto
+      }
+    }
+
+    /* For smaller displays like laptops */
+    @media (min-width: 768px) and (max-width: 979px) {
+      .container {
+        width: 724px
+      }
+    }
+
+    /* For larger displays */
+    @media (min-width: 1200px) {
+      .container {
+        width: 1170px
+      }
+    }
+  </style>
   </head>
   <script>
   	$(function(){
-  		$("body").bind("show",function(){
+  		return;
+  		$("body").bind("sec",function(){
   			$.ajax({
 			url: "GetTwoLevel.action?tid="+<%=id%>,
 			type: "POST",
@@ -60,66 +98,47 @@ String id=request.getParameter("id");
 				},
 		 	});
   		});
-  		$("body").trigger("show");
+  		$("body").trigger("sec");
   	});
   </script>
   
-  <body style="padding:0px">
-  <div>
-    <table class="table table-hover" style="margin-top:5px">
+  <body style="padding:5px;background-image:url(resources/image/bac.png);
+background-size:cover;">
+  <div class="container">
+  	<div style="width:auto;">
+  	<img src="resources/image/example-slide-1.jpg" style="display:block;margin:0px auto"></img>
+  	</div>
+    <table class="table" cellspacing="0" cellpadding="0" style="margin-top:5px;
+    ">
 		<tbody>
-			<!--tr>
-			  <td>
-			  	<a href="mobile.html" style="text-decoration:none;">
-			 	<div style="margin-right:5px;float:left;background-image:url(resources/image/car.png);height:48px;width:48px"></div>
-			 	<div class="weimob-list-item-line">
-					<div class="" style="font-family: 'Microsoft YaHei', 宋体;color: rgb(102, 102, 102);font-size: 16px;">指导价：25.2万-35.8万    
-						发动机1.6T / 2.0T            
-						变速箱：7速双离合
-					</div>
-               </div>
+			<tr class="temple2" style="
+			">
+				<td style="vertical-align:middle;padding-left:1px;width:25%" class="one">
+				<div style="float:left;background-image:url(resources/image/smallbac.png);height:80px;width:80px;
+				background-size:100% 100%;
+				"></div>
+				</td>
+			  	<td style="text-align:left;vertical-align:middle;padding-left:2px" class="two">
+			  	<a href="" style="text-decoration:none;">			 	
+				<span style="color: white">指导价...</span>
                </a>
-            </td>
+            	</td>
+            	<td style="vertical-align:middle;text-align:right;padding-right:20px">
+            	<img src="resources/image/twoarrow.png" style=""></img>
+            	</td>
 			</tr>
-			<tr>
-			  <td>
-			  	<a href="#" style="text-decoration:none;" class="test">
-			 	<div style="margin-right:5px;float:left;background-image:url(resources/image/car.png);height:48px;width:48px"></div>
-				<div class="" style="font-family: 'Microsoft YaHei', 宋体;color: rgb(102, 102, 102);
-					font-size: 16px;
-					display:block;
-					margin-top:autp 0px;
-					vertical-align:middle;
-					margin-top:12px;
-					">指导价：25.2万-35.8万    
-					</div>
-   				</a>
-            </td>
-			</tr-->
 			<tr class="hide temple" style="">
-			  
-				  <td style="vertical-align:middle;
-				  font-family: 'Microsoft YaHei', 宋体;color: rgb(102, 102, 102);
-				  ">
-				  <a href="#" style="text-decoration:none;cursor:default;color:rgb(102, 102, 102)">
-				  <img src="resources/image/car.png"/>
-							<span>指导价：25.2万-35.8万    
-							发动机1.6T / 2.0T            
-							变速箱：7速双离合</span>
-				   </a>
-	           	 </td>
-			</tr>
-			<tr class="hide temple2">
-				<td style="vertical-align:middle;width:5%" class="one">
-				<div style="float:left;background-image:url('');height:48px;width:48px"></div>
+			  	<td style="vertical-align:middle;padding-left:1px" class="one">
+				<div style="float:left;background-image:url(resources/image/car.png);height:85px;width:85px"></div>
 				</td>
 			  	<td style="vertical-align:middle;padding-left:2px" class="two">
-			  	<a href="mobile.html" style="text-decoration:none;">			 	
-				<span style="color: rgb(102, 102, 102)">指导价：25.2万-35.8万    
-						发动机1.6T / 2.0T            
-						变速箱：7速双离合</span>
+			  	<a href="" style="text-decoration:none;">			 	
+				<span style="color: white">好难    </span>
                </a>
-            </td>
+            	</td>
+            	<td style="vertical-align:bottom">
+            	<img src="resources/image/three.png" style="width:20px;height:20px"></img>
+            	</td>
 			</tr>
 		</tbody>
 	</table>

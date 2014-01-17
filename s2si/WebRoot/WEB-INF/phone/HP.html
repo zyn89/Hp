@@ -1,5 +1,6 @@
 <!doctype html>
-<html>
+<html style="background-image:url(resources/image/bac.png);
+background-size:cover;">
 <head>
   <meta charset="utf-8">
   <title>SlidesJS Standard Code Example</title>
@@ -7,7 +8,7 @@
   <meta name="author" content="Nathan Searles">
 
   <!-- SlidesJS Required (if responsive): Sets the page width to the device width. -->
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- End SlidesJS Required -->
   <style>
     body {
@@ -36,14 +37,19 @@
     }
 
     .slidesjs-pagination {
-      margin: 6px 0 0;
-      float: right;
       list-style: none;
+      margin:0 0;
+      bottom:5%;
+      position:absolute;
+      left:5%;
+      list-style: none;
+      z-index:1000;
+      padding:0px;
     }
 
     .slidesjs-pagination li {
       float: left;
-      margin: 0 1px;
+      margin: 0 5px;
     }
 
     .slidesjs-pagination li a {
@@ -51,19 +57,22 @@
       width: 13px;
       height: 0;
       padding-top: 13px;
-      background-image: url(resources/image/pagination.png);
-      background-position: 0 0;
+      background-image: url(resources/image/dot2.png);
+      background-size:100% 100%;
+      /*background-position: 0 0;*/
       float: left;
       overflow: hidden;
     }
 
     .slidesjs-pagination li a.active,
     .slidesjs-pagination li a:hover.active {
-      background-position: 0 -13px
+      background-image: url(resources/image/dot.png);
+      background-size:100% 100%;
     }
 
     .slidesjs-pagination li a:hover {
-      background-position: 0 -26px
+      background-image: url(resources/image/dot.png);
+      background-size:100% 100%;
     }
 
     #slides a:link,
@@ -78,6 +87,19 @@
 
     .navbar {
       overflow: hidden
+    }
+    .label{
+     border:none;
+     width:100%;
+     display:block;position:absolute;bottom:0%;
+	 background-color:rgba(0,0,0,0.5);
+	 z-index:1000;
+	 text-align:center;
+	 font-size:14px;
+	 margin-bottom:1px;
+    }
+    a{
+    color:white;text-decoration:none;
     }
   </style>
   <!-- End SlidesJS Optional-->
@@ -133,15 +155,88 @@
   <!-- SlidesJS Required: Start Slides -->
   <!-- The container is used to define the width of the slideshow -->
       <div class="container">
-        <div id="slides" style="width:100%;height:40%">
-          <!--img src="resources/image/example-slide-1.jpg" />
-          <img src="resources/image/example-slide-2.jpg" />
-          <img src="resources/image/example-slide-3.jpg" /-->
-          <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a>
-          <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a>
+        <div id="slides" style="position:relative;">
+          <img src="resources/image/lunbo.png" />
+          <img src="resources/image/lunbo.png" />
+          <img src="resources/image/lunbo.png" />
         </div>
-
-	<div style="width:100%;position:relative;margin:1px auto">
+		<div class="one_level" style="margin-top:5px;position:relative">
+		    <div id="left" style="float:left;width:49%;margin-top:0px">
+		    	<a href="items.html" class="left big" style="display:block;width:100%;">
+		    		<img src="resources/image/pic01.png" style="width:100%;display:block;">
+		    	</a>
+		    </div>
+		    <div id="right" style="width:49%;height:100%;margin-top:0px;position:absolute;
+			right:2px;
+		 	top:0%;">
+		 		
+		    	<a href="#" class="left big" style="color:white;text-decoration:none;height:49%;width:100%;display:block;
+		    	position:absolute;left:0%;top:0%;
+		    	">
+		    		<img src="resources/image/pic09.png" style="border:none;width:100%;height:100%;display:block;position:absolute;left:0%;top:0%;">
+		    	</a>
+		    	<a href="test.html" class="left big" style="height:49%;display:block;width:100%;
+		    	position:absolute;left:0%;bottom:0;
+		    	
+		    	">
+		    		<img src="resources/image/pic09.png" style="border:none;width:100%;height:100%;display:block;position:absolute;left:0%;top:0%;">
+		    	</a>
+		    </div>
+		    <div style="clear:both">
+		    </div>
+	    </div>
+	    <div class="two_level" style="margin-top:5px;position:relative">
+		    <div id="left" style="float:right;width:76.5%;margin-right:2px">
+		    	<a href="items.html" class="left big" style="display:block;width:100%;">
+		    		<img src="resources/image/pic04.png" style="width:100%;display:block;">
+		    		
+		    	</a>
+		    </div>
+		    <div id="right" style="width:21.5%;height:100%;margin-top:0px;position:absolute;
+			left:0px;
+		 	top:0%;">
+		 		
+		    	<a href="#" class="left big" style="color:white;text-decoration:none;height:49%;width:100%;display:block;
+		    	position:absolute;left:0%;top:0%;
+		    	
+		    	">
+		    		<img src="resources/image/pic03.png" style="border:none;width:100%;height:100%;display:block;position:absolute;left:0%;top:0%;">
+		    	
+		    	</a>
+		    	<a href="test.html" class="left big" style="height:49%;display:block;width:100%;
+		    	position:absolute;left:0%;bottom:0;
+		    	
+		    	">
+		    		<img src="resources/image/pic03.png" style="border:none;width:100%;height:100%;display:block;position:absolute;left:0%;top:0%;">
+		    	
+		    	</a>
+		    </div>
+		    <div style="clear:both">
+		    </div>
+	    </div>
+	   <div class="two_level" style="margin-top:5px;position:relative">
+		    <div id="left" style="float:left;width:49%;margin-top:0px">
+		    	<a href="items.html" class="left big" style="display:block;width:100%;">
+		    		<img src="resources/image/pic01.png" style="width:100%;display:block;">
+		    		
+		    	</a>
+		    </div>
+		    <div id="right" style="width:49%;height:100%;margin-top:0px;position:absolute;
+			right:2px;
+		 	top:0%;">
+		 		
+		    	<a href="#" class="left big" style="color:white;text-decoration:none;height:100%;width:100%;display:block;
+		    	position:absolute;left:0%;top:0px;
+		    	
+		    	">
+		    		<img src="resources/image/pic01.png" style="border:none;width:100%;height:100%;display:block;position:absolute;left:0%;top:0%;">
+		    	
+		    	</a>
+		    </div>
+		    <div style="clear:both">
+		    </div>
+	    </div>
+	  <!--div style="width:100%;position:relative;margin:1px auto">
     	<div style="float:left; width:49%; ">
     		<a href="" class="leftbig_one">
     			<img src="resources/image/leftbig.png" style="width:100%; display:none" />
@@ -155,11 +250,12 @@
     			<img src="resources/image/rightbottom.png" style="width:100%; display:none; position:absolute; height:49%; bottom:0;" />
     		</a>
     	</div>
-    	<div style="clear:both;"></div>
+    	<div style="clear:both;"></div-->
     </div>
    
     <div style="clear:both"></div>
-    </div>
+    
+    <div class="user" style="position:fixed;right:0%;top:50%;z-index:2000"><img style="width:70px;height:54px" src="resources/image/user.png"></img></div>
   <!-- End SlidesJS Required: Start Slides -->
 
   <!-- SlidesJS Required: Link to jQuery -->
@@ -169,7 +265,8 @@
   <!-- SlidesJS Required: Link to jquery.slides.js -->
   <script src="resources/js/jquery.slides.min.js"></script>
   <!-- End SlidesJS Required -->
-
+  <script src="resources/js/jquery-ui.js"></script>
+  <script src="resources/js/jquery.ui.touch-punch.min.js"></script>
   <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
   <script>
     $(function() {
@@ -203,13 +300,13 @@
       });
       $("body").bind("onelevel",function(e,data){
       		console.log(data);
-      		for(var i=0;i<data.length;i++){
+      		for(var i=0;i<3;i++){
       			//console.log(data[i].imageUrl);
       			var $img=$("a."+layout[i]).find("img").clone();
 	      		$img.attr("src",data[i].imageUrl);
 	      		//console.log(data[i].isStatic);
 	      		if(data[i].isStatic==0){
-	      			if(data[i].url==null){
+	      			if(data[i]){
 	      				data[i].url="second.action?id="+data[i].id;
 	      			}else{
 	      				data[i].url=="";
@@ -224,11 +321,11 @@
 	      		$img.appendTo($("a."+layout[i]));
       		}
       		
-      });
+      });    
       $("body").bind("initslide",function(){
 		 $('#slides').slidesjs({
-			 width: 940,
-			 height: 529,
+			 width: 760,
+			 height: 356,
 			 navigation: true,
 			 play: {
 			      active: false,
@@ -238,7 +335,9 @@
 			 }
 		  });
       });
-      $("body").trigger("slides");
+      $("body").trigger("initslide");
+      //$("body").trigger("slides");
+      $(".user").draggable();
     });
   </script>
   <!-- End SlidesJS Required -->

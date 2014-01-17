@@ -22,15 +22,68 @@ String id=request.getParameter("hid");
     <link href="resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <script language="javascript" type="text/javascript" src="resources/js/jquery-1.9.1.js"></script>
 	<script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+		<style>
+    .container {
+      margin: 0 auto
+    }
+
+    /* For tablets & smart phones */
+    @media (max-width: 767px) {
+      body {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .container {
+        width: auto
+      }
+    }
+
+    /* For smartphones */
+    @media (max-width: 480px) {
+      .container {
+        width: auto
+      }
+    }
+
+    /* For smaller displays like laptops */
+    @media (min-width: 768px) and (max-width: 979px) {
+      .container {
+        width: 724px
+      }
+    }
+
+    /* For larger displays */
+    @media (min-width: 1200px) {
+      .container {
+        width: 1170px
+      }
+    }
+  </style>
   </head>
   <script>
   	$(function(){
-  		$(".test").bind("click",function(){
+  		var flag=true;
+  		$("tr").bind("click",function(e){
   			//$('#myModal').modal("show");
+  			//e.stopPropagation();
+  			if(!flag){
+  				return;
+  			}
+  			e.stopPropagation();
   			$('#myModal').modal({
   				backdrop:false,
   			});
+  			flag=false;
   		});
+  		$("body").bind("click",function(){
+  		    $('#myModal').modal("hide");
+  		    flag=true;
+  		});
+  		for(var i=0;i<5;i++){
+  			//$("li").clone().appendTo($("ul"));
+  			$("li").find("span").text("活动题目"+i).end().clone().appendTo($("ul"));
+  		}
+  		return;
   		$("body").bind("get",function(){
   			$.ajax({
 			url: "GetThreeLevel.action?hid="+<%=id%>,
@@ -117,52 +170,52 @@ String id=request.getParameter("hid");
   		});
   	});
   </script>
-  <body style="padding:0px">
-  <div>
-    <table class="table table-hover third" style="margin-top:5px">
+  <body style="padding:5px;background-image:url(resources/image/bac.png);
+background-size:cover;">
+  <div class="container">
+  	<div style="width:auto;">
+  	<img src="resources/image/example-slide-1.jpg" style="display:block;margin:0px auto"></img>
+  	</div>
+    <table class="table third" style="margin-top:5px;cellspacing:0;cellpadding:0">
 		<tbody>
-			<tr class="hide temple" style="">
-			  
-				  <td style="vertical-align:middle;
-				  font-family: 'Microsoft YaHei', 宋体;color: rgb(102, 102, 102);
-				  ">
-				  <a href="#" style="text-decoration:none;color:rgb(102, 102, 102)">
-				  <img style="" src="resources/image/car.png"/>
-							<span>指导价：25.2万-35.8万    
-							发动机1.6T / 2.0T            
-							变速箱：7速双离合</span>
-				   </a>
-	           	 </td>
+			<tr class="temple2" style="
+			">
+				<td style="vertical-align:middle;padding-left:1px;width:25%" class="one">
+					<div style="float:left;background-image:url(resources/image/car.png);height:80px;width:80px;
+					background-size:100% 100%;
+					"></div>
+				</td>
+			  	<td style="text-align:left;vertical-align:middle;padding-left:2px" class="two">
+				  	<a href="" style="text-decoration:none;">			 	
+					<span style="color: white">指导价...</span>
+               </a>
+            	</td>
+	            	<td style="vertical-align:middle;text-align:right;padding-right:20px">
+	            	<img src="resources/image/twoarrow.png" style=""></img>
+            	</td>
 			</tr>
 		</tbody>
 	</table>
 	</div>
-	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-header" style="height:20px;padding-top:0px">
-	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    <h4 id="myModalLabel">详细信息</h4>
-	  </div>
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+	style="background-image:url(resources/image/bac3.png);
+	background-size:100% 100%;height:250px;background-color:transparent;box-shadow:none;border:none;
+	top:35%;overflow-y:scroll";
+	>
 	  <div class="modal-body">
-	    <table class="table table-hover other_table" style="margin-top:5px">
-		<tbody>
-			<tr class="hide other_temple" style="">			  
-				  <td style="vertical-align:middle;
-				  font-family: 'Microsoft YaHei', 宋体;color: rgb(102, 102, 102);
-				  ">
-				  <a href="#" style="text-decoration:none;color:rgb(102, 102, 102)">
-				  <img src="resources/image/car.png"/>
-							<span>指导价：25.2万-35.8万    
-							发动机1.6T / 2.0T            
-							变速箱：7速双离合</span>
-				   </a>
-	           	 </td>
-			</tr>
-		</tbody>
-	</table>
-	  </div>
-	  <div class="modal-footer" style="padding-top:10px;padding-bottom:11px">
-	    <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">关闭</button>
-	    <button class="btn btn-primary" data-dismiss="modal" data-dismiss="modal">确定</button>
+	    	<ul style="list-style: none;width:95%;margin:0px auto">
+	    		<li style="
+	    		background: url(resources/image/bac6.png);
+	    		background-size:100% 100%;
+				height: 45px;
+				width: 100%;
+				left : 60px;
+				line-height: 36px;
+				color: #fff;
+				font-size: 16px;
+				margin-bottom:10px;
+	    		"><span style="margin-top:3px;margin-left:10px;display:inline-block;">活动题目</span><img style="display:inline-block;height:60%;float:right;margin-top:8px;margin-right:10px" src="resources/image/twoarrow.png"/></li>
+	    	</ul>
 	  </div>
 	</div>
   </body>
