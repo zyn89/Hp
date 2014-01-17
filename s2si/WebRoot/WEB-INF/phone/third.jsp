@@ -66,24 +66,11 @@ String id=request.getParameter("hid");
   		$("tr").bind("click",function(e){
   			//$('#myModal').modal("show");
   			//e.stopPropagation();
-  			if(!flag){
-  				return;
-  			}
-  			e.stopPropagation();
-  			$('#myModal').modal({
-  				backdrop:false,
-  			});
-  			flag=false;
   		});
   		$("body").bind("click",function(){
   		    $('#myModal').modal("hide");
   		    flag=true;
   		});
-  		for(var i=0;i<5;i++){
-  			//$("li").clone().appendTo($("ul"));
-  			$("li").find("span").text("活动题目"+i).end().clone().appendTo($("ul"));
-  		}
-  		return;
   		$("body").bind("get",function(){
   			$.ajax({
 			url: "GetThreeLevel.action?hid="+<%=id%>,
@@ -94,18 +81,18 @@ String id=request.getParameter("hid");
 				console.log(data);
 				data=data.three_level || [];
 				for(var i=0;i<data.length;i++){
-					var $tr=$("table.third").find("tr.temple").clone();
+					var $tr=$("table.third").find("tr.temple2").clone();
 					console.log($tr[0]);
 					$tr.removeClass("hide");
 					$tr.removeClass("temple");
 					$tr.data("id",data[i].id);
-					$tr.find("img").attr("src",data[i].imageUrl);
+					$tr.find(".one").find("img").attr("src",data[i].imageUrl);
 					var str=data[i].content;
 					if(str.length>10){
 						str=str.substr(0,10);
 						str=str+"...";
 					}
-					$tr.find("span").text(str);
+					$tr.find(".two span").text(str);
 					if(data[i].isFinal==1){
 						$tr.find("a").attr("href",data[i].url);
 						$tr.bind("click",function(){
@@ -117,11 +104,16 @@ String id=request.getParameter("hid");
 							}
 						});
 					}else{
-						$tr.find("td").bind("click",function(){
+						$tr.bind("click",function(e){
 							$("#myModal").data("data",$tr.data("id"));
-							$('#myModal').modal({
+							if(!flag){
+				  				return;
+				  			}
+				  			e.stopPropagation();
+				  			$('#myModal').modal({
 				  				backdrop:false,
 				  			});
+				  			flag=false;
 						});
 					}
 					$tr.appendTo($("table.third"));
@@ -141,28 +133,15 @@ String id=request.getParameter("hid");
 				console.log(data);
 				data=data.four_level || [];
 				for(var i=0;i<data.length;i++){
-					var $tr=$("table.other_table").find("tr.other_temple").clone();
-					console.log($tr[0]);
-					$tr.removeClass("hide");
-					$tr.removeClass("other_temple");
-					$tr.data("id",data[i].id);
-					$tr.find("img").attr("src",data[i].imageUrl);
-					var str=data[i].content;
-					if(str.length>10){
-						str=str.substr(0,10);
-						str=str+"...";
-					}
-					$tr.find("a").attr("href",data[i].url);	
-					$tr.find("td").bind("click",function(){
-							var $urls = $(this).find("a").attr("href");
-							console.log($urls);
-							if($urls){
-								location.href=$urls;
-							}
-					});		
-					console.log(str);
-					$tr.find("span").text(str);
-					$tr.appendTo($("table.other_table"));
+					$li=$('#myModal').find("li.temple").clone();
+					$ul=$('#myModal').find("ul");
+					$li.removeClass("hide");
+					$li.removeClass("temple");
+					$li.find("span").text(data[i].content);
+					$li.bind("click",function(){
+						location.href=data[i].url;
+					});
+					$li.appendTo($ul);
 				}	
 				},
 		 	});
@@ -174,11 +153,11 @@ String id=request.getParameter("hid");
 background-size:cover;">
   <div class="container">
   	<div style="width:auto;">
-  	<img src="resources/image/example-slide-1.jpg" style="display:block;margin:0px auto"></img>
+  	<img src="resources/image/logobig.png" style="width:128px;height:128px;display:block;margin:0px auto"></img>
   	</div>
     <table class="table third" style="margin-top:5px;cellspacing:0;cellpadding:0">
 		<tbody>
-			<tr class="temple2" style="
+			<tr class="hide temple2" style="
 			">
 				<td style="vertical-align:middle;padding-left:1px;width:25%" class="one">
 					<div style="float:left;background-image:url(resources/image/car.png);height:80px;width:80px;
@@ -204,7 +183,7 @@ background-size:cover;">
 	>
 	  <div class="modal-body">
 	    	<ul style="list-style: none;width:95%;margin:0px auto">
-	    		<li style="
+	    		<li class="hide temple" style="
 	    		background: url(resources/image/bac6.png);
 	    		background-size:100% 100%;
 				height: 45px;

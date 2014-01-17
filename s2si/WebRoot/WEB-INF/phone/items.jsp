@@ -2,7 +2,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String id=request.getParameter("id");
+String id=request.getParameter("tid");
 %>
 <!DOCTYPE>
 <html style=""> 
@@ -62,7 +62,6 @@ String id=request.getParameter("id");
   </head>
   <script>
   	$(function(){
-  		return;
   		$("body").bind("sec",function(){
   			$.ajax({
 			url: "GetTwoLevel.action?tid="+<%=id%>,
@@ -74,7 +73,7 @@ String id=request.getParameter("id");
 				data=data.two_level || [];
 				for(var i=0;i<data.length;i++){
 					var $tr=$("table").find("tr.temple2").clone();
-					console.log($tr[0]);
+					//console.log($tr[0]);
 					$tr.removeClass("hide");
 					$tr.removeClass("temple2");
 					$tr.find("a").attr("href","third.action?hid="+data[i].id);
@@ -106,12 +105,12 @@ String id=request.getParameter("id");
 background-size:cover;">
   <div class="container">
   	<div style="width:auto;">
-  	<img src="resources/image/example-slide-1.jpg" style="display:block;margin:0px auto"></img>
+  	<img src="resources/image/logobig.png" style="width:128px;height:128px;display:block;margin:0px auto"></img>
   	</div>
     <table class="table" cellspacing="0" cellpadding="0" style="margin-top:5px;
     ">
 		<tbody>
-			<tr class="temple2" style="
+			<tr class="hide temple2" style="
 			">
 				<td style="vertical-align:middle;padding-left:1px;width:25%" class="one">
 				<div style="float:left;background-image:url(resources/image/smallbac.png);height:80px;width:80px;
@@ -119,25 +118,12 @@ background-size:cover;">
 				"></div>
 				</td>
 			  	<td style="text-align:left;vertical-align:middle;padding-left:2px" class="two">
-			  	<a href="" style="text-decoration:none;">			 	
-				<span style="color: white">指导价...</span>
-               </a>
+				  	<a href="" style="text-decoration:none;">			 	
+						<span style="color: white">指导价...</span>
+	               </a>
             	</td>
             	<td style="vertical-align:middle;text-align:right;padding-right:20px">
             	<img src="resources/image/twoarrow.png" style=""></img>
-            	</td>
-			</tr>
-			<tr class="hide temple" style="">
-			  	<td style="vertical-align:middle;padding-left:1px" class="one">
-				<div style="float:left;background-image:url(resources/image/car.png);height:85px;width:85px"></div>
-				</td>
-			  	<td style="vertical-align:middle;padding-left:2px" class="two">
-			  	<a href="" style="text-decoration:none;">			 	
-				<span style="color: white">好难    </span>
-               </a>
-            	</td>
-            	<td style="vertical-align:bottom">
-            	<img src="resources/image/three.png" style="width:20px;height:20px"></img>
             	</td>
 			</tr>
 		</tbody>
