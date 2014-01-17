@@ -59,8 +59,7 @@ public class LoginedCheckInterceptor extends AbstractInterceptor {
 					if(find == 1)
 					    return "tologin";
 					else
-						//return "adminLogin";
-						return ai.invoke();
+						return "adminLogin";
 				}else{					
 					return ai.invoke();
 								

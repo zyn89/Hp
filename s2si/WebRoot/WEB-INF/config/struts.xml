@@ -18,13 +18,9 @@
             	<param name="status">500</param>
             	<param name="headers.errorType">exception</param>
             </result>
-            <result type="httpheader" name="tologin">/WEB-INF/jsp/userhome.jsp
-            	<param name="status">500</param>
-            	<param name="headers.errorType">userLogin</param>
+            <result name="tologin">/WEB-INF/jsp/userhome.jsp
             </result>
-            <result type="httpheader" name="adminLogin">all_Login.action
-            	<param name="status">500</param>
-            	<param name="headers.errorType">adminLogin</param>
+            <result name="adminLogin">/WEB-INF/console/login.html
             </result>
         </global-results>
         <global-exception-mappings>
