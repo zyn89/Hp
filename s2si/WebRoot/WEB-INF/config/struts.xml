@@ -18,7 +18,7 @@
             	<param name="status">500</param>
             	<param name="headers.errorType">exception</param>
             </result>
-            <result name="tologin">/WEB-INF/jsp/userhome.jsp
+            <result name="tologin">/WEB-INF/jsp/login1.jsp
             </result>
             <result name="adminLogin">/WEB-INF/console/login.html
             </result>
