@@ -27,7 +27,10 @@ public class LoginedCheckInterceptor extends AbstractInterceptor {
 			if(url.indexOf(ActionManage.UserUrl[i] + ".action") != -1)
 			{
 				find = 1;
-			}
+			}			
+		}
+		for(int i = 0; i < ActionManage.AdminUrl.length; i ++)
+		{
 			if(url.indexOf(ActionManage.AdminUrl[i] + ".action") != -1)
 			{
 				find = 2;
