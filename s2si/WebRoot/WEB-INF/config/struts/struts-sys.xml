@@ -3,6 +3,11 @@
 <struts>
 	 <include file="struts-default.xml"/>
 	<package name="" namespace="/" extends="default">
+	
+	    <action name="ToMain" class="managerAction" method="ToMain">
+			<result name="main">/WEB-INF/jsp/userhome.jsp</result>
+			<interceptor-ref name="mystack" />
+		</action>
 		
 		<action name="register" class="userBasicAction" method="register">
 			<result name="success">/WEB-INF/jsp/userhome.jsp</result>

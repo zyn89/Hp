@@ -128,6 +128,7 @@ $(function() {
 		$('#img-oper-level' + CLevel).data('currentId', id);
 		$('#img-oper-level' + CLevel).data('currentFormData', formData);
 		$('#img-oper-form-level' + CLevel).hide()[0].reset();
+		$('#img-oper-form-level' + CLevel).find('input[type="radio"]').removeAttr('checked');
 		$('#img-oper-level' + CLevel).modal('show');
 	});
 	

@@ -26,6 +26,10 @@ public class ManagerAction extends BaseAction{
 		System.out.println(session.get("aid"));
 	}
 	
+	public String ToMain()
+	{
+		return "main";
+	}
 	
 	public String wdy() {
 		return "wdy";
