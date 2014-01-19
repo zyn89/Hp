@@ -7,7 +7,7 @@ String id=request.getParameter("tid");
 <!DOCTYPE>
 <html style=""> 
 	<head>
-    <title>二级页面</title>
+    <title>微网站</title>
 	<meta charset="UTF-8">
 	<meta http-equiv="pragma" content="no-cache"> 
 	<meta http-equiv="cache-control" content="no-cache"> 
@@ -107,8 +107,7 @@ background-size:cover;">
   	<div style="width:auto;">
   	<img src="resources/image/logobig.png" style="width:128px;height:128px;display:block;margin:0px auto"></img>
   	</div>
-    <table class="table" cellspacing="0" cellpadding="0" style="margin-top:5px;
-    ">
+    <table class="table" cellspacing="0" cellpadding="0" style="margin-top:5px; font-size: 16px;">
 		<tbody>
 			<tr class="hide temple2" style="
 			">
@@ -123,7 +122,7 @@ background-size:cover;">
 	               </a>
             	</td>
             	<td style="vertical-align:middle;text-align:right;padding-right:20px">
-            	<img src="resources/image/twoarrow.png" style=""></img>
+            	<img src="resources/image/onearrow.png" style="width:auto; height:30px;"></img>
             	</td>
 			</tr>
 		</tbody>

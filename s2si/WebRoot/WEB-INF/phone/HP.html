@@ -391,7 +391,19 @@
 				height: r3_right.height - 2 * bder,
 			}
 			data.r3_right_img = parse(r3_right_img);
-
+			
+			//处理图片跳转链接
+			for (var i=0; i<data.length; i++) {
+				if(data[i].isStatic === 1) {
+					data[i].url = "#";
+				} else {
+					console.log(data[i].url);
+					if (data[i].url == "") {
+						data[i].url = "second.action?tid="+data[i].id;
+					}
+				}
+			}
+			
  			$('#img-rows-container').html(_.template($('#img-rows-template').html(),{datas: data}));
  			      		
       });    

@@ -380,8 +380,12 @@ public class WebServiceImpl implements IWebService{
 		four.setContent(content);
 		four.setFid(fid);	
 		four.setUrl(url);
-		String imageUrl = FileUtil.SaveFourLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
-		four.setImageUrl(imageUrl);
+		if(pics != null && pics.size() > 0)
+		{
+			String imageUrl = FileUtil.SaveFourLevelAsMedia(uid, pics.get(0), picsContentType.get(0));
+			four.setImageUrl(imageUrl);
+		}
+		
 		fourLevelDao.insertFourLevel(four);
 		
 		json = GetFourLevel(fid);

@@ -7,7 +7,7 @@ String id=request.getParameter("hid");
 <!DOCTYPE>
 <html>
   <head>
-    <title>items.html</title>
+    <title>微网站</title>
 	<meta charset="UTF-8">
 	<meta http-equiv="pragma" content="no-cache"> 
 	<meta http-equiv="cache-control" content="no-cache"> 
@@ -84,38 +84,38 @@ String id=request.getParameter("hid");
 					var $tr=$("table.third").find("tr.temple2").clone();
 					console.log($tr[0]);
 					$tr.removeClass("hide");
-					$tr.removeClass("temple");
+					$tr.removeClass("temple2");
 					$tr.data("id",data[i].id);
-					$tr.find(".one").find("img").attr("src",data[i].imageUrl);
+					$tr.find("td.one").find("div").css("background-image","url("+data[i].imageUrl+")");
 					var str=data[i].content;
-					if(str.length>10){
-						str=str.substr(0,10);
+					if(str.length>9){
+						str=str.substr(0,9);
 						str=str+"...";
 					}
 					$tr.find(".two span").text(str);
-					if(data[i].isFinal==1){
-						$tr.find("a").attr("href",data[i].url);
-						$tr.bind("click",function(){
-							//$tr.find("a").trigger("click");
-							var $urls = $(this).find("a").attr("href");
-							console.log($urls);
-							if($urls){
-								location.href=$urls;
-							}
+					
+					if(data[i].url != ""){
+						$($tr).find("a").attr("href", data[i].url);
+						$($tr).bind("click", function(e) {
+							e.preventDefault();
+							location.href = $(this).find("a").attr("href");
 						});
 					}else{
-						$tr.bind("click",function(e){
-							$("#myModal").data("data",$tr.data("id"));
+						$($tr).bind("click",function(e){
+							$("#myModal").data("data",($(this)).data("id"));
 							if(!flag){
 				  				return;
 				  			}
 				  			e.stopPropagation();
+				  			e.preventDefault();
 				  			$('#myModal').modal({
-				  				backdrop:false,
+				  				backdrop:true,
 				  			});
 				  			flag=false;
 						});
 					}
+					//if(data[i].isFinal==1){
+					
 					$tr.appendTo($("table.third"));
 				}	
 				},
@@ -132,14 +132,16 @@ String id=request.getParameter("hid");
 				var data=JSON.parse(d);
 				console.log(data);
 				data=data.four_level || [];
+				$ul=$('#four-level-ul');
+				$ul.empty();
 				for(var i=0;i<data.length;i++){
 					$li=$('#myModal').find("li.temple").clone();
-					$ul=$('#myModal').find("ul");
 					$li.removeClass("hide");
 					$li.removeClass("temple");
 					$li.find("span").text(data[i].content);
+					$li.data("url", data[i].url);
 					$li.bind("click",function(){
-						location.href=data[i].url;
+						location.href=$(this).data("url");
 					});
 					$li.appendTo($ul);
 				}	
@@ -155,22 +157,22 @@ background-size:cover;">
   	<div style="width:auto;">
   	<img src="resources/image/logobig.png" style="width:128px;height:128px;display:block;margin:0px auto"></img>
   	</div>
-    <table class="table third" style="margin-top:5px;cellspacing:0;cellpadding:0">
+    <table class="table third" style="margin-top:5px;cellspacing:0;cellpadding:0;font-size: 16px;">
 		<tbody>
 			<tr class="hide temple2" style="
 			">
 				<td style="vertical-align:middle;padding-left:1px;width:25%" class="one">
-					<div style="float:left;background-image:url(resources/image/car.png);height:80px;width:80px;
-					background-size:100% 100%;
-					"></div>
+				<div style="float:left;;height:80px;width:80px;
+				background-size:100% 100%;
+				"></div>
 				</td>
 			  	<td style="text-align:left;vertical-align:middle;padding-left:2px" class="two">
 				  	<a href="" style="text-decoration:none;">			 	
-					<span style="color: white">指导价...</span>
-               </a>
+						<span style="color: white">指导价...</span>
+               		</a>
             	</td>
 	            	<td style="vertical-align:middle;text-align:right;padding-right:20px">
-	            	<img src="resources/image/twoarrow.png" style=""></img>
+	            	<img src="resources/image/onearrow.png" style="width:auto; height:30px;"></img>
             	</td>
 			</tr>
 		</tbody>
@@ -182,8 +184,7 @@ background-size:cover;">
 	top:35%;overflow-y:scroll";
 	>
 	  <div class="modal-body">
-	    	<ul style="list-style: none;width:95%;margin:0px auto">
-	    		<li class="hide temple" style="
+	    	<ul class="hide"><li class="hide temple" style="
 	    		background: url(resources/image/bac6.png);
 	    		background-size:100% 100%;
 				height: 45px;
@@ -195,6 +196,8 @@ background-size:cover;">
 				margin-bottom:10px;
 	    		"><span style="margin-top:3px;margin-left:10px;display:inline-block;">活动题目</span><img style="display:inline-block;height:60%;float:right;margin-top:8px;margin-right:10px" src="resources/image/twoarrow.png"/></li>
 	    	</ul>
+	    	<ul id="four-level-ul"style="list-style: none;width:95%;margin:0px auto">
+	    		</ul>
 	  </div>
 	</div>
   </body>
