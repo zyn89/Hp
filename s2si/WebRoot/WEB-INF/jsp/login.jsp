@@ -26,14 +26,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//登录检查
 			
 			function loginDataCheck(){
-				var username = $('#phone').val(),
-					upass = $('#pw').val();
+				var username = $('#u-phone').val(),
+					upass = $('#u-pass').val();
 				if(!username || !username.trim() || !upass || !upass.trim()) {
 					return false;
 				} 
 				return true;
 			}
-	
+		//to register
+		$(function(){
+			$("#register-btn").click(function(){
+				location.href = "goTo.action?url=register.jsp"; 
+			});
+		});
 	
 			
 	</script>
@@ -41,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		body{
 			width:100%;
 			min-height: 100%;
-			background: url(resources/image/背景.png) repeat-y fixed;	
+			background: url(resources/image/mobilebg.png) repeat-y fixed;	
 			background-size:cover;
 		}
 		ul {
@@ -58,10 +63,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		.header{
 			margin: 0 auto;
-			margin-bottom: 20px;
-			width: 320px;
-			height: 100px;
-			border: 1px solid black;
+			margin-bottom: 10px;
+			height: 135px;
+	 		border: 0px solid red;
+	 		width : 95%;
 		}
 		
 		.m-m-uinfo ul {
@@ -142,24 +147,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<div class="main">
-		<div class="header"></div>
+		<div class="header">
+			<div class="m-logo">
+				<img src="resources/image/logobig.png" style="height: 135px; width: 135px;"/>
+			</div>
+		</div>
 		<div class="m-login">
 			
-			<form class="m-uinfo" action="Login.action" method="get" onsubmit="return loginDataCheck()">
+			<form class="m-uinfo" action="Login.action" method="post" onsubmit="return loginDataCheck()">
 				<ul>
 					<li>
-						<input class="input-lg" id="u-phone" type="tel" placeholder="请输入手机号码"/>			
+						<input name="phone" class="input-lg" id="u-phone" type="tel" placeholder="请输入手机号码"/>			
 					</li>
 							
 					<li>
-						<input class="input-lg" id="u-pass" type="text" placeholder="请输入密码" />					
+						<input name="pw" class="input-lg" id="u-pass" type="password" placeholder="请输入密码" />					
 					</li>
 					
 				</ul>
 				<div class="btns" >
-						<button class="btn-d1" type="submit">登录</button></div></br>
-						<button  class="btn-d2" type="button">注册</button></br>
-					<div>
+						<button class="btn-d1" type="submit">登录</button>
+				</div></br>
+						<button class="btn-d2" id="register-btn">注册</button></br>
+				<div>
 				
 					<button class="btn-d3" type="button">找回密码</button></div>
 					

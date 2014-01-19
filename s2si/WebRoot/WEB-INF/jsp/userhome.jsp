@@ -32,15 +32,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			window.location.href="goTo.action?url=interact.jsp";
 		});
 
-
-		$('#login-btn').bind('click',function(event){
-			window.location.href="goTo.action?url=login1.jsp";
-		});
-
-		$('#reg-btn').bind('click',function(event){
-			window.location.href="goTo.action?url=register.jsp";
-		});
-
 		//单击签到图片 ajax异步请求 {"isCheck":1,"credit":51}  
 		$('#logout-btn').bind('click',function(event){
 			
@@ -154,15 +145,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	  	<div class="main">
 	  		<div class="m-logo">
-
+				<img src="resources/image/logobig.png" style="height: 135px; width: 135px;"/>
 			</div>
 			<div class="m-btns">
 			<% if(name==null) { %>
-				<a href="javasrcipt:void(0);" class="btn btn-large btn-up" id="login-btn">登录</a>
-				<a href="javasrcipt:void(0);" class="btn btn-large btn-bottom" id="reg-btn">注册</a>
+				<a href="goTo.action?url=login.jsp" class="btn btn-large btn-up" id="login-btn">登录</a>
+				<a href="goTo.action?url=register.jsp" class="btn btn-large btn-bottom" id="reg-btn">注册</a>
 			<% } else { %>
 				<a href="javasrcipt:void(0);" class="btn btn-large btn-up" id="logout-btn">退出</a>
-				<a href="javasrcipt:void(0);" class="btn btn-large btn-bottom" id="reg-btn">注册</a>
+				<a href="goTo.action?url=register.jsp" class="btn btn-large btn-bottom" id="reg-btn">注册</a>
 			<% } %> 
 			</div>
 			<div class="m-info">
@@ -173,7 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="m-acts">
 				<div class="m-acts-l">
 					<ul>
-						<li><a href="goTo.action?url=userInfo2.jsp"><img src="resources/image/yhzx.jpg" alt=""></a></li>
+						<li><a href="goTo.action?url=userInfo.jsp"><img src="resources/image/yhzx.jpg" alt=""></a></li>
 						<li><a id="j-whd" href="javascript:void(0);"><img src="resources/image/whd.jpg" alt=""></a></li>
 						<li><a href="goTo.action?url=research.jsp"><img src="resources/image/wdy.jpg" alt=""></a></li>
 					</ul>
@@ -181,8 +172,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="m-acts-r">
 					<ul>
 
-					<% if(isCheck != null && (Integer)isCheck == 1){ %>
-						
+					<% if(isCheck != null && (Integer) isCheck == 1){ %>
+
 					<% } else{ %>
 						<li><a href="javascript:void(0);"><img src="resources/image/qd.jpg" alt=""></a></li>
 					<% } %>
