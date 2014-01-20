@@ -173,6 +173,9 @@
 			$(".modal.oper").bind("hide",function(){
 				$(".modal.oper").find("a.desc ~ a.already").remove();
 				$("form#pictures")[0].reset();
+				var $tmp=$("form#pictures").find("input[type='file']").clone(true);
+				$("form#pictures").find("input[type='file']").remove();
+				$tmp.appendTo($("form#pictures"));
 			});
 			//保存按钮事件
 			$(".modal.oper").find(".btn.save").bind("click", function() {

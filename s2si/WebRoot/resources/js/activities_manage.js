@@ -436,12 +436,26 @@
 				$(".modal.oper").find("a.activity ~ a.already").remove();
 				$(".modal.oper").find("a.desc ~ a.already").remove();
 				$("#pictures")[0].reset();
+				$("#pictures").find("input[type='file']").each(function(index,e){
+					var $input=$(e).clone(true);
+					var $parent=$(e).parent();
+					$(e).remove();
+					$input.appendTo($parent);
+				});
+				console.log("清空");
 			});
 			$(".modal.add").bind("hide", function() {
 				//$(".oper").find("form").addClass("hide");
 				$(".modal.add").find("a.activity ~ a.already").remove();
 				$(".modal.add").find("a.desc ~ a.already").remove();
 				$("#pictures")[0].reset();
+				$("#pictures").find("input[type='file']").each(function(index,e){
+					var $input=$(e).clone(true);
+					var $parent=$(e).parent();
+					$(e).remove();
+					$input.appendTo($parent);
+				});
+				console.log("清空");
 			});
 			//点击取消按钮的时候关闭对话框
 			$(".modal-footer").find(".btn.shut").bind("click", function() {

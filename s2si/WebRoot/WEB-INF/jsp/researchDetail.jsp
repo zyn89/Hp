@@ -11,17 +11,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>调研</title>
-	
 	<link rel="stylesheet" href="resources/css/common.css" />
 	<script src="resources/js/jquery-1.9.1.js"></script>
-	<script src="resources/js/research.js"></script>
-	
+	<script src="resources/js/research2.js"></script>
 	<script>	
 		jQuery(function($){
-
-
-
-			
+					
 		});
 	</script>
 	<style>
@@ -127,7 +122,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			background-size:cover;
 			letter-spacing: 3px;
 		}
-	
+		.main .modal{
+			background-image:url(resources/image/bac3.png);
+			background-size:100% 100%;
+			height:250px;
+			width:300px;
+			background-color:transparent;
+			box-shadow:none;
+			border:none;
+			top:50%;overflow-y:auto;
+			position:absolute;
+			margin-left:10px;
+			z-index:1;
+			display:none;
+		}
+		.main .modal-body{
+			background-image:url(resources/image/modal_content.png);
+			background-size:100% 100%;
+			position:absolute;
+			top:5px;
+			height:150px;
+			width:260px;
+			margin-left:20px;
+			/*background-color:transparent;*/
+			box-shadow:none;
+			border:none;
+		}
+		.main .res{
+			margin-left:25px;
+			width:210px;
+			height:150px;
+			font-size:16px;
+			color:white;
+			top:40%;
+			position:absolute;
+			z-index:2;		
+		}
+		.modal .btn{
+			display:block;
+			width: 260px;
+			height:40px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/btn-green.png);
+			background-size:cover;
+			letter-spacing: 3px;
+			position:absolute;
+			bottom:5%;
+			margin-left:20px;
+		}
 	</style>
 </head>
 <%
@@ -140,13 +183,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 	<div id="wrap">
-		<div class="main">
+		    <div class="main">
 			<div class="m-logo">
 				<!--<img src="resources/image/logo.png" alt="">-->
 			</div>
 			<div class="m-question">
 				<img src="resources/image/list.png" />
 			</div>
+				<div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-body">
+				    	<div class="res">感谢您参与答题<br>恭喜您获得了<span>12</span>积分</div>
+				  </div>
+				  <a href="javascript:void(0);" class="btn">提交</a>
+				</div>
 			<div class="m-result" style="display:none;">
 
 			</div>
@@ -177,8 +226,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
-				
-
 </body>
 </html>
 

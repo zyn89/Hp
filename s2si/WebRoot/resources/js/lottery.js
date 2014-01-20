@@ -218,10 +218,22 @@
 			//窗口关闭时清空表单
 			$('#j-addmodel').bind('hide',function(){
 				$(this).find("form")[0].reset();
+				$(this).find("form").find("input[type='file']").each(function(index,e){
+					var $input=$(e).clone(true);
+					var $parent=$(e).parent();
+					$(e).remove();
+					$input.appendTo($parent);
+				});
 				$(this).find("span.j-filename").text("");
 			});
 			$('#j-update-lottery-modal').bind('hide',function(){
 				$(this).find("form")[0].reset();
+				$(this).find("form").find("input[type='file']").each(function(index,e){
+					var $input=$(e).clone(true);
+					var $parent=$(e).parent();
+					$(e).remove();
+					$input.appendTo($parent);
+				});
 				$(this).find("span.j-filename").text("");
 			});
 			//保存修改

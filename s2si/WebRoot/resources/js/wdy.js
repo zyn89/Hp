@@ -208,9 +208,15 @@
 		});
 			//打开对话框的清理事件
 		$(".modal").bind("show",function(){
-				console.log("show")
+				console.log("show");
 				$(this).find("form").each(function(index,e){
 					e.reset();
+				});
+				$(this).find("form").find("input[type='file']").each(function(index,e){
+					var $input=$(e).clone(true);
+					var $parent=$(e).parent();
+					$(e).remove();
+					$input.appendTo($parent);
 				});
 				$(this).find("p.text-error").css("display","none");
 				$(this).find(".controls span").text("");

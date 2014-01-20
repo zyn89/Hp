@@ -11,8 +11,9 @@
 				score=0, 
 				count=0; //用来判断是否所有调研问题都已经回答过 初始时置0
 			
-			
-			
+			if(!answered){				
+				$(".tip",".u-answer").hide();
+			}
 			$.ajax({
 				url: 'GetSurveyQuestion.action',
 				type: 'post',
@@ -39,6 +40,7 @@
 			}
 			
 			function makeQuestion(questionData) {
+				console.log(questionData);
 				var qid = questionData.qid,
 					done = questionData.done,
 					questionUrl = questionData.imageUrl,
@@ -49,9 +51,12 @@
 					$radios = $('.radio','.u-answer'),
 					$ul = $('.u-answer');
 					
+				//添加选项里面的文本内容
+				$("span.content").each(function(index,e){
+					$(e).text(choiceItems[index]);
+				});
 				//判断此问题是否已经回答过 可以固定选项 后面的radio 不可单击
 				//unbind radio上的事件 或者撤销 ul 上的事件(如果事件绑定在ul上)
-				
 				if(done) {
 					count+=1;
 					answered = 1;
@@ -109,14 +114,15 @@
 				return aIndex;
 			}
 
-
+			$(".modal").find(".btn").bind("click",function(e){
+				e.stopPropagation();
+				location.href="goTo.action?url=userhome.jsp";
+			});
 			//提交/下一题按钮事件
 			//应该避免重复提交
-			$('.m-submit button').bind('click',function(event){
-
-					var _this = $(this),
-						choiceResult,
-					
+			$('.m-submit #j-confirmbtn').bind('click',function(event){
+					var _this = $(this);
+					var	choiceResult="";
 					if(answered) {
 
 						//如果调研问题已经回答过 那么直接下一题
@@ -139,7 +145,7 @@
 
 						choiceResult = getCheckedValue();
 						answered = 1; //设置问题是否已答
-						curIndex;
+						//curIndex;
 						
 						$.ajax({
 							url: 'DoneSurveyQuestion.action',
@@ -153,17 +159,20 @@
 							}
 						})
 						.done(function(data) {
-
+							console.log(data);
 							//回显百分比 如果是最后一次 弹出获得积分对话框
-							var credit = data.credit,
-								$tips = $('.tip','.u-answer');
-
+							var credit =data.credit,
+								$tips = $('.tip','.u-answer'),
+								rate = data.rate;
 							$.each($tips,function(index,tip){
 								$(tip).text(rate[index])
 									  .show();
 							});
 							if(curIndex+1 > questions.length && credit != null) {
+								alert();
 								//如果是最后一题	
+								$(".modal").find(".res span").text(credit);
+								$(".modal").fadeIn("fast");
 							}
 							curIndex++;
 							_this.text('下一题');
@@ -172,6 +181,7 @@
 							console.log(err);
 						});		
 					}
+					console.log(curIndex);
 			});	
 
 		});//jQuery

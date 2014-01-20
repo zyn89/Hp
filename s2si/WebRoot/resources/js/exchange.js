@@ -201,11 +201,23 @@
 			//对话框关闭时清空form
 			$('#j-addmodel').bind('hide',function(){
 				$(this).find("form")[0].reset();
+				$(this).find("form").find("input[type='file']").each(function(index,e){
+					var $input=$(e).clone(true);
+					var $parent=$(e).parent();
+					$(e).remove();
+					$input.appendTo($parent);
+				});
 				$(this).find("span.j-filename").text("");
 			});
 			$('#j-update-exchange-modal').bind('hide',function(){
 				$(this).find("form")[0].reset();
 				$(this).find("span.j-filename").text("");
+				$(this).find("form").find("input[type='file']").each(function(index,e){
+					var $input=$(e).clone(true);
+					var $parent=$(e).parent();
+					$(e).remove();
+					$input.appendTo($parent);
+				});
 			});
 			//保存修改
 			$('#j-ex-update').bind('click.for.update',function(event){
