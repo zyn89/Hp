@@ -29,7 +29,7 @@ public class UserCreditDaoImpl extends SqlMapClientDaoSupport implements IUserCr
 	public List<UserCredit> getUserCreditInfos() {
 		List<UserCredit> result = null;
 		try{
-			result = (List<UserCredit>)this.getSqlMapClientTemplate().queryForObject(
+			result = (List<UserCredit>)this.getSqlMapClientTemplate().queryForList(
 					"getUserCreditInfos");
 		} catch (DataAccessException e) {
 			throw new BaseDaoException(ExceptionUtil.IllegalSqlOperation);
