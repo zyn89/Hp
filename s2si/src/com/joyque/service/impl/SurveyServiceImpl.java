@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.joyque.common.action.BaseAction;
 import com.joyque.common.util.FileUtil;
 import com.joyque.dao.ISurveyInfoDao;
 import com.joyque.dao.ISurveyQuestionDao;
@@ -22,7 +24,8 @@ import com.joyque.pojo.UserInfo;
 import com.joyque.pojo.UserSurvey;
 import com.joyque.service.ISurveyService;
 
-public class SurveyServiceImpl implements ISurveyService{
+public class SurveyServiceImpl extends BaseAction implements ISurveyService{
+	private static final long serialVersionUID = 530432816344395224L;
 	private ISurveyInfoDao surveyInfoDao;
 	private IUserSurveyDao userSurveyDao;
 	private ISurveyQuestionDao surveyQuestionDao;
@@ -216,6 +219,7 @@ public class SurveyServiceImpl implements ISurveyService{
 		return json;
 	}	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject DoneSurveyQuestion(String uid, long qid, long sid, int isFinal, int aIndex) {
 		JSONObject json = new JSONObject();
@@ -270,7 +274,10 @@ public class SurveyServiceImpl implements ISurveyService{
 			UserCredit uc = userCreditDao.getUserCredit(uid);
 			uc.setCredit(uc.getCredit() + si.getCredit());
 			userCreditDao.updateUserCredit(uc);
-			json.accumulate("credit", uc.getCredit());
+			Map session = getSession();
+			session.remove("credit");
+			session.put("credit", uc.getCredit());
+			json.accumulate("credit", si.getCredit());
 		}
 		return json;
 	}

@@ -3,10 +3,12 @@ package com.joyque.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.joyque.common.action.BaseAction;
 import com.joyque.common.util.DefaultValue;
 import com.joyque.common.util.FileUtil;
 import com.joyque.dao.IActivityInfoDao;
@@ -21,7 +23,9 @@ import com.joyque.pojo.UserCredit;
 import com.joyque.pojo.UserInfo;
 import com.joyque.service.IQuestionService;
 
-public class QuestionServiceImpl implements IQuestionService{
+public class QuestionServiceImpl extends BaseAction implements IQuestionService{
+
+	private static final long serialVersionUID = 7826621048803837552L;
 	private IQuestionInfoDao questionInfoDao;
 	private IUserActivityDao userActivityDao;
 	private IActivityInfoDao activityInfoDao;
@@ -56,6 +60,7 @@ public class QuestionServiceImpl implements IQuestionService{
 		return jArray;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject DoneQuestion(String uid, int score, long aid) {
 		JSONObject json = new JSONObject();
@@ -72,7 +77,9 @@ public class QuestionServiceImpl implements IQuestionService{
 			userCreditDao.updateUserCredit(uc);
 		}
 		
-		json.accumulate("credit", uc.getCredit());
+		Map session = getSession();
+		session.remove("credit");
+		session.put("credit", uc.getCredit());
 		return json;
 	}
 	

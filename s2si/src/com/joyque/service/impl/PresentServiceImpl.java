@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.joyque.common.action.BaseAction;
 import com.joyque.common.exception.BaseServiceException;
 import com.joyque.common.util.ExceptionUtil;
 import com.joyque.common.util.FileUtil;
@@ -26,7 +28,8 @@ import com.joyque.pojo.UserInfo;
 import com.joyque.pojo.UserPrize;
 import com.joyque.service.IPresentService;
 
-public class PresentServiceImpl implements IPresentService{
+public class PresentServiceImpl extends BaseAction implements IPresentService{
+	private static final long serialVersionUID = -6145191334328930464L;
 	private IExchangeInfoDao exchangeInfoDao;
 	private IPrizeInfoDao prizeInfoDao;
 	private IUserPrizeDao userPrizeDao;
@@ -130,6 +133,7 @@ public class PresentServiceImpl implements IPresentService{
 		return json;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject DoneExchange(String uid, long eid) {
 		JSONObject json = new JSONObject();
@@ -147,7 +151,9 @@ public class PresentServiceImpl implements IPresentService{
 		credit.setCredit(credit.getCredit() - exchange.getCredit());
 		userCreditDao.updateUserCredit(credit);
 		
-		json.accumulate("credit", credit.getCredit());
+		Map session = getSession();
+		session.remove("credit");
+		session.put("credit", credit.getCredit());
 		return json;
 	}
 	
@@ -301,6 +307,7 @@ public class PresentServiceImpl implements IPresentService{
 		return json;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject DrawLottery(String uid, int lid, int isAward) {
 		JSONObject json = new JSONObject();
@@ -317,6 +324,9 @@ public class PresentServiceImpl implements IPresentService{
 		credit.setCredit(credit.getCredit() - lottery.getCredit());
 		credit.setLotteryCount(credit.getLotteryCount() - 1);
 		userCreditDao.updateUserCredit(credit);
+		Map session = getSession();
+		session.remove("credit");
+		session.put("credit", credit.getCredit());
 		if(isAward == 1)
 		{
 			long pid = lottery.getPid();

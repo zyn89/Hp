@@ -1,10 +1,12 @@
 package com.joyque.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.sf.json.JSONObject;
 
+import com.joyque.common.action.BaseAction;
 import com.joyque.common.exception.BaseServiceException;
 import com.joyque.common.util.DefaultValue;
 import com.joyque.common.util.ExceptionUtil;
@@ -17,7 +19,8 @@ import com.joyque.pojo.UserInfo;
 import com.joyque.service.IUserBasicService;
 import com.opensymphony.xwork2.ActionContext;
 
-public class UserBasicServiceImpl implements IUserBasicService{
+public class UserBasicServiceImpl extends BaseAction implements IUserBasicService{
+	private static final long serialVersionUID = -1060300940647174540L;
 	private IUserInfoDao userInfoDao;
 	private IUserCreditDao userCreditDao;
 	private IAdminInfoDao adminInfoDao;
@@ -148,6 +151,7 @@ public class UserBasicServiceImpl implements IUserBasicService{
 		return json;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject CheckIn(String uid) {
 		JSONObject json = new JSONObject();
@@ -159,8 +163,11 @@ public class UserBasicServiceImpl implements IUserBasicService{
 		credit.setIsCheck(DefaultValue.IsCheck);
 		credit.setCredit(credit.getCredit() + DefaultValue.CheckCredit);
 		userCreditDao.updateUserCredit(credit);
-		json.accumulate("isCheck", credit.getIsCheck());
-		json.accumulate("credit", credit.getCredit());
+		Map session = getSession();
+		session.remove("credit");
+		session.put("credit", credit.getCredit());
+		session.remove("isCheck");
+		session.put("isCheck", json.get("isCheck"));
 		return json;
 	}
 	
