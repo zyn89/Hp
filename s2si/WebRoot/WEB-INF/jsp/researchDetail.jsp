@@ -194,7 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				  <div class="modal-body">
 				    	<div class="res">感谢您参与答题<br>恭喜您获得了<span>12</span>积分</div>
 				  </div>
-				  <a href="javascript:void(0);" class="btn">提交</a>
+				  <a href="javascript:void(0);" class="btn">确定</a>
 				</div>
 			<div class="m-result" style="display:none;">
 

@@ -10,7 +10,26 @@
 				answered = 0, //当前问题是否已经回答 用来判断是否需要改变按钮文字
 				score=0, 
 				count=0; //用来判断是否所有调研问题都已经回答过 初始时置0
-			
+			var credit_get="";
+			$.ajax({
+				url: 'GetSurveyList.action',
+				type: 'post',
+				dataType: 'json',
+				//data: {sid: sid},
+			})
+			.done(function(data) {
+				count = 0;
+				arr = data.surveys;
+				for(var i=0;i<arr.length;i++){
+					//console.log(arr[i].sid==sid);
+					if(arr[i].sid==sid){
+						credit_get=arr[i].credit
+					}
+				}
+			})
+			.fail(function(err) {
+				console.log(err);
+			});	
 			if(!answered){				
 				$(".tip",".u-answer").hide();
 			}
@@ -169,9 +188,8 @@
 									  .show();
 							});
 							if(curIndex+1 > questions.length && credit != null) {
-								alert();
 								//如果是最后一题	
-								$(".modal").find(".res span").text(credit);
+								$(".modal").find(".res span").text(credit_get);
 								$(".modal").fadeIn("fast");
 							}
 							curIndex++;
