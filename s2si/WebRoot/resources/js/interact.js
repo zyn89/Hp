@@ -3,7 +3,7 @@
 			
 
 			$(function(){
-				var acts; //save activities retrieved from server 
+				/*var acts; //save activities retrieved from server 
 
 				
 
@@ -68,7 +68,75 @@
 					paginationEventHandler(event,eventd.data.pageSize);
 				});
 
-				//事件处理中还应更改样式 计算分页点的宽度 调节总体宽度
+				//事件处理中还应更改样式 计算分页点的宽度 调节总体宽度*/
+				
+				
+				function diplayActs(data) {
+				 	var i,$newLi,
+						$actContainer = $('#exchange-items');
+				 	$actContainer.empty();	
+					
+					$.each(data,function(index,value){
+						var aid = value.aid,
+			 				activityUrl = value.activityUrl,
+							credit = value.credit,
+							descUrl = value.descUrl,
+							done = value.done,
+			 				score = value.score,
+			 				type = value.type;
+
+						$newLi = $('#j-clone').clone().attr({
+							id:'activity' + index,
+							'data-href' : 'interact_beginActivity.action?aid=' + aid + '&type=' + type + '&descUrl=' + descUrl
+						});
+
+						$('.u-prize',$newLi).attr({
+							src :activityUrl
+						});
+						
+						
+					
+			 			
+
+			 			if(done) {
+			 				//设置图片是活动完成的图片
+			 				$('.u-arrow',$newLi).hide();
+			 				$('<span>').addClass('finished').text('已完成').appendTo($newLi);
+			 				$newLi.attr({
+				 				'data-done' : 1
+				 			});
+			 			} 
+		
+			 			$newLi.show().appendTo($actContainer);
+			 		});
+			 	}
+				
+				
+				
+				$.ajax({
+			 		url: '/s2si/ActivityList.action',
+			 		type: 'post',
+			 		dataType: 'json'
+			 	})
+			 	.done(function(data) {
+			 		diplayActs(data.activities);
+			 	})
+			 	.fail(function(error) {
+			 		console.log("error");
+			 	});
+
+
+			 	$('#exchange-items').on('click','li',function(event){
+				 	var _target = $(event.target),
+				 		done = _target.data('done'),
+				 		href = _target.data('href');
+			 			
+			 		
+				 	if(!done){
+					 	window.location.href = href;
+				 	}
+			 	});
+				
 				
 			});
 })(window,jQuery);

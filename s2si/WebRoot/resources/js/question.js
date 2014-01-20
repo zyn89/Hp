@@ -3,49 +3,56 @@ jQuery(function($){
 			questions,curIndex = 1,answered = 0,score=0;
 
 		function makeQuestion(questionData) {
-				var num2alph = {1 : 'A', 2 : 'B','3' : 'C' ,4 : 'D'},
-					qid = questionData.qid,
-					questionUrl = questionData.questionUrl,
+			
+				var qid = questionData.qid,
+					done = questionData.done,
+					questionUrl = questionData.imageUrl,
 					choiceItems = questionData.choiceitems,
-					questionAnswerArea =$('.m-answer') .find('>fieldset'),
-					questionPicArea = $('.m-question').find('>img');
-
+					$radios = $('.radio','.u-answer'),
+					questionPicArea = $('.m-question img'),
+					$contentAreas = $('.m-answer .content'),
+					$ul = $('.u-answer'),
+					$result = $('.m-result');
+				
+					$result.hide();
+					$radios.removeClass('radio-light');
+					$radios.eq(0).addClass('radio-light');
 					questionPicArea.attr({
 						src : questionUrl
 					});
-					questionAnswerArea.empty();
-
+					
+					
 					$.each(choiceItems,function(index,value){
-						var $input = $('<input>'),
-							$label = $('<label>'),
-							iIndex = index-0+1,
-							idOrname = 'radio-choice-' + iIndex;
-							
-
-						$input.attr({
-							type : 'radio',
-							name : 'radio-choice',
-							id : idOrname,
-							value : iIndex
-						});
-						if(index == 0) {
-							$input.attr({checked : "checked"});
-						}
-						$label.attr({
-							for : idOrname,
-						}).text(num2alph[iIndex] + '. ' + value);
-
-						questionAnswerArea.append($input).append($label);
-						questionAnswerArea.trigger('create');
+						$contentAreas.eq(index).text(value);
 					});
 
 		}
 
 
-		function getCheckedValue() {
-			return $('.m-answer input:checked').val();
+		
+		function eventHandlerForRadio(event,$radios) {
+			var _target = $(event.target),
+				$parentLi = _target.parents('li'),
+				$siblingLis = $parentLi.siblings();
+			
+			$radios.removeClass('radio-light');
+			_target.addClass('radio-light');
 		}
-
+		
+		
+		
+		function getCheckedValue() {
+			var $radios = $('.radio','.u-answer'),
+				aIndex = 1;
+			$.each($radios,function(index,radio){
+				if($(radio).hasClass('radio-light')) {
+					aIndex = index-0 + 1;
+					return false;
+				}
+			});
+			return aIndex;
+		}
+		
 		$.ajax({
 			url: 'GetQuestionList.action',
 			type: 'post',
@@ -59,15 +66,24 @@ jQuery(function($){
 		.fail(function(err) {
 			console.log(err);
 		});	
-
+		
+		
+		$('.u-answer').on('click.radio','.radio',{'radios' : $('.radio','.u-answer')},function(event){
+			eventHandlerForRadio(event,event.data.radios);
+		});
+		
+		$('#j-finishedbtn').bind('click',function(event){
+			window.location.href = "goTo.action?url=interact.jsp";
+		});
+		
 		$('.m-submit a').bind('click',function(event){
 
 			var _this = $(this),
-				choiceResult,
-				$resultDiv = $('.m-result');
+				resultBox = $('.m-resultbox img'),
+				choiceResult;
+				
 			if(answered) {
-				//下一题
-				$resultDiv.hide();
+				
 				makeQuestion(questions[curIndex-1]);
 				answered = 0;
 				_this.text('提交');
@@ -75,18 +91,45 @@ jQuery(function($){
 				choiceResult = getCheckedValue();
 
 				if(choiceResult == questions[curIndex-1].aIndex) {
-					$resultDiv.text('正确');
+					resultBox.attr({
+						src : 'resources/image/right.png'
+					});
+					$('.m-result').show();
 					score += questions[curIndex-1].score;
 				} else {
-					$resultDiv.text('错误')
+					resultBox.attr({
+						src : 'resources/image/wrong.png'
+					});
+					$('.m-result').show();
+					
 				}
-				$resultDiv.show();
+				
 				answered = 1;
 				curIndex++;
 				if(curIndex > questions.length) {
-					alert('题目已经答完,所获积分' + score);
+					
+					//弹出提示框
+					$.ajax({
+						url: 'DoneQuestion.action',
+						type: 'post',
+						dataType: 'json',
+						data: {
+							aid: aid,
+							score : score
+						},
+					})
+					.done(function(data) {
+						$('.u-answer').unbind('click.radio');
+						$('.m-submit a').unbind('click');
+						$('.u-contentbox','.m-modelbox').text('感谢您参与答题,恭喜获得' + score + '积分！');
+						$('.m-modelbox').show();
+					})
+					.fail(function(err) {
+						console.log(err);
+					});	
+					
 				} else {
-					_this.text('下一题');
+					_this.text('下一题目');
 				}
 			}
 		});	

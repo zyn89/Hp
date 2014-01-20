@@ -167,25 +167,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	</style>
 </head>
-
+<%
+ 	  String aid=request.getParameter("aid");
+	  String descUrl=request.getParameter("descUrl");
+	  String type=request.getParameter("type");
+%>
 <body>
 	<div id="wrap">
 
 	
 		<div class="main">
 			<div class="m-logo">
-
+				<img src="resources/image/logo-small.png"/>
 			</div>
 
 			<div class="m-info"> 
 				<img src="resources/image/list.png"/>
 			</div>
-			<div class="m-content"> 
-				<input class="u-content" type="text" name="content" autocomplete="off" placeholder="请输入"/>
-			</div>
+			<% if(type.equals("pic_word")){ %>
+				<div class="m-content"> 
+					<input class="u-content" type="text" name="content" autocomplete="off" placeholder="请输入"/>
+				</div>
+			<%} %>
 			
 			<div class="m-upload">
 				<form name="" id="picform" class="">
+					<input type="hidden" id="aid" name="aid" value="<%= aid %>"/>
 					<ul class="u-upload">
 						<li class="title">上传图片</li>
 						<li class="first">

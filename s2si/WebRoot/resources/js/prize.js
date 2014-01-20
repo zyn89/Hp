@@ -84,15 +84,16 @@ jQuery(function($){
 						$img = $('img.u-prize',$li);
 					
 					$li.attr({
-						'data-href' : "interact_prizeInfo.action?eid=" + value.eid + '&descUrl=' + value.descUrl
+						'data-href' : "interact_prizeInfo.action?eid=" + value.eid + '&descUrl=' + value.descUrl + '&prizeUrl=' + value.prizeUrl
 					});
 					
 					$img.attr({
 						src : value.exchangeUrl
 					});
-					$li.appendTo($ul);
+					$li.show().appendTo($ul);
 				});
 			}
+			
 
 			function _btn2Callback(data,contentDiv) {
 				var lottery = (data.lotterys)[0],

@@ -15,9 +15,9 @@
 		</action>
 		
 		<action name="interact_*" class="interactAction" method="{1}">
-			<result name="beginactivity">/WEB-INF/jsp/interactIn2.jsp</result>
-			<result name="beginanswer">/WEB-INF/jsp/question2.jsp</result>
-			<result name="prizeinfo">/WEB-INF/jsp/prizeInfo.jsp</result>
+			<result name="picact">/WEB-INF/jsp/picUpload.jsp</result>
+			<result name="qaact">/WEB-INF/jsp/interactIn2.jsp</result>
+			<result name="prizeinfo">/WEB-INF/jsp/exchangeDesc.jsp</result>
 			<interceptor-ref name="mystack" />
 		</action>
 		<action name="manager" class="managerAction">

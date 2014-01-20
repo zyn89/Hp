@@ -10,10 +10,23 @@ public class InteractAction extends BaseAction {
 	
 	private String aid;
 	private String descUrl;
+	private String prizeUrl;
 	private String type;
 	private String eid;
 	
 	
+	public String getPrizeUrl() {
+		return prizeUrl;
+	}
+
+
+
+	public void setPrizeUrl(String prizeUrl) {
+		this.prizeUrl = prizeUrl;
+	}
+
+
+
 	public String getEid() {
 		return eid;
 	}
@@ -68,7 +81,13 @@ public class InteractAction extends BaseAction {
 		ActionContext.getContext().put("descUrl", descUrl);
 		ActionContext.getContext().put("type", type);
 		
-		return "beginactivity";
+		if(type.equals("pic_word") || type.equals("pic")) {
+			return "picact";
+		} else {
+			return "qaact";
+		}
+		
+		
 	}
 	
 	public String beginAnswer() {
@@ -78,6 +97,7 @@ public class InteractAction extends BaseAction {
 	
 	public String prizeInfo() {
 		ActionContext.getContext().put("eid", eid);
+		ActionContext.getContext().put("prizeUrl", prizeUrl);
 		return "prizeinfo";
 	}
 }

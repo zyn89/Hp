@@ -24,65 +24,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	<link rel="stylesheet" href="resources/css/common.css" />
 	<script src="resources/js/jquery-1.9.1.js"></script>
-	<script src="resources/js/interact.js"></script>
+	<script src="resources/js/interact.js"></script> 
 
 	<script>
-		// jQuery(function($){
-
-		// 	function diplayActs(data) {
-		// 		var $ul = $('<ul>');
+	jQuery(function($){
+		/*
+		 	function diplayActs(data) {
+			 	var i,$newLi,
+					$actContainer = $('#exchange-items');
+			 	$actContainer.empty();	
 				
-		// 		$.each(data,function(index,value){
-		// 			var aid = value.aid,
-		// 				activityUrl = value.activityUrl,
-		// 				credit = value.credit,
-		// 				descUrl = value.descUrl,
-		// 				done = value.done,
-		// 				score = value.score,
-		// 				type = value.type,
-		// 				$li = $('<li>'),
-		// 				$a = $('<a>'),
-		// 				$img = $('<img>');
+				$.each(data,function(index,value){
+					var aid = value.aid,
+		 				activityUrl = value.activityUrl,
+						credit = value.credit,
+						descUrl = value.descUrl,
+						done = value.done,
+		 				score = value.score,
+		 				type = value.type;
 
-		// 			$li.attr({
-		// 				'data-aid' : aid,
-		// 				'data-credit' : credit,
-		// 				'data-type' : type,
-		// 				'data-score' : score
-		// 			});
+					$newLi = $('#j-clone').clone().attr({
+						id:'activity' + index,
+						'data-href' : 'interact_beginActivity.action?aid=' + aid + '&type=' + type + '&descUrl=' + descUrl
+					});
 
-		// 			$a.attr({
-		// 				href:'interact_beginActivity.action?aid=' + aid + '&type=' + type + '&descUrl=' + descUrl
-		// 			});
+					$('.u-prize',$newLi).attr({
+						src :activityUrl
+					});
+					
+					
+				
+		 			
 
-		// 			if(done) {
-		// 				//设置图片是活动完成的图片
-		// 			} else {
-		// 				$img.attr({
-		// 					src : activityUrl
-		// 				});
-		// 			}
-
-		// 			$a.append($img).appendTo($li);
-		// 			$li.appendTo($ul);
-		// 		});
-
-		// 		$('.m-interacts').empty().append($ul);
-		// 	}
+		 			if(done) {
+		 				//设置图片是活动完成的图片
+		 				$('.u-arrow',$newLi).hide();
+		 				$('<span>').addClass('finished').text('已完成').appendTo($newLi);
+		 				$newLi.attr({
+			 				'data-done' ：1;
+			 			});
+		 			} 
+	
+		 			$newLi.appendTo($actContainer);
+		 		});
+		 	}
 
 			
-		// 	$.ajax({
-		// 		url: '/s2si/ActivityList.action',
-		// 		type: 'post',
-		// 		dataType: 'json',
-		// 	})
-		// 	.done(function(data) {
-		// 		diplayActs(data.activities);
-		// 	})
-		// 	.fail(function(error) {
-		// 		console.log("error");
-		// 	});
-		// });
+		 	$.ajax({
+		 		url: '/s2si/ActivityList.action',
+		 		type: 'post',
+		 		dataType: 'json',
+		 	})
+		 	.done(function(data) {
+		 		diplayActs(data.activities);
+		 	})
+		 	.fail(function(error) {
+		 		console.log("error");
+		 	});
+
+
+		 	$('.exchange-items').on('click','li',function(event){
+			 	var _target = $(event.target),
+			 		done = _target.data('done'),
+			 		href = _target.data('href');
+		 			
+		 		
+			 	if(!done){
+				 	window.location.href = href;
+			 	}
+		 	});
+	 	*/
+	});
 
 
 		
@@ -146,6 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			position: absolute;
 			right:7%;
 			top:39%;
+			
 		}
 
 		.finished {
@@ -164,31 +177,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 	  <div id="wrap">
 	  	<div class="main">
-	  		<div class="m-logo"></div>
-	  		<div class="m-pagination">
+	  		<div class="m-logo">
+	  			<img src="resources/image/logo-small.png"/>
+	  		</div>
+	  		<%--<div class="m-pagination">
 	  			<ul class="u-circles">
 	  				<li class="circle"></li>
 	  				<li></li>
 	  				<li></li>
 	  			</ul>
 	  		</div>
+			--%>
 			<div class="m-interacts">
 					<ul id="exchange-items">
 						
-						<li class="u-pitem">	
-								<img class="u-prize" src="resources/image/list.png" alt="">
-								<img class="u-arrow" src="resources/image/arrow.png" alt="">
-								<span class="finished">已完成</span>
-						</li>
-						<li class="u-pitem">	
-								<img class="u-prize" src="resources/image/list.png" alt="">
 						
-								<img class="u-arrow" src="resources/image/arrow.png" alt="">
-						</li>
-						<li class="u-pitem">	
-								<img class="u-prize" src="resources/image/list.png" alt="">
-								<img class="u-arrow" src="resources/image/arrow.png" alt="">
-						</li>
 					</ul>
 			</div>
 		</div>

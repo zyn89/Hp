@@ -12,46 +12,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Document</title>
 	
+	<link rel="stylesheet" href="resources/css/common.css" />
 	<script src="resources/js/jquery-1.9.1.js"></script>
 	<script src="resources/js/wScratchPad.js"></script>
 	<script type="text/javascript" src="resources/js/prize.js"></script>
 	<style>
 	
-		html,body {
-			height:100%;
-			width : 100%;
-		}
-
-		body,ul {
-			margin:0px;
-			padding:0px;
-		}
-		
-		ul {
-			list-style: none;
-		}
-
-		#wrap {
-			width:100%;
-			min-height: 100%;
-			background: url(resources/image/背景.png) repeat-y fixed;	
-			background-size:cover;
-		}
-
-
-		.main {
-			width : 320px;
-			min-height: 100%;
-			margin : 0px auto;
-			
-		}
-		
-		.main .m-logo {
-			 height: 135px;
-			 border: 1px solid red;
-			 width : 100%;
-			 margin-bottom:10px;
-		}
+	
 
 		.main .m-tabs {
 			
@@ -191,7 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="main">
 			
 				<div class="m-logo">
-
+					<img src="resources/image/logo-small.png"/>
 				</div>
 				<div class="m-tabs">
 					<div class="m-tabs-btns">
@@ -204,30 +171,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="m-tabs-content">
 						<div id="one" style="display:none;" class="tab-content">
 							<ul id="exchange-items">
-								<li class="u-pitem">	
-										<img class="u-prize" src="resources/image/list.png" alt="">						
-										<img class="u-arrow" src="resources/image/arrow.png" alt="">
-								</li>
-								<li class="u-pitem">	
-										<img class="u-prize" src="resources/image/list.png" alt="">
-								
-										<img class="u-arrow" src="resources/image/arrow.png" alt="">
-								</li>
-								<li class="u-pitem">	
-										<img class="u-prize" src="resources/image/list.png" alt="">
-								
-										<img class="u-arrow" src="resources/image/arrow.png" alt="">
-								</li>
-								<li class="u-pitem">	
-										<img class="u-prize" src="resources/image/list.png" alt="">
-								
-										<img class="u-arrow" src="resources/image/arrow.png" alt="">
-								</li>
+							
 							</ul>
 						</div>
 						<div id="two" style="" class="tab-content">
 							<div class="m-credit" >
-								<p style="padding-left: 22px;">剩余次数：12</p>
+								<p >剩余次数：12</p>
 							</div>
 							<img class="m-pic" src="resources/image/prizedb.png" alt=""></a>
 							<div class="m-ggk">

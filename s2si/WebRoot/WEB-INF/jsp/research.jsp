@@ -11,11 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Document</title>
-	
-	<link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
-	<link href="resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" href="resources/css/common.css" />
 	<script src="resources/js/jquery-1.9.1.js"></script>
-	<script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	
 
 
@@ -52,40 +49,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	</script>
 	<style>
-		body,ul {
-			padding: 0px;
-			margin: 0px;
-		}
 		
-		button,a {
-			outline: none !important;
-		}
-
-		.main {
-			margin:0px auto;
-			width:100%;
-			overflow:hidden;
-			zoom:1;
-			text-align:center;
-		}
 		
 		.m-infopic {
-			margin:20px auto;
+			width:100%;
+		}
+		
+		.m-infopic .m-dyinfo {
+			background:url(resources/image/dyinfo-db.png);
+			background-size : cover;
+			width: 272px;
+			height: 272px;
+			margin: 0 auto;	
 		}
 	
+		.m-infopic .m-dyinfo img {
+			width:100%;
+			height:100%
+		}
+		
+		.main .m-submit {
+			width: 100%;
+			margin-top:35px;
+		}
+
+		.main .m-submit a {
+			display:block;
+			width: 260px;
+			height:40px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/btn-green.png);
+			background-size:cover;
+			letter-spacing: 3px;
+		}
 		
 	</style>
 </head>
 
 <body>
-	<div class="main">
-		<input type="hidden" id="sid" >
-		<input type="hidden" id="credit" >
-		<div class="m-infopic">
-			<img src=""/>
-		</div>
-		<div class="m-submit">
-			<button id="c-btn" type="button" style="width:200px;" class="btn btn-large btn-primary">确定</button>
+	<div id="wrap">
+		<div class="main">
+			<input type="hidden" id="sid" >
+			<input type="hidden" id="credit" >
+			<div class="m-logo">
+				<img src="resources/image/logo-small.png"/>
+			</div>
+			<div class="m-infopic">
+				<div class="m-dyinfo">
+					<img src=""/>
+				</div>
+				
+			</div>
+			<div class="m-submit">
+				<a href="javascript:void(0);" id="c-btn">开始</a>
+			</div>
 		</div>
 	</div>
 </body>
