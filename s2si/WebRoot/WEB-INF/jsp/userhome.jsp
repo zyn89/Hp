@@ -3,7 +3,13 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%
+  	  Object name = session.getAttribute("name");
+	 
+	  Object credit = session.getAttribute("credit");
+  	  Object isCheck = session.getAttribute("isCheck");
+  	  int val=0;
+%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,27 +33,82 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 
 	jQuery(function($){
-
+		var str="<%=name%>";
+		console.log(str);
+		if(str=="null"){
+			$("div.m-check").hide();
+			$("div.m-info").hide();
+		}else{
+			$("div.m-info").show();
+			$("div.m-check").show();
+		}
+		if(str!="null" && <%=isCheck%>==0){
+			console.log(<%=isCheck%>);
+			$("div.m-check p").removeClass("checked");
+			$("div.m-check p").text("签到");
+		}else if(str!="null"){
+			console.log(<%=isCheck%>);
+			$("div.m-check p").addClass("checked");	
+			$("div.m-check p").text("已签到");	
+		}
 		$('#j-whd').bind('click',function(event){
 			window.location.href="goTo.action?url=interact.jsp";
 		});
-
+		$("div.m-check p").bind("click",function(){
+			if($(this).hasClass("checked")){
+				return;
+			}
+			$.ajax({
+					url: 'CheckIn.action',
+					type: 'post',
+				})
+				.done(function(data) {
+					location.href="goTo.action?url=userhome.jsp";
+				})
+				.fail(function(error) {
+					console.log("error");
+			 });
+		});
+		
 
 		$('#login-btn').bind('click',function(event){
-			window.location.href="goTo.action?url=login.jsp";
+			//window.location.href="goTo.action?url=login.jsp";
 		});
 
 		$('#reg-btn').bind('click',function(event){
-			window.location.href="goTo.action?url=register.jsp";
+			//window.location.href="goTo.action?url=register.jsp";
 		});
 
 		//单击签到图片 ajax异步请求 {"isCheck":1,"credit":51}  
 		$('#logout-btn').bind('click',function(event){
-			
+			 $.ajax({
+					url: 'Logout.action',
+					type: 'post',
+				})
+				.done(function(data) {
+					location.href="goTo.action?url=userhome.jsp";
+				})
+				.fail(function(error) {
+					console.log("error");
+			 });
 		});
-  
-
+		/*
+							<li class="whd"><a href="goTo.action?url=interact.jsp"></a></li>
+					<li class="wdy"><a href="goTo.action?url=research.jsp"></a></li>
+					<li class="lpzx"><a href="goTo.action?url=prize.jsp"></a></li>
+		*/
+		$("li.whd").data("url","goTo.action?url=interact.jsp");
+		$("li.wdy").data("url","goTo.action?url=research.jsp");
+		$("li.lpzx").data("url","goTo.action?url=prize.jsp");
+		$("li.yhzx").data("url","goTo.action?url=userinfo_0121.jsp")
 		$('.u-activities a').bind('click',function(event){
+			if(str=="null"){
+				$(this).attr("href",null);
+				return;
+			}else{
+				var url=$(this).parent().data("url");
+				$(this).attr("href",url);
+			}
 			var _this = $(this);
 			_this.siblings().add(_this).removeClass();
 			_this.addClass('dark');
@@ -127,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		.m-btns {
 			margin-top : 20px;
-			margin-bottom : 40px;
+			margin-bottom : 20px;
 			overflow : hidden;
 			zoom : 1;
 		}
@@ -269,37 +330,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	</style>
   </head>
-  <%
-  	  Object name = session.getAttribute("name");
-	 
-	  Object credit = session.getAttribute("credit");
-  	  Object isCheck = session.getAttribute("isCheck");
-	 
- %>
   <body>
   	<div id="wrap">
 
 	  	<div class="main">
 	  		<div class="m-logo">
-	  			<a href="javasrcipt:void(0);" class="m-wwz" id="j-wwz"></a>
+	  			<a href="phone.action" class="m-wwz" id="j-wwz"></a>
 				<img src="resources/image/logo-small.png"/>
 			</div>
 			<div class="m-btns">
 			<% if(name==null) { %>
-				<a href="goTo.action?url=login.jsp" class="btn btn-large btn-up" id="login-btn">登录</a>
-				<a href="javasrcipt:void(0);" class="btn btn-large btn-bottom" id="reg-btn">注册</a>
+				<a href="goTo.action?url=login_0121.jsp" class="btn btn-large btn-up" id="login-btn">登录</a>
+				<a href="goTo.action?url=register_0121.jsp" class="btn btn-large btn-bottom" id="reg-btn">注册</a>
 			<% } else { %>
 				<a href="javasrcipt:void(0);" class="btn-left" id="login-btn">注册</a>
-				<a href="javasrcipt:void(0);" class="btn-right" id="reg-btn">退出</a>
+				<a href="#" onclick="return false;" class="btn-right" id="logout-btn">退出</a>
 			<% } %> 
 			</div>
 			
 			<div class="m-info">
-				<p>用户名/积分:123456</p>
+					<p>用户名/积分:<%=credit%></p>		
 			</div>
 			
 			<div class="m-check">
-				<p class="checked">已签到</p>
+					<p class="checked">已签到</p>
 			</div>
 			
 			<div class="m-acts">

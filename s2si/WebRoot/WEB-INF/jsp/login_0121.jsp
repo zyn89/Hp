@@ -108,6 +108,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			background-size:cover;
 			letter-spacing: 3px;
 		}
+		.main .m-submit a.pwd{
+			display:block;
+			width: 125px;
+			height:40px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/findpwd.png);
+			background-size:cover;
+			letter-spacing: 3px;
+		}
 		.main .username .logo{
 			display:inline-block;
 			width: 20px;
@@ -155,7 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		margin-top:100px;
 		margin-left:auto;
 		margin-right:auto;
-		height:10%;
+		height:86px;
 		background: url(resources/image/login_bottom.png);
 		background-size:cover;
 		background-color: transparent;
@@ -181,7 +191,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	  	<div class="main">
 	  		<div class="m-logo">
-	  			<a href="#" class="m-wwz" id="j-wwz"></a>
+	  			<a href="phone.action" class="m-wwz" id="j-wwz"></a>
 				<img src="resources/image/logo-small.png"/>
 			</div>
 			<div class="val" style=""></div>
@@ -204,7 +214,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</form>
 			<div class="m-submit">
 				<a href="#" onclick="return false;" class="login" style="z-index:1000">登录</a>
-				<a href="#" onclick="return false;" class="reg" style="margin-top:20px;z-index:1000">注册</a>
+				<a href="goTo.action?url=register_0121.jsp" class="reg" style="margin-top:20px;z-index:1000">注册</a>
+				<a href="goTo.action?url=findpwd.jsp" class="pwd" style="margin-top:20px;z-index:1000">找回密码</a>
 			</div>
 			
 		</div>

@@ -2,7 +2,6 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-Object uid = session.getAttribute("uid");
 %>
 
 <!doctype html>
@@ -10,7 +9,7 @@ Object uid = session.getAttribute("uid");
   <head>
     <base href="<%=basePath%>">
     
-    <title>注册</title>
+    <title>找回密码</title>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<%--<meta http-equiv="pragma" content="no-cache">
@@ -28,66 +27,14 @@ Object uid = session.getAttribute("uid");
 	<script type="text/javascript">
 
 	jQuery(function($){
-		$("form input").focus(function(){
-				$(this).parent().removeClass("error");
-				if($(this).data("normal")){
-					$(this).attr("placeholder",$(this).data("normal"));
-				}
-		});
-		$("a.reg").bind("click",function(){
-			var phone = $('input.phone').val(),
-				pw	  = $('input.pw').val(),
-				pw2   = $('input.pw2').val(),
-				name = $('input.name').val(),
-				shopName=$('input.shopName').val();
-			console.log(phone);
-			var flag=false;
-			$("input[name='uid']").val("<%=uid%>");
-			$("form input").each(function(index,e){
-				if(index>4){
-					return;
-				}
-				var tmp=$(this).attr("placeholder");
-				$(this).data("normal",tmp);
-				var str=$(this).val()
-				if(str==""){
-					$(this).parent().addClass("error");
-					$(this).val("");
-					$(this).attr("placeholder","该选项不能为空");
-					flag=true;
-				}
-			});
-			if(flag==false){
-				if(pw.length<6 || pw.length>12){
-					$('input.pw').parent().addClass("error");
-					$('input.pw').val("");
-					$('input.pw').attr("placeholder","密码为6-12位");
-					flag=true;
-				}
-				if(pw!=pw2){
-					$('input.pw2').parent().addClass("error");
-					$('input.pw2').val("");
-					$('input.pw2').attr("placeholder","密码前后不符合");
-					flag=true;
-				}
-				if(phone.length!=11){
-					$('input.phone').parent().addClass("error");
-					$('input.phone').val("");
-					$('input.phone').attr("placeholder","手机号码为11位");
-					flag=true;
-				}
-			}
-			if(flag==true){
-				return;
-			}else{
-				$("form input[type='submit']").trigger("click");
-			}
-			/*if(!username || !username.trim() || !upass || !upass.trim()) {
+		$("a.login").bind("click",function(){
+			var username = $('input.phone').val(),
+					upass = $('input.pwd').val();
+			if(!username || !username.trim() || !upass || !upass.trim()) {
 					return false;
-			} 
-			return true;*/
-			//location.href="Login.action";
-		})
+			}
+			$("input[type='submit']").trigger("click");	
+		});
 		
 	});
 		
@@ -160,12 +107,43 @@ Object uid = session.getAttribute("uid");
 			background:url(resources/image/btn-blue.png);
 			background-size:cover;
 			letter-spacing: 3px;
-			z-index:1000;
+		}
+		.main .m-submit a.pwd{
+			display:block;
+			width: 125px;
+			height:40px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/findpwd.png);
+			background-size:cover;
+			letter-spacing: 3px;
+		}
+		.main .username .logo{
+			display:inline-block;
+			width: 20px;
+			height:20px;
+			line-height:20px;
+			margin: 10px auto;
+			background:url(resources/image/small_username.png);
+			background-size:cover;
+			letter-spacing: 3px;
+			float:left;
+		}
+		.main .password .logo{
+			display:inline-block;
+			width: 20px;
+			height:20px;
+			line-height:20px;
+			margin: 10px auto;
+			background:url(resources/image/small_pwd.png);
+			background-size:cover;
+			letter-spacing: 3px;
+			float:left;
 		}
 		.main .info input{
-			width : 220px;
+			width : 200px;
 			height: 30px;
-			line-height : normal;
+			line-height : 20px;
 			display: inline-block;
 			border: 0px;
 			margin:0px auto;
@@ -174,9 +152,9 @@ Object uid = session.getAttribute("uid");
 			font-size: 14px;
 			font-weight: bold;
 			color: #999;
+			padding-right:15px;
 			padding:0px;
 			background-color: transparent;
-			text-align:center;
 			/*background: url(resources/image/input1.png);
 			background-size:cover;*/
 		}
@@ -184,13 +162,13 @@ Object uid = session.getAttribute("uid");
 		position:absolute;
 		bottom:0;
 		width:100%;
+		margin-top:100px;
 		margin-left:auto;
 		margin-right:auto;
 		height:86px;
 		background: url(resources/image/login_bottom.png);
 		background-size:cover;
 		background-color: transparent;
-		z-index:0;
 		}
 		.main .val{
 		color:white;
@@ -198,71 +176,42 @@ Object uid = session.getAttribute("uid");
 		background-color: transparent;
 		margin:0px auto;
 		text-align:center;
-		}
-		.error input::-webkit-input-placeholder { color:#b94a48; }
-		.error input:-moz-placeholder { color: #b94a48; }
-		.main .info div{
-			display:block;
-			width: 260px;
-			height:40px;
-			line-height:40px;
-			margin: 0 auto;
-			background:url(resources/image/input1.png);
-			background-size:cover;
 		}				
 	</style>
   </head>
   <%
   	  Object name = session.getAttribute("name");
+	 
 	  Object credit = session.getAttribute("credit");
   	  Object isCheck = session.getAttribute("isCheck");
 	 
  %>
   <body>
-  	<div id="wrap" style="position:relative;z-index:1">
+  	<div id="wrap" style="position:relative">
 
 	  	<div class="main">
 	  		<div class="m-logo">
 				<img src="resources/image/logo-small.png"/>
 			</div>
-			<div class="val" style="">当前积分：<%=credit%></div>
-			<form action="MotifyInfo.action" method="post">
+			<div class="val" style=""></div>
+			<form action="Login.action" method="post">
 			<div class="info" style="margin-bottom:30px;margin-top:20px">
-				<input type="hidden" name="uid"/>
-				<div class="">
+				<div class="username">
+					<div class="logo" style="margin-left:15px"></div>
 					<input class="phone" type="text" name="phone" autocomplete="off" 
-					style="margin-top:5px;"
-					placeholder="请输入手机号码（必填）"/>
-				</div>
-				<div class="" style="margin-top:10px">
-					<input class="name" type="text" name="name" autocomplete="off" 
-					style="margin-top:5px;"
-					placeholder="请输入姓名（必填）"/>
-				</div>
-				<div class="" style="margin-top:10px">
-					<input class="pw" type="password" name="pw" autocomplete="off" 
-					style="margin-top:5px;"
-					placeholder="请输入密码（必填）"/>
-				</div>
-				<div class="" style="margin-top:10px">
-					<input class="pw2" type="password" name="pw2" autocomplete="off" 
-					style="margin-top:5px;"
-					placeholder="请确认密码（必填）"/>
-				</div>
-				<div class="" style="margin-top:10px">
-					<input class="shopName" type="text" name="shopName" autocomplete="off" 
-					style="margin-top:5px;"
-					placeholder="请输入门店（选填）"/>
+					style="margin-top:5px;margin-left:1px"
+					placeholder="请输入手机号"/>
 				</div>
 				<input type="submit" style="display:none"/>
 			</div>
 			</form>
-			<div class="m-submit" style="z-index:1000">
-				<a href="#" onclick="return false;" class="reg" style="margin-top:20px;z-index:2000">修改</a>
+			<div class="m-submit">
+				<a href="#" onclick="return false;" class="login" style="z-index:1000">找回密码</a>
 			</div>
 			
 		</div>
-	<div class="bottom"></div>
+	<div class="bottom">
+	</div>
   	</div>
   </body>
 </html>

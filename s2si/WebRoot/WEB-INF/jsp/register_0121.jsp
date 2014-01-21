@@ -185,7 +185,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		width:100%;
 		margin-left:auto;
 		margin-right:auto;
-		height:68px;
+		height:86px;
 		background: url(resources/image/login_bottom.png);
 		background-size:cover;
 		background-color: transparent;
