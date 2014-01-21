@@ -174,11 +174,18 @@ jQuery(function($){
 			}); 
 			
 			$('.m-tabs-btns ul li:eq(0)').trigger('click');
-			$('#exchange-items').on("click.for.exchange","",function(event){
+			$('#exchange-items').on("click.for.exchange","li",function(event){
 				var _target = $(event.target),
 					href = _target.data('href');
 				window.location.href = href;
 			});	
+			
+			$('#exchange-items').on('click.img','img',function(event){
+				var _target = $(event.target),
+					parentLi = _target.parents('li');
+				parentLi.trigger('click');
+				return false;
+			});
 
 
 		});
