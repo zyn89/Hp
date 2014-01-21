@@ -182,7 +182,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 
 			<div class="m-info"> 
-				<img src="resources/image/list.png"/>
+				<img src="<%=descUrl %>"/>
 			</div>
 			<% if(type.equals("pic_word")){ %>
 				<div class="m-content"> 

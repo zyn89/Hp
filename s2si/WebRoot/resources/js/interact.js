@@ -101,7 +101,7 @@
 			 			if(done) {
 			 				//设置图片是活动完成的图片
 			 				$('.u-arrow',$newLi).hide();
-			 				$('<span>').addClass('finished').text('已完成').appendTo($newLi);
+			 				$('<span>').addClass('finished').text('已完成').show().appendTo($newLi);
 			 				$newLi.attr({
 				 				'data-done' : 1
 				 			});
@@ -120,10 +120,8 @@
 			 	})
 			 	.done(function(data) {
 			 		diplayActs(data.activities);
-			 	})
-			 	.fail(function(error) {
-			 		console.log("error");
 			 	});
+			 	
 
 
 			 	$('#exchange-items').on('click','li',function(event){
@@ -137,6 +135,12 @@
 				 	}
 			 	});
 				
+			 	$('#exchange-items').on('click.img','img',function(event){
+			 		var _target = $(event.target),
+			 			parentLi = _target.parents('li');
+			 		parentLi.trigger('click');
+			 		return false;
+			 	});
 				
 			});
 })(window,jQuery);

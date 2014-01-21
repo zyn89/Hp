@@ -36,14 +36,21 @@ a {
 	overflow:hidden;
 	zoom:1;
 	text-align:center;
+	position:relative;
 }
 
 
 .main .m-logo {
-	 margin: auto;
 	 height: 135px;
-	 border: 0px solid red;
-	 width : 95%;
+	 width : 100%;
 	 margin-bottom:10px;
 	 position: relative;
+}
+
+.main .m-logo img {
+	height: 110px;
+	width: 110px;
+	position: absolute;
+	top: 12.5px;
+	left: 105px;
 }
