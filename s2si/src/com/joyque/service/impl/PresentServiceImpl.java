@@ -334,7 +334,8 @@ public class PresentServiceImpl extends BaseAction implements IPresentService{
 			up.setUid(uid);
 			up.setPid(pid);
 			userPrizeDao.insertUserPrize(up);
-		}				
+		}			
+		json.accumulate("lotteryCount", credit.getLotteryCount());
 		return json;
 	}
 	

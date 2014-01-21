@@ -10,14 +10,17 @@ import net.sf.json.JSONObject;
 
 import com.joyque.common.util.FileUtil;
 import com.joyque.dao.IUplordInfoDao;
+import com.joyque.dao.IUserActivityDao;
 import com.joyque.dao.IUserInfoDao;
 import com.joyque.pojo.UplordInfo;
+import com.joyque.pojo.UserActivity;
 import com.joyque.pojo.UserInfo;
 import com.joyque.service.IUplordService;
 
 public class UplordServiceImpl implements IUplordService{
 	private IUplordInfoDao uplordInfoDao;
 	private IUserInfoDao userInfoDao;
+	private IUserActivityDao userActivityDao;
 
 	@Override
 	public JSONObject UplordPic(String uid, long aid, List<File> pics,
@@ -64,6 +67,12 @@ public class UplordServiceImpl implements IUplordService{
 		}		
 		
 		uplordInfoDao.insertUplordInfo(ui);
+		
+		UserActivity ua = new UserActivity();
+		ua.setUid(uid);
+		ua.setAid(aid);
+		ua.setScore(0);
+		userActivityDao.insertUserActivity(ua);
 		return json;
 	}
 	
@@ -115,5 +124,13 @@ public class UplordServiceImpl implements IUplordService{
 
 	public void setUserInfoDao(IUserInfoDao userInfoDao) {
 		this.userInfoDao = userInfoDao;
+	}
+
+	public IUserActivityDao getUserActivityDao() {
+		return userActivityDao;
+	}
+
+	public void setUserActivityDao(IUserActivityDao userActivityDao) {
+		this.userActivityDao = userActivityDao;
 	}
 }

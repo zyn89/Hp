@@ -24,6 +24,7 @@
 	<bean id="uplordService" class="com.joyque.service.impl.UplordServiceImpl" scope="prototype">
 	    <property name="uplordInfoDao" ref="uplordInfoDao"></property>
 	    <property name="userInfoDao" ref="userInfoDao"></property>
+	    <property name="userActivityDao" ref="userActivityDao"></property>
 	</bean>
 	
 	<bean id="surveyService" class="com.joyque.service.impl.SurveyServiceImpl" scope="prototype">
