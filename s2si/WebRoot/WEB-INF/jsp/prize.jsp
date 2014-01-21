@@ -82,6 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			position: absolute;
 			left:6%;
 			top:10%;
+			width: 220px;
 		}
 
 		.u-pitem .u-arrow {
@@ -154,6 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body>
+	<input id="lid" type="hidden" name="lid" />
 	<div id="wrap">
 			<div class="main">
 			
@@ -163,9 +165,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="m-tabs">
 					<div class="m-tabs-btns">
 						<ul>
-							<li id="one#" class="tab-light"><a href="javascript:void(0);">兑奖</a></li>
-							<li id="two#" class="tab-light"><a href="javascript:void(0);">抽奖</a></li>
-							<li id="three#" class="tab-light"><a href="javascript:void(0);">奖品</a></li>
+							<li id="one#" class="tab-dark"><a href="javascript:void(0);">兑奖</a></li>
+							<li id="two#" class="tab-dark"><a href="javascript:void(0);">抽奖</a></li>
+							<li id="three#" class="tab-dark"><a href="javascript:void(0);">奖品</a></li>
 						</ul>
 					</div>
 					<div class="m-tabs-content">
@@ -188,7 +190,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						</div>
 						<div id="three" style="display:none;" class="tab-content">
+							<ul id="prize-items">
 							
+							</ul>
 						</div>
 					</div>
 				</div>

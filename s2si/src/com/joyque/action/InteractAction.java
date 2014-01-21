@@ -100,4 +100,9 @@ public class InteractAction extends BaseAction {
 		ActionContext.getContext().put("prizeUrl", prizeUrl);
 		return "prizeinfo";
 	}
+	
+	public String prize() {
+		ActionContext.getContext().put("descUrl", descUrl);
+		return "descUrl";
+	}
 }
