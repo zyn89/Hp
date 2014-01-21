@@ -178,7 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 						<div id="two" style="" class="tab-content">
 							<div class="m-credit" >
-								<p >剩余次数：12</p>
+								<p >剩余次数：5</p>
 							</div>
 							<img class="m-pic" src="resources/image/prizedb.png" alt=""></a>
 							<div class="m-ggk">
