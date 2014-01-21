@@ -8,6 +8,8 @@ import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.joyque.common.exception.BaseServiceException;
+import com.joyque.common.util.ExceptionUtil;
 import com.joyque.common.util.FileUtil;
 import com.joyque.dao.IUplordInfoDao;
 import com.joyque.dao.IUserActivityDao;
@@ -25,6 +27,16 @@ public class UplordServiceImpl implements IUplordService{
 	@Override
 	public JSONObject UplordPic(String uid, long aid, List<File> pics,
 			List<String> picsContentType, String content) throws IOException {
+		UserActivity ua = userActivityDao.getUserActivity(uid, aid);
+		if(ua != null)
+		{
+			throw new BaseServiceException(ExceptionUtil.DoneActiity,uid);
+		}
+		ua = new UserActivity();
+		ua.setUid(uid);
+		ua.setAid(aid);
+		ua.setScore(0);
+		userActivityDao.insertUserActivity(ua);
 		JSONObject json = new JSONObject();
 		UplordInfo ui = new UplordInfo();
 		ui.setUid(uid);
@@ -67,12 +79,6 @@ public class UplordServiceImpl implements IUplordService{
 		}		
 		
 		uplordInfoDao.insertUplordInfo(ui);
-		
-		UserActivity ua = new UserActivity();
-		ua.setUid(uid);
-		ua.setAid(aid);
-		ua.setScore(0);
-		userActivityDao.insertUserActivity(ua);
 		return json;
 	}
 	

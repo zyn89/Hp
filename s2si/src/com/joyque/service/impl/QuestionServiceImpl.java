@@ -9,7 +9,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.joyque.common.action.BaseAction;
+import com.joyque.common.exception.BaseServiceException;
 import com.joyque.common.util.DefaultValue;
+import com.joyque.common.util.ExceptionUtil;
 import com.joyque.common.util.FileUtil;
 import com.joyque.dao.IActivityInfoDao;
 import com.joyque.dao.IQuestionInfoDao;
@@ -64,7 +66,12 @@ public class QuestionServiceImpl extends BaseAction implements IQuestionService{
 	@Override
 	public JSONObject DoneQuestion(String uid, int score, long aid) {
 		JSONObject json = new JSONObject();
-		UserActivity ua = new UserActivity();
+		UserActivity ua = userActivityDao.getUserActivity(uid, aid);
+		if(ua != null)
+		{
+			throw new BaseServiceException(ExceptionUtil.DoneActiity,uid);
+		}
+		ua = new UserActivity();
 		ua.setUid(uid);
 		ua.setAid(aid);
 		ua.setScore(score);

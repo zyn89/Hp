@@ -10,4 +10,5 @@ public class ExceptionUtil {
 	public static final String IsCheck = "已经签到过！";
 	public static final String CreditLack = "您的积分不足！";
 	public static final String DrawLotteryCountLack = "抽奖次数不足！";
+	public static final String DoneActiity = "该活动已经完成!";
 }
