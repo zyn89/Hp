@@ -84,15 +84,17 @@
 							done = value.done,
 			 				score = value.score,
 			 				type = value.type;
-
-						$newLi = $('#j-clone').clone().attr({
-							id:'activity' + index,
-							'data-href' : 'interact_beginActivity.action?aid=' + aid + '&type=' + type + '&descUrl=' + descUrl
-						});
-
-						$('.u-prize',$newLi).attr({
-							src :activityUrl
-						});
+							
+							$newLi = $('#j-clone').clone().attr({
+								id:'activity' + index,
+								'data-href' : 'interact_beginActivity.action?aid=' + aid + '&type=' + type + '&descUrl=' + descUrl
+							});
+					
+	
+							$('.u-prize',$newLi).attr({
+								src :activityUrl
+							});
+						
 						
 						
 					
@@ -101,10 +103,16 @@
 			 			if(done) {
 			 				//设置图片是活动完成的图片
 			 				$('.u-arrow',$newLi).hide();
-			 				$('<span>').addClass('finished').text('已完成').show().appendTo($newLi);
+			 			
+			 				$('<span>').addClass('finished').text('已完成').attr({'data-href' : 'javascript:void(0);'}).show().appendTo($newLi);
+			 			
+			 				
 			 				$newLi.attr({
-				 				'data-done' : 1
+				 				'data-done' : 1				 				
 				 			});
+			 				$newLi.bind("click",function(){
+			 					
+			 				});
 			 			} 
 		
 			 			$newLi.show().appendTo($actContainer);
