@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 			</div>
 			<div class="m-submit">
-				<a href="javascript:void(0);" id="c-btn">完成</a>
+				<a href="javascript:void(0);" id="c-btn">确定</a>
 			</div>
 		</div>
 	</div>
