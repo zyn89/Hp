@@ -1,0 +1,215 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>登录</title>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<%--<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	--%>
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" href="resources/css/common.css" />
+	<script src="resources/js/jquery-1.9.1.js"></script>
+	
+	<script type="text/javascript">
+
+	jQuery(function($){
+		$("a.login").bind("click",function(){
+			var username = $('input.phone').val(),
+					upass = $('input.pwd').val();
+			if(!username || !username.trim() || !upass || !upass.trim()) {
+					return false;
+			}
+			$("input[type='submit']").trigger("click");	
+		});
+		
+	});
+		
+	
+	</script>
+	<style> 	
+		img{
+			border:none;
+		}
+		.main .m-logo {
+			height : 155px;
+			
+		}
+		.m-logo{
+			border:none;
+		}
+		.main .m-logo img {
+			top : 42.5px;
+			border:none;
+			background-color: transparent;
+			box-shadow:none;
+			z-index:100;
+			border:0px solid red;
+		}
+		.main .m-logo .m-wwz {
+			background: url(resources/image/wwz.png);
+			background-size: cover;
+			width: 72px;
+			height: 52px;
+			position: absolute;
+			left: 5px;
+			top: 5px;
+		}
+		.main .m-submit a.login{
+			display:block;
+			width: 260px;
+			height:40px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/btn-green.png);
+			background-size:cover;
+			letter-spacing: 3px;
+		}
+		.main .info div.username{
+			display:block;
+			width: 260px;
+			height:40px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/input1.png);
+			background-size:cover;
+			letter-spacing: 3px;
+		}
+		.main .info div.password{
+			display:block;
+			width: 260px;
+			height:40px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/input1.png);
+			background-size:cover;
+			letter-spacing: 3px;
+		}
+		.main .m-submit a.reg{
+			display:block;
+			width: 260px;
+			height:40px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/btn-blue.png);
+			background-size:cover;
+			letter-spacing: 3px;
+		}
+		.main .username .logo{
+			display:inline-block;
+			width: 20px;
+			height:20px;
+			line-height:20px;
+			margin: 10px auto;
+			background:url(resources/image/small_username.png);
+			background-size:cover;
+			letter-spacing: 3px;
+			float:left;
+		}
+		.main .password .logo{
+			display:inline-block;
+			width: 20px;
+			height:20px;
+			line-height:20px;
+			margin: 10px auto;
+			background:url(resources/image/small_pwd.png);
+			background-size:cover;
+			letter-spacing: 3px;
+			float:left;
+		}
+		.main .info input{
+			width : 200px;
+			height: 30px;
+			line-height : 20px;
+			display: inline-block;
+			border: 0px;
+			margin:0px auto;
+			outline: none;
+			text-indent: 15px;
+			font-size: 14px;
+			font-weight: bold;
+			color: #999;
+			padding-right:15px;
+			padding:0px;
+			background-color: transparent;
+			/*background: url(resources/image/input1.png);
+			background-size:cover;*/
+		}
+		.bottom{
+		position:absolute;
+		bottom:0;
+		width:100%;
+		margin-top:100px;
+		margin-left:auto;
+		margin-right:auto;
+		height:10%;
+		background: url(resources/image/login_bottom.png);
+		background-size:cover;
+		background-color: transparent;
+		}
+		.main .val{
+		color:white;
+		font-size:16px;
+		background-color: transparent;
+		margin:0px auto;
+		text-align:center;
+		}				
+	</style>
+  </head>
+  <%
+  	  Object name = session.getAttribute("name");
+	 
+	  Object credit = session.getAttribute("credit");
+  	  Object isCheck = session.getAttribute("isCheck");
+	 
+ %>
+  <body>
+  	<div id="wrap" style="position:relative">
+
+	  	<div class="main">
+	  		<div class="m-logo">
+	  			<a href="#" class="m-wwz" id="j-wwz"></a>
+				<img src="resources/image/logo-small.png"/>
+			</div>
+			<div class="val" style=""></div>
+			<form action="Login.action" method="post">
+			<div class="info" style="margin-bottom:30px;margin-top:20px">
+				<div class="username">
+					<div class="logo" style="margin-left:15px"></div>
+					<input class="phone" type="text" name="phone" autocomplete="off" 
+					style="margin-top:5px;margin-left:1px"
+					placeholder="请输入用户名"/>
+				</div>
+				<div class="password" style="margin-top:20px">
+					<div class="logo" style="margin-left:15px"></div>
+					<input class="pwd" type="password" name="pw" autocomplete="off" 
+					style="margin-top:5px;margin-left:1px"
+					placeholder="请输入密码"/>
+				</div>
+				<input type="submit" style="display:none"/>
+			</div>
+			</form>
+			<div class="m-submit">
+				<a href="#" onclick="return false;" class="login" style="z-index:1000">登录</a>
+				<a href="#" onclick="return false;" class="reg" style="margin-top:20px;z-index:1000">注册</a>
+			</div>
+			
+		</div>
+	<div class="bottom">
+	</div>
+  	</div>
+  </body>
+</html>
