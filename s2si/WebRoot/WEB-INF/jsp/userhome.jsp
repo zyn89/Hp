@@ -286,7 +286,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="m-btns">
 			<% if(name==null) { %>
-				<a href="javasrcipt:void(0);" class="btn btn-large btn-up" id="login-btn">登录</a>
+				<a href="goTo.action?url=login1.jsp" class="btn btn-large btn-up" id="login-btn">登录</a>
 				<a href="javasrcipt:void(0);" class="btn btn-large btn-bottom" id="reg-btn">注册</a>
 			<% } else { %>
 				<a href="javasrcipt:void(0);" class="btn-left" id="login-btn">注册</a>
