@@ -33,6 +33,10 @@ Object uid = session.getAttribute("uid");
 	<script type="text/javascript">
 
 	jQuery(function($){
+		$(".m-modelbox").hide();
+		$("#modelbox").bind("click",function(){
+			location.href="goTo.action?url=userinfo_0121.jsp";
+		});
 		$("form input").focus(function(){
 				$(this).parent().removeClass("error");
 				if($(this).data("normal")){
@@ -99,7 +103,14 @@ Object uid = session.getAttribute("uid");
 					data: data,
 				})
 				.done(function(data) {
-					location.href="goTo.action?url=userhome.jsp";
+					if(typef(data)!="object"){
+						data=JSON.parse(data);
+					}
+					if(!data.status){					
+						location.href="goTo.action?url=userhome.jsp";
+					}else{
+						$(".m-modelbox").fadeIn();
+					}
 				})
 				.fail(function(error) {
 					console.log("error");
@@ -236,7 +247,48 @@ Object uid = session.getAttribute("uid");
 			margin: 0 auto;
 			background:url(resources/image/input1.png);
 			background-size:cover;
-		}				
+		}
+		.m-modelbox {
+			display:block;
+			position:absolute;
+			left : 20px;
+			top :100px;
+			width : 280px;
+			height : 280px;	
+			background : url(resources/image/modelboxdb.png);
+			background-size : cover;
+			z-index:1000;
+		}
+		
+		.m-modelbox .u-contentbox {
+			background : url(resources/image/boxcontent.png);
+			background-size : cover;
+			width : 240px;
+			height : 160px;
+			position : absolute;
+			left :20px;
+			top : 15px;
+			display: table-cell;
+			color: #fff;
+			font-size: 18px;
+			text-align: center;
+			vertical-align: middle;
+		}	
+		
+		.m-modelbox a {
+			display:block;
+			width: 240px;
+			height:38px;
+			line-height:40px;
+			margin: 0 auto;
+			background:url(resources/image/btn-green.png);
+			background-size:cover;
+			letter-spacing: 3px;
+			position:absolute;
+			left : 20px;
+			bottom : 20px;
+			cursor:pointer;
+		}										
 	</style>
   </head>
   <body>
@@ -281,7 +333,14 @@ Object uid = session.getAttribute("uid");
 			<div class="m-submit" style="z-index:1000">
 				<a href="#" onclick="return false;" class="reg" style="margin-top:20px;z-index:2000">修改</a>
 			</div>
-			
+			<div class="m-modelbox" style="">
+					<div class="u-contentbox" >
+						<br/>
+						<br/>
+						修改失败！
+					</div>
+					<a id="modelbox">确定</a>
+			</div>
 		</div>
 	<div class="bottom"></div>
   	</div>
