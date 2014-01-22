@@ -4,13 +4,18 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Object uid = session.getAttribute("uid");
 %>
-
+<%
+  	  Object name = session.getAttribute("name");
+  	  Object phone = session.getAttribute("phone");
+	  Object credit = session.getAttribute("credit");
+  	  Object isCheck = session.getAttribute("isCheck");
+%>
 <!doctype html>
 <html lang="en">
   <head>
     <base href="<%=basePath%>">
     
-    <title>注册</title>
+    <title>修改信息</title>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<%--<meta http-equiv="pragma" content="no-cache">
@@ -80,15 +85,37 @@ Object uid = session.getAttribute("uid");
 			if(flag==true){
 				return;
 			}else{
-				$("form input[type='submit']").trigger("click");
+				//$("form input[type='submit']").trigger("click");
+				var data={};
+				data.phone=$('input.phone').val();
+				data.name=$('input.name').val();
+				data.shopName=$('input.shopName').val();
+				data.uid=$('input.uid').val();
+				data.pw=$("input.pw").val();
+				console.log(data);
+				$.ajax({
+					url: 'MotifyInfo.action',
+					type: 'post',
+					data: data,
+				})
+				.done(function(data) {
+					location.href="goTo.action?url=userhome.jsp";
+				})
+				.fail(function(error) {
+					console.log("error");
+			 });
 			}
 			/*if(!username || !username.trim() || !upass || !upass.trim()) {
 					return false;
 			} 
 			return true;*/
 			//location.href="Login.action";
-		})
-		
+		});
+		var str="<%=name%>";
+		if(str!="null"){
+			$("input[name='phone']").val("<%=phone%>");
+			$("input[name='name']").val("<%=name%>");	
+		}
 	});
 		
 	
@@ -171,7 +198,7 @@ Object uid = session.getAttribute("uid");
 			margin:0px auto;
 			outline: none;
 			text-indent: 15px;
-			font-size: 14px;
+			font-size: 16px;
 			font-weight: bold;
 			color: #999;
 			padding:0px;
@@ -212,12 +239,6 @@ Object uid = session.getAttribute("uid");
 		}				
 	</style>
   </head>
-  <%
-  	  Object name = session.getAttribute("name");
-	  Object credit = session.getAttribute("credit");
-  	  Object isCheck = session.getAttribute("isCheck");
-	 
- %>
   <body>
   	<div id="wrap" style="position:relative;z-index:100">
 
@@ -228,10 +249,10 @@ Object uid = session.getAttribute("uid");
 			<div class="val" style="">当前积分：<%=credit%></div>
 			<form action="MotifyInfo.action" method="post">
 			<div class="info" style="margin-bottom:30px;margin-top:20px">
-				<input type="hidden" name="uid"/>
+				<input type="hidden" name="uid" class="uid"/>
 				<div class="">
 					<input class="phone" type="text" name="phone" autocomplete="off" 
-					style="margin-top:5px;"
+					style="margin-top:5px;margin-left:0px"
 					placeholder="请输入手机号码（必填）"/>
 				</div>
 				<div class="" style="margin-top:10px">

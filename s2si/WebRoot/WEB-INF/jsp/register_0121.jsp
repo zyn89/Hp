@@ -79,7 +79,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(flag==true){
 				return;
 			}else{
-				$("form input[type='submit']").trigger("click");
+				//$("form input[type='submit']").trigger("click");
+				var data={};
+				data.phone=$('input.phone').val();
+				data.name=$('input.name').val();
+				data.shopName=$('input.shopName').val();
+				data.uid=$('input.uid').val();
+				data.pw=$("input.pw").val();
+				console.log(data);
+				$.ajax({
+					url: 'register.action',
+					type: 'post',
+					data: data,
+				})
+				.done(function(data) {
+					if(typef(data)!="object"){
+						data=JSON.parse(data);
+					}
+					if(!data.status){					
+						location.href="goTo.action?url=userhome.jsp";
+					}else{
+						location.href="goTo.action?url=register_0121.jsp";
+					}
+				})
+				.fail(function(error) {
+					console.log("error");
+			 	});
 			}
 			/*if(!username || !username.trim() || !upass || !upass.trim()) {
 					return false;

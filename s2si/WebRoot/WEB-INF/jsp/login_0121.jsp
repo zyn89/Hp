@@ -33,7 +33,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(!username || !username.trim() || !upass || !upass.trim()) {
 					return false;
 			}
-			$("input[type='submit']").trigger("click");	
+			//$("input[type='submit']").trigger("click");
+			var data={};
+				data.phone=$('input.phone').val();
+				data.pw=$("input.pwd").val();
+				//console.log(data);
+				$.ajax({
+					url: 'Login.action',
+					type: 'post',
+					data: data,
+				})
+				.done(function(data) {
+					var data=JSON.parse(data);
+					console.log(data["status"]);
+					if(!data.status){					
+						location.href="goTo.action?url=userhome.jsp";
+					}else{
+						location.href="goTo.action?url=login_0121.jsp";
+					}
+				})
 		});
 		
 	});
