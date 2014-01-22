@@ -47,7 +47,8 @@ public class SurveyAction extends BaseAction{
 		try{
 			json = surveyService.GetSurveyList();
 		}catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -89,7 +90,13 @@ public class SurveyAction extends BaseAction{
 	
 	public void GetSurveyQuestion_Web()
 	{
-		GetSurveyQuestion();
+		JSONObject json = new JSONObject();
+		try{
+			json = surveyService.GetSurveyList();
+		}catch(Exception e){			
+			throw new BaseException(e.getMessage());
+		}
+		ajaxReturn(json.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -106,7 +113,8 @@ public class SurveyAction extends BaseAction{
 			}
 			json = surveyService.GetSurveyQuestions(sid, uid);
 		}catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -185,7 +193,8 @@ public class SurveyAction extends BaseAction{
 			}
 			json = surveyService.DoneSurveyQuestion(uid, qid, sid, isFinal, aIndex);
 		}catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}

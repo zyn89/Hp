@@ -121,7 +121,8 @@ public class UserBasicAction extends BaseAction{
 		try{
 			json = userBasicService.MotifyInfo(uid, phone, pw, name, shopName);
 		}catch(Exception e){
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -136,7 +137,8 @@ public class UserBasicAction extends BaseAction{
 		try{
 			json = userBasicService.CheckIn(uid);
 		}catch(Exception e){
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}

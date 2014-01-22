@@ -55,7 +55,8 @@ public class PresentAction extends BaseAction{
 		try{
 			json = presentService.GetExchanges();
 		}catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -137,7 +138,8 @@ public class PresentAction extends BaseAction{
 			json = presentService.DoneExchange(uid, eid);
 		}
 		catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -170,7 +172,8 @@ public class PresentAction extends BaseAction{
 			uid = (String) session.get("uid");
 			json = presentService.GetLotterys(uid);
 		}catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -259,7 +262,8 @@ public class PresentAction extends BaseAction{
 			}
 			json = presentService.DrawLottery(uid, lid, isAward);
 		}catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}

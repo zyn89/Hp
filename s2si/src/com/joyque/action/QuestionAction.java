@@ -49,7 +49,8 @@ public class QuestionAction extends BaseAction{
 			}
 			json = questionService.GetQuestions(aid);
 		}catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -68,7 +69,8 @@ public class QuestionAction extends BaseAction{
 			}
 			json = questionService.DoneQuestion(uid, score, aid);
 		}catch(Exception e){			
-			
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
@@ -79,7 +81,8 @@ public class QuestionAction extends BaseAction{
 		try{
 			json = questionService.GetQaActivity();
 		}catch(Exception e){			
-			
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}

@@ -45,14 +45,25 @@ public class ActivityAction extends BaseAction{
 			uid = (String) session.get("uid");
 			json = activityService.GetActivityList(uid);
 		}catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void ActivityList_Web()
 	{
-		ActivityList();
+		JSONObject json = new JSONObject();
+		try{
+			String uid = null;
+			Map session = getSession();
+			uid = (String) session.get("uid");
+			json = activityService.GetActivityList(uid);
+		}catch(Exception e){			
+			throw new BaseException(e.getMessage());
+		}
+		ajaxReturn(json.toString());
 	}
 	
 	@SuppressWarnings("unchecked")

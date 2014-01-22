@@ -44,7 +44,8 @@ public class UplordAction extends BaseAction{
 			}
 			json = uplordService.UplordPic(uid, aid, pics, picsContentType, content);
 		}catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		ajaxReturn(json.toString());
 	}
