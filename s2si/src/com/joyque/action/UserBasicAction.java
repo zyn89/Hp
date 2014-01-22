@@ -27,15 +27,16 @@ public class UserBasicAction extends BaseAction{
 	private IUserBasicService userBasicService;
 	
 	@SuppressWarnings("unchecked")
-	public String register()
+	public void register()
 	{
+		JSONObject json =  new JSONObject();
 		try{
 			if(!isValidatePhone() || !isValidatePw()
 					|| !isValidateName())
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			JSONObject json = userBasicService.register(phone, pw, name, shopName);
+		    json = userBasicService.register(phone, pw, name, shopName);
 			Map session = getSession();
 			session.remove("uid");
 			session.put("uid", json.get("uid"));
@@ -48,21 +49,23 @@ public class UserBasicAction extends BaseAction{
 			session.remove("credit");
 			session.put("credit", json.get("credit"));
 		}catch(Exception e){			
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
 		
-		return SUCCESS;
+		ajaxReturn(json.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
-	public String Login()
+	public void Login()
 	{
+		JSONObject json = new JSONObject();
 		try{
 			if(!isValidatePhone() || !isValidatePw())
 			{
 				throw new BaseException(ExceptionUtil.IllegalInput);
 			}
-			JSONObject json = userBasicService.Login(phone, pw);
+			json = userBasicService.Login(phone, pw);
 			Map session = getSession();
 			session.remove("uid");
 			session.put("uid", json.get("uid"));
@@ -75,9 +78,10 @@ public class UserBasicAction extends BaseAction{
 			session.remove("credit");
 			session.put("credit", json.get("credit"));
 		}catch(Exception e){
-			throw new BaseException(e.getMessage());
+			json.accumulate("status", 400);
+			json.accumulate("message", e.getMessage());
 		}
-		return SUCCESS;
+		ajaxReturn(json.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
