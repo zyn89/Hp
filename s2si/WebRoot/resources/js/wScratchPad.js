@@ -247,7 +247,7 @@
 			var img = new Image();
   			img.src = imagePath;
   			$(img).load(function(){
-  				$this.ctx.drawImage(img, -7, -6, 13, 11);
+  				$this.ctx.drawImage(img, -6, -6, 113, 111);
   				$this.setBgImage();
   			})
 		},
