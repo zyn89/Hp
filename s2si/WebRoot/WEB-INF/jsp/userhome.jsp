@@ -56,13 +56,22 @@ response.setHeader("Cache-Control","no-cache");
 			window.location.href="goTo.action?url=interact.jsp";
 		});
 		$(".main .check p").bind("click",function(){
-			$(".m-modelbox").fadeIn("fast");
 			$.ajax({
 					url: 'CheckIn.action',
 					type: 'post',
 				})
 				.done(function(data) {
-					location.href="goTo.action?url=userhome.jsp";
+					console.log(data);
+					if(typeof(data)!="object"){
+						data=JSON.parse(data);
+					}
+					if(!data.status){					
+						$(".m-modelbox").fadeIn("fast");
+					}else{
+						$(".u-contentbox").html("<br/><br/>不要重复签到");
+						$(".m-modelbox").fadeIn("fast");
+					}
+					//location.href="goTo.action?url=userhome.jsp";
 				})
 				.fail(function(error) {
 					console.log("error");

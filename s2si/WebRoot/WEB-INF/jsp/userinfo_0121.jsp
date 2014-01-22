@@ -35,7 +35,7 @@ Object uid = session.getAttribute("uid");
 	jQuery(function($){
 		$(".m-modelbox").hide();
 		$("#modelbox").bind("click",function(){
-			location.href="goTo.action?url=userinfo_0121.jsp";
+			location.href="goTo.action?url=register_0121.jsp";
 		});
 		$("form input").focus(function(){
 				$(this).parent().removeClass("error");

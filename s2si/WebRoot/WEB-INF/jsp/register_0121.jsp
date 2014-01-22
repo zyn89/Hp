@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					data: data,
 				})
 				.done(function(data) {
-					if(typef(data)!="object"){
+					if(typeof(data)!="object"){
 						data=JSON.parse(data);
 					}
 					if(!data.status){					
