@@ -189,7 +189,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<div id="wrap" style="position:relative">
 
-	  	<div class="main">
+	  	<div class="main" style="position:relative;z-index:100">
 	  		<div class="m-logo">
 				<img src="resources/image/logo-small.png"/>
 			</div>

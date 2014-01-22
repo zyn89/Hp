@@ -187,9 +187,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 
  %>
   <body>
-  	<div id="wrap" style="position:relative">
+  	<div id="wrap" style="position:relative;scroll:auto">
 
-	  	<div class="main">
+	  	<div class="main" style="position:relative;z-index:1000">
 	  		<div class="m-logo">
 	  			<a href="phone.action" class="m-wwz" id="j-wwz"></a>
 				<img src="resources/image/logo-small.png"/>

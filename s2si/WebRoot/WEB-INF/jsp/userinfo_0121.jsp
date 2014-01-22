@@ -219,9 +219,9 @@ Object uid = session.getAttribute("uid");
 	 
  %>
   <body>
-  	<div id="wrap" style="position:relative;z-index:1">
+  	<div id="wrap" style="position:relative;z-index:100">
 
-	  	<div class="main">
+	  	<div class="main" style="position:relative;z-index:100">
 	  		<div class="m-logo">
 				<img src="resources/image/logo-small.png"/>
 			</div>
