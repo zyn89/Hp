@@ -103,6 +103,6 @@ public class InteractAction extends BaseAction {
 	
 	public String prize() {
 		ActionContext.getContext().put("descUrl", descUrl);
-		return "descUrl";
+		return "prize";
 	}
 }

@@ -108,7 +108,18 @@ jQuery(function($){
 					dataType: 'json'
 				})
 				.done(function(data) {
-					callback(data,contentDiv);
+					if(data.status == 400) {
+						$('.main').exceptionMsgBox({
+				 			msg : data.message,
+							btnClickHandler : function(event){
+				 				window.location.href = "goTo.action?url=prize.jsp";
+							},
+							btnText : '完成'
+					 	});
+					} else {
+						callback(data,contentDiv);
+					}
+					
 				})
 				.fail(function(err) {
 					console.log("error");
