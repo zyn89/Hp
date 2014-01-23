@@ -36,7 +36,7 @@
 			var msgBox = _createMsgBox();
 			_bindBtnEvent(msgBox);
 			_unbindObjEventHandler();
-			msgBox.appendTo(_thisContainer);
+			msgBox.show().appendTo(_thisContainer);
 			
 		});
 	};

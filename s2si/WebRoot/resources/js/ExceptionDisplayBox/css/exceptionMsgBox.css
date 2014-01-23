@@ -5,12 +5,12 @@
 			top :200px;
 			width : 280px;
 			height : 280px;	
-			background : url(resources/image/modelboxdb.png);
+			background : url(../images/modelboxdb.png);
 			background-size : cover;
 		}
 		
 	.m-modelbox .u-contentbox {
-		background : url(resources/image/boxcontent.png);
+		background : url(../images/boxcontent.png);
 		background-size : cover;
 		width : 240px;
 		height : 160px;
@@ -30,7 +30,7 @@
 		height:38px;
 		line-height:40px;
 		margin: 0 auto;
-		background:url(resources/image/btn-green.png);
+		background:url(../images/btn-green.png);
 		background-size:cover;
 		letter-spacing: 3px;
 		position:absolute;
