@@ -127,7 +127,7 @@ response.setHeader("Cache-Control","no-cache");
 				_this.addClass('dark');
 				var name=$(this).parent().attr("class");
 				console.log(name);
-				$.cookie(name, "dark", { expires: 1 });
+				$.cookie(name, "dark");
 				var url=$(this).parent().data("url");
 				$(this).attr("href",url);
 				location.href=url;
@@ -376,23 +376,26 @@ response.setHeader("Cache-Control","no-cache");
 .m-acts ul.u-activities li.yhzx a:visited {
 	background: url(resources/image/userhome/yhzx-dark.png);
 	background-size: cover;
+	background-color:rgba(0, 0, 0, 0);
 }
 .m-acts ul.u-activities li.whd a.dark {
 	background: url(resources/image/userhome/whd-dark.png);
 	background-size: cover;
 }
-.m-acts ul.u-activities li.whd a:visitd {
+.m-acts ul.u-activities li.whd a:visited {
 	background: url(resources/image/userhome/whd-dark.png);
 	background-size: cover;
+	background-color:rgba(0, 0, 0, 0);
 }
 
 .m-acts ul.u-activities li.wdy a.dark {
 	background: url(resources/image/userhome/wdy-dark.png);
 	background-size: cover;
 }
-.m-acts ul.u-activities li.wdy a:visitd {
+.m-acts ul.u-activities li.wdy a:visited {
 	background: url(resources/image/userhome/wdy-dark.png);
 	background-size: cover;
+	background-color:rgba(0, 0, 0, 0);
 }
 
 .m-acts ul.u-activities li.lpzx a.dark {
@@ -402,6 +405,7 @@ response.setHeader("Cache-Control","no-cache");
 .m-acts ul.u-activities li.lpzx a:visited {
 	background: url(resources/image/userhome/lpzx-dark.png);
 	background-size: cover;
+	background-color:rgba(0, 0, 0, 0);
 }
 /*.m-modelbox {
 			display:block;
