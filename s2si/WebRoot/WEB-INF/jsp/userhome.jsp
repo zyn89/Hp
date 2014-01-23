@@ -447,7 +447,7 @@ response.setHeader("Cache-Control","no-cache");
 			bottom : 20px;
 		}*/
 		.m-modelbox {
-			display:block;
+			display:none;
 			width : 280px;
 			height : 280px;	
 			margin-left:20px;

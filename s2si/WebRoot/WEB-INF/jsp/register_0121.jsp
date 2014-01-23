@@ -239,7 +239,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			background-size:cover;
 		}
 		.m-modelbox {
-			display:block;
+			display:none;
 			position:absolute;
 			left : 20px;
 			top :100px;
@@ -306,7 +306,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="" style="margin-top:10px">
 					<input class="name" type="text" name="name" autocomplete="off" 
 					style="margin-top:5px;"
-					placeholder="请输入姓名（必填）"/>
+					placeholder="请输入姓名（必填）" autocomplete="off"/>
 				</div>
 				<div class="" style="margin-top:10px">
 					<input class="pw" type="password" name="pw" autocomplete="off" 
