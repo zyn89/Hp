@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				})
 				.done(function(data) {
 					var data=JSON.parse(data);
-					console.log(data["status"]);
+					console.log(data);
 					if(!data.status){					
 						location.href="goTo.action?url=userhome.jsp";
 					}else{

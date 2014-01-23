@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="resources/css/common.css" />
 	<script src="resources/js/jquery-1.9.1.js"></script>
 	<script src="resources/js/research2.js"></script>
+	<script src="resources/js/ExceptionDisplayBox/js/exceptionMsgBox.js"></script>
 	<script>	
 		jQuery(function($){
 					
@@ -130,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			background-color:transparent;
 			box-shadow:none;
 			border:none;
-			top:50%;overflow-y:auto;
+			top:100px;overflow-y:auto;
 			position:absolute;
 			margin-left:10px;
 			z-index:1;

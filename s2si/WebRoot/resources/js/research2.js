@@ -20,6 +20,11 @@
 			.done(function(data) {
 				count = 0;
 				arr = data.surveys;
+				if(data.status){
+					$(".modal").find(".res").html("出错了");
+					$(".modal").fadeIn("fast");
+					return;
+				}
 				for(var i=0;i<arr.length;i++){
 					//console.log(arr[i].sid==sid);
 					if(arr[i].sid==sid){
@@ -143,10 +148,15 @@
 					var _this = $(this);
 					var	choiceResult="";
 					if(answered) {
-
+						if(!questions[curIndex-1]) {
+							//如果是最后一题
+							console.log("last");
+							$(".modal").find(".res span").text(credit_get);
+							$(".modal").fadeIn("fast");
+							return;
+						}
 						//如果调研问题已经回答过 那么直接下一题
 						makeQuestion(questions[curIndex-1]);
-						
 						/*if(curIndex>questions.length) {
 							if(count == questions.length) {
 								alert('已经参与过此次调研');
@@ -178,8 +188,13 @@
 							}
 						})
 						.done(function(data) {
-							console.log(data);
+							//console.log(data);
 							//回显百分比 如果是最后一次 弹出获得积分对话框
+							if(data.status){
+								$(".modal").find(".res").html(data.message);
+								$(".modal").fadeIn("fast");
+								return;
+							}
 							var credit =data.credit,
 								$tips = $('.tip','.u-answer'),
 								rate = data.rate;
@@ -199,7 +214,6 @@
 							console.log(err);
 						});		
 					}
-					console.log(curIndex);
 			});	
 
 		});//jQuery

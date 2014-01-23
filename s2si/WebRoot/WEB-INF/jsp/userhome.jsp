@@ -67,8 +67,10 @@ response.setHeader("Cache-Control","no-cache");
 					}
 					if(!data.status){					
 						$(".m-modelbox").fadeIn("fast");
+						$(".main .check p").text("已签到");	
 					}else{
 						$(".u-contentbox").html("<br/><br/>不要重复签到");
+						$(".main .check p").text("已签到");	
 						$(".m-modelbox").fadeIn("fast");
 					}
 					//location.href="goTo.action?url=userhome.jsp";
@@ -115,16 +117,17 @@ response.setHeader("Cache-Control","no-cache");
 			}
 		});
 		$('.u-activities a').bind('click',function(event){
-			var _this = $(this);
-			_this.addClass('dark');
-			var name=$(this).parent().attr("class");
-			$.cookie(name, "dark", { expires: 1 });
 			//location.href="goTo.action?url=interact.jsp";
 			//return false;
 			if(str=="null"){
 				$(this).attr("href",null);
 				return;
 			}else{
+				var _this = $(this);
+				_this.addClass('dark');
+				var name=$(this).parent().attr("class");
+				console.log(name);
+				$.cookie(name, "dark", { expires: 1 });
 				var url=$(this).parent().data("url");
 				$(this).attr("href",url);
 				location.href=url;
@@ -250,7 +253,7 @@ response.setHeader("Cache-Control","no-cache");
 
 .m-btns {
 	margin-top: 20px;
-	margin-bottom: 10px;
+	margin-bottom: 1px;
 	overflow: hidden;
 	zoom: 1;
 }
@@ -262,7 +265,7 @@ response.setHeader("Cache-Control","no-cache");
 	line-height: 36px;
 	display: block;
 	margin: 0 auto;
-	margin-bottom: 20px;
+	margin-bottom: 1px;
 	font-weight: bold;
 }
 
@@ -320,7 +323,7 @@ response.setHeader("Cache-Control","no-cache");
 	position: relative;
 }
 
-.m-acts ul.u-activities li a {
+.m-acts ul.u-activities li a{
 	width: 60px;
 	height: 86px;
 	position: absolute;
@@ -349,7 +352,6 @@ response.setHeader("Cache-Control","no-cache");
 	background: url(resources/image/userhome/yhzx-light.png);
 	background-size: cover;
 }
-
 .m-acts ul.u-activities li.whd a {
 	background: url(resources/image/userhome/whd-light.png);
 	background-size: cover;
@@ -371,8 +373,15 @@ response.setHeader("Cache-Control","no-cache");
 	background: url(resources/image/userhome/yhzx-dark.png);
 	background-size: cover;
 }
-
+.m-acts ul.u-activities li.yhzx a:visited {
+	background: url(resources/image/userhome/yhzx-dark.png);
+	background-size: cover;
+}
 .m-acts ul.u-activities li.whd a.dark {
+	background: url(resources/image/userhome/whd-dark.png);
+	background-size: cover;
+}
+.m-acts ul.u-activities li.whd a:visitd {
 	background: url(resources/image/userhome/whd-dark.png);
 	background-size: cover;
 }
@@ -381,8 +390,16 @@ response.setHeader("Cache-Control","no-cache");
 	background: url(resources/image/userhome/wdy-dark.png);
 	background-size: cover;
 }
+.m-acts ul.u-activities li.wdy a:visitd {
+	background: url(resources/image/userhome/wdy-dark.png);
+	background-size: cover;
+}
 
 .m-acts ul.u-activities li.lpzx a.dark {
+	background: url(resources/image/userhome/lpzx-dark.png);
+	background-size: cover;
+}
+.m-acts ul.u-activities li.lpzx a:visited {
 	background: url(resources/image/userhome/lpzx-dark.png);
 	background-size: cover;
 }
@@ -493,16 +510,16 @@ response.setHeader("Cache-Control","no-cache");
 					<a href="goTo.action?url=login_0121.jsp" class="btn-left"
 						id="login-btn">登录</a>
 					<a href="goTo.action?url=register_0121.jsp" class="btn-right"
-						id="logout-btn">注册</a>
+						id="">注册</a>
 					<% } else { %>
-					<a href="goTo.action?url=register_0121.jsp" class="btn-left" id="">注册</a>
+					<a href="goTo.action?url=register_0121.jsp" onclick="" class="btn-left" id="">注册</a>
 					<a href="#" onclick="return false;" class="btn-right"
 						id="logout-btn">退出</a>
 					<% } %>
 				</div>
 
-				<div class="entrance" style="height: 45px">
-					<div class="wwz"></div>
+				<div class="entrance" style="height: 45px;position:relative;z-index:10000" >
+					<div class="wwz" style="z-index:10000"></div>
 				</div>
 				<div class="m-acts" style="position: fixed; bottom: 0 ;z-index:1">
 					<%-- 
