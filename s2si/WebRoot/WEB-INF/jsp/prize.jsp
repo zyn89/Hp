@@ -13,8 +13,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>Document</title>
 	
 	<link rel="stylesheet" href="resources/css/common.css" />
+	<link rel="stylesheet" href="resources/js/ExceptionDisplayBox/css/exceptionMsgBox.css" />
 	<script src="resources/js/jquery-1.9.1.js"></script>
 	<script src="resources/js/wScratchPad.js"></script>
+	<script src="resources/js/ExceptionDisplayBox/js/exceptionMsgBox.js"></script>
 	<script type="text/javascript" src="resources/js/prize.js"></script>
 	<style>
 	

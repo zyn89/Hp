@@ -1,0 +1,39 @@
+	.m-modelbox {
+			display:none;
+			position:absolute;
+			left : 20px;
+			top :200px;
+			width : 280px;
+			height : 280px;	
+			background : url(resources/image/modelboxdb.png);
+			background-size : cover;
+		}
+		
+	.m-modelbox .u-contentbox {
+		background : url(resources/image/boxcontent.png);
+		background-size : cover;
+		width : 240px;
+		height : 160px;
+		position : absolute;
+		left :20px;
+		top : 15px;
+		display: table-cell;
+		color: #fff;
+		font-size: 18px;
+		text-align: center;
+		vertical-align: middle;
+	}	
+		
+	.m-modelbox a {
+		display:block;
+		width: 240px;
+		height:38px;
+		line-height:40px;
+		margin: 0 auto;
+		background:url(resources/image/btn-green.png);
+		background-size:cover;
+		letter-spacing: 3px;
+		position:absolute;
+		left : 20px;
+		bottom : 20px;
+	}

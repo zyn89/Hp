@@ -12,7 +12,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>兑换说明</title>
 	<link rel="stylesheet" href="resources/css/common.css" />
+	<link rel="stylesheet" href="resources/js/ExceptionDisplayBox/css/exceptionMsgBox.css" />
 	<script src="resources/js/jquery-1.9.1.js"></script>
+	<script src="resources/js/ExceptionDisplayBox/js/exceptionMsgBox.js"></script>
 	
 
 
@@ -21,7 +23,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		jQuery(function($){
 				
 			$('#c-btn').bind('click',function(event){
-				window.location.href="goTo.action?url=exchange.jsp&eid=" + $('#eid').val() + "&prizeUrl=" + $('#prizeUrl').val();
+
+
+				$.ajax({
+			 		url: 'DoneExchange.action',
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data : {
+			 			eid : $('#eid').val()
+					}
+			 	})
+			 	.done(function(data) {
+			 		if(data.status == 400) {
+				 		$('.main').exceptionMsgBox({
+				 			msg : data.message,
+							btnClickHandler : function(event){
+				 				window.location.href = "goTo.action?url=prize.jsp";
+							},
+							objForEventCancel : $('#c-btn'),
+							eventNameForCancel : 'click',
+							btnText : '完成'
+					 	});
+			 		} else {
+			 			window.location.href="goTo.action?url=exchange.jsp&eid=" + $('#eid').val() + "&prizeUrl=" + $('#prizeUrl').val();
+			 		}
+			 	})
+			 	.fail(function(error) {
+			 		console.log("error");
+			 	});
 			});
 		});
 	</script>

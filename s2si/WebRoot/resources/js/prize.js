@@ -241,11 +241,12 @@ jQuery(function($){
 			$('.m-tabs-btns ul li:eq(0)').trigger('click');
 			$('#exchange-items,#prize-items').on("click.for.exchange","li",function(event){
 				var _target = $(event.target);
-				href = _target.data('href').substring(22,_target.data('href').length);
-				//window.location.href = href;
+				//href = _target.data('href').substring(22,_target.data('href').length);
+				href = _target.data('href');
+				window.location.href = href;
 				//alert(href);
 				
-				window.location.href = 'goTo.action?url=prizeDisplay.jsp&'+href;
+				//window.location.href = 'goTo.action?url=prizeDisplay.jsp&'+href;
 			});	
 			
 			$('#exchange-items,#prize-items').on('click.img','img',function(event){

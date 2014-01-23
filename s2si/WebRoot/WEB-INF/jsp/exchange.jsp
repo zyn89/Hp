@@ -21,22 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		jQuery(function($){
 				
 			$('#c-btn').bind('click',function(event){
-
-				$.ajax({
-			 		url: 'DoneExchange.action',
-			 		type: 'post',
-			 		dataType: 'json',
-			 		data : {
-			 			eid : $('#eid').val()
-					}
-			 	})
-			 	.done(function(data) {
-			 		window.location.href="goTo.action?url=prize.jsp";
-			 	})
-			 	.fail(function(error) {
-			 		console.log("error");
-			 	});
-				
+				window.location.href="goTo.action?url=prize.jsp";
 			});
 		});
 	</script>
